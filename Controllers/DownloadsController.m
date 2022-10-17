@@ -1,6 +1,7 @@
 #import "DownloadsController.h"
 #import "DownloadsVideoController.h"
 #import "DownloadsAudioController.h"
+#import "../Headers/Imports.h"
 
 @interface DownloadsController ()
 - (void)setupDownloadsControllerView;

@@ -8,10 +8,10 @@
 - (void)loadView {
 	[super loadView];
     
-    _rebornChangelogsWebView = [[WKWebView alloc] initWithFrame:self.view.frame];  
-    [_rebornChangelogsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://repo.lillieh.gay/changelogs/youtubereborn.html"]]];
-    _rebornChangelogsWebView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-    [self.view addSubview:_rebornChangelogsWebView];
+    self.rebornChangelogsWebView = [[WKWebView alloc] initWithFrame:self.view.frame];  
+    [self.rebornChangelogsWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://lillieh001.github.io/repo/changelogs/youtubereborn.html"]]];
+    self.rebornChangelogsWebView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:self.rebornChangelogsWebView];
 }
 
 @end

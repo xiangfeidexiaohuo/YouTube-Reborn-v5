@@ -1,4 +1,5 @@
 #import "CreditsController.h"
+#import "../Headers/Imports.h"
 
 @interface CreditsController ()
 - (void)setupCreditsControllerView;

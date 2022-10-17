@@ -11,6 +11,7 @@
 #import "ChangelogsController.h"
 #import "PictureInPictureOptionsController.h"
 #import "../JailbreakDetection/JailbreakDetection.h"
+#import "../Headers/Imports.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)

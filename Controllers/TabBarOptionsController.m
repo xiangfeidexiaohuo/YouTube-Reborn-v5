@@ -1,5 +1,6 @@
 #import "TabBarOptionsController.h"
 #import "StartupPageOptionsController.h"
+#import "../Headers/Imports.h"
 
 @interface TabBarOptionsController ()
 - (void)setupTabBarOptionsControllerView;
