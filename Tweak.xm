@@ -186,60 +186,15 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 }
 %end
 
-%hook SSOKeychain
-+ (id)accessGroup {
-    if (![JailbreakDetection isJailbroken]) {
-        NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
-                            (__bridge NSString *)kSecClassGenericPassword, (__bridge NSString *)kSecClass,
-                            @"bundleSeedID", kSecAttrAccount,
-                            @"", kSecAttrService,
-                            (id)kCFBooleanTrue, kSecReturnAttributes,
-                            nil];
-        CFDictionaryRef result = nil;
-        OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
-        if (status == errSecItemNotFound)
-            status = SecItemAdd((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
-            if (status != errSecSuccess)
-                return nil;
-        NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:(__bridge NSString *)kSecAttrAccessGroup];
-        
-        return accessGroup;
-    }
-    return %orig;
-}
-+ (id)sharedAccessGroup {
-    if (![JailbreakDetection isJailbroken]) {
-        NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
-                            (__bridge NSString *)kSecClassGenericPassword, (__bridge NSString *)kSecClass,
-                            @"bundleSeedID", kSecAttrAccount,
-                            @"", kSecAttrService,
-                            (id)kCFBooleanTrue, kSecReturnAttributes,
-                            nil];
-        CFDictionaryRef result = nil;
-        OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
-        if (status == errSecItemNotFound)
-            status = SecItemAdd((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
-            if (status != errSecSuccess)
-                return nil;
-        NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:(__bridge NSString *)kSecAttrAccessGroup];
-        
-        return accessGroup;
-    }
-    return %orig;
-}
-%end
-
 %hook YTMainAppControlsOverlayView
 
 %property(retain, nonatomic) UIButton *rebornOverlayButton;
 
 - (id)initWithDelegate:(id)delegate {
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
-        // if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"] == YES) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"] == YES) {
             %init(gPictureInPicture);
         }
-        // }
     }
     self = %orig;
     if (self) {
