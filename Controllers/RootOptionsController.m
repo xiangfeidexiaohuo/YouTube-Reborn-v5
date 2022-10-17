@@ -197,32 +197,6 @@
 
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 3) {
-            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"13.0")) {
-                HBColorPickerViewController *alderisViewController = [[HBColorPickerViewController alloc] init];
-                alderisViewController.delegate = self;
-                alderisViewController.popoverPresentationController.sourceView = self.view;
-                alderisViewController.popoverPresentationController.sourceRect = self.view.bounds;
-                alderisViewController.popoverPresentationController.permittedArrowDirections = 0;
-
-                NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kYTRebornColourOptionsVThree"];
-                NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:colorData error:nil];
-                [unarchiver setRequiresSecureCoding:NO];
-                UIColor *colour = [unarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
-                HBColorPickerConfiguration *configuration = [[HBColorPickerConfiguration alloc] initWithColor:colour];
-                configuration.supportsAlpha = NO;
-
-                alderisViewController.configuration = configuration;
-                [self presentViewController:alderisViewController animated:YES completion:nil];
-            } else {
-                UIAlertController *alertError = [UIAlertController alertControllerWithTitle:@"Notice" message:@"Colour Options is not available on iOS 12 currently, it is only available for iOS 13+ right now" preferredStyle:UIAlertControllerStyleAlert];
-
-                [alertError addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                }]];
-
-                [self presentViewController:alertError animated:YES completion:nil];
-            }
-        }
         if (indexPath.row == 4) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
                 PictureInPictureOptionsController *pictureInPictureOptionsController = [[PictureInPictureOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
@@ -293,7 +267,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
-        return @"Version: 3.2.0 (Beta)";
+        return @"Version: 4.0.0 (Beta 1)";
     }
     return nil;
 }
