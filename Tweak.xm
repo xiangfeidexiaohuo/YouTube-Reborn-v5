@@ -1487,43 +1487,6 @@ int selectedTabIndex = 0;
 - (BOOL)shouldUseAppThemeSetting {
     return YES;
 }
-- (BOOL)enableYouthereCommandsOnIos {
-    return NO;
-}
-%end
-
-%hook YTYouThereController
-- (BOOL)shouldShowYouTherePrompt {
-    return NO;
-}
-%end
-
-%hook YTCommerceEventGroupHandler
-- (void)addEventHandlers {
-}
-%end
-
-%hook YTInterstitialPromoEventGroupHandler
-- (void)addEventHandlers {
-}
-%end
-
-%hook YTIShowFullscreenInterstitialCommand
-- (BOOL)shouldThrottleInterstitial {
-    return YES;
-}
-%end
-
-%hook YTSettings
-- (BOOL)allowAudioOnlyManualQualitySelection {
-    return YES;
-}
-%end
-
-%hook YTUpsell
-- (BOOL)isCounterfactual {
-    return YES;
-}
 %end
 
 %ctor {
