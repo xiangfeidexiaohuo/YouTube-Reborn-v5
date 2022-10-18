@@ -7,7 +7,7 @@
     NSMutableArray *filePathsAudioArray;
     NSMutableArray *filePathsAudioArtworkArray;
 }
-- (void)setupDownloadsAudioControllerView;
+- (void)coloursView;
 - (void)setupAudioArrays;
 @end
 
@@ -22,7 +22,7 @@
 
 - (void)loadView {
 	[super loadView];
-    [self setupDownloadsAudioControllerView];
+    [self coloursView];
 
     if (@available(iOS 15.0, *)) {
     	[self.tableView setSectionHeaderTopPadding:0.0f];
@@ -47,18 +47,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.textLabel.adjustsFontSizeToFitWidth = true;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        if (@available(iOS 13.0, *)) {
-            if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-                cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-                cell.textLabel.textColor = [UIColor blackColor];
-            }
-            else {
-                cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
-                cell.textLabel.textColor = [UIColor whiteColor];
-            }
-        } else {
+        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
+        }
+        else {
+            cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
+            cell.textLabel.textColor = [UIColor whiteColor];
         }
     }
     cell.textLabel.text = [filePathsAudioArray objectAtIndex:indexPath.row];
@@ -118,28 +113,24 @@
     [self presentViewController:alertMenu animated:YES completion:nil];
 }
 
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+    }
+    else {
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    }
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self setupDownloadsAudioControllerView];
+    [self coloursView];
     [self.tableView reloadData];
 }
 
 @end
 
 @implementation DownloadsAudioController(Privates)
-
-- (void)setupDownloadsAudioControllerView {
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-        }
-        else {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-        }
-    } else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-    }
-}
 
 - (void)setupAudioArrays {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

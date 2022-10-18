@@ -4,14 +4,14 @@
 #import "../Headers/Imports.h"
 
 @interface DownloadsController ()
-- (void)setupDownloadsControllerView;
+- (void)coloursView;
 @end
 
 @implementation DownloadsController
 
 - (void)loadView {
 	[super loadView];
-    [self setupDownloadsControllerView];
+    [self coloursView];
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -31,9 +31,22 @@
     [self.view addSubview:self.tabBar.view];
 }
 
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    }
+    else {
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    }
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self setupDownloadsControllerView];
+    [self coloursView];
 }
 
 @end
@@ -42,25 +55,6 @@
 
 - (void)done {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)setupDownloadsControllerView {
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-            [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-            self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        }
-        else {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-            [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-            self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-        }
-    } else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    }
 }
 
 @end

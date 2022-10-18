@@ -2,14 +2,14 @@
 #import "../Headers/Imports.h"
 
 @interface ShortsOptionsController ()
-- (void)setupShortsOptionsControllerView;
+- (void)coloursView;
 @end
 
 @implementation ShortsOptionsController
 
 - (void)loadView {
 	[super loadView];
-    [self setupShortsOptionsControllerView];
+    [self coloursView];
 
     self.title = @"Shorts Options";
 
@@ -37,17 +37,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.textLabel.adjustsFontSizeToFitWidth = true;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (@available(iOS 13.0, *)) {
-            if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-                cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-                cell.textLabel.textColor = [UIColor blackColor];
-            } else {
-                cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
-                cell.textLabel.textColor = [UIColor whiteColor];
-            }
-        } else {
+        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
+        }
+        else {
+            cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
+            cell.textLabel.textColor = [UIColor whiteColor];
         }
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Hide Like Button";
@@ -88,9 +84,22 @@
     return cell;
 }
 
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    }
+    else {
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    }
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self setupShortsOptionsControllerView];
+    [self coloursView];
     [self.tableView reloadData];
 }
 
@@ -100,24 +109,6 @@
 
 - (void)done {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)setupShortsOptionsControllerView {
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-            [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-            self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        } else {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-            [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-            self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-        }
-    } else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    }
 }
 
 - (void)toggleHideShortsMoreActionsButton:(UISwitch *)sender {

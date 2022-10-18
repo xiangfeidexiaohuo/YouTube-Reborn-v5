@@ -20,14 +20,14 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
 @interface RootOptionsController ()
-- (void)setupRootOptionsControllerView;
+- (void)coloursView;
 @end
 
 @implementation RootOptionsController
 
 - (void)loadView {
 	[super loadView];
-    [self setupRootOptionsControllerView];
+    [self coloursView];
 
     self.title = @"Options";
     
@@ -73,17 +73,13 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.textLabel.adjustsFontSizeToFitWidth = true;
-        if (@available(iOS 13.0, *)) {
-            if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-                cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-                cell.textLabel.textColor = [UIColor blackColor];
-            } else {
-                cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
-                cell.textLabel.textColor = [UIColor whiteColor];
-            }
-        } else {
+        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
+        }
+        else {
+            cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
+            cell.textLabel.textColor = [UIColor whiteColor];
         }
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -289,15 +285,22 @@
     footer.textLabel.textAlignment = NSTextAlignmentCenter;
 }
 
-- (void)colorPicker:self didAcceptColor:(UIColor *)colour {
-    NSData *colorData = [NSKeyedArchiver archivedDataWithRootObject:colour requiringSecureCoding:nil error:nil];
-    [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"kYTRebornColourOptionsVThree"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    }
+    else {
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    }
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self setupRootOptionsControllerView];
+    [self coloursView];
     [self.tableView reloadData];
 }
 
@@ -311,24 +314,6 @@
 
 - (void)apply {
     exit(0); 
-}
-
-- (void)setupRootOptionsControllerView {
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-            [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-            self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-        } else {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-            [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-            self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-        }
-    } else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    }
 }
 
 @end
