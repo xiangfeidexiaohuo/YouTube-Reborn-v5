@@ -37,8 +37,6 @@
 - (id)playPauseButton;
 - (void)didPressPause:(id)button;
 - (void)rebornOptionsAction;
-- (void)rebornVideoDownloader :(NSString *)videoID;
-- (void)rebornAudioDownloader :(NSString *)videoID;
 - (void)rebornPictureInPicture :(NSString *)videoID;
 - (void)rebornPlayInExternalApp :(NSString *)videoID;
 @end
@@ -130,8 +128,6 @@
 @interface YTReelHeaderView : UIView
 - (id)_viewControllerForAncestor;
 - (void)rebornOptionsAction;
-- (void)rebornVideoDownloader :(NSString *)videoID;
-- (void)rebornAudioDownloader :(NSString *)videoID;
 - (void)rebornPictureInPicture :(NSString *)videoID;
 - (void)rebornPlayInExternalApp :(NSString *)videoID;
 @end
