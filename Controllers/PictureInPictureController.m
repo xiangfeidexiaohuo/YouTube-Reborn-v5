@@ -2,9 +2,7 @@
 #import "../Headers/Imports.h"
 
 @interface PictureInPictureController ()
-- (void)setupPictureInPictureControllerView;
-- (void)startPictureInPicture:(NSTimer *)timer;
-- (void)closePictureInPicture;
+- (void)coloursView;
 @end
 
 @implementation PictureInPictureController
@@ -20,14 +18,13 @@ UILabel *rebornPictureInPictureLoadingLabel;
 
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
-    [self setupPictureInPictureControllerView];
+    [self coloursView];
 
-    UIWindow *boundsWindow = [[UIApplication sharedApplication] keyWindow];
+    UIWindow *boundsWindow = [[[UIApplication sharedApplication] windows] firstObject];
 
     AVPlayerItem *rebornPlayerItem = [[AVPlayerItem alloc] initWithURL:self.videoPath];
     rebornPlayer = [[AVPlayer alloc] initWithPlayerItem:rebornPlayerItem];
-    float newTimeFloat = [self.videoTime floatValue];
-    CMTime newTime = CMTimeMakeWithSeconds(newTimeFloat, 1);
+    CMTime newTime = CMTimeMakeWithSeconds([self.videoTime floatValue], NSEC_PER_SEC);
     [rebornPlayer seekToTime:newTime];
 
     [rebornPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
@@ -53,26 +50,23 @@ UILabel *rebornPictureInPictureLoadingLabel;
     [self.view addSubview:rebornPictureInPictureLoadingLabel];
 }
 
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+    }
+    else {
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    }
+}
+
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self setupPictureInPictureControllerView];
+    [self coloursView];
 }
 
 @end
 
 @implementation PictureInPictureController (Privates)
-
-- (void)setupPictureInPictureControllerView {
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-        } else {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-        }
-    } else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-    }
-}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == rebornPlayer && [keyPath isEqualToString:@"status"]) {
