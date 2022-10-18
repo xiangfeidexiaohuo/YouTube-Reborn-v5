@@ -62,8 +62,6 @@
     cell.textLabel.text = [filePathsAudioArray objectAtIndex:indexPath.row];
     @try {
         NSString *artworkFileName = filePathsAudioArtworkArray[indexPath.row];
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
         cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
     }
     @catch (NSException *exception) {
@@ -80,7 +78,7 @@
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];
     playerViewController.player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:filePath]];
     playerViewController.allowsPictureInPicturePlayback = NO;
-    if ([playerViewController respondsToSelector:@selector(setCanStartPictureInPictureAutomaticallyFromInline:)]) {
+    if (@available(iOS 14.2, *)) {
         playerViewController.canStartPictureInPictureAutomaticallyFromInline = NO;
     }
     [playerViewController.player play];
@@ -116,25 +114,6 @@
     [self presentViewController:alertMenu animated:YES completion:nil];
 }
 
-- (void)coloursView {
-    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-    }
-    else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-    }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [self coloursView];
-    [self.tableView reloadData];
-}
-
-@end
-
-@implementation DownloadsAudioController(Privates)
-
 - (void)setupAudioArrays {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     documentsDirectory = [paths objectAtIndex:0];
@@ -150,6 +129,21 @@
             [filePathsAudioArtworkArray addObject:jpg];
         }
     }
+}
+
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+    }
+    else {
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self coloursView];
+    [self.tableView reloadData];
 }
 
 @end
