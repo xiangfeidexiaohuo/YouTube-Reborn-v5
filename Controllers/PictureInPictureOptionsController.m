@@ -49,10 +49,10 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
+            cell.textLabel.text = @"Enable Picture In Picture";
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == YES) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
             } else {
-                cell.textLabel.text = @"Enable Picture In Picture";
                 UISwitch *enablePictureInPicture = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [enablePictureInPicture addTarget:self action:@selector(toggleEnablePictureInPicture:) forControlEvents:UIControlEventValueChanged];
                 enablePictureInPicture.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"];
