@@ -49,7 +49,7 @@
 @end
 
 @interface YTPlayerViewController : UIViewController <YTPlaybackController>
-- (void)scrubToTime:(CGFloat)time;
+- (void)seekToTime:(CGFloat)time;
 - (NSString *)currentVideoID;
 - (CGFloat)currentVideoMediaTime;
 - (void)autoFullscreen;

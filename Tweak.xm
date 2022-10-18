@@ -1401,127 +1401,51 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %end
 
 BOOL sponsorBlockEnabled;
-NSMutableDictionary *sponsorBlockValues = [[NSMutableDictionary alloc] init];
+NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
 
 %hook YTPlayerViewController
 - (void)playbackController:(id)arg1 didActivateVideo:(id)arg2 withPlaybackData:(id)arg3 {
     sponsorBlockEnabled = 0;
-    [sponsorBlockValues removeAllObjects];
+    sponsorBlockValues = [YouTubeExtractor sponsorBlockRequest:self.currentVideoID];
     %orig();
-    NSURLSessionConfiguration *dataConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *dataManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:dataConfiguration];
-
-    NSString *options = @"[%22sponsor%22,%22selfpromo%22,%22interaction%22,%22intro%22,%22outro%22,%22preview%22,%22music_offtopic%22]";
-    NSString *apiUrl = [NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options];
-    NSURL *dataUrl = [NSURL URLWithString:apiUrl];
-    NSURLRequest *apiRequest = [NSURLRequest requestWithURL:dataUrl];
-
-    NSURLSessionDataTask *dataTask = [dataManager dataTaskWithRequest:apiRequest uploadProgress:nil downloadProgress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (!error) {
-            NSMutableDictionary *jsonResponse = responseObject;
-            if ([NSJSONSerialization isValidJSONObject:jsonResponse]) {
-                sponsorBlockEnabled = 1;
-                for (NSMutableDictionary *jsonDictionary in jsonResponse) {
-                    if ([[jsonDictionary objectForKey:@"category"] isEqual:@"sponsor"]) {
-                        NSMutableArray *arraySponsorBlockValues = [[NSMutableArray alloc] init];
-                        [arraySponsorBlockValues removeAllObjects];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][0] floatValue]]];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][1] floatValue]]];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"sponsor"];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"sponsor"];
-                    }
-                    if ([[jsonDictionary objectForKey:@"category"] isEqual:@"selfpromo"]) {
-                        NSMutableArray *arraySponsorBlockValues = [[NSMutableArray alloc] init];
-                        [arraySponsorBlockValues removeAllObjects];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][0] floatValue]]];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][1] floatValue]]];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"selfpromo"];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"selfpromo"];
-                    }
-                    if ([[jsonDictionary objectForKey:@"category"] isEqual:@"interaction"]) {
-                        NSMutableArray *arraySponsorBlockValues = [[NSMutableArray alloc] init];
-                        [arraySponsorBlockValues removeAllObjects];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][0] floatValue]]];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][1] floatValue]]];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"interaction"];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"interaction"];
-                    }
-                    if ([[jsonDictionary objectForKey:@"category"] isEqual:@"intro"]) {
-                        NSMutableArray *arraySponsorBlockValues = [[NSMutableArray alloc] init];
-                        [arraySponsorBlockValues removeAllObjects];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][0] floatValue]]];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][1] floatValue]]];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"intro"];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"intro"];
-                    }
-                    if ([[jsonDictionary objectForKey:@"category"] isEqual:@"outro"]) {
-                        NSMutableArray *arraySponsorBlockValues = [[NSMutableArray alloc] init];
-                        [arraySponsorBlockValues removeAllObjects];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][0] floatValue]]];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][1] floatValue]]];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"outro"];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"outro"];
-                    }
-                    if ([[jsonDictionary objectForKey:@"category"] isEqual:@"preview"]) {
-                        NSMutableArray *arraySponsorBlockValues = [[NSMutableArray alloc] init];
-                        [arraySponsorBlockValues removeAllObjects];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][0] floatValue]]];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][1] floatValue]]];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"preview"];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"preview"];
-                    }
-                    if ([[jsonDictionary objectForKey:@"category"] isEqual:@"music_offtopic"]) {
-                        NSMutableArray *arraySponsorBlockValues = [[NSMutableArray alloc] init];
-                        [arraySponsorBlockValues removeAllObjects];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][0] floatValue]]];
-                        [arraySponsorBlockValues addObject:[NSNumber numberWithFloat:[[jsonDictionary objectForKey:@"segment"][1] floatValue]]];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"music_offtopic"];
-                        [sponsorBlockValues setObject:arraySponsorBlockValues forKey:@"music_offtopic"];
-                    }
-                }
-            } else {
-                sponsorBlockEnabled = 0;
-            }
-        }
-    }];
-    [dataTask resume];
+    if ([NSJSONSerialization isValidJSONObject:sponsorBlockValues]) {
+        sponsorBlockEnabled = 1;
+    } else {
+        sponsorBlockEnabled = 0;
+    }
 }
 - (void)singleVideo:(id)video currentVideoTimeDidChange:(YTSingleVideoTime *)time {
     %orig();
     if (sponsorBlockEnabled == 1) {
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] == 1) {
-            if (self.currentVideoMediaTime >= [[[sponsorBlockValues objectForKey:@"sponsor"] objectAtIndex:0] floatValue] && self.currentVideoMediaTime <= [[[sponsorBlockValues objectForKey:@"sponsor"] objectAtIndex:1] floatValue]) {
-                [self scrubToTime:[[[sponsorBlockValues objectForKey:@"sponsor"] objectAtIndex:1] floatValue]];
-            }
-        }
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] == 1) {
-            if (self.currentVideoMediaTime >= [[[sponsorBlockValues objectForKey:@"selfpromo"] objectAtIndex:0] floatValue] && self.currentVideoMediaTime <= [[[sponsorBlockValues objectForKey:@"selfpromo"] objectAtIndex:1] floatValue]) {
-                [self scrubToTime:[[[sponsorBlockValues objectForKey:@"selfpromo"] objectAtIndex:1] floatValue]];
-            }
-        }
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] == 1) {
-            if (self.currentVideoMediaTime >= [[[sponsorBlockValues objectForKey:@"interaction"] objectAtIndex:0] floatValue] && self.currentVideoMediaTime <= [[[sponsorBlockValues objectForKey:@"interaction"] objectAtIndex:1] floatValue]) {
-                [self scrubToTime:[[[sponsorBlockValues objectForKey:@"interaction"] objectAtIndex:1] floatValue]];
-            }
-        }
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1) {
-            if (self.currentVideoMediaTime >= [[[sponsorBlockValues objectForKey:@"intro"] objectAtIndex:0] floatValue] && self.currentVideoMediaTime <= [[[sponsorBlockValues objectForKey:@"intro"] objectAtIndex:1] floatValue]) {
-                [self scrubToTime:[[[sponsorBlockValues objectForKey:@"intro"] objectAtIndex:1] floatValue]];
-            }
-        }
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] == 1) {
-            if (self.currentVideoMediaTime >= [[[sponsorBlockValues objectForKey:@"outro"] objectAtIndex:0] floatValue] && self.currentVideoMediaTime <= [[[sponsorBlockValues objectForKey:@"outro"] objectAtIndex:1] floatValue]) {
-                [self scrubToTime:[[[sponsorBlockValues objectForKey:@"outro"] objectAtIndex:1] floatValue]];
-            }
-        }
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] == 1) {
-            if (self.currentVideoMediaTime >= [[[sponsorBlockValues objectForKey:@"preview"] objectAtIndex:0] floatValue] && self.currentVideoMediaTime <= [[[sponsorBlockValues objectForKey:@"preview"] objectAtIndex:1] floatValue]) {
-                [self scrubToTime:[[[sponsorBlockValues objectForKey:@"preview"] objectAtIndex:1] floatValue]];
-            }
-        }
-        if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] == 1) {
-            if (self.currentVideoMediaTime >= [[[sponsorBlockValues objectForKey:@"music_offtopic"] objectAtIndex:0] floatValue] && self.currentVideoMediaTime <= [[[sponsorBlockValues objectForKey:@"music_offtopic"] objectAtIndex:1] floatValue]) {
-                [self scrubToTime:[[[sponsorBlockValues objectForKey:@"music_offtopic"] objectAtIndex:1] floatValue]];
+        for (NSMutableDictionary *jsonDictionary in sponsorBlockValues) {
+            if ([[jsonDictionary objectForKey:@"category"] isEqual:@"sponsor"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                }
+            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"selfpromo"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                }
+            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"interaction"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                }
+            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"intro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                }
+            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"outro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                }
+            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"preview"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                }
+            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"music_offtopic"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                }
             }
         }
     }
