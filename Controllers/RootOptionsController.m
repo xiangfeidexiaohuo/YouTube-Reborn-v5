@@ -47,7 +47,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 2;
+        return 1;
     }
     if (section == 1) {
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"filza://"]]) {
@@ -84,9 +84,6 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Patreon";
-            }
-            if (indexPath.row == 1) {
-                cell.textLabel.text = @"Discord";
             }
         }
         if (indexPath.section == 1) {
@@ -146,9 +143,6 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.patreon.com/lillieweeb"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://repo.lillieh.gay/discord/"] options:@{} completionHandler:nil];
         }
     }
     if (indexPath.section == 1) {
