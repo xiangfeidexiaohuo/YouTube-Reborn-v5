@@ -103,7 +103,7 @@
             }]];
 
             [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTRebornColourOptionsVThree"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTRebornColourOptionsVFour"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 exit(0);
             }]];
