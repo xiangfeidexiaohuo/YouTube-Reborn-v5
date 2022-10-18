@@ -49,11 +49,15 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Enable Picture In Picture";
-            UISwitch *enablePictureInPicture = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [enablePictureInPicture addTarget:self action:@selector(toggleEnablePictureInPicture:) forControlEvents:UIControlEventValueChanged];
-            enablePictureInPicture.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"];
-            cell.accessoryView = enablePictureInPicture;
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == YES) {
+                cell.accessoryType = UITableViewCellAccessoryDetailButton;
+            } else {
+                cell.textLabel.text = @"Enable Picture In Picture";
+                UISwitch *enablePictureInPicture = [[UISwitch alloc] initWithFrame:CGRectZero];
+                [enablePictureInPicture addTarget:self action:@selector(toggleEnablePictureInPicture:) forControlEvents:UIControlEventValueChanged];
+                enablePictureInPicture.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"];
+                cell.accessoryView = enablePictureInPicture;
+            }
         }
         if (indexPath.row == 1) {
             cell.textLabel.text = @"Hide PIP Ads Badge";
@@ -71,6 +75,17 @@
         }
     }
     return cell;
+}
+
+- (void)tableView:(UITableView*)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath*)indexPath {
+    if (indexPath.row == 0) {
+        UIAlertController *alertError = [UIAlertController alertControllerWithTitle:@"Notice" message:@"This feature has been disabled cause you have the 'I Have YouTube Premium' option enabled" preferredStyle:UIAlertControllerStyleAlert];
+
+        [alertError addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        }]];
+
+        [self presentViewController:alertError animated:YES completion:nil];
+    }
 }
 
 - (void)coloursView {
