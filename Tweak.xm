@@ -24,7 +24,7 @@ static BOOL hasDeviceNotch() {
 }
 
 UIColor *hexColour() {
-    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kYTRebornColourOptionsVThree"];
+    NSData *colorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kYTRebornColourOptionsVFour"];
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:colorData error:nil];
     [unarchiver setRequiresSecureCoding:NO];
     return [unarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];

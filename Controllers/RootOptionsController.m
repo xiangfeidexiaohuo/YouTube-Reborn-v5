@@ -3,6 +3,7 @@
 #import "OverlayOptionsController.h"
 #import "TabBarOptionsController.h"
 #import "CreditsController.h"
+#import "ColourOptionsController.h"
 #import "ShortsOptionsController.h"
 #import "RebornSettingsController.h"
 #import "DownloadsController.h"
@@ -189,6 +190,13 @@
             tabBarOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
+        }
+        if (indexPath.row == 3) {
+            ColourOptionsController *colourOptionsController = [[ColourOptionsController alloc] init];
+            UINavigationController *colourOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:colourOptionsController];
+            colourOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:colourOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 4) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
