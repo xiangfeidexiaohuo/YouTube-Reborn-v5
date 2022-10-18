@@ -10,7 +10,6 @@
 #import "OtherOptionsController.h"
 #import "ChangelogsController.h"
 #import "PictureInPictureOptionsController.h"
-#import "../JailbreakDetection/JailbreakDetection.h"
 #import "../Headers/Imports.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
@@ -51,7 +50,7 @@
         return 2;
     }
     if (section == 1) {
-        if ([JailbreakDetection isJailbroken]) {
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"filza://"]]) {
             return 2;
         } else {
             return 1;
