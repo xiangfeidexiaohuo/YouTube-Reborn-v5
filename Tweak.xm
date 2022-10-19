@@ -792,6 +792,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 - (void)layoutSubviews {
 	%orig();
 	MSHookIvar<YTMainAppControlsOverlayView *>(self, "_previousButton").hidden = YES;
+    MSHookIvar<YTTransportControlsButtonView *>(self, "_previousButtonView").hidden = YES;
 }
 %end
 %end
@@ -801,6 +802,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 - (void)layoutSubviews {
 	%orig();
 	MSHookIvar<YTMainAppControlsOverlayView *>(self, "_nextButton").hidden = YES;
+    MSHookIvar<YTTransportControlsButtonView *>(self, "_nextButtonView").hidden = YES;
 }
 %end
 %end
