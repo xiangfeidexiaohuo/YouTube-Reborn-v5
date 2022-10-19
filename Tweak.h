@@ -3,6 +3,9 @@
 + (instancetype)iconButton;
 @end
 
+@interface YTPlaybackButton : UIControl
+@end
+
 @interface ABCSwitch : UISwitch
 @end
 
@@ -133,4 +136,7 @@
 @end
 
 @interface YTReelPlayerMoreButton : YTQTMButton
+@end
+
+@interface YTTransportControlsButtonView : UIView
 @end
