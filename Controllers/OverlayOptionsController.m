@@ -135,7 +135,7 @@ static BOOL hasDeviceNotch() {
             hideOverlayDarkBackground.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayDarkBackground"];
             cell.accessoryView = hideOverlayDarkBackground;
         }
-        if (indexPath.row == 19) {
+        if (indexPath.row == 10) {
             cell.textLabel.text = @"Hide Quick Actions";
             UISwitch *hideOverlayQuickActions = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideOverlayQuickActions addTarget:self action:@selector(toggleHideOverlayQuickActions:) forControlEvents:UIControlEventValueChanged];
