@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
 
-@interface ColourOptionsController : UIColorPickerViewController
+@interface ColourOptionsController : UIColorPickerViewController <UIColorPickerViewControllerDelegate>
 
 @end
