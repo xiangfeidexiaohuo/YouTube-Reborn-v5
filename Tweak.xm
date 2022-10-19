@@ -1008,9 +1008,9 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook YTAsyncCollectionView
 - (void)setBackgroundColor:(UIColor *)color {
     if([self.nextResponder isKindOfClass:NSClassFromString(@"YTRelatedVideosCollectionViewController")]) {
-        color = [[UIColor blackColor] colorWithAlphaComponent:0.0];
+        color = [UIColor clearColor];
     } else if([self.nextResponder isKindOfClass:NSClassFromString(@"YTFullscreenMetadataHighlightsCollectionViewController")]) {
-        color = [[UIColor blackColor] colorWithAlphaComponent:0.0];
+        color = [UIColor clearColor];
     } else {
         color = rebornHexColour;
     }
@@ -1286,6 +1286,12 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 }
 %end
 %hook YTShareBusyView
+- (void)setBackgroundColor:(UIColor *)color {
+    color = rebornHexColour;
+    %orig;
+}
+%end
+%hook YTELMView
 - (void)setBackgroundColor:(UIColor *)color {
     color = rebornHexColour;
     %orig;
