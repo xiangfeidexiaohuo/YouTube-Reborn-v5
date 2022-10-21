@@ -27,27 +27,4 @@
     return [NSJSONSerialization JSONObjectWithData:requestData options:0 error:nil];
 }
 
-+ (NSDictionary *)sponsorBlockRequest :(NSString *)videoID {
-    NSString *options = @"[%22sponsor%22,%22selfpromo%22,%22interaction%22,%22intro%22,%22outro%22,%22preview%22,%22music_offtopic%22]";
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", videoID, options]]];
-    
-    __block NSData *requestData;
-    __block BOOL requestFinished = NO;
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        requestData = data;
-        requestFinished = YES;
-    }] resume];
-
-    while (!requestFinished) {
-        [NSThread sleepForTimeInterval:0.02];
-    }
-
-    NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:requestData options:0 error:nil];
-    if ([NSJSONSerialization isValidJSONObject:jsonResponse]) {
-        return jsonResponse;
-    } else {
-        return nil;
-    }
-}
-
 @end
