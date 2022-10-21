@@ -1435,17 +1435,20 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
 %hook YTPlayerViewController
 - (void)playbackController:(id)arg1 didActivateVideo:(id)arg2 withPlaybackData:(id)arg3 {
     sponsorBlockEnabled = 0;
+    %orig();
     NSString *options = @"[%22sponsor%22,%22selfpromo%22,%22interaction%22,%22intro%22,%22outro%22,%22preview%22,%22music_offtopic%22]";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        sponsorBlockValues = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        if ([NSJSONSerialization isValidJSONObject:sponsorBlockValues]) {
-            sponsorBlockEnabled = 1;
-        } else {
-            sponsorBlockEnabled = 0;
+        if (!error) {
+            NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([NSJSONSerialization isValidJSONObject:jsonResponse]) {
+                sponsorBlockValues = jsonResponse;
+                sponsorBlockEnabled = 1;
+            } else {
+                sponsorBlockEnabled = 0;
+            }
         }
     }] resume];
-    %orig();
 }
 - (void)singleVideo:(id)video currentVideoTimeDidChange:(YTSingleVideoTime *)time {
     %orig();
