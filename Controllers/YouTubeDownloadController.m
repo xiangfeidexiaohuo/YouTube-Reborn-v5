@@ -10,7 +10,7 @@
     UILabel *downloadPercentLabel;
     UILabel *noticeLabel;
 }
-- (void)setupYouTubeDownloadControllerView;
+- (void)coloursView;
 - (void)videoDownloaderPartOne;
 - (void)videoDownloaderPartTwo;
 - (void)audioDownloader;
@@ -23,9 +23,9 @@
 
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
-    [self setupYouTubeDownloadControllerView];
+    [self coloursView];
 
-    UIWindow *boundsWindow = [[UIApplication sharedApplication] keyWindow];
+    UIWindow *boundsWindow = [[[UIApplication sharedApplication] windows] firstObject];
 
     artworkImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, boundsWindow.safeAreaInsets.top, self.view.bounds.size.width, 300)];
     UIImage *artwork = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.artworkURL]];
@@ -39,14 +39,10 @@
     titleLabel.text = self.downloadTitle;
     titleLabel.numberOfLines = 2;
     titleLabel.adjustsFontSizeToFitWidth = YES;
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            titleLabel.textColor = [UIColor blackColor];
-        } else {
-            titleLabel.textColor = [UIColor whiteColor];
-        }
-    } else {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
         titleLabel.textColor = [UIColor blackColor];
+    } else {
+        titleLabel.textColor = [UIColor whiteColor];
     }
 
     [self.view addSubview:titleLabel];
@@ -54,14 +50,10 @@
     downloadPercentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, boundsWindow.safeAreaInsets.top + 300 + titleLabel.frame.size.height, self.view.bounds.size.width, 50)];
     downloadPercentLabel.numberOfLines = 1;
     downloadPercentLabel.adjustsFontSizeToFitWidth = YES;
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            downloadPercentLabel.textColor = [UIColor blackColor];
-        } else {
-            downloadPercentLabel.textColor = [UIColor whiteColor];
-        }
-    } else {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
         downloadPercentLabel.textColor = [UIColor blackColor];
+    } else {
+        downloadPercentLabel.textColor = [UIColor whiteColor];
     }
 
     [self.view addSubview:downloadPercentLabel];
@@ -70,14 +62,10 @@
     noticeLabel.text = @"Don't Exit The App\nThis will automatically close on completion";
     noticeLabel.numberOfLines = 2;
     noticeLabel.adjustsFontSizeToFitWidth = YES;
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            noticeLabel.textColor = [UIColor blackColor];
-        } else {
-            noticeLabel.textColor = [UIColor whiteColor];
-        }
-    } else {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
         noticeLabel.textColor = [UIColor blackColor];
+    } else {
+        noticeLabel.textColor = [UIColor whiteColor];
     }
 
     [self.view addSubview:noticeLabel];
@@ -85,9 +73,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (@available(iOS 13.0, *)) {
-        self.modalInPresentation = YES;
-    }
+    self.modalInPresentation = YES;
 
     if (self.downloadOption == 0) {
         [self videoDownloaderPartOne];
@@ -196,39 +182,25 @@
     [downloadTask resume];
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    [self setupYouTubeDownloadControllerView];
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            titleLabel.textColor = [UIColor blackColor];
-            downloadPercentLabel.textColor = [UIColor blackColor];
-            noticeLabel.textColor = [UIColor blackColor];
-        } else {
-            titleLabel.textColor = [UIColor whiteColor];
-            downloadPercentLabel.textColor = [UIColor whiteColor];
-            noticeLabel.textColor = [UIColor whiteColor];
-        }
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
     } else {
-        titleLabel.textColor = [UIColor blackColor];
-        downloadPercentLabel.textColor = [UIColor blackColor];
-        noticeLabel.textColor = [UIColor blackColor];
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
     }
 }
 
-@end
-
-@implementation YouTubeDownloadController (Privates)
-
-- (void)setupYouTubeDownloadControllerView {
-    if (@available(iOS 13.0, *)) {
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-        } else {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-        }
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self coloursView];
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        titleLabel.textColor = [UIColor blackColor];
+        downloadPercentLabel.textColor = [UIColor blackColor];
+        noticeLabel.textColor = [UIColor blackColor];
     } else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+        titleLabel.textColor = [UIColor whiteColor];
+        downloadPercentLabel.textColor = [UIColor whiteColor];
+        noticeLabel.textColor = [UIColor whiteColor];
     }
 }
 
