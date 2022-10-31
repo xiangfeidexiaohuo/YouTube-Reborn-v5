@@ -1,5 +1,4 @@
 #import "SponsorBlockOptionsController.h"
-#import "../Headers/Imports.h"
 
 @interface SponsorBlockOptionsController ()
 - (void)coloursView;

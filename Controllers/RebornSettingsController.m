@@ -1,5 +1,4 @@
 #import "RebornSettingsController.h"
-#import "../Headers/Imports.h"
 
 @interface RebornSettingsController ()
 - (void)coloursView;

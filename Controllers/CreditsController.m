@@ -1,5 +1,4 @@
 #import "CreditsController.h"
-#import "../Headers/Imports.h"
 
 @interface CreditsController ()
 - (void)coloursView;
@@ -74,7 +73,7 @@
                 cell.detailTextLabel.text = @"Features: \"Adblock\", \"AutoPlay In Fullscreen\"";
             }
             if (indexPath.row == 3) {
-                cell.textLabel.text = @"Zachary";
+                cell.textLabel.text = @"Snoolie";
                 cell.detailTextLabel.text = @"Features: \"Enable Extra Video Speed\"";
             }
         }
@@ -100,7 +99,7 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/PoomSmart"] options:@{} completionHandler:nil];
         }
         if (indexPath.row == 3) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/zachary7829"] options:@{} completionHandler:nil];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/0xilis"] options:@{} completionHandler:nil];
         }
     }
 }

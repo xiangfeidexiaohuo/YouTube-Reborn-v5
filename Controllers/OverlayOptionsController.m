@@ -1,5 +1,4 @@
 #import "OverlayOptionsController.h"
-#import "../Headers/Imports.h"
 #import <LocalAuthentication/LocalAuthentication.h>
 
 @interface OverlayOptionsController ()

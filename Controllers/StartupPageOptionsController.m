@@ -1,5 +1,4 @@
 #import "StartupPageOptionsController.h"
-#import "../Headers/Imports.h"
 
 @interface StartupPageOptionsController ()
 - (void)coloursView;

@@ -1,5 +1,4 @@
 #import "PictureInPictureOptionsController.h"
-#import "../Headers/Imports.h"
 
 @interface PictureInPictureOptionsController ()
 - (void)coloursView;

@@ -1,5 +1,4 @@
 #import "VideoOptionsController.h"
-#import "../Headers/Imports.h"
 
 @interface VideoOptionsController ()
 - (void)coloursView;

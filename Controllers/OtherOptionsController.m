@@ -1,5 +1,4 @@
 #import "OtherOptionsController.h"
-#import "../Headers/Imports.h"
 
 @interface OtherOptionsController ()
 - (void)coloursView;
