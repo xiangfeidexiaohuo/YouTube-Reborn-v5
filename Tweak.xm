@@ -184,10 +184,8 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %property(retain, nonatomic) UIButton *rebornOverlayButton;
 
 - (id)initWithDelegate:(id)delegate {
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"] == YES) {
-            %init(gPictureInPicture);
-        }
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0") && [[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"] == YES) {
+        %init(gPictureInPicture);
     }
     self = %orig;
     if (self) {
