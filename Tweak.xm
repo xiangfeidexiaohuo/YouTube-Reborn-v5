@@ -1696,7 +1696,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
     return NULL;
 }
 - (BOOL)enabled {
-    return 0;
+    return NO;
 }
 %end
 %end
