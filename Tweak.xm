@@ -1966,7 +1966,7 @@ int selectedTabIndex = 0;
         NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:colorData error:nil];
         [unarchiver setRequiresSecureCoding:NO];
         NSString *hexString = [unarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
-        if(hexString != nil) {
+        if (hexString != nil) {
             rebornHexColour = [unarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
             %init(gColourOptions);
         }
