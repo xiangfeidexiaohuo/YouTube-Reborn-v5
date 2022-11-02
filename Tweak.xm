@@ -1823,6 +1823,15 @@ int selectedTabIndex = 0;
 }
 %end
 
+/* %hook YTPlayerBarController
++ (BOOL)isFineScrubbingEnabled {
+    return NO;
+}
++ (BOOL)isFineScrubbingFromSeekAnywhereEnabled {
+    return NO;
+}
+%end */
+
 %ctor {
     @autoreleasepool {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kEnableNoVideoAds"] == nil) {
