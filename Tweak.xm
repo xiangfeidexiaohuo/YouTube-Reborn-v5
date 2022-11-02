@@ -127,18 +127,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook YTRightNavigationButtons
 %property (strong, nonatomic) YTQTMButton *youtubeRebornButton;
 - (NSMutableArray *)buttons {
-	NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubeReborn" ofType:@"bundle"];
-    NSString *youtubeRebornLightSettingsPath;
-    NSString *youtubeRebornDarkSettingsPath;
-    if (tweakBundlePath) {
-        NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
-        youtubeRebornLightSettingsPath = [tweakBundle pathForResource:@"ytrebornbuttonwhite" ofType:@"png"];
-		youtubeRebornDarkSettingsPath = [tweakBundle pathForResource:@"ytrebornbuttonblack" ofType:@"png"];
-    } else {
-		youtubeRebornLightSettingsPath = @"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonwhite.png";
-        youtubeRebornDarkSettingsPath = @"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonblack.png";
-    }
-    NSMutableArray *retVal = %orig.mutableCopy;
+	NSMutableArray *retVal = %orig.mutableCopy;
     [self.youtubeRebornButton removeFromSuperview];
     [self addSubview:self.youtubeRebornButton];
     if (!self.youtubeRebornButton) {
@@ -146,10 +135,12 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
         self.youtubeRebornButton.frame = CGRectMake(0, 0, 24, 24);
         
         if ([%c(YTPageStyleController) pageStyle] == 0) {
-            [self.youtubeRebornButton setImage:[UIImage imageWithContentsOfFile:youtubeRebornDarkSettingsPath] forState:UIControlStateNormal];
+            [self.youtubeRebornButton setImage:[UIImage systemImageNamed:@"gearshape"] forState:UIControlStateNormal];
+            self.youtubeRebornButton.tintColor = [UIColor blackColor];
         }
         else if ([%c(YTPageStyleController) pageStyle] == 1) {
-            [self.youtubeRebornButton setImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath] forState:UIControlStateNormal];
+            [self.youtubeRebornButton setImage:[UIImage systemImageNamed:@"gearshape"] forState:UIControlStateNormal];
+            self.youtubeRebornButton.tintColor = [UIColor whiteColor];
         }
         
         [self.youtubeRebornButton addTarget:self action:@selector(rebornRootOptionsAction) forControlEvents:UIControlEventTouchUpInside];
