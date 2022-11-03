@@ -17,7 +17,7 @@ static BOOL hasDeviceNotch() {
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 		return NO;
 	} else {
-		LAContext* context = [[LAContext alloc] init];
+		LAContext *context = [[LAContext alloc] init];
 		[context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
 		return [context biometryType] == LABiometryTypeFaceID;
 	}
