@@ -1749,10 +1749,10 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
     %orig();
     NSString *options = @"[%22sponsor%22,%22selfpromo%22,%22interaction%22,%22intro%22,%22outro%22,%22preview%22,%22music_offtopic%22]";
     NSURLRequest *request;
-    if (![[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"] || [[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"] == 0) {
+    if (![[NSUserDefaults standardUserDefaults] integerForKey:@"kSourceSegmentedInt"] || [[NSUserDefaults standardUserDefaults] integerForKey:@"kSourceSegmentedInt"] == 0) {
         request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
     }
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"] == 1) {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSourceSegmentedInt"] == 1) {
         request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsorblock.kavin.rocks/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
     }
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
