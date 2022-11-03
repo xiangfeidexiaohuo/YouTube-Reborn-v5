@@ -1737,13 +1737,15 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %end
 
 BOOL sponsorBlockEnabled;
-BOOL sponsorSkipped;
+BOOL sponsorSkipCheck;
+BOOL sponsorSkipShowing;
 NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
 
 %hook YTPlayerViewController
 - (void)playbackController:(id)arg1 didActivateVideo:(id)arg2 withPlaybackData:(id)arg3 {
     sponsorBlockEnabled = NO;
-    sponsorSkipped = NO;
+    sponsorSkipCheck = NO;
+    sponsorSkipShowing = NO;
     %orig();
     NSString *options = @"[%22sponsor%22,%22selfpromo%22,%22interaction%22,%22intro%22,%22outro%22,%22preview%22,%22music_offtopic%22]";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
@@ -1766,49 +1768,272 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
             if ([[jsonDictionary objectForKey:@"category"] isEqual:@"sponsor"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                    break;
+                }
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
+                    sponsorSkipShowing = YES;
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Sponsor Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                        sponsorSkipCheck = NO;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    UIViewController *topViewController = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+                    while (true) {
+                        if (topViewController.presentedViewController) {
+                            topViewController = topViewController.presentedViewController;
+                        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+                            UINavigationController *nav = (UINavigationController *)topViewController;
+                            topViewController = nav.topViewController;
+                        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+                            UITabBarController *tab = (UITabBarController *)topViewController;
+                            topViewController = tab.selectedViewController;
+                        } else {
+                            break;
+                        }
+                    }
+                    [topViewController presentViewController:alertSkip animated:YES completion:nil];
+                    break;
                 }
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"selfpromo"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                    break;
+                }
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
+                    sponsorSkipShowing = YES;
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"SelfPromo Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                        sponsorSkipCheck = NO;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    UIViewController *topViewController = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+                    while (true) {
+                        if (topViewController.presentedViewController) {
+                            topViewController = topViewController.presentedViewController;
+                        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+                            UINavigationController *nav = (UINavigationController *)topViewController;
+                            topViewController = nav.topViewController;
+                        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+                            UITabBarController *tab = (UITabBarController *)topViewController;
+                            topViewController = tab.selectedViewController;
+                        } else {
+                            break;
+                        }
+                    }
+                    [topViewController presentViewController:alertSkip animated:YES completion:nil];
+                    break;
                 }
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"interaction"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                    break;
                 }
-            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"intro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
-                /* if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1) {
-                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                } */
-                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1 && !sponsorSkipped) {
-                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Intro Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
+                    sponsorSkipShowing = YES;
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Interaction Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
 
                     [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                        sponsorSkipped = YES;
+                        sponsorSkipCheck = YES;
+                        sponsorSkipShowing = NO;
                     }]];
 
                     [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                        sponsorSkipped = YES;
+                        sponsorSkipCheck = YES;
                         [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                        sponsorSkipped = NO;
+                        sponsorSkipCheck = NO;
+                        sponsorSkipShowing = NO;
                     }]];
 
-                    UIViewController *skipViewController = [self _viewControllerForAncestor];
-                    [skipViewController presentViewController:alertSkip animated:YES completion:nil];
+                    UIViewController *topViewController = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+                    while (true) {
+                        if (topViewController.presentedViewController) {
+                            topViewController = topViewController.presentedViewController;
+                        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+                            UINavigationController *nav = (UINavigationController *)topViewController;
+                            topViewController = nav.topViewController;
+                        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+                            UITabBarController *tab = (UITabBarController *)topViewController;
+                            topViewController = tab.selectedViewController;
+                        } else {
+                            break;
+                        }
+                    }
+                    [topViewController presentViewController:alertSkip animated:YES completion:nil];
+                    break;
+                }
+            } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"intro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1) {
+                    [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                    break;
+                }
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
+                    sponsorSkipShowing = YES;
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Intro Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                        sponsorSkipCheck = NO;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    UIViewController *topViewController = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+                    while (true) {
+                        if (topViewController.presentedViewController) {
+                            topViewController = topViewController.presentedViewController;
+                        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+                            UINavigationController *nav = (UINavigationController *)topViewController;
+                            topViewController = nav.topViewController;
+                        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+                            UITabBarController *tab = (UITabBarController *)topViewController;
+                            topViewController = tab.selectedViewController;
+                        } else {
+                            break;
+                        }
+                    }
+                    [topViewController presentViewController:alertSkip animated:YES completion:nil];
+                    break;
                 }
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"outro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                    break;
+                }
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
+                    sponsorSkipShowing = YES;
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Outro Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                        sponsorSkipCheck = NO;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    UIViewController *topViewController = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+                    while (true) {
+                        if (topViewController.presentedViewController) {
+                            topViewController = topViewController.presentedViewController;
+                        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+                            UINavigationController *nav = (UINavigationController *)topViewController;
+                            topViewController = nav.topViewController;
+                        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+                            UITabBarController *tab = (UITabBarController *)topViewController;
+                            topViewController = tab.selectedViewController;
+                        } else {
+                            break;
+                        }
+                    }
+                    [topViewController presentViewController:alertSkip animated:YES completion:nil];
+                    break;
                 }
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"preview"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                    break;
+                }
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
+                    sponsorSkipShowing = YES;
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Preview Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                        sponsorSkipCheck = NO;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    UIViewController *topViewController = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+                    while (true) {
+                        if (topViewController.presentedViewController) {
+                            topViewController = topViewController.presentedViewController;
+                        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+                            UINavigationController *nav = (UINavigationController *)topViewController;
+                            topViewController = nav.topViewController;
+                        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+                            UITabBarController *tab = (UITabBarController *)topViewController;
+                            topViewController = tab.selectedViewController;
+                        } else {
+                            break;
+                        }
+                    }
+                    [topViewController presentViewController:alertSkip animated:YES completion:nil];
+                    break;
                 }
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"music_offtopic"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                    break;
+                }
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
+                    sponsorSkipShowing = YES;
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Music_OffTopic Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipCheck = YES;
+                        [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                        sponsorSkipCheck = NO;
+                        sponsorSkipShowing = NO;
+                    }]];
+
+                    UIViewController *topViewController = [[[[UIApplication sharedApplication] windows] firstObject] rootViewController];
+                    while (true) {
+                        if (topViewController.presentedViewController) {
+                            topViewController = topViewController.presentedViewController;
+                        } else if ([topViewController isKindOfClass:[UINavigationController class]]) {
+                            UINavigationController *nav = (UINavigationController *)topViewController;
+                            topViewController = nav.topViewController;
+                        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+                            UITabBarController *tab = (UITabBarController *)topViewController;
+                            topViewController = tab.selectedViewController;
+                        } else {
+                            break;
+                        }
+                    }
+                    [topViewController presentViewController:alertSkip animated:YES completion:nil];
+                    break;
                 }
             } else {
-                sponsorSkipped = NO;
+                sponsorSkipCheck = NO;
+                sponsorSkipShowing = NO;
                 break;
             }
         }

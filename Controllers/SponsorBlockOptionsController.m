@@ -53,7 +53,7 @@
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                NSArray *sponsorItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", nil];
+                NSArray *sponsorItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", @"Manual Skip", nil];
                 UISegmentedControl *sponsorSegmentedControl = [[UISegmentedControl alloc] initWithItems:sponsorItemArray];
                 sponsorSegmentedControl.frame = CGRectMake(0, 5, self.view.bounds.size.width, cell.bounds.size.height - 10);
                 [sponsorSegmentedControl addTarget:self action:@selector(actionSponsorSegmentedControl:) forControlEvents:UIControlEventValueChanged];
@@ -68,7 +68,7 @@
         if (indexPath.section == 1) {
             if (indexPath.row == 0) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                NSArray *selfpromoItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", nil];
+                NSArray *selfpromoItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", @"Manual Skip", nil];
                 UISegmentedControl *selfpromoSegmentedControl = [[UISegmentedControl alloc] initWithItems:selfpromoItemArray];
                 selfpromoSegmentedControl.frame = CGRectMake(0, 5, self.view.bounds.size.width, cell.bounds.size.height - 10);
                 [selfpromoSegmentedControl addTarget:self action:@selector(actionSelfPromoSegmentedControl:) forControlEvents:UIControlEventValueChanged];
@@ -83,7 +83,7 @@
         if (indexPath.section == 2) {
             if (indexPath.row == 0) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                NSArray *interactionItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", nil];
+                NSArray *interactionItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", @"Manual Skip", nil];
                 UISegmentedControl *interactionSegmentedControl = [[UISegmentedControl alloc] initWithItems:interactionItemArray];
                 interactionSegmentedControl.frame = CGRectMake(0, 5, self.view.bounds.size.width, cell.bounds.size.height - 10);
                 [interactionSegmentedControl addTarget:self action:@selector(actionInteractionSegmentedControl:) forControlEvents:UIControlEventValueChanged];
@@ -98,7 +98,7 @@
         if (indexPath.section == 3) {
             if (indexPath.row == 0) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                NSArray *introItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", nil];
+                NSArray *introItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", @"Manual Skip", nil];
                 UISegmentedControl *introSegmentedControl = [[UISegmentedControl alloc] initWithItems:introItemArray];
                 introSegmentedControl.frame = CGRectMake(0, 5, self.view.bounds.size.width, cell.bounds.size.height - 10);
                 [introSegmentedControl addTarget:self action:@selector(actionIntroSegmentedControl:) forControlEvents:UIControlEventValueChanged];
@@ -113,7 +113,7 @@
         if (indexPath.section == 4) {
             if (indexPath.row == 0) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                NSArray *outroItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", nil];
+                NSArray *outroItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", @"Manual Skip", nil];
                 UISegmentedControl *outroSegmentedControl = [[UISegmentedControl alloc] initWithItems:outroItemArray];
                 outroSegmentedControl.frame = CGRectMake(0, 5, self.view.bounds.size.width, cell.bounds.size.height - 10);
                 [outroSegmentedControl addTarget:self action:@selector(actionOutroSegmentedControl:) forControlEvents:UIControlEventValueChanged];
@@ -128,7 +128,7 @@
         if (indexPath.section == 5) {
             if (indexPath.row == 0) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                NSArray *previewItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", nil];
+                NSArray *previewItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", @"Manual Skip", nil];
                 UISegmentedControl *previewSegmentedControl = [[UISegmentedControl alloc] initWithItems:previewItemArray];
                 previewSegmentedControl.frame = CGRectMake(0, 5, self.view.bounds.size.width, cell.bounds.size.height - 10);
                 [previewSegmentedControl addTarget:self action:@selector(actionPreviewSegmentedControl:) forControlEvents:UIControlEventValueChanged];
@@ -143,7 +143,7 @@
         if (indexPath.section == 6) {
             if (indexPath.row == 0) {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                NSArray *musicofftopicItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", nil];
+                NSArray *musicofftopicItemArray = [NSArray arrayWithObjects:@"Disable", @"Auto Skip", @"Manual Skip", nil];
                 UISegmentedControl *musicofftopicSegmentedControl = [[UISegmentedControl alloc] initWithItems:musicofftopicItemArray];
                 musicofftopicSegmentedControl.frame = CGRectMake(0, 5, self.view.bounds.size.width, cell.bounds.size.height - 10);
                 [musicofftopicSegmentedControl addTarget:self action:@selector(actionMusicOffTopicSegmentedControl:) forControlEvents:UIControlEventValueChanged];
