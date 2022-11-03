@@ -1816,32 +1816,32 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
 }
 %end
 
-int selectedTabIndex = 0;
+BOOL selectedTabIndex = NO;
 
 %hook YTPivotBarViewController
 - (void)viewDidAppear:(BOOL)animated {
     %orig();
     if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"]) {
         int selectedTab = [[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"];
-        if (selectedTab == 0 && selectedTabIndex == 0) {
+        if (selectedTab == 0 && !selectedTabIndex) {
             [self selectItemWithPivotIdentifier:@"FEwhat_to_watch"];
-            selectedTabIndex = 1;
+            selectedTabIndex = YES;
         }
-        if (selectedTab == 1 && selectedTabIndex == 0) {
+        if (selectedTab == 1 && !selectedTabIndex) {
             [self selectItemWithPivotIdentifier:@"FEexplore"];
-            selectedTabIndex = 1;
+            selectedTabIndex = YES;
         }
-        if (selectedTab == 2 && selectedTabIndex == 0) {
+        if (selectedTab == 2 && !selectedTabIndex) {
             [self selectItemWithPivotIdentifier:@"FEshorts"];
-            selectedTabIndex = 1;
+            selectedTabIndex = YES;
         }
-        if (selectedTab == 3 && selectedTabIndex == 0) {
+        if (selectedTab == 3 && !selectedTabIndex) {
             [self selectItemWithPivotIdentifier:@"FEsubscriptions"];
-            selectedTabIndex = 1;
+            selectedTabIndex = YES;
         }
-        if (selectedTab == 4 && selectedTabIndex == 0) {
+        if (selectedTab == 4 && !selectedTabIndex) {
             [self selectItemWithPivotIdentifier:@"FElibrary"];
-            selectedTabIndex = 1;
+            selectedTabIndex = YES;
         }
     }
 }
