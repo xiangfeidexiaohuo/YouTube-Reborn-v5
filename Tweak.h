@@ -54,6 +54,7 @@
 @end
 
 @interface YTPlayerViewController : UIViewController <YTPlaybackController>
+- (id)_viewControllerForAncestor;
 - (void)seekToTime:(CGFloat)time;
 - (NSString *)currentVideoID;
 - (CGFloat)currentVideoMediaTime;

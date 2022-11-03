@@ -1728,11 +1728,13 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %end
 
 BOOL sponsorBlockEnabled;
+BOOL sponsorSkipped;
 NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
 
 %hook YTPlayerViewController
 - (void)playbackController:(id)arg1 didActivateVideo:(id)arg2 withPlaybackData:(id)arg3 {
-    sponsorBlockEnabled = 0;
+    sponsorBlockEnabled = NO;
+    sponsorSkipped = NO;
     %orig();
     NSString *options = @"[%22sponsor%22,%22selfpromo%22,%22interaction%22,%22intro%22,%22outro%22,%22preview%22,%22music_offtopic%22]";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
@@ -1741,16 +1743,16 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
             NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             if ([NSJSONSerialization isValidJSONObject:jsonResponse]) {
                 sponsorBlockValues = jsonResponse;
-                sponsorBlockEnabled = 1;
+                sponsorBlockEnabled = YES;
             } else {
-                sponsorBlockEnabled = 0;
+                sponsorBlockEnabled = NO;
             }
         }
     }] resume];
 }
 - (void)singleVideo:(id)video currentVideoTimeDidChange:(YTSingleVideoTime *)time {
     %orig();
-    if (sponsorBlockEnabled == 1 && [NSJSONSerialization isValidJSONObject:sponsorBlockValues]) {
+    if (sponsorBlockEnabled && [NSJSONSerialization isValidJSONObject:sponsorBlockValues]) {
         for (NSMutableDictionary *jsonDictionary in sponsorBlockValues) {
             if ([[jsonDictionary objectForKey:@"category"] isEqual:@"sponsor"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] == 1) {
@@ -1765,8 +1767,24 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
                 }
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"intro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
-                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1) {
+                /* if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                } */
+                if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1 && !sponsorSkipped) {
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Intro Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipped = YES;
+                    }]];
+
+                    [alertSkip addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                        sponsorSkipped = YES;
+                        [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
+                        sponsorSkipped = NO;
+                    }]];
+
+                    UIViewController *skipViewController = [self _viewControllerForAncestor];
+                    [skipViewController presentViewController:alertSkip animated:YES completion:nil];
                 }
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"outro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] == 1) {
@@ -1780,6 +1798,9 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
                 }
+            } else {
+                sponsorSkipped = NO;
+                break;
             }
         }
     }
