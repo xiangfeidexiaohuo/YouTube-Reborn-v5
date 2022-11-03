@@ -1764,6 +1764,8 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
             } else {
                 sponsorBlockEnabled = NO;
             }
+        } else if (error) {
+            sponsorBlockEnabled = NO;
         }
     }] resume];
 }
