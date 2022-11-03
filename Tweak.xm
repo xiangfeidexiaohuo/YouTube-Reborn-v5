@@ -1748,8 +1748,13 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
     sponsorSkipShowing = NO;
     %orig();
     NSString *options = @"[%22sponsor%22,%22selfpromo%22,%22interaction%22,%22intro%22,%22outro%22,%22preview%22,%22music_offtopic%22]";
-    // NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsorblock.kavin.rocks/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
+    NSURLRequest *request;
+    if (![[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"] || [[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"] == 0) {
+        request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsor.ajay.app/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
+    }
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"] == 1) {
+        request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://sponsorblock.kavin.rocks/api/skipSegments?videoID=%@&categories=%@", self.currentVideoID, options]]];
+    }
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (!error) {
             NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -1769,7 +1774,6 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
             if ([[jsonDictionary objectForKey:@"category"] isEqual:@"sponsor"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                    break;
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSponsorSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
@@ -1802,16 +1806,15 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                         }
                     }
                     [topViewController presentViewController:alertSkip animated:YES completion:nil];
-                    break;
                 }
+                break;
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"selfpromo"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                    break;
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kSelfPromoSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
-                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"SelfPromo Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Selfpromo Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
 
                     [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         sponsorSkipCheck = YES;
@@ -1840,12 +1843,11 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                         }
                     }
                     [topViewController presentViewController:alertSkip animated:YES completion:nil];
-                    break;
                 }
+                break;
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"interaction"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                    break;
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kInteractionSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
@@ -1878,12 +1880,11 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                         }
                     }
                     [topViewController presentViewController:alertSkip animated:YES completion:nil];
-                    break;
                 }
+                break;
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"intro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                    break;
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kIntroSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
@@ -1916,12 +1917,11 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                         }
                     }
                     [topViewController presentViewController:alertSkip animated:YES completion:nil];
-                    break;
                 }
+                break;
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"outro"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                    break;
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kOutroSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
@@ -1954,12 +1954,11 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                         }
                     }
                     [topViewController presentViewController:alertSkip animated:YES completion:nil];
-                    break;
                 }
+                break;
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"preview"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                    break;
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kPreviewSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
@@ -1992,16 +1991,15 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                         }
                     }
                     [topViewController presentViewController:alertSkip animated:YES completion:nil];
-                    break;
                 }
+                break;
             } else if ([[jsonDictionary objectForKey:@"category"] isEqual:@"music_offtopic"] && [[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] && self.currentVideoMediaTime >= [[jsonDictionary objectForKey:@"segment"][0] floatValue] && self.currentVideoMediaTime <= [[jsonDictionary objectForKey:@"segment"][1] floatValue]) {
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] == 1) {
                     [self seekToTime:[[jsonDictionary objectForKey:@"segment"][1] floatValue]];
-                    break;
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kMusicOffTopicSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
-                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Music_OffTopic Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:@"Music_offtopic Detected" message:@"Would you like to skip?" preferredStyle:UIAlertControllerStyleAlert];
 
                     [alertSkip addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         sponsorSkipCheck = YES;
@@ -2030,12 +2028,10 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                         }
                     }
                     [topViewController presentViewController:alertSkip animated:YES completion:nil];
-                    break;
                 }
+                break;
             } else {
                 sponsorSkipCheck = NO;
-                sponsorSkipShowing = NO;
-                break;
             }
         }
     }
