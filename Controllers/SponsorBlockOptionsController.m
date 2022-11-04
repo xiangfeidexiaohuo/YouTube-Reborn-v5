@@ -21,11 +21,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0 || section == 1 || section == 2 || section == 3 || section == 4 || section == 5 || section == 6) {
+    if (section == 0 || section == 1 || section == 2 || section == 3 || section == 4 || section == 5 || section == 6 || section == 7) {
         return 1;
     }
     return 0;
@@ -168,7 +168,7 @@
 }
 
 - (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0 || section == 1 || section == 2 || section == 3 || section == 4 || section == 5 || section == 6) {
+    if (section == 0 || section == 1 || section == 2 || section == 3 || section == 4 || section == 5 || section == 6 || section == 7) {
         return 50;
     }
     return 0;
