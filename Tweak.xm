@@ -1663,6 +1663,21 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
     MSHookIvar<UIControl *>(self, "_safeArea").backgroundColor = rebornHexColour;
 }
 %end
+%hook _ASDisplayView
+- (void)layoutSubviews {
+	%orig();
+    UIResponder *responder = [self nextResponder];
+    while (responder != nil) {
+        if ([responder isKindOfClass:NSClassFromString(@"YTELMViewController")]) {
+            self.backgroundColor = rebornHexColour;
+        }
+        if ([responder isKindOfClass:NSClassFromString(@"YTActionSheetDialogViewController")]) {
+            self.backgroundColor = rebornHexColour;
+        }
+        responder = [responder nextResponder];
+    }
+}
+%end
 %end
 
 %group gAutoFullScreen

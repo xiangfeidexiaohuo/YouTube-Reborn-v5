@@ -144,3 +144,6 @@
 
 @interface YTTransportControlsButtonView : UIView
 @end
+
+@interface _ASDisplayView : UIView
+@end
