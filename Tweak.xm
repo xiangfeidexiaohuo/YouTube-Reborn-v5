@@ -1666,12 +1666,12 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook _ASDisplayView
 - (void)layoutSubviews {
 	%orig();
-    /* if ([responder isKindOfClass:NSClassFromString(@"YTELMViewController")]) {
-        self.backgroundColor = rebornHexColour;
-    } */
     UIResponder *responder = [self nextResponder];
     while (responder != nil) {
         if ([responder isKindOfClass:NSClassFromString(@"YTActionSheetDialogViewController")]) {
+            self.backgroundColor = rebornHexColour;
+        }
+        if ([responder isKindOfClass:NSClassFromString(@"YTPanelLoadingStrategyViewController")]) {
             self.backgroundColor = rebornHexColour;
         }
         responder = [responder nextResponder];
