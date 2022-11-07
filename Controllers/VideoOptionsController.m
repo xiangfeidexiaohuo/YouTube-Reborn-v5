@@ -151,11 +151,16 @@
             cell.accessoryView = enableCustomDoubleTapToSkipDuration;
         }
         if (indexPath.row == 13) {
+            if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
+                cell.textLabel.text = [NSString stringWithFormat:@"Value (Seconds): %d", (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]];
+            } else {
+                cell.textLabel.text = @"Value (Seconds): 10";
+            }
             UIStepper *customDoubleTapToSkipDurationStepper = [[UIStepper alloc] initWithFrame:CGRectZero];
-            customDoubleTapToSkipDurationStepper.stepValue = 1f;
-            customDoubleTapToSkipDurationStepper.minimumValue = 1f;
-            customDoubleTapToSkipDurationStepper.maximumValue = 1000f;
-            customDoubleTapToSkipDurationStepper.value = 10f;
+            customDoubleTapToSkipDurationStepper.stepValue = 1;
+            customDoubleTapToSkipDurationStepper.minimumValue = 1;
+            customDoubleTapToSkipDurationStepper.maximumValue = 1000;
+            customDoubleTapToSkipDurationStepper.value = 10;
             [customDoubleTapToSkipDurationStepper addTarget:self action:@selector(customDoubleTapToSkipDurationStepperValueChanged:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = customDoubleTapToSkipDurationStepper;
         }
@@ -350,8 +355,10 @@
 }
 
 - (void)customDoubleTapToSkipDurationStepperValueChanged:(UIStepper *)sender {
-	[[NSUserDefaults standardUserDefaults] setInteger:[[NSString stringWithFormat:@"%f", sender.value] floatValue] forKey:@"kCustomDoubleTapToSkipDuration"];
+    int trueValue = (int)sender.value;
+	[[NSUserDefaults standardUserDefaults] setInteger:trueValue forKey:@"kCustomDoubleTapToSkipDuration"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.tableView reloadData];
 }
 
 @end
