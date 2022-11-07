@@ -29,7 +29,7 @@
         return 1;
     }
     if (section == 1) {
-        return 1;
+        return 2;
     }
     if (section == 2) {
         return 2;
@@ -38,7 +38,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"TabBarTableViewCell";
+    static NSString *CellIdentifier = @"RebornSettingsTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     if (cell == nil) {
@@ -56,12 +56,6 @@
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"Reset Colour Options";
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-        }
-        if (indexPath.section == 1) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"I Have YouTube Premium";
@@ -71,7 +65,7 @@
                 cell.accessoryView = rebornIHaveYouTubePremiumButton;
             }
         }
-        if (indexPath.section == 2) {
+        if (indexPath.section == 1) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Hide Video Overlay 'OP' Button";
@@ -88,21 +82,46 @@
                 cell.accessoryView = hideRebornShortsOPButton;
             }
         }
+        if (indexPath.section == 2) {
+            if (indexPath.row == 0) {
+                cell.textLabel.text = @"Reset Colour Options";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+            if (indexPath.row == 1) {
+                cell.textLabel.text = @"Reset All YouTube Reborn Options";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+        }
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0) {
+    if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Notice" message:@"Are you sure you want to delete your set colour?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Notice" message:@"Are you sure you want to reset your set colour?" preferredStyle:UIAlertControllerStyleAlert];
 
             [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             }]];
 
             [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableCustomDoubleTapToSkipDuration"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTRebornColourOptionsVFour"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                exit(0);
+            }]];
+
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        if (indexPath.row == 1) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Notice" message:@"Are you sure you want to reset all your options?" preferredStyle:UIAlertControllerStyleAlert];
+
+            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            }]];
+
+            [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kCustomDoubleTapToSkipDuration"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 exit(0);
             }]];
