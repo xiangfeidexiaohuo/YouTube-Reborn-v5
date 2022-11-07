@@ -25,7 +25,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 12;
+    return 14;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -105,27 +105,20 @@
             cell.accessoryView = disableVideoAutoPlay;
         }
         if (indexPath.row == 7) {
-            cell.textLabel.text = @"Disable Double Tap To Skip";
-            UISwitch *disableDoubleTapToSkip = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [disableDoubleTapToSkip addTarget:self action:@selector(toggleDisableDoubleTapToSkip:) forControlEvents:UIControlEventValueChanged];
-            disableDoubleTapToSkip.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableDoubleTapToSkip"];
-            cell.accessoryView = disableDoubleTapToSkip;
-        }
-        if (indexPath.row == 8) {
             cell.textLabel.text = @"Hide Channel Watermark";
             UISwitch *hideChannelWatermark = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideChannelWatermark addTarget:self action:@selector(toggleHideChannelWatermark:) forControlEvents:UIControlEventValueChanged];
             hideChannelWatermark.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"];
             cell.accessoryView = hideChannelWatermark;
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 8) {
             cell.textLabel.text = @"Hide Player Bar Heatwave";
             UISwitch *hidePlayerBarHeatwave = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlayerBarHeatwave addTarget:self action:@selector(toggleHidePlayerBarHeatwave:) forControlEvents:UIControlEventValueChanged];
             hidePlayerBarHeatwave.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayerBarHeatwave"];
             cell.accessoryView = hidePlayerBarHeatwave;
         }
-        if (indexPath.row == 10) {
+        if (indexPath.row == 9) {
             cell.textLabel.text = @"Always Show Player Bar";
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == NO || [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == NO) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
@@ -136,12 +129,35 @@
                 cell.accessoryView = alwaysShowPlayerBar;
             }
         }
-        if (indexPath.row == 11) {
+        if (indexPath.row == 10) {
             cell.textLabel.text = @"Enable Extra Speed Options";
             UISwitch *enableExtraSpeedOptions = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableExtraSpeedOptions addTarget:self action:@selector(toggleExtraSpeedOptions:) forControlEvents:UIControlEventValueChanged];
             enableExtraSpeedOptions.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableExtraSpeedOptions"];
             cell.accessoryView = enableExtraSpeedOptions;
+        }
+        if (indexPath.row == 11) {
+            cell.textLabel.text = @"Disable Double Tap To Skip";
+            UISwitch *disableDoubleTapToSkip = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [disableDoubleTapToSkip addTarget:self action:@selector(toggleDisableDoubleTapToSkip:) forControlEvents:UIControlEventValueChanged];
+            disableDoubleTapToSkip.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableDoubleTapToSkip"];
+            cell.accessoryView = disableDoubleTapToSkip;
+        }
+        if (indexPath.row == 12) {
+            cell.textLabel.text = @"Enable Custom Double Tap To Skip Duration";
+            UISwitch *enableCustomDoubleTapToSkipDuration = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [enableCustomDoubleTapToSkipDuration addTarget:self action:@selector(toggleEnableCustomDoubleTapToSkipDuration:) forControlEvents:UIControlEventValueChanged];
+            enableCustomDoubleTapToSkipDuration.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"];
+            cell.accessoryView = enableCustomDoubleTapToSkipDuration;
+        }
+        if (indexPath.row == 13) {
+            UIStepper *customDoubleTapToSkipDurationStepper = [[UIStepper alloc] initWithFrame:CGRectZero];
+            customDoubleTapToSkipDurationStepper.stepValue = 1f;
+            customDoubleTapToSkipDurationStepper.minimumValue = 1f;
+            customDoubleTapToSkipDurationStepper.maximumValue = 1000f;
+            customDoubleTapToSkipDurationStepper.value = 10f;
+            [customDoubleTapToSkipDurationStepper addTarget:self action:@selector(customDoubleTapToSkipDurationStepperValueChanged:) forControlEvents:UIControlEventValueChanged];
+            cell.accessoryView = customDoubleTapToSkipDurationStepper;
         }
     }
     return cell;
@@ -273,16 +289,6 @@
     }
 }
 
-- (void)toggleDisableDoubleTapToSkip:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kDisableDoubleTapToSkip"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kDisableDoubleTapToSkip"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
 - (void)toggleHideChannelWatermark:(UISwitch *)sender {
     if ([sender isOn]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideChannelWatermark"];
@@ -321,6 +327,31 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kEnableExtraSpeedOptions"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+
+- (void)toggleDisableDoubleTapToSkip:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kDisableDoubleTapToSkip"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kDisableDoubleTapToSkip"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleEnableCustomDoubleTapToSkipDuration:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kEnableCustomDoubleTapToSkipDuration"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kEnableCustomDoubleTapToSkipDuration"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)customDoubleTapToSkipDurationStepperValueChanged:(UIStepper *)sender {
+	[[NSUserDefaults standardUserDefaults] setInteger:[[NSString stringWithFormat:@"%f", sender.value] floatValue] forKey:@"kCustomDoubleTapToSkipDuration"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

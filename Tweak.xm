@@ -1756,6 +1756,49 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %end
 %end
 
+%group gEnableCustomDoubleTapToSkipDuration
+%hook YTSettings
+- (long long)doubleTapSeekDuration {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    }
+    return 10;
+}
+- (void)setDoubleTapSeekDuration:(long long)arg1 {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        arg1 = [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    } else {
+        arg1 = 10;
+    }
+    %orig;
+}
+%end
+%hook YTMainAppVideoPlayerOverlayView
+- (long long)doubleTapSeekDuration {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    }
+    return 10;
+}
+%end
+%hook YTUserDefaults
+- (long long)doubleTapSeekDuration {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    }
+    return 10;
+}
+- (void)setDoubleTapSeekDuration:(long long)arg1 {
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        arg1 = [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    } else {
+        arg1 = 10;
+    }
+    %orig;
+}
+%end
+%end
+
 BOOL sponsorBlockEnabled;
 BOOL sponsorSkipCheck;
 BOOL sponsorSkipShowing;
@@ -2156,6 +2199,7 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePreviousButtonShadowInOverlay"] == YES) %init(gHidePreviousButtonShadowInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideNextButtonShadowInOverlay"] == YES) %init(gHideNextButtonShadowInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayPauseButtonShadowInOverlay"] == YES) %init(gHidePlayPauseButtonShadowInOverlay);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"] == YES) %init(gEnableCustomDoubleTapToSkipDuration);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kAlwaysShowPlayerBarVTwo"] == YES) {
             %init(gAlwaysShowPlayerBar);
         }
