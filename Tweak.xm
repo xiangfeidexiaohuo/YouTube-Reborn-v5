@@ -1759,14 +1759,14 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %group gEnableCustomDoubleTapToSkipDuration
 %hook YTSettings
 - (NSInteger)doubleTapSeekDuration {
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
-        return [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
     }
     return 10;
 }
 - (void)setDoubleTapSeekDuration:(NSInteger)arg1 {
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
-        arg1 = [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        arg1 = [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
     } else {
         arg1 = 10;
     }
@@ -1775,26 +1775,40 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %end
 %hook YTMainAppVideoPlayerOverlayView
 - (NSInteger)doubleTapSeekDuration {
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
-        return [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
     }
     return 10;
 }
 %end
 %hook YTUserDefaults
 - (NSInteger)doubleTapSeekDuration {
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
-        return [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
     }
     return 10;
 }
 - (void)setDoubleTapSeekDuration:(NSInteger)arg1 {
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
-        arg1 = [[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"];
+    if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        arg1 = [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
     } else {
         arg1 = 10;
     }
     %orig;
+}
+%end
+%hook YTVideoPlayerOverlayConfigTransformer
++ (double)doubleTapSeekIntervalForVideoPlayerOverlayConfig:(id)arg1 {
+    if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
+    }
+    return 10;
+}
++ (NSInteger)doubleTapSeekDurationForVideoPlayerOverlayConfig:(id)arg1 {
+    if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
+        return [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
+    }
+    return 10;
 }
 %end
 %end
