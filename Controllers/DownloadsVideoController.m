@@ -86,7 +86,7 @@
     [self presentViewController:playerViewController animated:YES completion:nil];
 }
 
-- (void)tableView:(UITableView*)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath*)indexPath {
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     NSString *currentVideoFileName = filePathsVideoArray[indexPath.row];
     NSString *currentArtworkFileName = filePathsVideoArtworkArray[indexPath.row];
 
