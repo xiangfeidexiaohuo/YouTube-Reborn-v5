@@ -32,7 +32,7 @@
         return 2;
     }
     if (section == 2) {
-        return 2;
+        return 1;
     }
     return 0;
 }
