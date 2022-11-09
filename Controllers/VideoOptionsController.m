@@ -158,7 +158,7 @@
             customDoubleTapToSkipDurationStepper.stepValue = 1;
             customDoubleTapToSkipDurationStepper.minimumValue = 1;
             customDoubleTapToSkipDurationStepper.maximumValue = 1000;
-            if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kCustomDoubleTapToSkipDuration"]) {
+            if ([[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]) {
                 customDoubleTapToSkipDurationStepper.value = [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"];
                 cell.textLabel.text = [NSString stringWithFormat:@"Value (Seconds): %.lf", [[NSUserDefaults standardUserDefaults] doubleForKey:@"kCustomDoubleTapToSkipDuration"]];
             } else {
