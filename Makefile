@@ -6,10 +6,10 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = YouTubeReborn
 YouTubeReborn_FILES = Tweak.xm $(shell find Controllers -name '*.m') $(shell find AFNetworking -name '*.m') $(shell find YouTubeExtractor -name '*.m')
-YouTubeReborn_FRAMEWORKS = UIKit Foundation AVFoundation AVKit Photos Accelerate CoreMotion GameController VideoToolbox
+YouTubeReborn_FRAMEWORKS = UIKit Foundation AVFoundation AVKit Photos Accelerate CoreMotion VideoToolbox
 YouTubeReborn_EXTRA_FRAMEWORKS = ffmpegkit libavcodec libavdevice libavfilter libavformat libavutil libswresample libswscale
-YouTubeReborn_CFLAGS = -FFrameworks -fobjc-arc -Wno-deprecated-declarations
-YouTubeReborn_LDFLAGS += -FFrameworks -rpath @loader_path/Frameworks/
+YouTubeReborn_CFLAGS = -Flayout/Library/Frameworks -fobjc-arc -Wno-deprecated-declarations
+YouTubeReborn_LDFLAGS += -Flayout/Library/Frameworks -rpath @loader_path/Frameworks/
 YouTubeReborn_LIBRARIES = bz2 c++ iconv z
 ARCHS = arm64
 
