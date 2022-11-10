@@ -180,6 +180,8 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kStartupPageIntVTwo"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornOPButtonVTwo"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornShortsOPButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideCurrentTime"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideDuration"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 exit(0);
             }]];
