@@ -2154,6 +2154,13 @@ BOOL selectedTabIndex = NO;
 }
 %end
 
+/* %hook YTInlinePlayerBarContainerView
+- (void)layoutSubviews {
+	%orig();
+	self.durationLabel.hidden = YES;
+}
+%end */
+
 %ctor {
     @autoreleasepool {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kEnableNoVideoAds"] == nil) {
