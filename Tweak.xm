@@ -1813,6 +1813,24 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %end
 %end
 
+%group gHideCurrentTimeLabel
+%hook YTInlinePlayerBarContainerView
+- (void)layoutSubviews {
+	%orig();
+    self.currentTimeLabel.hidden = YES;
+}
+%end
+%end
+
+%group gHideDurationLabel
+%hook YTInlinePlayerBarContainerView
+- (void)layoutSubviews {
+	%orig();
+	self.durationLabel.hidden = YES;
+}
+%end
+%end
+
 BOOL sponsorBlockEnabled;
 BOOL sponsorSkipCheck;
 BOOL sponsorSkipShowing;
@@ -2154,13 +2172,6 @@ BOOL selectedTabIndex = NO;
 }
 %end
 
-/* %hook YTInlinePlayerBarContainerView
-- (void)layoutSubviews {
-	%orig();
-	self.durationLabel.hidden = YES;
-}
-%end */
-
 %ctor {
     @autoreleasepool {
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"kEnableNoVideoAds"] == nil) {
@@ -2217,6 +2228,8 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideNextButtonShadowInOverlay"] == YES) %init(gHideNextButtonShadowInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayPauseButtonShadowInOverlay"] == YES) %init(gHidePlayPauseButtonShadowInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"] == YES) %init(gEnableCustomDoubleTapToSkipDuration);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCurrentTime"] == YES) %init(gHideCurrentTimeLabel);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideDuration"] == YES) %init(gHideDurationLabel);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kAlwaysShowPlayerBarVTwo"] == YES) {
             %init(gAlwaysShowPlayerBar);
         }

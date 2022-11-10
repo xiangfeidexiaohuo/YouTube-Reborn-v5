@@ -153,4 +153,5 @@
 
 @interface YTInlinePlayerBarContainerView : UIView
 @property(readonly, nonatomic) YTLabel *durationLabel;
+@property(readonly, nonatomic) YTLabel *currentTimeLabel;
 @end

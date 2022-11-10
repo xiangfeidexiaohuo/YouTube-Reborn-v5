@@ -36,7 +36,7 @@ static BOOL hasDeviceNotch() {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 11;
+    return 13;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -140,6 +140,20 @@ static BOOL hasDeviceNotch() {
             [hideOverlayQuickActions addTarget:self action:@selector(toggleHideOverlayQuickActions:) forControlEvents:UIControlEventValueChanged];
             hideOverlayQuickActions.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"];
             cell.accessoryView = hideOverlayQuickActions;
+        }
+        if (indexPath.row == 11) {
+            cell.textLabel.text = @"Hide Current Time";
+            UISwitch *hideCurrentTime = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideCurrentTime addTarget:self action:@selector(toggleHideCurrentTime:) forControlEvents:UIControlEventValueChanged];
+            hideCurrentTime.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCurrentTime"];
+            cell.accessoryView = hideCurrentTime;
+        }
+        if (indexPath.row == 12) {
+            cell.textLabel.text = @"Hide Duration";
+            UISwitch *hideDuration = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideDuration addTarget:self action:@selector(toggleHideDuration:) forControlEvents:UIControlEventValueChanged];
+            hideDuration.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideDuration"];
+            cell.accessoryView = hideDuration;
         }
     }
     return cell;
@@ -296,6 +310,26 @@ static BOOL hasDeviceNotch() {
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideOverlayQuickActions"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideCurrentTime:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideCurrentTime"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideCurrentTime"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideDuration:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideDuration"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideDuration"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
