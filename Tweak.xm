@@ -873,13 +873,13 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook YTRightNavigationButtons
 - (void)layoutSubviews {
 	%orig();
-	if(![[self MDXButton] isHidden]) [[self MDXButton] setHidden:YES];
+	self.MDXButton.hidden = YES;
 }
 %end
 %hook YTMainAppControlsOverlayView
 - (void)layoutSubviews {
 	%orig();
-	if(![[self playbackRouteButton] isHidden]) [[self playbackRouteButton] setHidden:YES];
+	self.playbackRouteButton.hidden = YES;
 }
 %end
 %end
@@ -898,7 +898,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook YTRightNavigationButtons
 - (void)layoutSubviews {
 	%orig();
-	if(![[self notificationButton] isHidden]) [[self notificationButton] setHidden:YES];
+	self.notificationButton.hidden = YES;
 }
 %end
 %end
@@ -1200,7 +1200,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook YTMainAppControlsOverlayView
 - (void)layoutSubviews {
 	%orig();
-	if(![[self autonavSwitch] isHidden]) [[self autonavSwitch] setHidden:YES];
+	self.autonavSwitch.hidden = YES;
 }
 %end
 %end
@@ -1209,7 +1209,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook YTMainAppControlsOverlayView
 - (void)layoutSubviews {
 	%orig();
-    if(![[self closedCaptionsOrSubtitlesButton] isHidden]) [[self closedCaptionsOrSubtitlesButton] setHidden:YES];
+    self.closedCaptionsOrSubtitlesButton.hidden = YES;
 }
 %end
 %end
@@ -1257,7 +1257,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %hook YTRightNavigationButtons
 - (void)layoutSubviews {
 	%orig();
-	if(![[self searchButton] isHidden]) [[self searchButton] setHidden:YES];
+	self.searchButton.hidden = YES;
 }
 %end
 %end
