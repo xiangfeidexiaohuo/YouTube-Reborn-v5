@@ -24,7 +24,7 @@
 @property(readonly, nonatomic) YTQTMButton *MDXButton;
 @property(readonly, nonatomic) YTQTMButton *searchButton;
 @property(readonly, nonatomic) YTQTMButton *notificationButton;
-@property (strong, nonatomic) YTQTMButton *youtubeRebornButton;
+@property(strong, nonatomic) YTQTMButton *youtubeRebornButton;
 - (void)setLeadingPadding:(CGFloat)arg1;
 - (void)rebornRootOptionsAction;
 @end
@@ -36,7 +36,7 @@
 @property(readonly, nonatomic) YTQTMButton *nextButton;
 @property(readonly, nonatomic) ABCSwitch *autonavSwitch;
 @property(readonly, nonatomic) YTQTMButton *closedCaptionsOrSubtitlesButton;
-@property(retain, nonatomic) UIButton *rebornOverlayButton;
+@property(strong, nonatomic) UIButton *rebornOverlayButton;
 - (id)playPauseButton;
 - (void)didPressPause:(id)button;
 - (void)rebornOptionsAction;
