@@ -11,7 +11,7 @@ Reddit: [Subreddit](https://www.reddit.com/r/YouTubeReborn/)
 
 Non-Jailbreak Download
 
-Ipa (4.0.7): [Download](https://github.com/LillieH001/YouTube-Reborn/releases/download/4.0.7/YouTube.Reborn.v4.0.7.ipa)\
+Ipa (4.0.8): [Download](https://github.com/LillieH001/YouTube-Reborn/releases/download/4.0.8/YouTube.Reborn.v4.0.8.ipa)\
 AltStore Repo: [AltStore Repo](https://lillieh001.github.io/altstore/)
 
 -----
