@@ -71,7 +71,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 }
 %end
 
-%group gEnablePictureInPicture
+%group gPictureInPicture
 %hook YTPlayerPIPController
 - (BOOL)isPictureInPicturePossible {
     return YES;
@@ -123,59 +123,6 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 }
 %end
 %end
-
-/* %group gDisablePictureInPicture
-%hook YTPlayerPIPController
-- (BOOL)isPictureInPicturePossible {
-    return NO;
-}
-- (BOOL)canEnablePictureInPicture {
-    return NO;
-}
-- (BOOL)isPipSettingEnabled {
-    return NO;
-}
-- (BOOL)isPictureInPictureForceDisabled {
-    return YES;
-}
-- (void)setPictureInPictureForceDisabled:(BOOL)arg1 {
-    %orig(YES);
-}
-%end
-%hook YTLocalPlaybackController
-- (BOOL)isPictureInPicturePossible {
-    return NO;
-}
-%end
-%hook YTBackgroundabilityPolicy
-- (BOOL)isPlayableInPictureInPictureByUserSettings {
-    return NO;
-}
-%end
-%hook YTLightweightPlayerViewController
-- (BOOL)isPictureInPicturePossible {
-    return NO;
-}
-%end
-%hook YTPlayerViewController
-- (BOOL)isPictureInPicturePossible {
-    return NO;
-}
-%end
-%hook YTPlayerResponse
-- (BOOL)isPlayableInPictureInPicture {
-    return NO;
-}
-- (BOOL)isPipOffByDefault {
-    return YES;
-}
-%end
-%hook MLPIPController
-- (BOOL)pictureInPictureSupported {
-    return NO;
-}
-%end
-%end */
 
 %hook YTRightNavigationButtons
 %property (strong, nonatomic) YTQTMButton *youtubeRebornButton;
@@ -237,7 +184,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 
 - (id)initWithDelegate:(id)delegate {
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0") && [[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO && [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnablePictureInPictureVTwo"] == YES) {
-        %init(gEnablePictureInPicture);
+        %init(gPictureInPicture);
     }
     self = %orig;
     if (self) {
