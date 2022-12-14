@@ -3,6 +3,15 @@ My personal YouTube customizer for non-jb and jb, works on iOS 14-16 and support
 
 -----
 
+Donate
+
+PayPal: [PayPal](https://paypal.me/LillieH001/)\
+Patreon: [Patreon](https://www.patreon.com/lillieweeb)
+
+-----
+
+Social
+
 Discord: [Invite](https://lillieh001.github.io/discord/youtuberebornv4.html)\
 Reddit: [Subreddit](https://www.reddit.com/r/YouTubeReborn/)
 
