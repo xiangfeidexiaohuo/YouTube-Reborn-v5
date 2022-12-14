@@ -1400,6 +1400,9 @@ BOOL dNoSearchAds = NO;
     if ([self.nextResponder isKindOfClass:NSClassFromString(@"YCHLiveChatTickerViewController")]) {
         color = rebornHexColour;
     }
+    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTEditSheetControllerHeader")]) {
+        color = rebornHexColour;
+    }
     %orig;
 }
 %end
@@ -1700,6 +1703,12 @@ BOOL dNoSearchAds = NO;
             self.backgroundColor = rebornHexColour;
         }
         if ([responder isKindOfClass:NSClassFromString(@"YTPanelLoadingStrategyViewController")]) {
+            self.backgroundColor = rebornHexColour;
+        }
+        if ([responder isKindOfClass:NSClassFromString(@"YTTabHeaderElementsViewController")]) {
+            self.backgroundColor = rebornHexColour;
+        }
+        if ([responder isKindOfClass:NSClassFromString(@"YTEditSheetControllerElementsContentViewController")]) {
             self.backgroundColor = rebornHexColour;
         }
         responder = [responder nextResponder];
