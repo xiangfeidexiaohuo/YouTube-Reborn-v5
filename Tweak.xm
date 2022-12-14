@@ -1398,6 +1398,12 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 - (void)setDarkBackgroundColor:(UIColor *)color {
     %orig(rebornHexColour);
 }
+- (void)layoutSubviews {
+    %orig();
+    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTWatchNextResultsViewController")]) {
+        self.subviews[0].subviews[0].backgroundColor = rebornHexColour;
+    }
+}
 %end
 %hook YTPivotBarView
 - (void)setBackgroundColor:(UIColor *)color {
