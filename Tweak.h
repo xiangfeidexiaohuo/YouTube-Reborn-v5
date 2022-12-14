@@ -64,7 +64,7 @@
 - (NSString *)currentVideoID;
 @end
 
-@interface YTMainAppVideoPlayerOverlayViewController
+@interface YTMainAppVideoPlayerOverlayViewController : UIViewController
 - (CGFloat)mediaTime;
 - (int)playerViewLayout;
 - (NSInteger)playerState;
