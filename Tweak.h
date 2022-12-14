@@ -155,3 +155,12 @@
 @property(readonly, nonatomic) YTLabel *durationLabel;
 @property(readonly, nonatomic) YTLabel *currentTimeLabel;
 @end
+
+@interface YTIElementRendererCompatibilityOptions : GPBMessage
+@property (nonatomic, assign, readwrite) BOOL hasAdLoggingData;
+@end
+
+@interface YTIElementRenderer : GPBMessage
+@property (nonatomic, strong, readwrite) YTIElementRendererCompatibilityOptions *compatibilityOptions;
+@property (nonatomic, assign, readwrite) BOOL hasCompatibilityOptions;
+@end

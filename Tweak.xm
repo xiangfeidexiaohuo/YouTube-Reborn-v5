@@ -769,6 +769,19 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 }
 %end
 
+BOOL dNoSearchAds = NO;
+
+%group gNoSearchAds
+%hook YTIElementRenderer
+- (NSData *)elementData {
+    if (self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
+        return nil;
+    }
+    return %orig;
+}
+%end
+%end
+
 %group gNoVideoAds
 %hook YTIPlayerResponse
 - (BOOL)isMonetized {
@@ -782,6 +795,15 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 %end
 %hook YTAdsInnerTubeContextDecorator
 - (void)decorateContext:(id)arg1 {
+}
+%end
+%hook YTSectionListViewController
+- (void)loadWithModel:(id)model {
+    if (!dNoSearchAds) {
+        %init(gNoSearchAds);
+        dNoSearchAds = YES;
+    }
+    %orig;
 }
 %end
 %end
