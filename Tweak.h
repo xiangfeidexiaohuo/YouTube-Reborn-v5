@@ -164,3 +164,11 @@
 @property (nonatomic, strong, readwrite) YTIElementRendererCompatibilityOptions *compatibilityOptions;
 @property (nonatomic, assign, readwrite) BOOL hasCompatibilityOptions;
 @end
+
+@interface YTColorPalette : NSObject
+@property(readonly, nonatomic) long long pageStyle;
+@end
+
+@interface YTCommonColorPalette : NSObject
+@property(readonly, nonatomic) long long pageStyle;
+@end
