@@ -886,6 +886,62 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
+%group gLowContrastMode (this feature has not been declared official by the YouTube Reborn developer yet.)
+%hook UIColor
++ (UIColor *)whiteColor {
+         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)tintColor {
+         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
+%end
+
+%hook YTColorPalette
+- (UIColor *)textPrimary {
+    if (self.pageStyle == 1) {
+        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00]; // Dark Mode
+    }
+        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Mode
+}
+- (UIColor *)textSecondary {
+    if (self.pageStyle == 1) {
+        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+    }
+        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00];
+}
+%end
+
+%hook YTCommonColorPalette
+- (UIColor *)textPrimary {
+    if (self.pageStyle == 1) {
+        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00]; // Dark Mode
+    }
+        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Mode
+}
+- (UIColor *)textSecondary {
+    if (self.pageStyle == 1) {
+        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+    }
+        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00];
+}
+%end
+
+%hook UIButton
++ (UIColor *)currentBackgroundImage {
+         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
+- (UIColor *)currentBackgroundImage {
+         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)currentTitleColor {
+         return [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 1.00];
+}
+- (UIColor *)currentTitleColor {
+         return [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 1.00];
+}
+%end
+%end
+
 %group gNoCastButton
 %hook YTSettings
 - (BOOL)disableMDXDeviceDiscovery {
@@ -2267,6 +2323,7 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"] == YES) %init(gEnableCustomDoubleTapToSkipDuration);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCurrentTime"] == YES) %init(gHideCurrentTimeLabel);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideDuration"] == YES) %init(gHideDurationLabel);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"] == YES) %init(gLowContrastMode);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kAlwaysShowPlayerBarVTwo"] == YES) {
             %init(gAlwaysShowPlayerBar);
         }
