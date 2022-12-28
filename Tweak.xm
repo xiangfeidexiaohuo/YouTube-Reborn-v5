@@ -886,7 +886,7 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
-%group gLowContrastMode (this feature has not been declared official by the YouTube Reborn developer yet.)
+%group gLowContrastMode // (this feature has not been declared official by the YouTube Reborn developer yet.)
 %hook UIColor
 + (UIColor *)whiteColor {
          return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
