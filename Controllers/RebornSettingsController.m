@@ -182,6 +182,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornShortsOPButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideCurrentTime"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideDuration"];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kLowContrastMode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 exit(0);
             }]];
