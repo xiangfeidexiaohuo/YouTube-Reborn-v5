@@ -37,7 +37,7 @@
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+            cell.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
         }
@@ -95,6 +95,13 @@
             [hideYouTubeLogo addTarget:self action:@selector(toggleHideYouTubeLogo:) forControlEvents:UIControlEventValueChanged];
             hideYouTubeLogo.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"];
             cell.accessoryView = hideYouTubeLogo;
+	}
+        if (indexPath.row == 7) {
+            cell.textLabel.text = @"Low Contrast Mode";
+            UISwitch *lowContrastMode = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [lowContrastMode addTarget:self action:@selector(toggleLowContrastMode:) forControlEvents:UIControlEventValueChanged];
+            lowContrastMode.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"];
+            cell.accessoryView = lowContrastMode;
         }
     }
     return cell;
@@ -197,4 +204,13 @@
     }
 }
 
+- (void)toggleLowContrastMode:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kLowContrastMode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kLowContrastMode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
 @end

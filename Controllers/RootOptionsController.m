@@ -74,7 +74,7 @@
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+            cell.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
         }
@@ -285,7 +285,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
-        return @"Version: 4.0.9";
+        return @"YouTube Reborn - v4.0.11";
     }
     return nil;
 }

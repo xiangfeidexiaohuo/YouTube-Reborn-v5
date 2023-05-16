@@ -37,7 +37,7 @@
         self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     }
     else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        self.view.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
         self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     }

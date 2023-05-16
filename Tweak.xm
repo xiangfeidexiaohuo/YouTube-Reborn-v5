@@ -1,6 +1,7 @@
 #import <LocalAuthentication/LocalAuthentication.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <rootless.h>
 #import <YouTubeExtractor/YouTubeExtractor.h>
 #import "Controllers/RootOptionsController.h"
 #import "Controllers/PictureInPictureController.h"
@@ -783,18 +784,34 @@ BOOL dNoSearchAds = NO;
 %end
 
 %group gNoVideoAds
+%hook YTHotConfig
+- (BOOL)disableAfmaIdfaCollection { return NO; }
+%end
 %hook YTIPlayerResponse
 - (BOOL)isMonetized {
     return NO;
 }
 %end
 %hook YTDataUtils
-+ (id)spamSignalsDictionary {
-    return NULL;
-}
++ (id)spamSignalsDictionary { return nil; }
++ (id)spamSignalsDictionaryWithoutIDFA { return nil; }
 %end
 %hook YTAdsInnerTubeContextDecorator
 - (void)decorateContext:(id)arg1 {
+}
+%end
+%hook YTAccountScopedAdsInnerTubeContextDecorator
+- (void)decorateContext:(id)context {}
+%end
+%hook YTIElementRenderer
+- (NSData *)elementData {
+    if (self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData)
+        return nil;
+    NSString *description = [self description];
+    // product_carousel.eml product_engagement_panel.eml product_item.eml
+    if ([description containsString:@"brand_promo"] || [description containsString:@"statement_banner"])
+        return [NSData data];
+    return %orig;
 }
 %end
 %hook YTSectionListViewController
@@ -886,58 +903,52 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
-%group gLowContrastMode // (this feature has not been declared official by the YouTube Reborn developer yet.)
+%group gLowContrastMode // Low Contrast Mode v1.2.3 (Compatible with only v15.02.1-present)
 %hook UIColor
-+ (UIColor *)whiteColor {
++ (UIColor *)whiteColor { // Dark Theme Color
          return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
 }
-+ (UIColor *)tintColor {
++ (UIColor *)textColor {
+         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)dynamicLabelColor {
          return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
 }
 %end
 
-%hook YTColorPalette
+%hook YTCommonColorPalette // Changes Texts & Icons in YouTube Bottom Bar (Doesn't change Texts & Icons under the video player)
 - (UIColor *)textPrimary {
     if (self.pageStyle == 1) {
-        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00]; // Dark Mode
+        return [UIColor whiteColor]; // Dark Theme
     }
-        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Mode
+        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Theme
 }
 - (UIColor *)textSecondary {
     if (self.pageStyle == 1) {
-        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+        return [UIColor whiteColor]; // Dark Theme
     }
-        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00];
+        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Theme
 }
 %end
 
-%hook YTCommonColorPalette
-- (UIColor *)textPrimary {
-    if (self.pageStyle == 1) {
-        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00]; // Dark Mode
-    }
-        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Mode
+%hook YTQTMButton // Changes Tweak Icons/Texts/Images
+- (UIColor *)whiteColor {
+         return [UIColor whiteColor];
 }
-- (UIColor *)textSecondary {
-    if (self.pageStyle == 1) {
-        return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
-    }
-        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00];
+- (UIColor *)tintColor {
+         return [UIColor whiteColor];
+}
+- (UIColor *)overflowButton {
+         return [UIColor whiteColor];
 }
 %end
 
-%hook UIButton
-+ (UIColor *)currentBackgroundImage {
-         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+%hook ELMAnimatedVectorView // Changes the Like Button Animation Color. 
+- (UIColor *)_ASDisplayView {
+         return [UIColor whiteColor];
 }
-- (UIColor *)currentBackgroundImage {
-         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
-}
-+ (UIColor *)currentTitleColor {
-         return [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 1.00];
-}
-- (UIColor *)currentTitleColor {
-         return [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 1.00];
+- (UIColor *)ELMAnimatedVectorView {
+         return [UIColor whiteColor];
 }
 %end
 %end
@@ -1253,6 +1264,24 @@ BOOL dNoSearchAds = NO;
 - (void)layoutSubviews {
 	%orig();
     MSHookIvar<YTTransportControlsButtonView *>(self, "_nextButtonView").backgroundColor = nil;
+}
+%end
+%end
+
+%group gHideSeekBackwardButtonShadowInOverlay
+%hook YTMainAppControlsOverlayView
+- (void)layoutSubviews {
+	%orig();
+    MSHookIvar<YTTransportControlsButtonView *>(self, "_seekBackwardAccessibilityButtonView").backgroundColor = nil;
+}
+%end
+%end
+
+%group gHideSeekForwardButtonShadowInOverlay
+%hook YTMainAppControlsOverlayView
+- (void)layoutSubviews {
+	%orig();
+    MSHookIvar<YTTransportControlsButtonView *>(self, "_seekForwardAccessibilityButtonView").backgroundColor = nil;
 }
 %end
 %end
@@ -2319,6 +2348,8 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureSponsorBadge"] == YES) %init(gHidePictureInPictureSponsorBadge);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePreviousButtonShadowInOverlay"] == YES) %init(gHidePreviousButtonShadowInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideNextButtonShadowInOverlay"] == YES) %init(gHideNextButtonShadowInOverlay);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSeekBackwardButtonShadowInOverlay"] == YES) %init(gHideSeekBackwardButtonShadowInOverlay);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSeekForwardButtonShadowInOverlay"] == YES) %init(gHideSeekForwardButtonShadowInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayPauseButtonShadowInOverlay"] == YES) %init(gHidePlayPauseButtonShadowInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"] == YES) %init(gEnableCustomDoubleTapToSkipDuration);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCurrentTime"] == YES) %init(gHideCurrentTimeLabel);

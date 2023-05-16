@@ -48,7 +48,7 @@ static BOOL hasDeviceNotch() {
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+            cell.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
         }
@@ -100,55 +100,69 @@ static BOOL hasDeviceNotch() {
             cell.accessoryView = hideNextButtonShadowInOverlay;
         }
         if (indexPath.row == 5) {
+            cell.textLabel.text = @"Hide Seek Backward Button Shadow";
+            UISwitch *hideSeekBackwardButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideSeekBackwardButtonShadowInOverlay addTarget:self action:@selector(toggleHideSeekBackwardButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
+            hideSeekBackwardButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSeekBackwardButtonShadowInOverlay"];
+            cell.accessoryView = hideSeekBackwardButtonShadowInOverlay;
+        }
+        if (indexPath.row == 6) {
+            cell.textLabel.text = @"Hide Seek Forward Button Shadow";
+            UISwitch *hideSeekForwardButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideSeekForwardButtonShadowInOverlay addTarget:self action:@selector(toggleHideSeekForwardButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
+            hideSeekForwardButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSeekForwardButtonShadowInOverlay"];
+            cell.accessoryView = hideSeekForwardButtonShadowInOverlay;
+        }
+        if (indexPath.row == 7) {
             cell.textLabel.text = @"Hide Play/Pause Button Shadow";
             UISwitch *hidePlayPauseButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlayPauseButtonShadowInOverlay addTarget:self action:@selector(toggleHidePlayPauseButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
             hidePlayPauseButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayPauseButtonShadowInOverlay"];
             cell.accessoryView = hidePlayPauseButtonShadowInOverlay;
         }
-        if (indexPath.row == 6) {
+        if (indexPath.row == 8) {
             cell.textLabel.text = @"Hide AutoPlay Switch";
             UISwitch *hideAutoPlaySwitchInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideAutoPlaySwitchInOverlay addTarget:self action:@selector(toggleHideAutoPlaySwitchInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideAutoPlaySwitchInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideAutoPlaySwitchInOverlay"];
             cell.accessoryView = hideAutoPlaySwitchInOverlay;
         }
-        if (indexPath.row == 7) {
+        if (indexPath.row == 9) {
             cell.textLabel.text = @"Hide Captions/Subtitles Button";
             UISwitch *hideCaptionsSubtitlesButtonInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideCaptionsSubtitlesButtonInOverlay addTarget:self action:@selector(toggleHideCaptionsSubtitlesButtonInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideCaptionsSubtitlesButtonInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCaptionsSubtitlesButtonInOverlay"];
             cell.accessoryView = hideCaptionsSubtitlesButtonInOverlay;
         }
-        if (indexPath.row == 8) {
+        if (indexPath.row == 10) {
             cell.textLabel.text = @"Disable Related Videos";
             UISwitch *disableRelatedVideosInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableRelatedVideosInOverlay addTarget:self action:@selector(toggleDisableRelatedVideosInOverlay:) forControlEvents:UIControlEventValueChanged];
             disableRelatedVideosInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"];
             cell.accessoryView = disableRelatedVideosInOverlay;
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 11) {
             cell.textLabel.text = @"Hide Dark Background";
             UISwitch *hideOverlayDarkBackground = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideOverlayDarkBackground addTarget:self action:@selector(toggleHideOverlayDarkBackground:) forControlEvents:UIControlEventValueChanged];
             hideOverlayDarkBackground.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayDarkBackground"];
             cell.accessoryView = hideOverlayDarkBackground;
         }
-        if (indexPath.row == 10) {
+        if (indexPath.row == 12) {
             cell.textLabel.text = @"Hide Quick Actions";
             UISwitch *hideOverlayQuickActions = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideOverlayQuickActions addTarget:self action:@selector(toggleHideOverlayQuickActions:) forControlEvents:UIControlEventValueChanged];
             hideOverlayQuickActions.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"];
             cell.accessoryView = hideOverlayQuickActions;
         }
-        if (indexPath.row == 11) {
+        if (indexPath.row == 13) {
             cell.textLabel.text = @"Hide Current Time";
             UISwitch *hideCurrentTime = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideCurrentTime addTarget:self action:@selector(toggleHideCurrentTime:) forControlEvents:UIControlEventValueChanged];
             hideCurrentTime.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCurrentTime"];
             cell.accessoryView = hideCurrentTime;
         }
-        if (indexPath.row == 12) {
+        if (indexPath.row == 14) {
             cell.textLabel.text = @"Hide Duration";
             UISwitch *hideDuration = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideDuration addTarget:self action:@selector(toggleHideDuration:) forControlEvents:UIControlEventValueChanged];
@@ -250,6 +264,26 @@ static BOOL hasDeviceNotch() {
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideNextButtonShadowInOverlay"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideSeekBackwardButtonShadowInOverlay:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideSeekBackwardButtonShadowInOverlay"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideSeekBackwardButtonShadowInOverlay"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideSeekForwardButtonShadowInOverlay:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideSeekForwardButtonShadowInOverlay"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideSeekForwardButtonShadowInOverlay"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
