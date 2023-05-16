@@ -8,7 +8,7 @@ on:
     inputs:
       reborn_version:
         description: "The version of Reborn"
-        default: "4.0.9"
+        default: "4.0.10"
         required: true
         type: string
       decrypted_youtube_url:
@@ -44,13 +44,13 @@ concurrency:
 jobs:
   build:
     name: Build YouTube Reborn
-    runs-on: macos-11
+    runs-on: macos-latest
     permissions:
       contents: write
 
     steps:
       - name: Checkout Main
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.2
         with:
           path: main
           submodules: recursive
@@ -59,16 +59,16 @@ jobs:
         run: brew install ldid dpkg
 
       - name: Setup Theos
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.2
         with:
           repository: theos/theos
-          ref: 997b95cf42163bfd2475cb7023e50124816dc7fd
+          ref: master
           path: theos
           submodules: recursive
       
       - name: Caching
         id: SDK
-        uses: actions/cache@v3.0.11
+        uses: actions/cache@v3.3.1
         env:
           cache-name: iOS-15.5-SDK
         with:
@@ -84,7 +84,7 @@ jobs:
           THEOS: ${{ github.workspace }}/theos
 
       - name: Setup Theos Jailed
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.5.2
         with:
           repository: qnblackcat/theos-jailed
           ref: master
@@ -130,7 +130,7 @@ jobs:
           APP_NAME: ${{ inputs.app_name }}
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         env:
           REBORN_VERSION: ${{ inputs.reborn_version }}
           YOUTUBE_VERSION: ${{ inputs.youtube_version }}
