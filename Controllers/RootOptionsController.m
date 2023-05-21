@@ -86,15 +86,6 @@
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"PayPal";
-            }
-            if (indexPath.row == 1) {
-                cell.textLabel.text = @"Patreon";
-            }
-            if (indexPath.row == 2) {
-                cell.textLabel.text = @"Discord";
-            }
-            if (indexPath.row == 3) {
                 cell.textLabel.text = @"Reddit";
             }
         }
@@ -154,15 +145,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://paypal.me/LillieH001/"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.patreon.com/lillieweeb"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 2) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://lillieh001.github.io/discord/youtuberebornv4.html"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 3) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.reddit.com/r/YouTubeReborn/"] options:@{} completionHandler:nil];
         }
     }
@@ -285,7 +267,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
-        return @"YouTube Reborn - v4.0.11";
+        return @"YouTube Reborn v4.0.12";
     }
     return nil;
 }

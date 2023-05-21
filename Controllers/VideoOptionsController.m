@@ -114,14 +114,28 @@
             hideChannelWatermark.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"];
             cell.accessoryView = hideChannelWatermark;
         }
-        if (indexPath.row == 8) {
+	if (indexPath.row == 8) {
+            cell.textLabel.text = @"Red Progress Bar";
+            UISwitch *redProgressBar = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [redProgressBar addTarget:self action:@selector(toggleRedProgressBar:) forControlEvents:UIControlEventValueChanged];
+            redProgressBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kRedProgressBar"];
+            cell.accessoryView = redProgressBar;
+        }
+	if (indexPath.row == 9) {
+            cell.textLabel.text = @"Old Buffer Bar";
+            UISwitch *oldBufferBar = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [oldBufferBar addTarget:self action:@selector(toggleOldBufferBar:) forControlEvents:UIControlEventValueChanged];
+            oldBufferBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kOldBufferBar"];
+            cell.accessoryView = oldBufferBar;
+        }
+        if (indexPath.row == 10) {
             cell.textLabel.text = @"Hide Player Bar Heatwave";
             UISwitch *hidePlayerBarHeatwave = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlayerBarHeatwave addTarget:self action:@selector(toggleHidePlayerBarHeatwave:) forControlEvents:UIControlEventValueChanged];
             hidePlayerBarHeatwave.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayerBarHeatwave"];
             cell.accessoryView = hidePlayerBarHeatwave;
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 11) {
             cell.textLabel.text = @"Always Show Player Bar";
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == NO || [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == NO) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
@@ -132,28 +146,28 @@
                 cell.accessoryView = alwaysShowPlayerBar;
             }
         }
-        if (indexPath.row == 10) {
+        if (indexPath.row == 12) {
             cell.textLabel.text = @"Enable Extra Speed Options";
             UISwitch *enableExtraSpeedOptions = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableExtraSpeedOptions addTarget:self action:@selector(toggleExtraSpeedOptions:) forControlEvents:UIControlEventValueChanged];
             enableExtraSpeedOptions.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableExtraSpeedOptions"];
             cell.accessoryView = enableExtraSpeedOptions;
         }
-        if (indexPath.row == 11) {
+        if (indexPath.row == 13) {
             cell.textLabel.text = @"Disable Double Tap To Skip";
             UISwitch *disableDoubleTapToSkip = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableDoubleTapToSkip addTarget:self action:@selector(toggleDisableDoubleTapToSkip:) forControlEvents:UIControlEventValueChanged];
             disableDoubleTapToSkip.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableDoubleTapToSkip"];
             cell.accessoryView = disableDoubleTapToSkip;
         }
-        if (indexPath.row == 12) {
+        if (indexPath.row == 14) {
             cell.textLabel.text = @"Enable Custom Double Tap To Skip Duration";
             UISwitch *enableCustomDoubleTapToSkipDuration = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableCustomDoubleTapToSkipDuration addTarget:self action:@selector(toggleEnableCustomDoubleTapToSkipDuration:) forControlEvents:UIControlEventValueChanged];
             enableCustomDoubleTapToSkipDuration.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"];
             cell.accessoryView = enableCustomDoubleTapToSkipDuration;
         }
-        if (indexPath.row == 13) {
+        if (indexPath.row == 15) {
             UIStepper *customDoubleTapToSkipDurationStepper = [[UIStepper alloc] initWithFrame:CGRectZero];
             customDoubleTapToSkipDurationStepper.stepValue = 1;
             customDoubleTapToSkipDurationStepper.minimumValue = 1;
@@ -304,6 +318,26 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideChannelWatermark"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleRedProgressBar:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kRedProgressBar"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kRedProgressBar"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleOldBufferBar:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kOldBufferBar"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kOldBufferBar"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

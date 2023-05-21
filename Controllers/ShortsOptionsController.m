@@ -82,6 +82,13 @@
             hideShortsMoreActionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsMoreActionsButton"];
             cell.accessoryView = hideShortsMoreActionsButton;
         }
+        if (indexPath.row == 4) {
+            cell.textLabel.text = @"Hide Subscriptions Button";
+            UISwitch *hideShortsSubscriptionsButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideShortsSubscriptionsButton addTarget:self action:@selector(toggleHideShortsSubscriptionsButton:) forControlEvents:UIControlEventValueChanged];
+            hideShortsSubscriptionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"];
+            cell.accessoryView = hideShortsSubscriptionsButton;
+        }
     }
     return cell;
 }
@@ -159,6 +166,16 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideShortsShareButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideShortsSubscriptionsButton:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideShortsSubscriptionsButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideShortsSubscriptionsButton"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

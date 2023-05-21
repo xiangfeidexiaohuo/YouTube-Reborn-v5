@@ -1,13 +1,16 @@
 #import <LocalAuthentication/LocalAuthentication.h>
+#import <dlfcn.h>
+#import <rootless.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <rootless.h>
 #import <YouTubeExtractor/YouTubeExtractor.h>
 #import "Controllers/RootOptionsController.h"
 #import "Controllers/PictureInPictureController.h"
 #import "Controllers/YouTubeDownloadController.h"
 #import "Tweak.h"
 
+#define YT_BUNDLE_ID @"com.google.ios.youtube"
+#define YT_NAME @"YouTube"
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -825,6 +828,115 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
+// Hide Upgrade Dialog by @arichorn
+%hook YTGlobalConfig
+- (BOOL)shouldBlockUpgradeDialog { return YES;}
+- (BOOL)shouldForceUpgrade { return NO;}
+- (BOOL)shouldShowUpgrade { return NO;}
+- (BOOL)shouldShowUpgradeDialog { return NO;}
+%end
+
+# pragma mark - IAmYouTube - https://github.com/PoomSmart/IAmYouTube/
+%hook YTVersionUtils
++ (NSString *)appName { return YT_NAME; }
++ (NSString *)appID { return YT_BUNDLE_ID; }
+%end
+
+%hook GCKBUtils
++ (NSString *)appIdentifier { return YT_BUNDLE_ID; }
+%end
+
+%hook GPCDeviceInfo
++ (NSString *)bundleId { return YT_BUNDLE_ID; }
+%end
+
+%hook OGLBundle
++ (NSString *)shortAppName { return YT_NAME; }
+%end
+
+%hook GVROverlayView
++ (NSString *)appName { return YT_NAME; }
+%end
+
+%hook OGLPhenotypeFlagServiceImpl
+- (NSString *)bundleId { return YT_BUNDLE_ID; }
+%end
+
+%hook APMAEU
++ (BOOL)isFAS { return YES; }
+%end
+
+%hook GULAppEnvironmentUtil
++ (BOOL)isFromAppStore { return YES; }
+%end
+
+// Keychain fix
+static NSString *accessGroupID() {
+    NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (__bridge NSString *)kSecClassGenericPassword, (__bridge NSString *)kSecClass,
+                           @"bundleSeedID", kSecAttrAccount,
+                           @"", kSecAttrService,
+                           (id)kCFBooleanTrue, kSecReturnAttributes,
+                           nil];
+    CFDictionaryRef result = nil;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status == errSecItemNotFound)
+        status = SecItemAdd((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+        if (status != errSecSuccess)
+            return nil;
+    NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:(__bridge NSString *)kSecAttrAccessGroup];
+
+    return accessGroup;
+}
+
+%hook NSBundle
+- (NSString *)bundleIdentifier {
+    NSArray *address = [NSThread callStackReturnAddresses];
+    Dl_info info = {0};
+    if (dladdr((void *)[address[2] longLongValue], &info) == 0)
+        return %orig;
+    NSString *path = [NSString stringWithUTF8String:info.dli_fname];
+    if ([path hasPrefix:NSBundle.mainBundle.bundlePath])
+        return YT_BUNDLE_ID;
+    return %orig;
+}
+- (id)objectForInfoDictionaryKey:(NSString *)key {
+    if ([key isEqualToString:@"CFBundleIdentifier"])
+        return YT_BUNDLE_ID;
+    if ([key isEqualToString:@"CFBundleDisplayName"] || [key isEqualToString:@"CFBundleName"])
+        return YT_NAME;
+    return %orig;
+}
+// Fix Google Sign in by @PoomSmart & @level3tjg
+- (NSDictionary *)infoDictionary {
+    NSMutableDictionary *info = %orig.mutableCopy;
+    NSString *altBundleIdentifier = info[@"ALTBundleIdentifier"];
+    if (altBundleIdentifier) info[@"CFBundleIdentifier"] = altBundleIdentifier;
+    return info;
+}
+%end
+
+// Fix login for YouTube 18.13.2 and higher
+%hook SSOKeychainHelper
++ (NSString *)accessGroup {
+    return accessGroupID();
+}
++ (NSString *)sharedAccessGroup {
+    return accessGroupID();
+}
+%end
+
+// Fix login for YouTube 17.33.2 and higher (https://gist.github.com/BandarHL/492d50de46875f9ac7a056aad084ac10)
+%hook SSOKeychainCore
++ (NSString *)accessGroup {
+    return accessGroupID();
+}
+
++ (NSString *)sharedAccessGroup {
+    return accessGroupID();
+}
+%end
+
 %group gBackgroundPlayback
 %hook YTIPlayerResponse
 - (BOOL)isPlayableInBackground {
@@ -1431,6 +1543,13 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
+%group gHideShortsSubscriptionsButton
+%hook YTReelWatchRootViewController
+- (void)setPausedStateCarouselView {
+}
+%end
+%end
+
 %group gColourOptions
 %hook UIView
 - (void)setBackgroundColor:(UIColor *)color {
@@ -1483,6 +1602,9 @@ BOOL dNoSearchAds = NO;
         color = rebornHexColour;
     }
     if ([self.nextResponder isKindOfClass:NSClassFromString(@"YCHLiveChatTickerViewController")]) {
+        color = rebornHexColour;
+    }
+    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTInnerTubeCollectionViewController")]) {
         color = rebornHexColour;
     }
     if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTEditSheetControllerHeader")]) {
@@ -1848,6 +1970,24 @@ BOOL dNoSearchAds = NO;
 - (void)setPlayerViewLayout:(int)arg1 {
     %orig(2);
 } 
+%end
+%end
+
+// Red Progress Bar
+%group gRedProgressBar
+%hook YTInlinePlayerBarContainerView
+- (id)quietProgressBarColor {
+    return [UIColor redColor];
+}
+%end
+%end
+
+// Old Buffer Bar (add-on for Red Progress Bar) @dayanch96 
+%group gOldBufferBar
+%hook YTSegmentableInlinePlayerBarView
+- (void)setBufferedProgressBarColor:(id)arg1 {
+     [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:0.60];
+}
 %end
 %end
 
@@ -2338,11 +2478,14 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsDislikeButton"] == YES) %init(gHideShortsDislikeButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsCommentsButton"] == YES) %init(gHideShortsCommentsButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsShareButton"] == YES) %init(gHideShortsShareButton);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"] == YES) %init(gHideShortsSubscriptionsButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoFullScreen"] == YES) %init(gAutoFullScreen);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"] == YES) %init(gHideYouTubeLogo);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES) %init(gDisableRelatedVideosInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == YES) %init(gHideOverlayQuickActions);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPadStyleOniPhone"] == YES) %init(gEnableiPadStyleOniPhone);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRedProgressBar"] == YES) %init(gRedProgressBar);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kOldBufferBar"] == YES) %init(gOldBufferBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayerBarHeatwave"] == YES) %init(gHidePlayerBarHeatwave);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureAdsBadge"] == YES) %init(gHidePictureInPictureAdsBadge);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureSponsorBadge"] == YES) %init(gHidePictureInPictureSponsorBadge);
