@@ -65,14 +65,18 @@
                 cell.detailTextLabel.text = @"Icon Designer";
             }
             if (indexPath.row == 1) {
+                cell.textLabel.text = @"Dayanch96";
+                cell.detailTextLabel.text = @"Features: \"Red Progress Bar\", \"Old Buffer Bar\"";
+            }
+            if (indexPath.row == 2) {
                 cell.textLabel.text = @"kirb";
                 cell.detailTextLabel.text = @"Development Support";
             }
-            if (indexPath.row == 2) {
+            if (indexPath.row == 3) {
                 cell.textLabel.text = @"PoomSmart";
                 cell.detailTextLabel.text = @"Features: \"Adblock\", \"AutoPlay In Fullscreen\"";
             }
-            if (indexPath.row == 3) {
+            if (indexPath.row == 4) {
                 cell.textLabel.text = @"Snoolie";
                 cell.detailTextLabel.text = @"Features: \"Enable Extra Video Speed\"";
             }
@@ -93,12 +97,15 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/Kutarin_"] options:@{} completionHandler:nil];
         }
         if (indexPath.row == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/kirb"] options:@{} completionHandler:nil];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/Dayanch96"] options:@{} completionHandler:nil];
         }
         if (indexPath.row == 2) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/PoomSmart"] options:@{} completionHandler:nil];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/kirb"] options:@{} completionHandler:nil];
         }
         if (indexPath.row == 3) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/PoomSmart"] options:@{} completionHandler:nil];
+        }
+        if (indexPath.row == 4) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/0xilis"] options:@{} completionHandler:nil];
         }
     }

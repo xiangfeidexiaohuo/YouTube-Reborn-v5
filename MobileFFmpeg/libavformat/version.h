@@ -27,7 +27,7 @@
  * Libavformat version macros
  */
 
-#include "libavutil/version.h"
+#include "../libavutil/version.h"
 
 #include "version_major.h"
 

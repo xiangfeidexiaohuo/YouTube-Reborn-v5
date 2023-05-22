@@ -37,22 +37,22 @@
 
 #include <stddef.h>
 
-#include "libavutil/attributes.h"
-#include "libavutil/avutil.h"
-#include "libavutil/buffer.h"
-#include "libavutil/dict.h"
-#include "libavutil/frame.h"
-#include "libavutil/log.h"
-#include "libavutil/samplefmt.h"
-#include "libavutil/pixfmt.h"
-#include "libavutil/rational.h"
+#include "../libavutil/attributes.h"
+#include "../libavutil/avutil.h"
+#include "../libavutil/buffer.h"
+#include "../libavutil/dict.h"
+#include "../libavutil/frame.h"
+#include "../libavutil/log.h"
+#include "../libavutil/samplefmt.h"
+#include "../libavutil/pixfmt.h"
+#include "../libavutil/rational.h"
 
-#include "libavfilter/version_major.h"
+#include "../libavfilter/version_major.h"
 #ifndef HAVE_AV_CONFIG_H
 /* When included as part of the ffmpeg build, only include the major version
  * to avoid unnecessary rebuilds. When included externally, keep including
  * the full version information. */
-#include "libavfilter/version.h"
+#include "../libavfilter/version.h"
 #endif
 
 /**

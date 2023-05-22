@@ -1,7 +1,8 @@
 #import <LocalAuthentication/LocalAuthentication.h>
+#import <dlfcn.h>
+#import <rootless.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <rootless.h>
 #import <YouTubeExtractor/YouTubeExtractor.h>
 #import "Controllers/RootOptionsController.h"
 #import "Controllers/PictureInPictureController.h"
@@ -825,6 +826,14 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
+// Hide Upgrade Dialog by @arichorn
+%hook YTGlobalConfig
+- (BOOL)shouldBlockUpgradeDialog { return YES;}
+- (BOOL)shouldForceUpgrade { return NO;}
+- (BOOL)shouldShowUpgrade { return NO;}
+- (BOOL)shouldShowUpgradeDialog { return NO;}
+%end
+
 %group gBackgroundPlayback
 %hook YTIPlayerResponse
 - (BOOL)isPlayableInBackground {
@@ -1431,6 +1440,13 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
+%group gHideShortsSubscriptionsButton
+%hook YTReelWatchRootViewController
+- (void)setPausedStateCarouselView {
+}
+%end
+%end
+
 %group gColourOptions
 %hook UIView
 - (void)setBackgroundColor:(UIColor *)color {
@@ -1483,6 +1499,9 @@ BOOL dNoSearchAds = NO;
         color = rebornHexColour;
     }
     if ([self.nextResponder isKindOfClass:NSClassFromString(@"YCHLiveChatTickerViewController")]) {
+        color = rebornHexColour;
+    }
+    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTInnerTubeCollectionViewController")]) {
         color = rebornHexColour;
     }
     if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTEditSheetControllerHeader")]) {
@@ -1848,6 +1867,24 @@ BOOL dNoSearchAds = NO;
 - (void)setPlayerViewLayout:(int)arg1 {
     %orig(2);
 } 
+%end
+%end
+
+// Red Progress Bar
+%group gRedProgressBar
+%hook YTInlinePlayerBarContainerView
+- (id)quietProgressBarColor {
+    return [UIColor redColor];
+}
+%end
+%end
+
+// Old Buffer Bar (add-on for Red Progress Bar) @dayanch96 
+%group gOldBufferBar
+%hook YTSegmentableInlinePlayerBarView
+- (void)setBufferedProgressBarColor:(id)arg1 {
+     [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:0.60];
+}
 %end
 %end
 
@@ -2338,11 +2375,14 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsDislikeButton"] == YES) %init(gHideShortsDislikeButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsCommentsButton"] == YES) %init(gHideShortsCommentsButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsShareButton"] == YES) %init(gHideShortsShareButton);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"] == YES) %init(gHideShortsSubscriptionsButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoFullScreen"] == YES) %init(gAutoFullScreen);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"] == YES) %init(gHideYouTubeLogo);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES) %init(gDisableRelatedVideosInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == YES) %init(gHideOverlayQuickActions);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPadStyleOniPhone"] == YES) %init(gEnableiPadStyleOniPhone);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRedProgressBar"] == YES) %init(gRedProgressBar);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kOldBufferBar"] == YES) %init(gOldBufferBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayerBarHeatwave"] == YES) %init(gHidePlayerBarHeatwave);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureAdsBadge"] == YES) %init(gHidePictureInPictureAdsBadge);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureSponsorBadge"] == YES) %init(gHidePictureInPictureSponsorBadge);

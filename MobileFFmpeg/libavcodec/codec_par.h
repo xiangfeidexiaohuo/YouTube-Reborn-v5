@@ -23,10 +23,10 @@
 
 #include <stdint.h>
 
-#include "libavutil/avutil.h"
-#include "libavutil/channel_layout.h"
-#include "libavutil/rational.h"
-#include "libavutil/pixfmt.h"
+#include "../libavutil/avutil.h"
+#include "../libavutil/channel_layout.h"
+#include "../libavutil/rational.h"
+#include "../libavutil/pixfmt.h"
 
 #include "codec_id.h"
 

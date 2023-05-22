@@ -25,7 +25,7 @@
 #include <stdint.h>
 
 #include "config.h"
-#include "libavutil/error.h"
+#include "../libavutil/error.h"
 #include "os_support.h"
 #include "avio.h"
 #include "url.h"
