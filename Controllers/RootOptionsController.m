@@ -7,7 +7,6 @@
 #import "ShortsOptionsController.h"
 #import "RebornSettingsController.h"
 #import "DownloadsController.h"
-#import "SponsorBlockOptionsController.h"
 #import "OtherOptionsController.h"
 #import "ChangelogsController.h"
 #import "PictureInPictureOptionsController.h"
@@ -119,9 +118,6 @@
                 cell.textLabel.text = @"Shorts Options";
             }
             if (indexPath.row == 6) {
-                cell.textLabel.text = @"SponsorBlock Options (Beta)";
-            }
-            if (indexPath.row == 7) {
                 cell.textLabel.text = @"Other Options";
             }
         }
@@ -221,13 +217,6 @@
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 6) {
-            SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *sponsorBlockOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:sponsorBlockOptionsController];
-            sponsorBlockOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
-
-            [self presentViewController:sponsorBlockOptionsControllerView animated:YES completion:nil];
-        }
-        if (indexPath.row == 7) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -267,7 +256,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
-        return @"YouTube Reborn v4.0.12";
+        return @"YouTube Reborn v4.0.13";
     }
     return nil;
 }

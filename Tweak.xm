@@ -2,6 +2,8 @@
 #import <dlfcn.h>
 #import <rootless.h>
 #import <Foundation/Foundation.h>
+#import <CaptainHook/CaptainHook.h>
+#import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 #import <YouTubeExtractor/YouTubeExtractor.h>
 #import "Controllers/RootOptionsController.h"
@@ -192,7 +194,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
     if (self) {
         self.rebornOverlayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self.rebornOverlayButton addTarget:self action:@selector(rebornOptionsAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.rebornOverlayButton setTitle:@"OP" forState:UIControlStateNormal];
+        [self.rebornOverlayButton setTitle:@"DL" forState:UIControlStateNormal];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kShowStatusBarInOverlay"] == YES) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPadStyleOniPhone"] == YES) {
                 self.rebornOverlayButton.frame = CGRectMake(40, 9, 40.0, 30.0);

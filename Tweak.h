@@ -53,6 +53,10 @@
 @protocol YTPlaybackController
 @end
 
+@interface YTPlayerView : UIView
+- (void)downloadVideo;
+@end
+
 @interface YTPlayerViewController : UIViewController <YTPlaybackController>
 - (void)seekToTime:(CGFloat)time;
 - (NSString *)currentVideoID;
