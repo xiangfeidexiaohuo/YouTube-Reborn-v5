@@ -56,7 +56,7 @@
         }
     }
     if (section == 2) {
-        return 8;
+        return 7;
     }
     if (section == 3) {
         return 3;
@@ -73,13 +73,15 @@
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
+            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
         }
         else {
             cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
             cell.textLabel.textColor = [UIColor whiteColor];
+	    cell.textLabel.shadowColor = [UIColor blackColor];
+            cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         if (indexPath.section == 0) {
@@ -256,7 +258,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
-        return @"YouTube Reborn v4.0.13";
+        return @"YouTube Reborn v4.1.0";
     }
     return nil;
 }
@@ -286,6 +288,26 @@
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
     [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.tableView.layer.borderWidth = 1.0;
+    self.tableView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.view.layer.borderWidth = 1.0;
+    self.view.layer.borderColor = [UIColor blackColor].CGColor;
+    UITableView *tableView = self.tableView;
+    tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
+    tableView.layer.maskedCorners = kCALayerMinXMinYCorner;
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
 }
 
 @end

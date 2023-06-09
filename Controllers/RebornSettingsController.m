@@ -46,13 +46,15 @@
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
+            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
         }
         else {
             cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
             cell.textLabel.textColor = [UIColor whiteColor];
+	    cell.textLabel.shadowColor = [UIColor blackColor];
+            cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         if (indexPath.section == 0) {
@@ -129,6 +131,10 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableYouTubeKidsPopup"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableExtraSpeedOptions"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableHints"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideYouTubeLogo"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kFixRebornHexColor"];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kLowContrastMode"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAutoHideHomeBar"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideTabBarLabels"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideExploreTab"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsTab"];
@@ -136,7 +142,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideSubscriptionsTab"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideLibraryTab"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableDoubleTapToSkip"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideOverlayDarkBackground"];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideOverlayDarkBackground"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePreviousButtonInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideNextButtonInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableVideoAutoPlay"];
@@ -145,21 +151,28 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableVideoInfoCards"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kNoSearchButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideChannelWatermark"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsMoreActionsButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsChannelAvatarButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsLikeButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsDislikeButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsCommentsButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsRemixButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsShareButton"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAutoFullScreen"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideYouTubeLogo"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableRelatedVideosInOverlay"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsBuySuperThanks"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsSubscriptionsButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsMoreActionsButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideOverlayQuickActions"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAutoFullScreen"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableRelatedVideosInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableiPadStyleOniPhone"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kRedProgressBar"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kOldBufferBar"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePlayerBarHeatwave"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureAdsBadge"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureSponsorBadge"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePreviousButtonShadowInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideNextButtonShadowInOverlay"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideSeekBackwardButtonShadowInOverlay"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideSeekForwardButtonShadowInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePlayPauseButtonShadowInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableCustomDoubleTapToSkipDuration"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAlwaysShowPlayerBarVTwo"];
@@ -182,7 +195,6 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornShortsOPButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideCurrentTime"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideDuration"];
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kLowContrastMode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 exit(0);
             }]];
@@ -209,6 +221,26 @@
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
     [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.tableView.layer.borderWidth = 1.0;
+    self.tableView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.view.layer.borderWidth = 1.0;
+    self.view.layer.borderColor = [UIColor blackColor].CGColor;
+    UITableView *tableView = self.tableView;
+    tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
+    tableView.layer.maskedCorners = kCALayerMinXMinYCorner;
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
 }
 
 @end

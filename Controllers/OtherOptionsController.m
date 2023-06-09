@@ -25,7 +25,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -37,13 +37,15 @@
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
+            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
         }
         else {
             cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
             cell.textLabel.textColor = [UIColor whiteColor];
+	    cell.textLabel.shadowColor = [UIColor blackColor];
+            cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -97,11 +99,25 @@
             cell.accessoryView = hideYouTubeLogo;
 	}
         if (indexPath.row == 7) {
+            cell.textLabel.text = @"Fix Reborn Colour Options (for YouTube v18.15.1+ only)";
+            UISwitch *fixRebornHexColor = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [fixRebornHexColor addTarget:self action:@selector(toggleFixRebornHexColor:) forControlEvents:UIControlEventValueChanged];
+            fixRebornHexColor.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kFixRebornHexColor"];
+            cell.accessoryView = fixRebornHexColor;
+        }
+        if (indexPath.row == 8) {
             cell.textLabel.text = @"Low Contrast Mode";
             UISwitch *lowContrastMode = [[UISwitch alloc] initWithFrame:CGRectZero];
             [lowContrastMode addTarget:self action:@selector(toggleLowContrastMode:) forControlEvents:UIControlEventValueChanged];
             lowContrastMode.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"];
             cell.accessoryView = lowContrastMode;
+        }
+        if (indexPath.row == 9) {
+            cell.textLabel.text = @"Auto-Hide Home Bar";
+            UISwitch *autoHideHomeBar = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [autoHideHomeBar addTarget:self action:@selector(toggleAutoHideHomeBar:) forControlEvents:UIControlEventValueChanged];
+            autoHideHomeBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"];
+            cell.accessoryView = autoHideHomeBar;
         }
     }
     return cell;
@@ -124,6 +140,26 @@
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
     [self.tableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.tableView.layer.borderWidth = 1.0;
+    self.tableView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.view.layer.borderWidth = 1.0;
+    self.view.layer.borderColor = [UIColor blackColor].CGColor;
+    UITableView *tableView = self.tableView;
+    tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
+    tableView.layer.maskedCorners = kCALayerMinXMinYCorner;
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
 }
 
 @end
@@ -204,12 +240,32 @@
     }
 }
 
+- (void)toggleFixRebornHexColor:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kFixRebornHexColor"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kFixRebornHexColor"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 - (void)toggleLowContrastMode:(UISwitch *)sender {
     if ([sender isOn]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kLowContrastMode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kLowContrastMode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleAutoHideHomeBar:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kAutoHideHomeBar"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kAutoHideHomeBar"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

@@ -17,6 +17,9 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
+static BOOL isDarkMode() {
+    return ([[NSUserDefaults standardUserDefaults] integerForKey:@"page_style"] == 1);
+}
 static BOOL hasDeviceNotch() {
 	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
 		return NO;
@@ -557,7 +560,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 	%orig();
     UIButton *rebornOverlayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [rebornOverlayButton addTarget:self action:@selector(rebornOptionsAction) forControlEvents:UIControlEventTouchUpInside];
-    [rebornOverlayButton setTitle:@"OP" forState:UIControlStateNormal];
+    [rebornOverlayButton setTitle:@"DL" forState:UIControlStateNormal];
     rebornOverlayButton.frame = CGRectMake(40, 5, 40.0, 30.0);
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornShortsOPButton"] == YES) {
         rebornOverlayButton.hidden = YES;
@@ -795,28 +798,21 @@ BOOL dNoSearchAds = NO;
     return NO;
 }
 %end
+
 %hook YTDataUtils
 + (id)spamSignalsDictionary { return nil; }
 + (id)spamSignalsDictionaryWithoutIDFA { return nil; }
 %end
+
 %hook YTAdsInnerTubeContextDecorator
 - (void)decorateContext:(id)arg1 {
 }
 %end
+
 %hook YTAccountScopedAdsInnerTubeContextDecorator
 - (void)decorateContext:(id)context {}
 %end
-%hook YTIElementRenderer
-- (NSData *)elementData {
-    if (self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData)
-        return nil;
-    NSString *description = [self description];
-    // product_carousel.eml product_engagement_panel.eml product_item.eml
-    if ([description containsString:@"brand_promo"] || [description containsString:@"statement_banner"])
-        return [NSData data];
-    return %orig;
-}
-%end
+
 %hook YTSectionListViewController
 - (void)loadWithModel:(id)model {
     if (!dNoSearchAds) {
@@ -914,7 +910,7 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
-%group gLowContrastMode // Low Contrast Mode v1.2.3 (Compatible with only v15.02.1-present)
+%group gLowContrastMode // Low Contrast Mode v1.3.0 (Compatible with only v15.02.1-present)
 %hook UIColor
 + (UIColor *)whiteColor { // Dark Theme Color
          return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
@@ -922,12 +918,17 @@ BOOL dNoSearchAds = NO;
 + (UIColor *)textColor {
          return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
 }
-+ (UIColor *)dynamicLabelColor {
-         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+%end
+
+%hook UILabel
++ (void)load {
+    @autoreleasepool {
+        [[UILabel appearance] setTextColor:[UIColor whiteColor]];
+    }
 }
 %end
 
-%hook YTCommonColorPalette // Changes Texts & Icons in YouTube Bottom Bar (Doesn't change Texts & Icons under the video player)
+%hook YTCommonColorPalette
 - (UIColor *)textPrimary {
     if (self.pageStyle == 1) {
         return [UIColor whiteColor]; // Dark Theme
@@ -942,25 +943,99 @@ BOOL dNoSearchAds = NO;
 }
 %end
 
-%hook YTQTMButton // Changes Tweak Icons/Texts/Images
-- (UIColor *)whiteColor {
-         return [UIColor whiteColor];
-}
-- (UIColor *)tintColor {
-         return [UIColor whiteColor];
-}
-- (UIColor *)overflowButton {
-         return [UIColor whiteColor];
+%hook YTCollectionView
+ - (void)setTintColor:(UIColor *)color { 
+     return isDarkMode() ? %orig([UIColor whiteColor]) : %orig;
 }
 %end
 
-%hook ELMAnimatedVectorView // Changes the Like Button Animation Color. 
-- (UIColor *)_ASDisplayView {
+%hook ASTextNode
+- (NSAttributedString *)attributedString {
+    NSAttributedString *originalAttributedString = %orig;
+
+    NSMutableAttributedString *newAttributedString = [originalAttributedString mutableCopy];
+    [newAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, newAttributedString.length)];
+
+    return newAttributedString;
+}
+%end
+
+%hook ASTextFieldNode
+- (void)setTextColor:(UIColor *)textColor {
+   %orig([UIColor whiteColor]);
+}
+%end
+
+%hook ASTextView
+- (void)setTextColor:(UIColor *)textColor {
+   %orig([UIColor whiteColor]);
+}
+%end
+
+%hook ASButtonNode
+- (void)setTextColor:(UIColor *)textColor {
+   %orig([UIColor whiteColor]);
+}
+%end
+
+%hook UIButton 
+- (void)setTitleColor:(UIColor *)color forState:(UIControlState)state {
+    %log;
+    color = [UIColor whiteColor];
+    %orig(color, state);
+}
+%end
+
+%hook UILabel
+- (void)setTextColor:(UIColor *)textColor {
+    %log;
+    textColor = [UIColor whiteColor];
+    %orig(textColor);
+}
+%end
+
+%hook UITextField
+- (void)setTextColor:(UIColor *)textColor {
+    %log;
+    textColor = [UIColor whiteColor];
+    %orig(textColor);
+}
+%end
+
+%hook UITextView
+- (void)setTextColor:(UIColor *)textColor {
+    %log;
+    textColor = [UIColor whiteColor];
+    %orig(textColor);
+}
+%end
+
+%hook VideoTitleLabel
+- (void)setTextColor:(UIColor *)textColor {
+    textColor = [UIColor whiteColor];
+    %orig(textColor);
+}
+%end
+
+%hook _ASDisplayView
+- (UIColor *)textColor {
          return [UIColor whiteColor];
 }
-- (UIColor *)ELMAnimatedVectorView {
-         return [UIColor whiteColor];
+%end
+%end
+
+// Auto-Hide Home Bar by @arichorn
+%group gAutoHideHomeBar
+%hook UIViewController
+- (BOOL)prefersHomeIndicatorAutoHidden {
+    return YES;
 }
+%end
+%end
+
+%group gFixRebornHexColor
+%hook YTVersionUtils
++ (NSString *)appVersion { return @"18.14.1"; }
 %end
 %end
 
@@ -1406,6 +1481,15 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
+%group gHideShortsChannelAvatarButton
+%hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_nativePivotButton").hidden = YES;
+}
+%end
+%end
+
 %group gHideShortsLikeButton
 %hook YTReelWatchPlaybackOverlayView
 - (void)layoutSubviews {
@@ -1433,11 +1517,31 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
+%group gHideShortsRemixButton
+%hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_remixButton").hidden = YES;
+}
+%end
+%end
+
 %group gHideShortsShareButton
 %hook YTReelWatchPlaybackOverlayView
 - (void)layoutSubviews {
 	%orig();
 	MSHookIvar<YTQTMButton *>(self, "_shareButton").hidden = YES;
+}
+%end
+%end
+
+%group gHideShortsBuySuperThanks
+%hook _ASDisplayView
+- (void)didMoveToWindow {
+    %orig();
+    if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.suggested_action"]) { 
+        self.hidden = YES; 
+    }
 }
 %end
 %end
@@ -1885,7 +1989,7 @@ BOOL dNoSearchAds = NO;
 %group gOldBufferBar
 %hook YTSegmentableInlinePlayerBarView
 - (void)setBufferedProgressBarColor:(id)arg1 {
-     [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:0.60];
+     [UIColor colorWithRed:1.00 green:1.00 blue:1.00 alpha:0.60];
 }
 %end
 %end
@@ -2356,6 +2460,10 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableYouTubeKidsPopup"] == YES) %init(gDisableYouTubeKids);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableExtraSpeedOptions"] == YES) %init(gExtraSpeedOptions);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableHints"] == YES) %init(gDisableHints);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"] == YES) %init(gHideYouTubeLogo);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kFixRebornHexColor"] == YES) %init(gFixRebornHexColor);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"] == YES) %init(gLowContrastMode);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"] == YES) %init(gAutoHideHomeBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideTabBarLabels"] == YES) %init(gHideTabBarLabels);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideExploreTab"] == YES) %init(gHideExploreTab);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsTab"] == YES) %init(gHideShortsTab);
@@ -2372,16 +2480,18 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoInfoCards"] == YES) %init(gDisableVideoInfoCards);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kNoSearchButton"] == YES) %init(gNoSearchButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"] == YES) %init(gHideChannelWatermark);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsMoreActionsButton"] == YES) %init(gHideShortsMoreActionsButton);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsChannelAvatarButton"] == YES) %init(gHideShortsChannelAvatarButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsLikeButton"] == YES) %init(gHideShortsLikeButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsDislikeButton"] == YES) %init(gHideShortsDislikeButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsCommentsButton"] == YES) %init(gHideShortsCommentsButton);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsRemixButton"] == YES) %init(gHideShortsRemixButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsShareButton"] == YES) %init(gHideShortsShareButton);
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsBuySuperThanks"] == YES) %init(gHideShortsBuySuperThanks);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"] == YES) %init(gHideShortsSubscriptionsButton);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoFullScreen"] == YES) %init(gAutoFullScreen);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"] == YES) %init(gHideYouTubeLogo);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES) %init(gDisableRelatedVideosInOverlay);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsMoreActionsButton"] == YES) %init(gHideShortsMoreActionsButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == YES) %init(gHideOverlayQuickActions);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoFullScreen"] == YES) %init(gAutoFullScreen);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES) %init(gDisableRelatedVideosInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPadStyleOniPhone"] == YES) %init(gEnableiPadStyleOniPhone);
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRedProgressBar"] == YES) %init(gRedProgressBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kOldBufferBar"] == YES) %init(gOldBufferBar);
@@ -2396,7 +2506,6 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"] == YES) %init(gEnableCustomDoubleTapToSkipDuration);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCurrentTime"] == YES) %init(gHideCurrentTimeLabel);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideDuration"] == YES) %init(gHideDurationLabel);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"] == YES) %init(gLowContrastMode);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == YES & [[NSUserDefaults standardUserDefaults] boolForKey:@"kAlwaysShowPlayerBarVTwo"] == YES) {
             %init(gAlwaysShowPlayerBar);
         }

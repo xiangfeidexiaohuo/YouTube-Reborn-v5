@@ -78,6 +78,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.layer.borderWidth = 1.0;
+    self.view.layer.borderColor = [UIColor blackColor].CGColor;
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
     self.modalInPresentation = YES;
 
     if (self.downloadOption == 0) {
@@ -207,6 +212,13 @@
         downloadPercentLabel.textColor = [UIColor whiteColor];
         noticeLabel.textColor = [UIColor whiteColor];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
 }
 
 @end
