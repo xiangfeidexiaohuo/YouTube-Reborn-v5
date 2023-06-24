@@ -33,7 +33,7 @@ jobs:
         echo "12" > dist/DEBIAN/compat
 
     - name: Create Library Folder
-      run: mkdir -p dist/Library/YouTubeReborn/lib
+      run: mkdir -p dist/Library/YouTubeReborn
 
     - name: Copy Modified Files to Applications
       run: |
@@ -41,35 +41,7 @@ jobs:
         cp -r ./Tweak.xm dist/Library/YouTubeReborn/
         cp -r ./Tweak.h dist/Library/YouTubeReborn/
         cp -r ./YouTubeReborn.plist dist/Library/YouTubeReborn/
-        cp -r ./Makefile dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libaom.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libass.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libavcodec.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libavdevice.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libavfilter.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libavformat.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libavutil.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libexpat.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libfontconfig.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libfreetype.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libfribidi.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libgif.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libgmp.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libgnutls.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libhogweed.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libilbc.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libjpeg.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libkvazaar.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libmobileffmpeg.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libmp3lame.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libnettle.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libogg.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libopencore-amrnb.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libopus.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libpng.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libshine.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libsnappy.a dist/Library/YouTubeReborn/lib/
-        cp -r ./lib/libsndfile.a dist/Library/YouTubeReborn/lib/
+        cp -r ./Makefile dist/Library/YouTubeReborn/
 
     - name: Build Debian Package
       run: |
