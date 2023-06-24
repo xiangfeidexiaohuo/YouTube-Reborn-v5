@@ -1,7 +1,7 @@
 # This has been created by @arichorn
 # Enjoy making debs!
 
-name: Build and Release YouTube Reborn Tweak
+name: Build the YouTube Reborn deb
 
 on:
   workflow_dispatch:
@@ -33,7 +33,7 @@ jobs:
         echo "12" > dist/DEBIAN/compat
 
     - name: Create Library Folder
-      run: mkdir -p dist/Library/YouTubeReborn
+      run: mkdir -p dist/Library/YouTubeReborn/lib
 
     - name: Copy Modified Files to Applications
       run: |
@@ -41,11 +41,39 @@ jobs:
         cp -r ./Tweak.xm dist/Library/YouTubeReborn/
         cp -r ./Tweak.h dist/Library/YouTubeReborn/
         cp -r ./YouTubeReborn.plist dist/Library/YouTubeReborn/
-        cp -r ./Makefile dist/Library/YouTubeReborn/
+        cp -r ./Makefile dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libaom.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libass.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libavcodec.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libavdevice.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libavfilter.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libavformat.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libavutil.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libexpat.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libfontconfig.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libfreetype.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libfribidi.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libgif.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libgmp.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libgnutls.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libhogweed.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libilbc.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libjpeg.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libkvazaar.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libmobileffmpeg.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libmp3lame.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libnettle.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libogg.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libopencore-amrnb.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libopus.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libpng.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libshine.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libsnappy.a dist/Library/YouTubeReborn/lib/
+        cp -r ./lib/libsndfile.a dist/Library/YouTubeReborn/lib/
 
     - name: Build Debian Package
       run: |
-        dpkg-deb --build dist YouTube.Reborn.v4.1.0.deb
+        dpkg-deb --build dist YouTube.Reborn.4.1.0.deb
 
     - name: List files in dist directory
       run: ls -l dist
@@ -57,7 +85,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: h.ryan.youtubereborn
-        path: YouTube.Reborn.v4.1.0.deb
+        path: YouTube.Reborn.4.1.0.deb
 
     - name: Debug Upload Debian Package
       run: echo ${{ steps.upload_debian_package.outputs }}
@@ -68,7 +96,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        files: YouTube.Reborn.v4.1.0.deb
+        files: YouTube.Reborn.4.1.0.deb
         tag_name: v4.1.0
         name: YouTube Reborn v4.1.0
         draft: true
@@ -79,6 +107,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: YouTube.Reborn.v4.1.0.deb
+        asset_path: YouTube.Reborn.4.1.0.deb
         asset_name: h.ryan.youtubereborn
         asset_content_type: application/vnd.debian.binary-package
