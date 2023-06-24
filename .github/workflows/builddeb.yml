@@ -1,0 +1,73 @@
+# This has been created by @arichorn
+# Enjoy making debs!
+
+name: Build and Release YouTube Reborn Tweak
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y dpkg-dev build-essential debhelper devscripts dh-make fakeroot
+
+    - name: Create DEBIAN directory
+      run: |
+        mkdir -p dist/DEBIAN
+        chmod 755 dist/DEBIAN
+
+    - name: Move control file
+      run: |
+        mv control dist/DEBIAN/control
+   
+    - name: Create compat file
+      run: |
+        echo "12" > dist/DEBIAN/compat
+
+    - name: Build Debian Package
+      run: |
+        dpkg-deb --build dist YouTube.Reborn.v4.1.0.deb
+
+    - name: List files in dist directory
+      run: ls -l dist
+
+    - name: List files in current directory
+      run: ls -l
+
+    - name: Upload Debian Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: h.ryan.youtubereborn
+        path: YouTube.Reborn.v4.1.0.deb
+
+    - name: Debug Upload Debian Package
+      run: echo ${{ steps.upload_debian_package.outputs }}
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v0.1.15
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: YouTube.Reborn.v4.1.0.deb
+        tag_name: v4.1.0
+        name: YouTube Reborn v4.1.0
+        draft: true
+
+    - name: Upload DEB to Release
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: YouTube.Reborn.v4.1.0.deb
+        asset_name: h.ryan.youtubereborn
+        asset_content_type: application/vnd.debian.binary-package
