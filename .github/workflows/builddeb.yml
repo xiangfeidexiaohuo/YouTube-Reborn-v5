@@ -32,6 +32,17 @@ jobs:
       run: |
         echo "12" > dist/DEBIAN/compat
 
+    - name: Create Library Folder
+      run: mkdir -p dist/Library/YouTubeReborn
+
+    - name: Copy Modified Files to Applications
+      run: |
+        mkdir -p dist/Applications/YouTube.app/
+        cp -r ./Tweak.xm dist/Library/YouTubeReborn/
+        cp -r ./Tweak.h dist/Library/YouTubeReborn/
+        cp -r ./YouTubeReborn.plist dist/Library/YouTubeReborn/
+        cp -r ./Makefile dist/Library/YouTubeReborn/
+
     - name: Build Debian Package
       run: |
         dpkg-deb --build dist YouTube.Reborn.v4.1.0.deb
