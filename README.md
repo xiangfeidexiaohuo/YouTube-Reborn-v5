@@ -1,15 +1,10 @@
 # YouTube Reborn
-LillieH1000's YouTube customizer for non-jb and jb, works on iOS 14-16 and supports all the way up to YouTube v18.14.1.
-
-# Not-Compatible with Latest Version of the App
-YouTube Reborn will have the following issues when using v18.15.1-latest YouTube Versions
-- YouTube Reborn > Colour Options
-  - the Colour Options still work on YouTube Reborn but YouTube has changed some things on v18.15.1-newer that changes the way Dark/Light Theme works.
+LillieH1000's YouTube customizer for non-jb and jb, works on iOS/iPadOS 14-17 and supports the latest YouTube version.
 
 -----
 
 Non-Jailbreak Download
-Ipa: [Download](https://github.com/LillieH001/YouTube-Reborn/releases/latest/)
+Ipa: [Download](https://github.com/arichorn/YouTube-Reborn/releases/latest/)
 
 -----
 

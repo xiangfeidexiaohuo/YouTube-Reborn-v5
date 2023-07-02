@@ -25,7 +25,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,20 +99,13 @@
             cell.accessoryView = hideYouTubeLogo;
 	}
         if (indexPath.row == 7) {
-            cell.textLabel.text = @"Fix Reborn Colour Options (for YouTube v18.15.1+ only)";
-            UISwitch *fixRebornHexColor = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [fixRebornHexColor addTarget:self action:@selector(toggleFixRebornHexColor:) forControlEvents:UIControlEventValueChanged];
-            fixRebornHexColor.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kFixRebornHexColor"];
-            cell.accessoryView = fixRebornHexColor;
-        }
-        if (indexPath.row == 8) {
             cell.textLabel.text = @"Low Contrast Mode";
             UISwitch *lowContrastMode = [[UISwitch alloc] initWithFrame:CGRectZero];
             [lowContrastMode addTarget:self action:@selector(toggleLowContrastMode:) forControlEvents:UIControlEventValueChanged];
             lowContrastMode.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"];
             cell.accessoryView = lowContrastMode;
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 8) {
             cell.textLabel.text = @"Auto-Hide Home Bar";
             UISwitch *autoHideHomeBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [autoHideHomeBar addTarget:self action:@selector(toggleAutoHideHomeBar:) forControlEvents:UIControlEventValueChanged];
@@ -144,7 +137,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     self.view.layer.cornerRadius = 10.0;
     self.view.layer.masksToBounds = YES;
 }
@@ -236,16 +228,6 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideYouTubeLogo"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
-- (void)toggleFixRebornHexColor:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kFixRebornHexColor"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kFixRebornHexColor"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

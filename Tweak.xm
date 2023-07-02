@@ -1,14 +1,3 @@
-#import <LocalAuthentication/LocalAuthentication.h>
-#import <dlfcn.h>
-#import <rootless.h>
-#import <Foundation/Foundation.h>
-#import <CaptainHook/CaptainHook.h>
-#import <objc/runtime.h>
-#import <UIKit/UIKit.h>
-#import <YouTubeExtractor/YouTubeExtractor.h>
-#import "Controllers/RootOptionsController.h"
-#import "Controllers/PictureInPictureController.h"
-#import "Controllers/YouTubeDownloadController.h"
 #import "Tweak.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
@@ -776,19 +765,7 @@ YTMainAppVideoPlayerOverlayViewController *stateOut;
 }
 %end
 
-BOOL dNoSearchAds = NO;
-
-%group gNoSearchAds
-%hook YTIElementRenderer
-- (NSData *)elementData {
-    if (self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) {
-        return nil;
-    }
-    return %orig;
-}
-%end
-%end
-
+// No YouTube Ads
 %group gNoVideoAds
 %hook YTHotConfig
 - (BOOL)disableAfmaIdfaCollection { return NO; }
@@ -813,13 +790,34 @@ BOOL dNoSearchAds = NO;
 - (void)decorateContext:(id)context {}
 %end
 
-%hook YTSectionListViewController
-- (void)loadWithModel:(id)model {
-    if (!dNoSearchAds) {
-        %init(gNoSearchAds);
-        dNoSearchAds = YES;
+BOOL isAd(id node) {
+    if ([node isKindOfClass:NSClassFromString(@"YTVideoWithContextNode")]
+        && [node respondsToSelector:@selector(parentResponder)]
+        && [[(YTVideoWithContextNode *)node parentResponder] isKindOfClass:NSClassFromString(@"YTAdVideoElementsCellController")])
+        return YES;
+    if ([node isKindOfClass:NSClassFromString(@"ELMCellNode")]) {
+        NSString *description = [[[node controller] owningComponent] description];
+        if ([description containsString:@"brand_promo"]
+            || [description containsString:@"statement_banner"]
+            || [description containsString:@"product_carousel"]
+            || [description containsString:@"product_engagement_panel"]
+            || [description containsString:@"product_item"]
+            || [description containsString:@"text_search_ad"]
+            || [description containsString:@"square_image_layout"] // install app ad
+            || [description containsString:@"feed_ad_metadata"])
+            return YES;
     }
-    %orig;
+    return NO;
+}
+
+%hook YTAsyncCollectionView
+- (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    _ASCollectionViewCell *cell = %orig;
+    if ([cell isKindOfClass:NSClassFromString(@"_ASCollectionViewCell")]
+        && [cell respondsToSelector:@selector(node)]
+        && isAd([cell node]))
+            [self deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+    return cell;
 }
 %end
 %end
@@ -910,7 +908,7 @@ BOOL dNoSearchAds = NO;
 %end
 %end
 
-%group gLowContrastMode // Low Contrast Mode v1.3.0 (Compatible with only v15.02.1-present)
+%group gLowContrastMode // Low Contrast Mode v1.3.0 (Compatible with only YouTube v16.05.7-v17.38.10)
 %hook UIColor
 + (UIColor *)whiteColor { // Dark Theme Color
          return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
@@ -946,6 +944,13 @@ BOOL dNoSearchAds = NO;
 %hook YTCollectionView
  - (void)setTintColor:(UIColor *)color { 
      return isDarkMode() ? %orig([UIColor whiteColor]) : %orig;
+}
+%end
+
+%hook LOTAnimationView
+- (void) setTintColor:(UIColor *)tintColor {
+    tintColor = [UIColor whiteColor];
+    %orig(tintColor);
 }
 %end
 
@@ -986,6 +991,14 @@ BOOL dNoSearchAds = NO;
 }
 %end
 
+%hook UIBarButtonItem
+- (void)setTitleTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state {
+    NSMutableDictionary *modifiedAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    [modifiedAttributes setObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    %orig(modifiedAttributes, state);
+}
+%end
+
 %hook UILabel
 - (void)setTextColor:(UIColor *)textColor {
     %log;
@@ -1010,16 +1023,25 @@ BOOL dNoSearchAds = NO;
 }
 %end
 
-%hook VideoTitleLabel
+%hook UISearchBar
 - (void)setTextColor:(UIColor *)textColor {
     textColor = [UIColor whiteColor];
     %orig(textColor);
 }
 %end
 
-%hook _ASDisplayView
-- (UIColor *)textColor {
-         return [UIColor whiteColor];
+%hook UISegmentedControl
+- (void)setTitleTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state {
+    NSMutableDictionary *modifiedAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    [modifiedAttributes setObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    %orig(modifiedAttributes, state);
+}
+%end
+
+%hook VideoTitleLabel
+- (void)setTextColor:(UIColor *)textColor {
+    textColor = [UIColor whiteColor];
+    %orig(textColor);
 }
 %end
 %end
@@ -1030,12 +1052,6 @@ BOOL dNoSearchAds = NO;
 - (BOOL)prefersHomeIndicatorAutoHidden {
     return YES;
 }
-%end
-%end
-
-%group gFixRebornHexColor
-%hook YTVersionUtils
-+ (NSString *)appVersion { return @"18.14.1"; }
 %end
 %end
 
@@ -1989,7 +2005,7 @@ BOOL dNoSearchAds = NO;
 %group gOldBufferBar
 %hook YTSegmentableInlinePlayerBarView
 - (void)setBufferedProgressBarColor:(id)arg1 {
-     [UIColor colorWithRed:1.00 green:1.00 blue:1.00 alpha:0.60];
+     [UIColor colorWithRed:1.00 green:1.00 blue:1.00 alpha:0.90];
 }
 %end
 %end
@@ -2461,7 +2477,6 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableExtraSpeedOptions"] == YES) %init(gExtraSpeedOptions);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableHints"] == YES) %init(gDisableHints);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"] == YES) %init(gHideYouTubeLogo);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kFixRebornHexColor"] == YES) %init(gFixRebornHexColor);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"] == YES) %init(gLowContrastMode);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"] == YES) %init(gAutoHideHomeBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideTabBarLabels"] == YES) %init(gHideTabBarLabels);

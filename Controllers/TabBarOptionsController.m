@@ -120,7 +120,7 @@
                 cell.accessoryView = hideSubscriptionsTab;
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = @"Hide Library Tab";
+                cell.textLabel.text = @"Hide You/Library Tab";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UISwitch *hideLibraryTab = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideLibraryTab addTarget:self action:@selector(toggleHideLibraryTab:) forControlEvents:UIControlEventValueChanged];
@@ -147,7 +147,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     self.view.layer.cornerRadius = 10.0;
     self.view.layer.masksToBounds = YES;
 }

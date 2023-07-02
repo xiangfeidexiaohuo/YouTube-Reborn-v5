@@ -81,7 +81,7 @@ int selectedIndex;
             }
         }
         if (indexPath.row == 4) {
-            cell.textLabel.text = @"Library";
+            cell.textLabel.text = @"You/Library";
             if (selectedIndex == 4) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
@@ -119,7 +119,6 @@ int selectedIndex;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     self.view.layer.cornerRadius = 10.0;
     self.view.layer.masksToBounds = YES;
 }

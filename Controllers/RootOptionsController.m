@@ -258,7 +258,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
-        return @"YouTube Reborn v4.1.0";
+        return @"YouTube Reborn v4.1.1";
     }
     return nil;
 }
@@ -292,22 +292,34 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
     self.view.layer.cornerRadius = 10.0;
     self.view.layer.masksToBounds = YES;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setBorderPropertiesForView:self.tableView];
+    [self setBorderPropertiesForView:self.view];
+    self.tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
     self.tableView.layer.borderWidth = 1.0;
     self.tableView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.tableView.layer.cornerRadius = 10.0;
+    self.tableView.layer.masksToBounds = true;
     self.view.layer.borderWidth = 1.0;
     self.view.layer.borderColor = [UIColor blackColor].CGColor;
     UITableView *tableView = self.tableView;
     tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
     tableView.layer.maskedCorners = kCALayerMinXMinYCorner;
+    self.view.layer.borderWidth = 1.0;
+    self.view.layer.borderColor = [UIColor blackColor].CGColor;
     self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
+    self.view.layer.masksToBounds = true;
     self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
+}
+
+- (void)setBorderPropertiesForView:(UIView *)view {
+    view.layer.borderWidth = 1.0;
+    view.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
 @end

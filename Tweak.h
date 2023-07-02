@@ -1,3 +1,20 @@
+#import <LocalAuthentication/LocalAuthentication.h>
+#import <dlfcn.h>
+#import <rootless.h>
+#import <Foundation/Foundation.h>
+#import <CaptainHook/CaptainHook.h>
+#import <objc/runtime.h>
+#import <UIKit/UIKit.h>
+#import <YouTubeExtractor/YouTubeExtractor.h>
+#import "Controllers/RootOptionsController.h"
+#import "Controllers/PictureInPictureController.h"
+#import "Controllers/YouTubeDownloadController.h"
+#import "YouTubeHeader/_ASCollectionViewCell.h"
+#import "YouTubeHeader/YTVideoWithContextNode.h"
+#import "YouTubeHeader/ELMCellNode.h"
+#import "YouTubeHeader/ELMNodeController.h"
+#import "YouTubeHeader/YTISectionListRenderer.h" // Deprecated
+
 @interface YTQTMButton : UIButton
 @property (strong, nonatomic) UIImageView *imageView;
 + (instancetype)iconButton;
@@ -110,9 +127,6 @@
 - (void)broadcastRateChange:(float)rate;
 @end
 
-@interface GPBMessage : NSObject
-@end
-
 @interface YTIPivotBarItemRenderer : NSObject
 - (NSString *)pivotIdentifier;
 @end
@@ -158,15 +172,6 @@
 @interface YTInlinePlayerBarContainerView : UIView
 @property(readonly, nonatomic) YTLabel *durationLabel;
 @property(readonly, nonatomic) YTLabel *currentTimeLabel;
-@end
-
-@interface YTIElementRendererCompatibilityOptions : GPBMessage
-@property (nonatomic, assign, readwrite) BOOL hasAdLoggingData;
-@end
-
-@interface YTIElementRenderer : GPBMessage
-@property (nonatomic, strong, readwrite) YTIElementRendererCompatibilityOptions *compatibilityOptions;
-@property (nonatomic, assign, readwrite) BOOL hasCompatibilityOptions;
 @end
 
 @interface YTColorPalette : NSObject
