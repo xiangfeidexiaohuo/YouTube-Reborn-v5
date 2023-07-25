@@ -132,6 +132,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableExtraSpeedOptions"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableHints"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideYouTubeLogo"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kStickNavigationBar"];
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kLowContrastMode"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAutoHideHomeBar"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideTabBarLabels"];
@@ -156,9 +157,10 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsCommentsButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsRemixButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsShareButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsMoreActionsButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsSearchButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsBuySuperThanks"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsSubscriptionsButton"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsMoreActionsButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideOverlayQuickActions"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAutoFullScreen"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableRelatedVideosInOverlay"];

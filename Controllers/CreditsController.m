@@ -67,16 +67,16 @@
                 cell.detailTextLabel.text = @"Icon Designer";
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Dayanch96";
-                cell.detailTextLabel.text = @"Features: \"Red Progress Bar\", \"Old Buffer Bar\"";
-            }
-            if (indexPath.row == 2) {
                 cell.textLabel.text = @"kirb";
                 cell.detailTextLabel.text = @"Development Support";
             }
+            if (indexPath.row == 2) {
+                cell.textLabel.text = @"Dayanch96";
+                cell.detailTextLabel.text = @"Features: \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+            }
             if (indexPath.row == 3) {
                 cell.textLabel.text = @"PoomSmart";
-                cell.detailTextLabel.text = @"Features: \"Adblock\", \"AutoPlay In Fullscreen\"";
+                cell.detailTextLabel.text = @"Features: \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
             }
             if (indexPath.row == 4) {
                 cell.textLabel.text = @"Snoolie";

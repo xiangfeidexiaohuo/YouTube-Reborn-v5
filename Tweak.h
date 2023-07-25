@@ -9,11 +9,11 @@
 #import "Controllers/RootOptionsController.h"
 #import "Controllers/PictureInPictureController.h"
 #import "Controllers/YouTubeDownloadController.h"
-#import "YouTubeHeader/_ASCollectionViewCell.h"
+#import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
 #import "YouTubeHeader/ELMCellNode.h"
 #import "YouTubeHeader/ELMNodeController.h"
-#import "YouTubeHeader/YTISectionListRenderer.h" // Deprecated
+#import "YouTubeHeader/YTIMenuConditionalServiceItemRenderer.h"
 
 @interface YTQTMButton : UIButton
 @property (strong, nonatomic) UIImageView *imageView;
@@ -26,14 +26,15 @@
 @interface ABCSwitch : UISwitch
 @end
 
-@interface YTPivotBarItemView : UIView
-@property(readonly, nonatomic) YTQTMButton *navigationButton;
-@end
-
 @interface YTTopAlignedView : UIView
 @end
 
+@interface _ASCollectionViewCell : UICollectionViewCell
+- (id)node;
+@end
+
 @interface YTAsyncCollectionView : UICollectionView
+- (void)removeCellsAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @interface YTRightNavigationButtons : UIView
@@ -99,10 +100,6 @@
 - (void)showFullScreen;
 @end
 
-@interface YTPivotBarViewController : UIViewController
-- (void)selectItemWithPivotIdentifier:(id)pivotIndentifier;
-@end
-
 @interface YTPageStyleController
 + (NSInteger)pageStyle;
 @end
@@ -125,6 +122,17 @@
 
 @interface MLPlayerEventCenter : NSObject
 - (void)broadcastRateChange:(float)rate;
+@end
+
+@interface YTPivotBarView : UIView
+@end
+
+@interface YTPivotBarViewController : UIViewController
+- (void)selectItemWithPivotIdentifier:(id)pivotIndentifier;
+@end
+
+@interface YTPivotBarItemView : UIView
+@property(readonly, nonatomic) YTQTMButton *navigationButton;
 @end
 
 @interface YTIPivotBarItemRenderer : NSObject
@@ -160,10 +168,24 @@
 @interface YTReelPlayerMoreButton : YTQTMButton
 @end
 
+@interface YTReelPlayerButton : UIButton
+@end
+
+@interface YTReelWatchPlaybackOverlayView : UIView
+@end
+
+@interface YTReelTransparentStackView : UIView
+@end
+
 @interface YTTransportControlsButtonView : UIView
 @end
 
+@interface SSOConfiguration : NSObject
+@end
+
 @interface _ASDisplayView : UIView
+- (UILabel *)findLabelInSubviews:(NSArray *)subviews;
+- (void)customizeLabel:(UILabel *)label;
 @end
 
 @interface YTLabel : UILabel

@@ -28,7 +28,7 @@
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"] == YES) {
         return 14;
     }
-    return 13;
+    return 16;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,11 +124,11 @@
             cell.accessoryView = redProgressBar;
         }
 	if (indexPath.row == 9) {
-            cell.textLabel.text = @"Old Buffer Bar";
-            UISwitch *oldBufferBar = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [oldBufferBar addTarget:self action:@selector(toggleOldBufferBar:) forControlEvents:UIControlEventValueChanged];
-            oldBufferBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kOldBufferBar"];
-            cell.accessoryView = oldBufferBar;
+            cell.textLabel.text = @"Gray Buffer Progress";
+            UISwitch *grayBufferProgress = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [grayBufferProgress addTarget:self action:@selector(toggleGrayBufferProgress:) forControlEvents:UIControlEventValueChanged];
+            grayBufferProgress.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kGrayBufferProgress"];
+            cell.accessoryView = grayBufferProgress;
         }
         if (indexPath.row == 10) {
             cell.textLabel.text = @"Hide Player Bar Heatwave";
@@ -353,12 +353,12 @@
     }
 }
 
-- (void)toggleOldBufferBar:(UISwitch *)sender {
+- (void)toggleGrayBufferProgress:(UISwitch *)sender {
     if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kOldBufferBar"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kGrayBufferProgress"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kOldBufferBar"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kGrayBufferProgress"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

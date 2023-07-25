@@ -25,7 +25,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 9;
+    return 11;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -92,26 +92,40 @@
             cell.accessoryView = hideShortsShareButton;
         }
         if (indexPath.row == 6) {
-            cell.textLabel.text = @"Hide 'Buy Super Thanks' Banner";
-            UISwitch *hideShortsBuySuperThanks = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [hideShortsBuySuperThanks addTarget:self action:@selector(toggleHideShortsBuySuperThanks:) forControlEvents:UIControlEventValueChanged];
-            hideShortsBuySuperThanks.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsBuySuperThanks"];
-            cell.accessoryView = hideShortsBuySuperThanks;
-	}
-        if (indexPath.row == 7) {
-            cell.textLabel.text = @"Hide Subscriptions Button";
-            UISwitch *hideShortsSubscriptionsButton = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [hideShortsSubscriptionsButton addTarget:self action:@selector(toggleHideShortsSubscriptionsButton:) forControlEvents:UIControlEventValueChanged];
-            hideShortsSubscriptionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"];
-            cell.accessoryView = hideShortsSubscriptionsButton;
-	}
-        if (indexPath.row == 8) {
             cell.textLabel.text = @"Hide More Actions Button";
             UISwitch *hideShortsMoreActionsButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsMoreActionsButton addTarget:self action:@selector(toggleHideShortsMoreActionsButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsMoreActionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsMoreActionsButton"];
             cell.accessoryView = hideShortsMoreActionsButton;
         }
+        if (indexPath.row == 7) {
+            cell.textLabel.text = @"Hide Search Button";
+            UISwitch *hideShortsSearchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideShortsSearchButton addTarget:self action:@selector(toggleHideShortsSearchButton:) forControlEvents:UIControlEventValueChanged];
+            hideShortsSearchButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSearchButton"];
+            cell.accessoryView = hideShortsSearchButton;
+        }
+        if (indexPath.row == 8) {
+            cell.textLabel.text = @"Hide 'Buy Super Thanks' Banner";
+            UISwitch *hideShortsBuySuperThanks = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideShortsBuySuperThanks addTarget:self action:@selector(toggleHideShortsBuySuperThanks:) forControlEvents:UIControlEventValueChanged];
+            hideShortsBuySuperThanks.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsBuySuperThanks"];
+            cell.accessoryView = hideShortsBuySuperThanks;
+	}
+        if (indexPath.row == 9) {
+            cell.textLabel.text = @"Hide Subscriptions Button";
+            UISwitch *hideShortsSubscriptionsButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideShortsSubscriptionsButton addTarget:self action:@selector(toggleHideShortsSubscriptionsButton:) forControlEvents:UIControlEventValueChanged];
+            hideShortsSubscriptionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"];
+            cell.accessoryView = hideShortsSubscriptionsButton;
+	}
+         if (indexPath.row == 10) {
+            cell.textLabel.text = @"Disable Resume to Shorts";
+            UISwitch *disableResumeToShorts = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [disableResumeToShorts addTarget:self action:@selector(toggleDisableResumeToShorts:) forControlEvents:UIControlEventValueChanged];
+            disableResumeToShorts.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableResumeToShorts"];
+            cell.accessoryView = disableResumeToShorts;
+	}
     }
     return cell;
 }
@@ -222,6 +236,26 @@
     }
 }
 
+- (void)toggleHideShortsMoreActionsButton:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideShortsMoreActionsButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideShortsMoreActionsButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideShortsSearchButton:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideShortsSearchButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideShortsSearchButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 - (void)toggleHideShortsBuySuperThanks:(UISwitch *)sender {
     if ([sender isOn]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideShortsBuySuperThanks"];
@@ -242,12 +276,12 @@
     }
 }
 
-- (void)toggleHideShortsMoreActionsButton:(UISwitch *)sender {
+- (void)toggleDisableResumeToShorts:(UISwitch *)sender {
     if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideShortsMoreActionsButton"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kDisableResumeToShorts"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideShortsMoreActionsButton"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kDisableResumeToShorts"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
