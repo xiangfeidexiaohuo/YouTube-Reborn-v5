@@ -1,4 +1,4 @@
-TARGET = iphone:clang:15.5:14.0
+TARGET = iphone:clang:16.2:14.0
 YouTubeReborn_USE_FLEX = 0
 YouTubeReborn_USE_FISHHOOK = 0
 GO_EASY_ON_ME = 1
