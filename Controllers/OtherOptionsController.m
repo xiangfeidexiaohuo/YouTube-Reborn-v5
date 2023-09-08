@@ -25,7 +25,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 11;
+    return 12;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,42 +84,49 @@
             noSearchButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kNoSearchButton"];
             cell.accessoryView = noSearchButton;
         }
-        if (indexPath.row == 5) {
+         if (indexPath.row == 5) {
+            cell.textLabel.text = @"Hide 'Play next in queue'";
+            UISwitch *hidePlayNextInQueue = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hidePlayNextInQueue addTarget:self action:@selector(toggleHidePlayNextInQueue:) forControlEvents:UIControlEventValueChanged];
+            hidePlayNextInQueue.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayNextInQueue"];
+            cell.accessoryView = hidePlayNextInQueue;
+        }
+        if (indexPath.row == 6) {
             cell.textLabel.text = @"Disable YouTube Kids";
             UISwitch *disableYouTubeKidsPopup = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableYouTubeKidsPopup addTarget:self action:@selector(toggleDisableYouTubeKidsPopup:) forControlEvents:UIControlEventValueChanged];
             disableYouTubeKidsPopup.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableYouTubeKidsPopup"];
             cell.accessoryView = disableYouTubeKidsPopup;
         }
-        if (indexPath.row == 6) {
+        if (indexPath.row == 7) {
             cell.textLabel.text = @"Disable Hints";
             UISwitch *disableHints = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableHints addTarget:self action:@selector(toggleDisableHints:) forControlEvents:UIControlEventValueChanged];
             disableHints.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableHints"];
             cell.accessoryView = disableHints;
         }
-        if (indexPath.row == 7) {
+        if (indexPath.row == 8) {
             cell.textLabel.text = @"Hide YouTube Logo";
             UISwitch *hideYouTubeLogo = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideYouTubeLogo addTarget:self action:@selector(toggleHideYouTubeLogo:) forControlEvents:UIControlEventValueChanged];
             hideYouTubeLogo.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"];
             cell.accessoryView = hideYouTubeLogo;
 	}
-         if (indexPath.row == 8) {
+         if (indexPath.row == 9) {
             cell.textLabel.text = @"Stick Navigation Bar";
             UISwitch *stickNavigationBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [stickNavigationBar addTarget:self action:@selector(toggleStickNavigationBar:) forControlEvents:UIControlEventValueChanged];
             stickNavigationBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kStickNavigationBar"];
             cell.accessoryView = stickNavigationBar;
 	}
-        if (indexPath.row == 9) {
+        if (indexPath.row == 10) {
             cell.textLabel.text = @"Low Contrast Mode";
             UISwitch *lowContrastMode = [[UISwitch alloc] initWithFrame:CGRectZero];
             [lowContrastMode addTarget:self action:@selector(toggleLowContrastMode:) forControlEvents:UIControlEventValueChanged];
             lowContrastMode.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"];
             cell.accessoryView = lowContrastMode;
         }
-        if (indexPath.row == 10) {
+        if (indexPath.row == 11) {
             cell.textLabel.text = @"Auto-Hide Home Bar";
             UISwitch *autoHideHomeBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [autoHideHomeBar addTarget:self action:@selector(toggleAutoHideHomeBar:) forControlEvents:UIControlEventValueChanged];
@@ -222,6 +229,16 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kNoSearchButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHidePlayNextInQueue:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHidePlayNextInQueue"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHidePlayNextInQueue"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

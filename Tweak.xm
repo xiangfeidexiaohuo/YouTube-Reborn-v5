@@ -22,6 +22,7 @@ static BOOL hasDeviceNotch() {
 }
 
 UIColor *rebornHexColour;
+UIColor *lcmHexColor;
 
 YTLocalPlaybackController *playingVideoID;
 
@@ -245,7 +246,7 @@ static NSString *accessGroupID() {
 %end
 
 %hook YTRightNavigationButtons
-%property (strong, nonatomic) YTQTMButton *youtubeRebornButton;
+%property (retain, nonatomic) YTQTMButton *youtubeRebornButton;
 - (NSMutableArray *)buttons {
 	NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubeReborn" ofType:@"bundle"];
     NSString *youtubeRebornLightSettingsPath;
@@ -915,6 +916,13 @@ static NSString *accessGroupID() {
 - (void)decorateContext:(id)context {}
 %end
 
+%hook YTIElementRenderer
+- (NSData *)elementData {
+    if (self.hasCompatibilityOptions && self.compatibilityOptions.hasAdLoggingData) return nil;
+    return %orig;
+}
+%end
+
 BOOL isAd(id node) {
     if ([node isKindOfClass:NSClassFromString(@"YTVideoWithContextNode")]
         && [node respondsToSelector:@selector(parentResponder)]
@@ -930,7 +938,9 @@ BOOL isAd(id node) {
             || [description containsString:@"text_search_ad"]
             || [description containsString:@"text_image_button_layout"]
             || [description containsString:@"carousel_headered_layout"]
+            || [description containsString:@"carousel_footered_layout"]
             || [description containsString:@"square_image_layout"] // install app ad
+            || [description containsString:@"landscape_image_wide_button_layout"]
             || [description containsString:@"feed_ad_metadata"])
             return YES;
     }
@@ -938,13 +948,23 @@ BOOL isAd(id node) {
 }
 
 %hook YTAsyncCollectionView
-- (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (id)collectionView:(id)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     _ASCollectionViewCell *cell = %orig;
-    if ([cell isKindOfClass:NSClassFromString(@"_ASCollectionViewCell")]
-        && [cell respondsToSelector:@selector(node)]
-        && isAd([cell node]))
-            [self deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+    if ([cell isKindOfClass:NSClassFromString(@"YTCompactPromotedVideoCell")]
+        || ([cell isKindOfClass:NSClassFromString(@"_ASCollectionViewCell")]
+            && [cell respondsToSelector:@selector(node)]
+            && isAd([cell node])))
+                [self deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
     return cell;
+}
+%end
+%end
+
+// Remove “Play next in queue” from the menu by @PoomSmart
+%group gHidePlayNextInQueue
+%hook YTMenuItemVisibilityHandler
+- (BOOL)shouldShowServiceItemRenderer:(YTIMenuConditionalServiceItemRenderer *)renderer {
+    return renderer.icon.iconType == 251 ? NO : %orig;
 }
 %end
 %end
@@ -1035,105 +1055,157 @@ BOOL isAd(id node) {
 %end
 %end
 
-%group gLowContrastMode // Low Contrast Mode v1.3.0 (Compatible with only YouTube v16.05.7-v17.38.10)
+%group gLowContrastMode // Low Contrast Mode v1.4.2 (Compatible with only YouTube v16.05.7-v17.38.10)
 %hook UIColor
 + (UIColor *)whiteColor { // Dark Theme Color
-         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
 }
-+ (UIColor *)textColor {
-         return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
++ (UIColor *)lightTextColor {
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)placeholderTextColor {
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)labelColor {
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)secondaryLabelColor {
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)tertiaryLabelColor {
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
++ (UIColor *)quaternaryLabelColor {
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
 }
 %end
-
+%hook YTCommonColorPalette
+- (UIColor *)textPrimary {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)textSecondary {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)overlayTextPrimary {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)overlayTextSecondary {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)iconActive {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)iconActiveOther {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)brandIconActive {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)staticBrandWhite {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+- (UIColor *)overlayIconActiveOther {
+    return self.pageStyle == 1 ? [UIColor whiteColor] : %orig;
+}
+%end
+%hook YTColor
++ (UIColor *)white2 {
+    return [UIColor whiteColor];
+}
++ (UIColor *)white3 {
+    return [UIColor whiteColor];
+}
++ (UIColor *)white4 {
+    return [UIColor whiteColor];
+}
++ (UIColor *)white5 {
+    return [UIColor whiteColor];
+}
+%end
+%hook QTMColorGroup
+- (UIColor *)tint100 {
+    return [UIColor whiteColor];
+}
+- (UIColor *)tint300 {
+    return [UIColor whiteColor];
+}
+- (UIColor *)bodyTextColor {
+    return [UIColor whiteColor];
+}
+- (UIColor *)bodyTextColorOnLighterColor {
+    return [UIColor whiteColor];
+}
+- (UIColor *)bodyTextColorOnRegularColor {
+    return [UIColor whiteColor];
+}
+- (UIColor *)bodyTextColorOnDarkerColor {
+    return [UIColor whiteColor];
+}
+- (UIColor *)bodyTextColorOnAccentColor {
+    return [UIColor whiteColor];
+}
+- (UIColor *)bodyTextColorOnOnBrightAccentColor {
+    return [UIColor whiteColor];
+}
+- (UIColor *)lightBodyTextColor {
+    return [UIColor whiteColor];
+}
+- (UIColor *)buttonBackgroundColor {
+    return [UIColor whiteColor];
+}
+%end
+%hook YTQTMButton
+- (void)setImage:(UIImage *)image {
+    UIImage *currentImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self setTintColor:[UIColor whiteColor]];
+    %orig(currentImage);
+}
+%end
+%hook UIExtendedSRGColorSpace
+- (void)setTextColor:(UIColor *)textColor {
+    textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.9];
+    %orig();
+}
+%end
+%hook VideoTitleLabel
+- (void)setTextColor:(UIColor *)textColor {
+    textColor = [UIColor whiteColor];
+    %orig(textColor);
+}
+%end
 %hook UILabel
 + (void)load {
     @autoreleasepool {
         [[UILabel appearance] setTextColor:[UIColor whiteColor]];
     }
 }
-%end
-
-%hook YTCommonColorPalette
-- (UIColor *)textPrimary {
-    if (self.pageStyle == 1) {
-        return [UIColor whiteColor]; // Dark Theme
-    }
-        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Theme
-}
-- (UIColor *)textSecondary {
-    if (self.pageStyle == 1) {
-        return [UIColor whiteColor]; // Dark Theme
-    }
-        return [UIColor colorWithRed: 0.38 green: 0.38 blue: 0.38 alpha: 1.00]; // Light Theme
-}
-%end
-
-%hook YTCollectionView
- - (void)setTintColor:(UIColor *)color { 
-     return isDarkMode() ? %orig([UIColor whiteColor]) : %orig;
-}
-%end
-
-%hook LOTAnimationView
-- (void) setTintColor:(UIColor *)tintColor {
-    tintColor = [UIColor whiteColor];
-    %orig(tintColor);
-}
-%end
-
-%hook ASTextNode
-- (NSAttributedString *)attributedString {
-    NSAttributedString *originalAttributedString = %orig;
-
-    NSMutableAttributedString *newAttributedString = [originalAttributedString mutableCopy];
-    [newAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, newAttributedString.length)];
-
-    return newAttributedString;
-}
-%end
-
-%hook ASTextFieldNode
-- (void)setTextColor:(UIColor *)textColor {
-   %orig([UIColor whiteColor]);
-}
-%end
-
-%hook ASTextView
-- (void)setTextColor:(UIColor *)textColor {
-   %orig([UIColor whiteColor]);
-}
-%end
-
-%hook ASButtonNode
-- (void)setTextColor:(UIColor *)textColor {
-   %orig([UIColor whiteColor]);
-}
-%end
-
-%hook UIButton 
-- (void)setTitleColor:(UIColor *)color forState:(UIControlState)state {
-    %log;
-    color = [UIColor whiteColor];
-    %orig(color, state);
-}
-%end
-
-%hook UIBarButtonItem
-- (void)setTitleTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state {
-    NSMutableDictionary *modifiedAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
-    [modifiedAttributes setObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    %orig(modifiedAttributes, state);
-}
-%end
-
-%hook UILabel
 - (void)setTextColor:(UIColor *)textColor {
     %log;
     textColor = [UIColor whiteColor];
     %orig(textColor);
 }
 %end
-
 %hook UITextField
 - (void)setTextColor:(UIColor *)textColor {
     %log;
@@ -1141,7 +1213,6 @@ BOOL isAd(id node) {
     %orig(textColor);
 }
 %end
-
 %hook UITextView
 - (void)setTextColor:(UIColor *)textColor {
     %log;
@@ -1149,14 +1220,12 @@ BOOL isAd(id node) {
     %orig(textColor);
 }
 %end
-
 %hook UISearchBar
 - (void)setTextColor:(UIColor *)textColor {
     textColor = [UIColor whiteColor];
     %orig(textColor);
 }
 %end
-
 %hook UISegmentedControl
 - (void)setTitleTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state {
     NSMutableDictionary *modifiedAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
@@ -1164,11 +1233,70 @@ BOOL isAd(id node) {
     %orig(modifiedAttributes, state);
 }
 %end
-
-%hook VideoTitleLabel
+%hook UIButton
+- (void)setTitleColor:(UIColor *)color forState:(UIControlState)state {
+    color = [UIColor whiteColor];
+    %orig(color, state);
+}
+%end
+%hook UIBarButtonItem
+- (void)setTitleTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state {
+    NSMutableDictionary *modifiedAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    [modifiedAttributes setObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    %orig(modifiedAttributes, state);
+}
+%end
+%hook NSAttributedString
+- (instancetype)initWithString:(NSString *)str attributes:(NSDictionary<NSAttributedStringKey, id> *)attrs {
+    NSMutableDictionary *modifiedAttributes = [NSMutableDictionary dictionaryWithDictionary:attrs];
+    [modifiedAttributes setObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    return %orig(str, modifiedAttributes);
+}
+%end
+%hook CATextLayer
+- (void)setTextColor:(CGColorRef)textColor {
+    %orig([UIColor whiteColor].CGColor);
+}
+%end
+%hook ASTextNode
+- (NSAttributedString *)attributedString {
+    NSAttributedString *originalAttributedString = %orig;
+    NSMutableAttributedString *newAttributedString = [originalAttributedString mutableCopy];
+    [newAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, newAttributedString.length)];
+    return newAttributedString;
+}
+%end
+%hook ASTextFieldNode
 - (void)setTextColor:(UIColor *)textColor {
-    textColor = [UIColor whiteColor];
-    %orig(textColor);
+   %orig([UIColor whiteColor]);
+}
+%end
+%hook ASTextView
+- (void)setTextColor:(UIColor *)textColor {
+   %orig([UIColor whiteColor]);
+}
+%end
+%hook ASButtonNode
+- (void)setTextColor:(UIColor *)textColor {
+   %orig([UIColor whiteColor]);
+}
+%end
+%hook UIImage
++ (UIImage *)imageNamed:(NSString *)name {
+    UIImage *originalImage = %orig;
+    if ([name isEqualToString:@"sponsorblocksettings-20@2x.png"] || [name isEqualToString:@"ytrebornbuttonwhite.png"]) {
+        UIGraphicsBeginImageContextWithOptions(originalImage.size, NO, originalImage.scale);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGRect rect = CGRectMake(0, 0, originalImage.size.width, originalImage.size.height);
+        [originalImage drawInRect:rect];
+        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+        CGContextSetBlendMode(context, kCGBlendModeSourceAtop);
+        CGContextFillRect(context, rect);
+        UIImage *modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return modifiedImage;
+    }
+    return originalImage;
 }
 %end
 %end
@@ -1424,12 +1552,9 @@ BOOL isAd(id node) {
 %end
 
 %group gHideOverlayDarkBackground
-%hook UIView
-- (void)setBackgroundColor:(UIColor *)color {
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTMainAppVideoPlayerOverlayView")]) {
-        color = nil;
-    }
-    %orig;
+%hook YTMainAppVideoPlayerOverlayView
+- (void)setBackgroundVisible:(BOOL)arg1 isGradientBackground:(BOOL)arg2 {
+    %orig(NO, arg2);
 }
 %end
 %end
@@ -1627,6 +1752,13 @@ BOOL isAd(id node) {
     [[self navigationButton] setTitle:@"" forState:UIControlStateSelected];
 }
 %end
+
+%hook YTPivotBarIndicatorView
+- (void)didMoveToWindow {
+    [self setHidden:YES];
+    %orig();
+}
+%end
 %end
 
 %group gHideChannelWatermark
@@ -1730,85 +1862,90 @@ BOOL isAd(id node) {
 %end
 
 %group gColourOptions
-%hook UIView
-- (void)setBackgroundColor:(UIColor *)color {
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTPivotBarView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTSlideForActionsView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTChipCloudCell")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTEngagementPanelView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTPlaylistPanelProminentThumbnailVideoCell")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTPlaylistHeaderView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTAsyncCollectionView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTLinkCell")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTMessageCell")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTSearchView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTDrawerAvatarCell")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTFeedHeaderView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YCHLiveChatTextCell")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YCHLiveChatViewerEngagementCell")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTCommentsHeaderView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YCHLiveChatView")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YCHLiveChatTickerViewController")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTInnerTubeCollectionViewController")]) {
-        color = rebornHexColour;
-    }
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTEditSheetControllerHeader")]) {
-        color = rebornHexColour;
-    }
+%hook YTCommonColorPalette
+- (UIColor *)background1 {
+    return rebornHexColour;
+}
+- (UIColor *)background2 {
+    return rebornHexColour;
+}
+- (UIColor *)background3 {
+    return rebornHexColour;
+}
+- (UIColor *)baseBackground {
+    return rebornHexColour;
+}
+- (UIColor *)brandBackgroundSolid {
+    return rebornHexColour;
+}
+- (UIColor *)brandBackgroundPrimary {
+    return rebornHexColour;
+}
+- (UIColor *)brandBackgroundSecondary {
+    return rebornHexColour;
+}
+- (UIColor *)raisedBackground {
+    return rebornHexColour;
+}
+- (UIColor *)staticBrandBlack {
+    return rebornHexColour;
+}
+- (UIColor *)generalBackgroundA {
+    return rebornHexColour;
+}
+- (UIColor *)generalBackgroundB {
+    return rebornHexColour;
+}
+- (UIColor *)menuBackground {
+    return rebornHexColour;
+}
+%end
+%hook UITableViewCell
+- (void)_layoutSystemBackgroundView {
     %orig;
+    NSString *backgroundViewKey = class_getInstanceVariable(self.class, "_colorView") ? @"_colorView" : @"_backgroundView";
+    ((UIView *)[[self valueForKey:@"_systemBackgroundView"] valueForKey:backgroundViewKey]).backgroundColor = rebornHexColour;
+}
+- (void)_layoutSystemBackgroundView:(BOOL)arg1 {
+    %orig;
+    ((UIView *)[[self valueForKey:@"_systemBackgroundView"] valueForKey:@"_colorView"]).backgroundColor = rebornHexColour;
+}
+%end
+%hook settingsReorderTable
+- (void)viewDidLayoutSubviews {
+    %orig;
+    self.tableView.backgroundColor = rebornHexColour;
+}
+%end
+%hook FRPSelectListTable
+- (void)viewDidLayoutSubviews {
+    %orig;
+    self.tableView.backgroundColor = rebornHexColour;
+}
+%end
+%hook FRPreferences
+- (void)viewDidLayoutSubviews {
+    %orig;
+    self.tableView.backgroundColor = rebornHexColour;
+}
+%end
+%hook SponsorBlockSettingsController
+- (void)viewDidLoad {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+        %orig;
+        self.tableView.backgroundColor = rebornHexColour;
+    } else { return %orig; }
+}
+%end
+%hook SponsorBlockViewController
+- (void)viewDidLoad {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+        %orig;
+        self.view.backgroundColor = rebornHexColour;
+    } else { return %orig; }
 }
 %end
 %hook YTAsyncCollectionView
-- (void)setBackgroundColor:(UIColor *)color {
-    if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTRelatedVideosCollectionViewController")]) {
-        color = [UIColor clearColor];
-    } else if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTFullscreenMetadataHighlightsCollectionViewController")]) {
-        color = [UIColor clearColor];
-    } else {
-        color = rebornHexColour;
-    }
-    %orig;
-}
-- (UIColor *)darkBackgroundColor {
-    return rebornHexColour;
-}
-- (void)setDarkBackgroundColor:(UIColor *)color {
-    %orig(rebornHexColour);
-}
 - (void)layoutSubviews {
     %orig();
     if ([self.nextResponder isKindOfClass:NSClassFromString(@"YTWatchNextResultsViewController")]) {
@@ -1846,6 +1983,11 @@ BOOL isAd(id node) {
     %orig(rebornHexColour);
 }
 %end
+%hook YTSettingsCell
+- (void)setBackgroundColor:(UIColor *)color {
+    %orig(rebornHexColour);
+}
+%end
 %hook YTSlideForActionsView
 - (void)setBackgroundColor:(UIColor *)color {
     %orig(rebornHexColour);
@@ -1862,6 +2004,11 @@ BOOL isAd(id node) {
 }
 %end
 %hook YTPlaylistMiniBarView
+- (void)setBackgroundColor:(UIColor *)color {
+    %orig(rebornHexColour);
+}
+%end
+%hook YTEngagementPanelView
 - (void)setBackgroundColor:(UIColor *)color {
     %orig(rebornHexColour);
 }
@@ -2050,10 +2197,6 @@ BOOL isAd(id node) {
     %orig(rebornHexColour);
 }
 %end
-%hook YTSearchSuggestionCollectionViewCell
-- (void)updateColors {
-}
-%end
 %hook YTCreateCommentTextView
 - (void)setTextColor:(UIColor *)color {
     long long ytDarkModeCheck = [ytThemeSettings appThemeSetting];
@@ -2100,10 +2243,21 @@ BOOL isAd(id node) {
         responder = [responder nextResponder];
     }
 }
-%end
-%hook YTCinematicContainerView
-- (void)setHidden:(BOOL)arg1 {
-    %orig(YES);
+- (void)didMoveToWindow {
+    %orig;
+        if ([self.nextResponder isKindOfClass:%c(ASScrollView)]) { self.backgroundColor = [UIColor clearColor]; }
+        if ([self.accessibilityIdentifier isEqualToString:@"brand.promo_view"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"eml.cvr"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"rich_header"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.ui.comment_cell"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.ui.cancel.button"]) { self.superview.backgroundColor = [UIColor clearColor]; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.comment_composer"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.filter_chip_bar"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.elements.components.video_list_entry"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.comment.guidelines_text"]) { self.superview.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.comment.channel_guidelines_bottom_sheet_container"]) { self.backgroundColor = rebornHexColour; }
+        if ([self.accessibilityIdentifier isEqualToString:@"id.comment.channel_guidelines_entry_banner_container"]) { self.backgroundColor = rebornHexColour; }
+	if ([self.accessibilityIdentifier isEqualToString:@"id.comment.comment_group_detail_container"]) { self.backgroundColor = [UIColor clearColor]; }
 }
 %end
 %end
@@ -2331,6 +2485,7 @@ BOOL selectedTabIndex = NO;
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableBackgroundPlayback"] == YES && [[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO) {
             %init(gBackgroundPlayback);
         }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayNextInQueue"] == YES) %init(gHidePlayNextInQueue);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kNoCastButton"] == YES) %init(gNoCastButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kNoNotificationButton"] == YES) %init(gNoNotificationButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAllowHDOnCellularData"] == YES) %init(gAllowHDOnCellularData);

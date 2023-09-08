@@ -3,56 +3,59 @@
 #import "DownloadsAudioController.h"
 
 @interface DownloadsController ()
-- (void)coloursView;
+- (void)configureUI;
+- (void)doneButtonTapped;
 @end
 
 @implementation DownloadsController
-
 - (void)loadView {
-	[super loadView];
-    [self coloursView];
-
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = doneButton;
-
-    self.tabBar = [[UITabBarController alloc] init];
-
-    DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
-    videoViewController.title = @"Video";
-    UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
-
-    DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
-    audioViewController.title = @"Audio";
-    UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
-
-    self.tabBar.viewControllers = [NSArray arrayWithObjects:videoNavViewController, audioNavViewController, nil];
-
-    [self.view addSubview:self.tabBar.view];
+    [super loadView];
+    [self configureUI];
 }
 
-- (void)coloursView {
-    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    }
-    else {
-        self.view.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    }
+- (void)configureUI {
+    self.view.backgroundColor = [UIColor systemBackgroundColor];
+    
+    UINavigationBarAppearance *navigationBarAppearance = [[UINavigationBarAppearance alloc] init];
+    navigationBarAppearance.backgroundColor = [UIColor systemBackgroundColor];
+    navigationBarAppearance.backgroundEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemUltraThinMaterial];
+
+    [self.navigationController.navigationBar setStandardAppearance:navigationBarAppearance];
+    [self.navigationController.navigationBar setScrollEdgeAppearance:navigationBarAppearance];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor labelColor], NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+    
+    self.tabBar = [[UITabBarController alloc] init];
+    
+    DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
+    videoViewController.title = @"Video";
+    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonvideoblack.png"] tag:0];
+    videoViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonvideowhite.png"];
+    UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
+    
+    DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
+    audioViewController.title = @"Audio";
+    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonaudioblack.png"] tag:1];
+    audioViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonaudiowhite.png"];
+    UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
+    
+    self.tabBar.viewControllers = @[videoNavViewController, audioNavViewController];
+    [self addChildViewController:self.tabBar];
+    self.tabBar.view.frame = self.view.bounds;
+    [self.view addSubview:self.tabBar.view];
+    [self.tabBar didMoveToParentViewController:self];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self coloursView];
+    [self configureUI];
 }
 
-@end
-
-@implementation DownloadsController (Privates)
-
-- (void)done {
+- (void)doneButtonTapped {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 

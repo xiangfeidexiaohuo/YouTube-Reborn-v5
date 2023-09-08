@@ -258,7 +258,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 3) {
-        return @"YouTube Reborn v4.2.0";
+        return @"YouTube Reborn v4.2.1";
     }
     return nil;
 }

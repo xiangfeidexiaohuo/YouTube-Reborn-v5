@@ -11,6 +11,7 @@
 #import "Controllers/YouTubeDownloadController.h"
 #import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
+#import "YouTubeHeader/YTIElementRenderer.h"
 #import "YouTubeHeader/ELMCellNode.h"
 #import "YouTubeHeader/ELMNodeController.h"
 #import "YouTubeHeader/YTIMenuConditionalServiceItemRenderer.h"
@@ -127,6 +128,9 @@
 @interface YTPivotBarView : UIView
 @end
 
+@interface YTPivotBarIndicatorView : UIView
+@end
+
 @interface YTPivotBarViewController : UIViewController
 - (void)selectItemWithPivotIdentifier:(id)pivotIndentifier;
 @end
@@ -184,8 +188,6 @@
 @end
 
 @interface _ASDisplayView : UIView
-- (UILabel *)findLabelInSubviews:(NSArray *)subviews;
-- (void)customizeLabel:(UILabel *)label;
 @end
 
 @interface YTLabel : UILabel
@@ -202,4 +204,21 @@
 
 @interface YTCommonColorPalette : NSObject
 @property(readonly, nonatomic) long long pageStyle;
+@end
+
+// YouTube Reborn Settings
+@interface FRPreferences : UITableViewController
+@end
+
+@interface FRPSelectListTable : UITableViewController
+@end
+
+@interface settingsReorderTable : UIViewController
+@property(nonatomic, strong) UITableView *tableView;
+@end
+
+@interface SponsorBlockSettingsController : UITableViewController
+@end
+
+@interface SponsorBlockViewController : UIViewController
 @end
