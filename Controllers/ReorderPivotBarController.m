@@ -15,7 +15,8 @@
     self.title = @"Reorder Tabs";
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
+    self.navigationItem.rightBarButtonItems = @[doneButton, saveButton];
     
     if (@available(iOS 15.0, *)) {
         [self.tableView setSectionHeaderTopPadding:0.0f];
@@ -39,7 +40,7 @@
         return 1;
     }
     if (section == 1) {
-        return self.tabOrder.count;
+        return 4;
     }
     return 0;
 }
@@ -56,8 +57,7 @@
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
-        }
-        else {
+        } else {
             cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.textLabel.shadowColor = [UIColor blackColor];
@@ -68,18 +68,14 @@
     
     if (indexPath.section == 0) {
         cell.textLabel.text = @"Home";
-    }
-    else if (indexPath.section == 1) {
+    } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Shorts";
-        }
-        else if (indexPath.row == 1) {
+        } else if (indexPath.row == 1) {
             cell.textLabel.text = @"Create";
-        }
-        else if (indexPath.row == 2) {
+        } else if (indexPath.row == 2) {
             cell.textLabel.text = @"Subscriptions";
-        }
-        else if (indexPath.row == 3) {
+        } else if (indexPath.row == 3) {
             cell.textLabel.text = @"You";
         }
         
@@ -107,16 +103,16 @@
             NSMutableArray *reorderedTabs = [NSMutableArray array];
             
             for (NSString *tabIdentifier in self.tabOrder) {
-                if ([tabIdentifier isEqualToString:@"Shorts"]) {
+                if ([tabIdentifier isEqualToString:@"FEshorts"]) {
                     [reorderedTabs addObject:@"Shorts"];
                 }
-                else if ([tabIdentifier isEqualToString:@"Create"]) {
+                else if ([tabIdentifier isEqualToString:@"FEuploads"]) {
                     [reorderedTabs addObject:@"Create"];
                 }
-                else if ([tabIdentifier isEqualToString:@"Subscriptions"]) {
+                else if ([tabIdentifier isEqualToString:@"FEsubscriptions"]) {
                     [reorderedTabs addObject:@"Subscriptions"];
                 }
-                else if ([tabIdentifier isEqualToString:@"You"]) {
+                else if ([tabIdentifier isEqualToString:@"FElibrary"]) {
                     [reorderedTabs addObject:@"You"];
                 }
             }
@@ -129,27 +125,12 @@
         }
     }
 }
-- (void)done {
+- (void)save {
     [[NSUserDefaults standardUserDefaults] setObject:self.tabOrder forKey:@"kTabOrder"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSMutableArray *reorderedTabs = [NSMutableArray array];
-    
-    for (NSString *tabIdentifier in self.tabOrder) {
-        if ([tabIdentifier isEqualToString:@"Shorts"]) {
-            [reorderedTabs addObject:@"Shorts"];
-        }
-        else if ([tabIdentifier isEqualToString:@"Create"]) {
-            [reorderedTabs addObject:@"Create"];
-        }
-        else if ([tabIdentifier isEqualToString:@"Subscriptions"]) {
-            [reorderedTabs addObject:@"Subscriptions"];
-        }
-        else if ([tabIdentifier isEqualToString:@"You"]) {
-            [reorderedTabs addObject:@"You"];
-        }
-    }
-    [self setTabOrder:reorderedTabs];
+}
+- (void)done {   
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
