@@ -1,84 +1,47 @@
-# This has been created by @arichorn
-# Enjoy making debs!
+# This has been created by @lillieH1000
 
 name: Build the YouTube Reborn deb
 
 on:
   workflow_dispatch:
-
+    
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: macos-latest
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@main
 
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y dpkg-dev build-essential debhelper devscripts dh-make fakeroot
+      - name: Checkout theos/theos
+        uses: actions/checkout@main
+        with:
+          repository: theos/theos
+          ref: master
+          submodules: recursive
+          path: theos
 
-    - name: Create DEBIAN directory
-      run: |
-        mkdir -p dist/DEBIAN
-        chmod 755 dist/DEBIAN
+      - name: Checkout chrisharper22/sdks
+        uses: actions/checkout@main
+        with:
+          repository: chrisharper22/sdks
+          ref: main
+          sparse-checkout: iPhoneOS16.2.sdk
+          path: theos/sdks
 
-    - name: Move control file
-      run: |
-        mv control dist/DEBIAN/control
-   
-    - name: Create compat file
-      run: |
-        echo "12" > dist/DEBIAN/compat
+      - name: Checkout PoomSmart/YouTubeHeader
+        uses: actions/checkout@main
+        with:
+          repository: PoomSmart/YouTubeHeader
+          ref: main
+          path: YouTubeHeader
 
-    - name: Create Library Folder
-      run: mkdir -p dist/Library/YouTubeReborn
+      - name: Build Package 
+        run: |
+          brew install make xz ldid 
+          export THEOS=theos
+          gmake clean package FINALPACKAGE=1
+          gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
 
-    - name: Copy Modified Files to Applications
-      run: |
-        mkdir -p dist/Applications/YouTube.app/
-        cp -r ./Tweak.xm dist/Library/YouTubeReborn/
-        cp -r ./Tweak.h dist/Library/YouTubeReborn/
-        cp -r ./YouTubeReborn.plist dist/Library/YouTubeReborn/
-        cp -r ./Makefile dist/Library/YouTubeReborn/
-
-    - name: Build Debian Package
-      run: |
-        dpkg-deb --build dist YouTube.Reborn.4.1.0.deb
-
-    - name: List files in dist directory
-      run: ls -l dist
-
-    - name: List files in current directory
-      run: ls -l
-
-    - name: Upload Debian Package
-      uses: actions/upload-artifact@v2
-      with:
-        name: h.ryan.youtubereborn
-        path: YouTube.Reborn.4.1.0.deb
-
-    - name: Debug Upload Debian Package
-      run: echo ${{ steps.upload_debian_package.outputs }}
-
-    - name: Create Release
-      id: create_release
-      uses: softprops/action-gh-release@v0.1.15
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        files: YouTube.Reborn.4.1.0.deb
-        tag_name: v4.1.0
-        name: YouTube Reborn v4.1.0
-        draft: true
-
-    - name: Upload DEB to Release
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: YouTube.Reborn.4.1.0.deb
-        asset_name: h.ryan.youtubereborn
-        asset_content_type: application/vnd.debian.binary-package
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          path: packages/*.deb
