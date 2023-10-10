@@ -25,7 +25,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 11;
+    return 12;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,12 +119,19 @@
             hideShortsSubscriptionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"];
             cell.accessoryView = hideShortsSubscriptionsButton;
 	}
-         if (indexPath.row == 10) {
+        if (indexPath.row == 10) {
             cell.textLabel.text = @"Disable Resume to Shorts";
             UISwitch *disableResumeToShorts = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableResumeToShorts addTarget:self action:@selector(toggleDisableResumeToShorts:) forControlEvents:UIControlEventValueChanged];
             disableResumeToShorts.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableResumeToShorts"];
             cell.accessoryView = disableResumeToShorts;
+	}
+         if (indexPath.row == 11) {
+            cell.textLabel.text = @"Always Show Shorts Player Bar";
+            UISwitch *alwaysShowShortsPlayerBar = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [alwaysShowShortsPlayerBar addTarget:self action:@selector(toggleAlwaysShowShortsPlayerBar:) forControlEvents:UIControlEventValueChanged];
+            alwaysShowShortsPlayerBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAlwaysShowShortsPlayerBar"];
+            cell.accessoryView = alwaysShowShortsPlayerBar;
 	}
     }
     return cell;
@@ -282,6 +289,16 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kDisableResumeToShorts"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleAlwaysShowShortsPlayerBar:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kAlwaysShowShortsPlayerBar"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kAlwaysShowShortsPlayerBar"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

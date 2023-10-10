@@ -1,11 +1,11 @@
 #import <LocalAuthentication/LocalAuthentication.h>
-#import <dlfcn.h>
-#import <rootless.h>
 #import <Foundation/Foundation.h>
 #import <CaptainHook/CaptainHook.h>
 #import <objc/runtime.h>
 #import <UIKit/UIKit.h>
 #import <YouTubeExtractor/YouTubeExtractor.h>
+#import <dlfcn.h>
+#import <rootless.h>
 #import "Controllers/RootOptionsController.h"
 #import "Controllers/PictureInPictureController.h"
 #import "Controllers/YouTubeDownloadController.h"
@@ -28,6 +28,13 @@
 @end
 
 @interface YTTopAlignedView : UIView
+@end
+
+@interface YTCommentDetailHeaderCell : UIView
+@end
+
+@interface YTIPivotBarItemRender : NSObject
+@property(nonatomic, copy) NSArray *tabItems;
 @end
 
 @interface _ASCollectionViewCell : UICollectionViewCell

@@ -2,13 +2,13 @@
 #import "VideoOptionsController.h"
 #import "OverlayOptionsController.h"
 #import "TabBarOptionsController.h"
+#import "ReorderPivotBarController.h"
 #import "CreditsController.h"
 #import "ColourOptionsController.h"
 #import "ShortsOptionsController.h"
 #import "RebornSettingsController.h"
 #import "DownloadsController.h"
 #import "OtherOptionsController.h"
-#import "ChangelogsController.h"
 #import "PictureInPictureOptionsController.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
@@ -41,25 +41,22 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
-    }
-    if (section == 1) {
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"filza://"]]) {
             return 2;
         } else {
             return 1;
         }
     }
-    if (section == 2) {
-        return 7;
+    if (section == 1) {
+        return 8;
     }
-    if (section == 3) {
-        return 3;
+    if (section == 2) {
+        return 2;
     }
     return 0;
 }
@@ -87,19 +84,13 @@
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Reddit";
-            }
-        }
-        if (indexPath.section == 1) {
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            if (indexPath.row == 0) {
                 cell.textLabel.text = @"View Downloads";
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = @"View Downloads In Filza";
             }
         }
-        if (indexPath.section == 2) {
+        if (indexPath.section == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Video Options";
@@ -111,27 +102,27 @@
                 cell.textLabel.text = @"Tab Bar Options";
             }
             if (indexPath.row == 3) {
-                cell.textLabel.text = @"Colour Options";
+                cell.textLabel.text = @"Reorder Tab Bar Options";
             }
             if (indexPath.row == 4) {
-                cell.textLabel.text = @"Picture In Picture Options";
+                cell.textLabel.text = @"Colour Options";
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = @"Shorts Options";
+                cell.textLabel.text = @"Picture In Picture Options";
             }
             if (indexPath.row == 6) {
+                cell.textLabel.text = @"Shorts Options";
+            }
+            if (indexPath.row == 7) {
                 cell.textLabel.text = @"Other Options";
             }
         }
-        if (indexPath.section == 3) {
+        if (indexPath.section == 2) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Reborn Settings";
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Changelogs";
-            }
-            if (indexPath.row == 2) {
                 cell.textLabel.text = @"Credits";
             }
         }
@@ -142,11 +133,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.reddit.com/r/YouTubeReborn/"] options:@{} completionHandler:nil];
-        }
-    }
-    if (indexPath.section == 1) {
         if (indexPath.row == 0) {    
             DownloadsController *downloadsController = [[DownloadsController alloc] init];
             UINavigationController *downloadsControllerView = [[UINavigationController alloc] initWithRootViewController:downloadsController];
@@ -166,7 +152,7 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path] options:@{} completionHandler:nil];
         }
     }
-    if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
         if (indexPath.row == 0) {    
             VideoOptionsController *videoOptionsController = [[VideoOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
             UINavigationController *videoOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:videoOptionsController];
@@ -189,13 +175,20 @@
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 3) {
+            ReorderPivotBarController *reorderPivotBarController = [[ReorderPivotBarController alloc] initWithStyle:UITableViewStyleGrouped];
+            UINavigationController *ReorderPivotBarControllerView = [[UINavigationController alloc] initWithRootViewController:reorderPivotBarController];
+            ReorderPivotBarControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:ReorderPivotBarControllerView animated:YES completion:nil];
+        }
+        if (indexPath.row == 4) {
             ColourOptionsController *colourOptionsController = [[ColourOptionsController alloc] init];
             UINavigationController *colourOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:colourOptionsController];
             colourOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:colourOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 4) {
+        if (indexPath.row == 5) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
                 PictureInPictureOptionsController *pictureInPictureOptionsController = [[PictureInPictureOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
                 UINavigationController *pictureInPictureOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:pictureInPictureOptionsController];
@@ -211,14 +204,14 @@
                 [self presentViewController:alertError animated:YES completion:nil];
             }
         }
-        if (indexPath.row == 5) {
+        if (indexPath.row == 6) {
             ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
             UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
             shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 6) {
+        if (indexPath.row == 7) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -226,7 +219,7 @@
             [self presentViewController:otherOptionsControllerView animated:YES completion:nil];
         }
     }
-    if (indexPath.section == 3) {
+    if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             RebornSettingsController *rebornSettingsController = [[RebornSettingsController alloc] initWithStyle:UITableViewStyleGrouped];
             UINavigationController *rebornSettingsControllerView = [[UINavigationController alloc] initWithRootViewController:rebornSettingsController];
@@ -235,11 +228,6 @@
             [self presentViewController:rebornSettingsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
-            ChangelogsController *changelogsController = [[ChangelogsController alloc] init];
-
-            [self presentViewController:changelogsController animated:YES completion:nil];
-        }
-        if (indexPath.row == 2) {
             CreditsController *creditsController = [[CreditsController alloc] initWithStyle:UITableViewStyleGrouped];
             UINavigationController *creditsControllerView = [[UINavigationController alloc] initWithRootViewController:creditsController];
             creditsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -250,15 +238,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 3) {
+    if (section == 2) {
         return 50;
     }
     return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == 3) {
-        return @"YouTube Reborn v4.2.1";
+    if (section == 2) {
+        return @"YouTube Reborn v4.2.2";
     }
     return nil;
 }

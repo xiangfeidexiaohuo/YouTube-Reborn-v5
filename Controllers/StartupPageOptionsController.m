@@ -81,7 +81,7 @@ int selectedIndex;
             }
         }
         if (indexPath.row == 4) {
-            cell.textLabel.text = @"You/Library";
+            cell.textLabel.text = @"You";
             if (selectedIndex == 4) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }

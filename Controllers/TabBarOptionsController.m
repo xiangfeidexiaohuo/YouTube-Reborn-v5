@@ -74,7 +74,7 @@
                     cell.detailTextLabel.text = @"Subscriptions";
                 }
                 if (selectedTab == 4) {
-                    cell.detailTextLabel.text = @"Library";
+                    cell.detailTextLabel.text = @"You";
                 }
             }
         }
@@ -120,12 +120,12 @@
                 cell.accessoryView = hideSubscriptionsTab;
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = @"Hide You/Library Tab";
+                cell.textLabel.text = @"Hide You Tab";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UISwitch *hideLibraryTab = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [hideLibraryTab addTarget:self action:@selector(toggleHideLibraryTab:) forControlEvents:UIControlEventValueChanged];
-                hideLibraryTab.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideLibraryTab"];
-                cell.accessoryView = hideLibraryTab;
+                UISwitch *hideYouTab = [[UISwitch alloc] initWithFrame:CGRectZero];
+                [hideYouTab addTarget:self action:@selector(toggleHideYouTab:) forControlEvents:UIControlEventValueChanged];
+                hideYouTab.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTab"];
+                cell.accessoryView = hideYouTab;
             }
         }
     }
@@ -242,12 +242,12 @@
     }
 }
 
-- (void)toggleHideLibraryTab:(UISwitch *)sender {
+- (void)toggleHideYouTab:(UISwitch *)sender {
     if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideLibraryTab"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideYouTab"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideLibraryTab"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideYouTab"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

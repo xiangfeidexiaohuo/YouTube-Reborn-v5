@@ -127,6 +127,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kNoCastButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kNoNotificationButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAllowHDOnCellularData"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePlayNextInQueue"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableVideoEndscreenPopups"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableYouTubeKidsPopup"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableExtraSpeedOptions"];
@@ -140,7 +141,8 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsTab"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideUploadTab"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideSubscriptionsTab"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideLibraryTab"];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideYouTab"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideLibraryTab"]; // Deprecated Option
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableDoubleTapToSkip"];
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideOverlayDarkBackground"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePreviousButtonInOverlay"];
@@ -161,12 +163,15 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsSearchButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsBuySuperThanks"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShortsSubscriptionsButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableResumeToShorts"];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAlwaysShowShortsPlayerBar"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideOverlayQuickActions"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAutoFullScreen"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableRelatedVideosInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableiPadStyleOniPhone"];
+	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableiPhoneStyleOniPad"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kRedProgressBar"];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kOldBufferBar"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kGrayBufferProgress"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePlayerBarHeatwave"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureAdsBadge"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureSponsorBadge"];
