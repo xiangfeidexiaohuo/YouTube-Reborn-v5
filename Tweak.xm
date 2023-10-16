@@ -1443,6 +1443,71 @@ BOOL isAd(id node) {
 %end
 %end
 
+%hook YTIPivotBarItemRender
+
+- (void)viewDidLoad {
+    %orig();
+    NSArray *tabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
+    
+    NSDictionary *tabPositions = @{
+        @"FEwhat_to_watch": @(0), // Home
+        @"FEshorts": @(1), // Shorts
+        @"FEuploads": @(2), // Create
+        @"FEsubscriptions": @(3), // Subscriptions
+        @"FElibrary": @(4) // You
+    };
+    NSArray *sortedTabOrder = [tabOrder sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSNumber *position1 = tabPositions[obj1];
+        NSNumber *position2 = tabPositions[obj2];
+        return [position1 compare:position2];
+    }];
+    NSMutableArray *reorderedTabs = [NSMutableArray array];
+    for (NSString *tabIdentifier in sortedTabOrder) {
+        for (id tabItem in self.tabItems) {
+            if ([tabItem respondsToSelector:@selector(pivotIdentifier)]) {
+                NSString *pivotIdentifier = [tabItem pivotIdentifier];
+                if ([pivotIdentifier isEqualToString:tabIdentifier]) {
+                    [reorderedTabs addObject:tabItem];
+                    break;
+                }
+            }
+        }
+    }
+    [self setTabItems:reorderedTabs];
+}
+%end
+
+BOOL selectedTabIndex = NO;
+
+%hook YTPivotBarViewController
+- (void)viewDidAppear:(BOOL)animated {
+    %orig();
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"]) {
+        int selectedTab = [[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"];
+        if (selectedTab == 0 && !selectedTabIndex) {
+            [self selectItemWithPivotIdentifier:@"FEwhat_to_watch"];
+            selectedTabIndex = YES;
+        }
+        if (selectedTab == 1 && !selectedTabIndex) {
+            [self selectItemWithPivotIdentifier:@"FEexplore"];
+            selectedTabIndex = YES;
+        }
+        if (selectedTab == 2 && !selectedTabIndex) {
+            [self selectItemWithPivotIdentifier:@"FEshorts"];
+            selectedTabIndex = YES;
+        }
+        if (selectedTab == 3 && !selectedTabIndex) {
+            [self selectItemWithPivotIdentifier:@"FEsubscriptions"];
+            selectedTabIndex = YES;
+        }
+        if (selectedTab == 4 && !selectedTabIndex) {
+            [self selectItemWithPivotIdentifier:@"FElibrary"];
+            selectedTabIndex = YES;
+        }
+    }
+}
+%end
+
 %group gDisableDoubleTapToSkip
 %hook YTMainAppVideoPlayerOverlayViewController
 - (BOOL)allowDoubleTapToSeekGestureRecognizer {
@@ -2360,71 +2425,6 @@ BOOL isAd(id node) {
 	self.durationLabel.hidden = YES;
 }
 %end
-%end
-
-BOOL selectedTabIndex = NO;
-
-%hook YTPivotBarViewController
-- (void)viewDidAppear:(BOOL)animated {
-    %orig();
-    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"]) {
-        int selectedTab = [[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"];
-        if (selectedTab == 0 && !selectedTabIndex) {
-            [self selectItemWithPivotIdentifier:@"FEwhat_to_watch"];
-            selectedTabIndex = YES;
-        }
-        if (selectedTab == 1 && !selectedTabIndex) {
-            [self selectItemWithPivotIdentifier:@"FEexplore"];
-            selectedTabIndex = YES;
-        }
-        if (selectedTab == 2 && !selectedTabIndex) {
-            [self selectItemWithPivotIdentifier:@"FEshorts"];
-            selectedTabIndex = YES;
-        }
-        if (selectedTab == 3 && !selectedTabIndex) {
-            [self selectItemWithPivotIdentifier:@"FEsubscriptions"];
-            selectedTabIndex = YES;
-        }
-        if (selectedTab == 4 && !selectedTabIndex) {
-            [self selectItemWithPivotIdentifier:@"FElibrary"];
-            selectedTabIndex = YES;
-        }
-    }
-}
-%end
-
-%hook YTIPivotBarItemRender
-
-- (void)viewDidLoad {
-    %orig();
-    NSArray *tabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
-    
-    NSDictionary *tabPositions = @{
-        @"FEwhat_to_watch": @(0), // Home
-        @"FEshorts": @(1), // Shorts
-        @"FEuploads": @(2), // Create
-        @"FEsubscriptions": @(3), // Subscriptions
-        @"FElibrary": @(4) // You
-    };
-    NSArray *sortedTabOrder = [tabOrder sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSNumber *position1 = tabPositions[obj1];
-        NSNumber *position2 = tabPositions[obj2];
-        return [position1 compare:position2];
-    }];
-    NSMutableArray *reorderedTabs = [NSMutableArray array];
-    for (NSString *tabIdentifier in sortedTabOrder) {
-        for (id tabItem in self.tabItems) {
-            if ([tabItem respondsToSelector:@selector(pivotIdentifier)]) {
-                NSString *pivotIdentifier = [tabItem pivotIdentifier];
-                if ([pivotIdentifier isEqualToString:tabIdentifier]) {
-                    [reorderedTabs addObject:tabItem];
-                    break;
-                }
-            }
-        }
-    }
-    [self setTabItems:reorderedTabs];
-}
 %end
 
 %hook YTColdConfig
