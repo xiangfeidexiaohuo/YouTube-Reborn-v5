@@ -102,7 +102,7 @@
                 cell.textLabel.text = @"Tab Bar Options";
             }
             if (indexPath.row == 3) {
-                cell.textLabel.text = @"Reorder Tab Bar Options";
+                cell.textLabel.text = @"Reorder Tabs";
             }
             if (indexPath.row == 4) {
                 cell.textLabel.text = @"Colour Options";
