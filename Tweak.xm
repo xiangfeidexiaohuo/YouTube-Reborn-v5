@@ -1444,7 +1444,6 @@ BOOL isAd(id node) {
 %end
 
 %hook YTIPivotBarItemRender
-
 - (void)viewDidLoad {
     %orig();
     NSArray *tabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
