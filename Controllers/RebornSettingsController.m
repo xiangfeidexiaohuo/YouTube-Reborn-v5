@@ -70,14 +70,14 @@
         if (indexPath.section == 1) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Hide Video Overlay 'DL' Button";
+                cell.textLabel.text = @"Hide Video Overlay 'OP' Button";
                 UISwitch *hideRebornOPButton = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideRebornOPButton addTarget:self action:@selector(toggleHideRebornOPButton:) forControlEvents:UIControlEventValueChanged];
                 hideRebornOPButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornOPButtonVTwo"];
                 cell.accessoryView = hideRebornOPButton;
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Hide Shorts Overlay 'DL' Button";
+                cell.textLabel.text = @"Hide Shorts Overlay 'OP' Button";
                 UISwitch *hideRebornShortsOPButton = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideRebornShortsOPButton addTarget:self action:@selector(toggleHideRebornShortsOPButton:) forControlEvents:UIControlEventValueChanged];
                 hideRebornShortsOPButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornShortsOPButton"];
@@ -195,6 +195,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kIntroSegmentedInt"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kOutroSegmentedInt"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kPreviewSegmentedInt"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kFillerSegmentedInt"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kMusicOffTopicSegmentedInt"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kStartupPageIntVTwo"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornOPButtonVTwo"];
