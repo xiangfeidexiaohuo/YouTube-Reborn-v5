@@ -15,15 +15,17 @@ Get ready to have a better YouTube experience! Download the Ipa or Deb file from
 -New Badges-
 <p align="center">
     <a href="https://github.com/arichorn/YouTube-Reborn/releases/latest"><img src="https://custom-icon-badges.demolab.com/github/v/release/arichorn/YouTube-Reborn?logo=youtube&color=%23ff0000&label=Latest%20Release" alt="Latest Release Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/releases/latest"><img src="https://img.shields.io/github/downloads/arichorn/YouTube-Reborn/total?color=%23ff0000&label=Downloads" alt="Download Badge"></img></a>
+    <a href="https://github.com/arichorn/YouTube-Reborn/releases/latest"><img src="https://img.shields.io/github/downloads/arichorn/YouTube-Reborn/total?color=%23ff0000&label=Downloads&logo=fontawesome&logoColor=white" alt="Download Badge"></img></a>
     <a href="https://github.com/arichorn/YouTube-Reborn/commit"><img src="https://custom-icon-badges.demolab.com/github/last-commit/arichorn/YouTube-Reborn?logo=history&logoColor=white&color=%23ff0000&label=Last%20Commit" alt="Last Commit Badge"></img></a>
     <a href="https://github.com/arichorn/YouTube-Reborn/issues"><img src="https://custom-icon-badges.demolab.com/github/issues-raw/arichorn/YouTube-Reborn?logo=issue-opened&logoColor=white&color=%23ff0000&label=Issues" alt="Issues Badge"></img</a>
 </p>
 
 <p align="center">
     <a href="https://github.com/arichorn/YouTube-Reborn/stargazers"><img src="https://custom-icon-badges.demolab.com/github/stars/arichorn/YouTube-Reborn?logo=star&logoColor=white&color=%23ff0000&label=Stars" alt="Stars Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/network/members"><img src="https://custom-icon-badges.demolab.com/github/forks/arichorn/YouTube-Reborn?logo=code-fork&logoColor=white&color=%23ff0000&label=Forks" alt="Forks Badge"></img></a>
+<a href="https://github.com/arichorn/YouTube-Reborn/network/members"><img src="https://custom-icon-badges.demolab.com/github/forks/arichorn/YouTube-Reborn?logo=github&logoColor=white&color=%23ff0000&label=Forks"></a>
 </p>
+
+-----
 
 -Old Badges-
 <p align="center">
