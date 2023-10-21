@@ -10,7 +10,7 @@ Get ready to have a better YouTube experience! Download the Ipa or Deb file from
 
 -----
 
-# YouTube Reborn Repository Status
+# YouTube Reborn Repository Statistics
 
 -New Badges-
 <p align="center">
