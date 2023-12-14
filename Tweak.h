@@ -84,20 +84,50 @@
 @end
 
 @interface YTPlayerViewController : UIViewController <YTPlaybackController>
+@property id activeVideo;
+@property float playbackRate;
 - (void)seekToTime:(CGFloat)time;
 - (NSString *)currentVideoID;
 - (CGFloat)currentVideoMediaTime;
+- (void)singleVideo:(id)video playbackRateDidChange:(float)rate;
 - (void)autoFullscreen;
+- (id)activeVideoPlayerOverlay; 
+- (id)playerView;
 @end
 
 @interface YTLocalPlaybackController : NSObject
 - (NSString *)currentVideoID;
+- (void)setPlaybackRate:(float)rate;
+- (id)activeVideo;
 @end
 
 @interface YTMainAppVideoPlayerOverlayViewController : UIViewController
 - (CGFloat)mediaTime;
 - (int)playerViewLayout;
 - (NSInteger)playerState;
+@end
+
+@interface YTVarispeedSwitchControllerOption : NSObject
+- (id)initWithTitle:(id)title rate:(float)rate;
+@end
+
+@interface MLHAMQueuePlayer : NSObject
+@property id playerEventCenter;
+@property id delegate;
+- (void)setRate:(float)rate;
+- (void)internalSetRate;
+@end
+
+@interface MLPlayerStickySettings : NSObject
+- (void)setRate:(float)rate;
+@end
+
+@interface MLPlayerEventCenter : NSObject
+- (void)broadcastRateChange:(float)rate;
+@end
+
+@interface HAMPlayerInternal : NSObject
+- (void)setRate:(float)rate;
 @end
 
 @interface YTUserDefaults : NSObject
