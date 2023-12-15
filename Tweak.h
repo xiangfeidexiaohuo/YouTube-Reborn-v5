@@ -177,6 +177,7 @@
 @end
 
 @interface YTIPivotBarSupportedRenderers : NSObject
+@property(retain, nonatomic) YTIPivotBarItemRenderer *pivotBarItemRenderer;
 - (YTIPivotBarItemRenderer *)pivotBarItemRenderer;
 - (YTIPivotBarIconOnlyItemRenderer *)pivotBarIconOnlyItemRenderer;
 @end
