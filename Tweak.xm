@@ -264,6 +264,7 @@ static NSString *accessGroupID() {
     [self addSubview:self.youtubeRebornButton];
     if (!self.youtubeRebornButton) {
         self.youtubeRebornButton = [%c(YTQTMButton) iconButton];
+        [self.youtubeRebornButton enableNewTouchFeedback];
         self.youtubeRebornButton.frame = CGRectMake(0, 0, 24, 24);
         
         if ([%c(YTPageStyleController) pageStyle] == 0) {
