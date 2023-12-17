@@ -88,13 +88,10 @@
 - (void)setPlaybackRate:(float)arg1;
 @end
 
-@interface YTPlayerViewController ()
-- (YTSingleVideoController *)activeVideo;
-@end
-
 @interface YTPlayerViewController : UIViewController <YTPlaybackController>
 @property id activeVideo;
 @property float playbackRate;
+- (YTSingleVideoController *)activeVideo;
 - (void)seekToTime:(CGFloat)time;
 - (NSString *)currentVideoID;
 - (CGFloat)currentVideoMediaTime;
