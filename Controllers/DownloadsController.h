@@ -3,6 +3,6 @@
 
 @interface DownloadsController : UIViewController <UITabBarControllerDelegate>
 
-@property (nonatomic, retain) UITabBarController *tabBar;
+@property (nonatomic, strong) UITabBarController *tabBar;
 
 @end
