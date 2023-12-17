@@ -1,5 +1,5 @@
 #import "UIKit/UIKit.h"
 
-@interface RootOptionsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface CreditsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView* tableView;
 @end
