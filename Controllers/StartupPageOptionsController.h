@@ -1,6 +1,5 @@
-#import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+#import "UIKit/UIKit.h"
 
-@interface StartupPageOptionsController : UITableViewController
-
+@interface StartupPageOptionsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView* tableView;
 @end
