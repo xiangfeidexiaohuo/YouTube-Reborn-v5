@@ -12,6 +12,7 @@
 // YT Headers
 #import "YouTubeHeader/QTMIcon.h"
 #import "YouTubeHeader/YTColor.h"
+#import "YouTubeHeader/YTQTMButton.h"
 #import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
 #import "YouTubeHeader/YTIElementRenderer.h"
