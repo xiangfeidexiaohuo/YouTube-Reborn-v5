@@ -1,6 +1,5 @@
-#import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+#import "UIKit/UIKit.h"
 
-@interface OverlayOptionsController : UITableViewController
-
+@interface OverlayOptionsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView* tableView;
 @end
