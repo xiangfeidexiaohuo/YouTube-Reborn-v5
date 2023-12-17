@@ -1,8 +1,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 
-@interface DownloadsVideoController : UITableViewController <AVPlayerViewControllerDelegate>
-
+@interface DownloadsVideoController : UIViewController <UITableViewDelegate, UITableViewDataSource, AVPlayerViewControllerDelegate>
+@property (nonatomic, strong) UITableView *tableView;
 @end
