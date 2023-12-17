@@ -88,22 +88,13 @@
 - (void)downloadVideo;
 @end
 
-@interface YTSingleVideoController ()
-- (float)playbackRate;
-- (void)setPlaybackRate:(float)arg1;
-@end
-
 @interface YTPlayerViewController : UIViewController <YTPlaybackController>
-@property id activeVideo;
-@property float playbackRate;
-- (YTSingleVideoController *)activeVideo;
+@property (nonatomic, strong) id activeVideo;
+@property (nonatomic) float playbackRate;
 - (void)seekToTime:(CGFloat)time;
 - (NSString *)currentVideoID;
 - (CGFloat)currentVideoMediaTime;
-- (void)singleVideo:(id)video playbackRateDidChange:(float)rate;
 - (void)autoFullscreen;
-- (id)activeVideoPlayerOverlay; 
-- (id)playerView;
 @end
 
 @interface YTLocalPlaybackController : NSObject
