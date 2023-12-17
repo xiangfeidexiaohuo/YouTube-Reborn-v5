@@ -3,6 +3,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface DownloadsAudioController : UITableViewController <AVPlayerViewControllerDelegate>
-
+@interface DownloadsAudioController : UIViewController <UITableViewDelegate, UITableViewDataSource, AVPlayerViewControllerDelegate>
+@property (nonatomic, strong) UITableView *tableView;
 @end
