@@ -1,6 +1,5 @@
-#import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+#import "UIKit/UIKit.h"
 
-@interface RebornSettingsController : UITableViewController
-
+@interface RebornSettingsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView* tableView;
 @end
