@@ -11,8 +11,7 @@
 #import "Controllers/YouTubeDownloadController.h"
 // YT Headers
 #import "YouTubeHeader/QTMIcon.h"
-#import "YouTubeHeader/YTColor.h"
-#import "YouTubeHeader/YTQTMButton.h"
+#import "YouTubeHeader/YTColor.h
 #import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
 #import "YouTubeHeader/YTIElementRenderer.h"
@@ -24,7 +23,9 @@
 
 @interface YTQTMButton : UIButton
 @property (strong, nonatomic) UIImageView *imageView;
++ (instancetype)button;
 + (instancetype)iconButton;
+- (void)enableNewTouchFeedback;
 @end
 
 @interface YTPlaybackButton : UIControl
@@ -90,8 +91,6 @@
 @end
 
 @interface YTPlayerViewController : UIViewController <YTPlaybackController>
-@property (nonatomic, strong) id activeVideo;
-@property (nonatomic) float playbackRate;
 - (void)seekToTime:(CGFloat)time;
 - (NSString *)currentVideoID;
 - (CGFloat)currentVideoMediaTime;
@@ -100,37 +99,12 @@
 
 @interface YTLocalPlaybackController : NSObject
 - (NSString *)currentVideoID;
-- (void)setPlaybackRate:(float)rate;
-- (id)activeVideo;
 @end
 
 @interface YTMainAppVideoPlayerOverlayViewController : UIViewController
 - (CGFloat)mediaTime;
 - (int)playerViewLayout;
 - (NSInteger)playerState;
-@end
-
-@interface YTVarispeedSwitchControllerOption : NSObject
-- (id)initWithTitle:(id)title rate:(float)rate;
-@end
-
-@interface MLHAMQueuePlayer : NSObject
-@property id playerEventCenter;
-@property id delegate;
-- (void)setRate:(float)rate;
-- (void)internalSetRate;
-@end
-
-@interface MLPlayerStickySettings : NSObject
-- (void)setRate:(float)rate;
-@end
-
-@interface MLPlayerEventCenter : NSObject
-- (void)broadcastRateChange:(float)rate;
-@end
-
-@interface HAMPlayerInternal : NSObject
-- (void)setRate:(float)rate;
 @end
 
 @interface YTUserDefaults : NSObject
@@ -146,6 +120,23 @@
 @end
 
 @interface YTSingleVideoTime : NSObject
+@end
+
+@interface MLHAMQueuePlayer : NSObject
+@property id playerEventCenter;
+-(void)setRate:(float)rate;
+@end
+
+@interface YTVarispeedSwitchControllerOption : NSObject
+- (id)initWithTitle:(id)title rate:(float)rate;
+@end
+
+@interface HAMPlayerInternal : NSObject
+- (void)setRate:(float)rate;
+@end
+
+@interface MLPlayerEventCenter : NSObject
+- (void)broadcastRateChange:(float)rate;
 @end
 
 @interface YTPivotBarView : UIView
@@ -171,7 +162,6 @@
 @end
 
 @interface YTIPivotBarSupportedRenderers : NSObject
-@property(retain, nonatomic) YTIPivotBarItemRenderer *pivotBarItemRenderer;
 - (YTIPivotBarItemRenderer *)pivotBarItemRenderer;
 - (YTIPivotBarIconOnlyItemRenderer *)pivotBarIconOnlyItemRenderer;
 @end
