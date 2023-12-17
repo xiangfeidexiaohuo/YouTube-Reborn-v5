@@ -9,12 +9,17 @@
 #import "Controllers/RootOptionsController.h"
 #import "Controllers/PictureInPictureController.h"
 #import "Controllers/YouTubeDownloadController.h"
+// YT Headers
+#import "YouTubeHeader/QTMIcon.h"
+#import "YouTubeHeader/YTColor.h"
 #import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
 #import "YouTubeHeader/YTIElementRenderer.h"
 #import "YouTubeHeader/ELMCellNode.h"
 #import "YouTubeHeader/ELMNodeController.h"
 #import "YouTubeHeader/YTIMenuConditionalServiceItemRenderer.h"
+#import "YouTubeHeader/YTTouchFeedbackController.h"
+#import "YouTubeHeader/YTWatchViewController.h"
 
 @interface YTQTMButton : UIButton
 @property (strong, nonatomic) UIImageView *imageView;
