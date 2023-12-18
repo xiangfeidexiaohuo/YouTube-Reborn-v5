@@ -1,4 +1,24 @@
-// YouTube Reborn - English Localization
 
-"COLOUR_OPTIONS" = "Colour Options";
-"COLOUR_OPTIONS_ALERT" = "Colour Saved";
+// Video Options
+"VIDEO_OPTIONS" = "Video Options";
+"ENABLE_NO_ADS" = "Enable No Ads";
+"ENABLE_BACKGROUND_PLAYBACK" = "Enable Background Playback";
+"ALLOW_HD_ON_CELLULAR_DATA" = "Allow HD On Cellular Data";
+"PORTRAIT_FULLSCREEN" = "Portrait Fullscreen";
+"AUTO_PLAY_IN_FULLSCREEN" = "Auto Play In Fullscreen";
+"DISABLE_VIDEO_ENDSCREEN_POPUPS" = "Disable Video Endscreen Popups";
+"DISABLE_VIDEO_INFO_CARDS" = "Disable Video Info Cards";
+"DISABLE_VIDEO_AUTOPLAY" = "Disable Video Autoplay";
+"HIDE_CHANNEL_WATERMARK" = "Hide Channel Watermark";
+"RED_PROGRESS_BAR" = "Red Progress Bar";
+"GRAY_BUFFER_PROGRESS" = "Gray Buffer Progress";
+"HIDE_PLAYER_BAR_HEATWAVE" = "Hide Player Bar Heatwave";
+"ALWAYS_SHOW_PLAYER_BAR" = "Always Show Player Bar"
+"ENABLE_EXTRA_SPEED_OPTIONS" = "Enable Extra Speed Options";
+"DISABLE_DOUBLE_TAP_TO_SKIP" = "Disable Double Tap To Skip";
+"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "Enable Custom Double Tap To Skip Duration";
+
+
+// Colour Options
+"COLOUR_OPTIONS" = "Color Options";
+"COLOUR_OPTIONS_ALERT" = "color Saved";
