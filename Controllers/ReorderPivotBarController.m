@@ -95,6 +95,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location]; 
         if (indexPath) {
             NSString *tabIdentifier = self.tabOrder[indexPath.row];
+                NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
                 if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
                     [reorderedTabs addObject:@"Home"];
                 }
