@@ -87,13 +87,6 @@
 - (void)downloadVideo;
 @end
 
-@interface YTPlayerViewController : UIViewController <YTPlaybackController>
-- (void)seekToTime:(CGFloat)time;
-- (NSString *)currentVideoID;
-- (CGFloat)currentVideoMediaTime;
-- (void)autoFullscreen;
-@end
-
 @interface YTLocalPlaybackController : NSObject
 - (NSString *)currentVideoID;
 @end
@@ -165,10 +158,6 @@
 
 @interface YTIPivotBarRenderer : NSObject
 - (NSMutableArray <YTIPivotBarSupportedRenderers *> *)itemsArray;
-@end
-
-@interface YTSingleVideo : NSObject
-- (NSString *)videoId;
 @end
 
 @interface YTReelHeaderView : UIView
