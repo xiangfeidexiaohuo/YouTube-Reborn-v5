@@ -6,9 +6,16 @@
 
 @implementation CreditsController
 
-- (void)loadView {
-	[super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self coloursView];
+
+    UITableViewStyle style;
+        if (@available(iOS 13, *)) {
+            style = UITableViewStyleInsetGrouped;
+        } else {
+            style = UITableViewStyleGrouped;
+        }
 
     self.title = @"Credits";
 
@@ -72,7 +79,7 @@
             }
             if (indexPath.row == 2) {
                 cell.textLabel.text = @"Dayanch96";
-                cell.detailTextLabel.text = @"Features: \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+                cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
             }
             if (indexPath.row == 3) {
                 cell.textLabel.text = @"PoomSmart";
@@ -91,7 +98,7 @@
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/LillieH001"] options:@{} completionHandler:nil];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/LillieH1000"] options:@{} completionHandler:nil];
         }
     }
     if (indexPath.section == 1) {
@@ -134,21 +141,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.tableView.layer.borderWidth = 1.0;
-    self.tableView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.view.layer.borderWidth = 1.0;
-    self.view.layer.borderColor = [UIColor blackColor].CGColor;
-    UITableView *tableView = self.tableView;
-    tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
-    tableView.layer.maskedCorners = kCALayerMinXMinYCorner;
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
-    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
 }
 
 @end
