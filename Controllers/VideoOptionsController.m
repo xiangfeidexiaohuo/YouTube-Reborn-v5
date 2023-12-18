@@ -179,7 +179,7 @@
             cell.accessoryView = enableExtraSpeedOptions;
         }
         if (indexPath.row == 14) {
-            cell.textLabel.text = LOC(@"DISABLE_DOUBLE_TAP_TO_SKIP";
+            cell.textLabel.text = LOC(@"DISABLE_DOUBLE_TAP_TO_SKIP");
             UISwitch *disableDoubleTapToSkip = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableDoubleTapToSkip addTarget:self action:@selector(toggleDisableDoubleTapToSkip:) forControlEvents:UIControlEventValueChanged];
             disableDoubleTapToSkip.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableDoubleTapToSkip"];
