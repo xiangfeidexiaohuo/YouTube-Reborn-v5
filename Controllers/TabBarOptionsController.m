@@ -23,7 +23,6 @@
             style = UITableViewStyleGrouped;
         }
 
-
     if (@available(iOS 15.0, *)) {
     	[self.tableView setSectionHeaderTopPadding:0.0f];
 	}
@@ -144,7 +143,7 @@
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            UINavigationController *startupPageOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:startupPageOptionsController];
+	    UINavigationController *startupPageOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[StartupPageOptionsController alloc] init]];
             [startupPageOptionsControllerView setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:startupPageOptionsControllerView animated:YES completion:nil];
@@ -154,8 +153,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
 }
 
 - (void)coloursView {
