@@ -112,7 +112,7 @@
             cell.accessoryView = autoFullScreen;
         }
         if (indexPath.row == 5) {
-            cell.textLabel.text = LOC(@"DISABLE_VIDEO_FULLSCREEN_POPUPS");
+            cell.textLabel.text = LOC(@"DISABLE_VIDEO_ENDSCREEN_POPUPS");
             UISwitch *disableVideoEndscreenPopups = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableVideoEndscreenPopups addTarget:self action:@selector(toggleDisableVideoEndscreenPopups:) forControlEvents:UIControlEventValueChanged];
             disableVideoEndscreenPopups.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoEndscreenPopups"];
