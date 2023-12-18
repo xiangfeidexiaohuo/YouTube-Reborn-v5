@@ -288,7 +288,7 @@ static NSString *accessGroupID() {
 }
 %new;
 - (void)rebornRootOptionsAction {
-    UINavigationController *rootOptionsController = [[UINavigationController alloc] initWithRootViewController:[[RootPrefsViewController alloc] init]];
+    UINavigationController *rootOptionsController = [[UINavigationController alloc] initWithRootViewController:[[RootOptionsViewController alloc] init]];
     [rootOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
     [self._viewControllerForAncestor presentViewController:rootOptionsController animated:YES completion:nil];
 }
