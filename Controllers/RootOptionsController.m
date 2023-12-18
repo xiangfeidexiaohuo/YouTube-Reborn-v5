@@ -10,6 +10,7 @@
 #import "DownloadsController.h"
 #import "OtherOptionsController.h"
 #import "PictureInPictureOptionsController.h"
+#import "Localization.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -41,10 +42,6 @@
         } else {
             style = UITableViewStyleGrouped;
         }
-
-	if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -91,16 +88,16 @@
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"View Downloads";
+                cell.textLabel.text = LOC(@"VIEW_DOWNLOADS");
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"View Downloads In Filza";
+                cell.textLabel.text = @"VIEW_DOWNLOADS_IN_FILZA";
             }
         }
         if (indexPath.section == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Video Options";
+                cell.textLabel.text = LOC(@"VIDEO_OPTIONS");
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = @"Overlay Options";
@@ -112,7 +109,7 @@
                 cell.textLabel.text = @"Reorder Tabs";
             }
             if (indexPath.row == 4) {
-                cell.textLabel.text = @"Colour Options";
+                cell.textLabel.text = LOC(@"COLOUR_OPTIONS");
             }
             if (indexPath.row == 5) {
                 cell.textLabel.text = @"Picture In Picture Options";
