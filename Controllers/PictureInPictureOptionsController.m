@@ -6,14 +6,21 @@
 
 @implementation PictureInPictureOptionsController
 
-- (void)loadView {
-	[super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self coloursView];
 
     self.title = @"Picture In Picture Options";
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
+
+    UITableViewStyle style;
+        if (@available(iOS 13, *)) {
+            style = UITableViewStyleInsetGrouped;
+        } else {
+            style = UITableViewStyleGrouped;
+        }
 
     if (@available(iOS 15.0, *)) {
     	[self.tableView setSectionHeaderTopPadding:0.0f];
@@ -112,19 +119,6 @@
     [super viewWillAppear:animated];
     self.view.layer.cornerRadius = 10.0;
     self.view.layer.masksToBounds = YES;
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.tableView.layer.borderWidth = 1.0;
-    self.tableView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.view.layer.borderWidth = 1.0;
-    self.view.layer.borderColor = [UIColor blackColor].CGColor;
-    UITableView *tableView = self.tableView;
-    tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
-    tableView.layer.maskedCorners = kCALayerMinXMinYCorner;
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
-    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
 }
 
 @end
