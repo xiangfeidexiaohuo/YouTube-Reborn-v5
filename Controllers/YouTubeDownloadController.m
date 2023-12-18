@@ -1,6 +1,13 @@
 #import "YouTubeDownloadController.h"
 #import "../MobileFFmpeg/MobileFFmpegConfig.h"
 #import "../MobileFFmpeg/MobileFFmpeg.h"
+#import "../MobileFFmpeg/libavcodec/avcodec.h"
+#import "../MobileFFmpeg/libavdevice/avdevice.h"
+#import "../MobileFFmpeg/libavfilter/avfilter.h"
+#import "../MobileFFmpeg/libavutil/avutil.h"
+#import "../MobileFFmpeg/libswresample/swresample.h"
+#import "../MobileFFmpeg/libswscale/swscale.h"
+#import "../AFNetworking/AFNetworking.h"
 
 @interface YouTubeDownloadController () {
     UIImageView *artworkImage;
@@ -16,8 +23,8 @@
 
 @implementation YouTubeDownloadController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadView {
+    [super loadView];
 
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
@@ -69,8 +76,15 @@
     [self.view addSubview:noticeLabel];
 }
 
-- (void)loadView {
-    [super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.layer.borderWidth = 1.0;
+    self.view.layer.borderColor = [UIColor blackColor].CGColor;
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
+    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
+    self.modalInPresentation = YES;
+
     if (self.downloadOption == 0) {
         [self videoDownloaderPartOne];
     } else if (self.downloadOption == 1) {
@@ -202,6 +216,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.view.layer.cornerRadius = 10.0;
+    self.view.layer.masksToBounds = YES;
 }
 
 @end
