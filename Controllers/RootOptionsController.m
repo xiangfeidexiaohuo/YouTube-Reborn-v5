@@ -44,6 +44,20 @@
         }
 }
 
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
@@ -67,10 +81,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"RootTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -158,30 +172,26 @@
     }
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {    
-            VideoOptionsController *videoOptionsController = [[VideoOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *videoOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:videoOptionsController];
-            videoOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *videoOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[VideoOptionsController alloc] init]];
+            [rootOptionsControllerView setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:videoOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
-            OverlayOptionsController *overlayOptionsController = [[OverlayOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:overlayOptionsController];
-            overlayOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[OverlayOptionsController alloc] init]];
+            [overlayOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:overlayOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 2) {
-            TabBarOptionsController *tabBarOptionsController = [[TabBarOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *tabBarOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:tabBarOptionsController];
-            tabBarOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *tabBarOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[TabBarOptionsController alloc] init]];
+            [tabBarOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 3) {
-            ReorderPivotBarController *reorderPivotBarController = [[ReorderPivotBarController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *ReorderPivotBarControllerView = [[UINavigationController alloc] initWithRootViewController:reorderPivotBarController];
-            ReorderPivotBarControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *reorderPivotBarControllerView = [[UINavigationController alloc] initWithRootViewController:[[ReorderPivotBarController alloc] init]];
+            [reorderPivotBarController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:ReorderPivotBarControllerView animated:YES completion:nil];
         }
@@ -209,32 +219,28 @@
             }
         }
         if (indexPath.row == 6) {
-            ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
-            shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[ShortsOptionsController alloc] init]];
+            [shortsOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 7) {
-            OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
-            otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[OtherOptionsController alloc] init]];
+            [otherOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:otherOptionsControllerView animated:YES completion:nil];
         }
     }
     if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            RebornSettingsController *rebornSettingsController = [[RebornSettingsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *rebornSettingsControllerView = [[UINavigationController alloc] initWithRootViewController:rebornSettingsController];
-            rebornSettingsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *rebornSettingsControllerView = [[UINavigationController alloc] initWithRootViewController:[[RebornSettingsController alloc] init]];
+            [rebornSettingsController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:rebornSettingsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
-            CreditsController *creditsController = [[CreditsController alloc] initWithStyle:UITableViewStyleGrouped];
-            UINavigationController *creditsControllerView = [[UINavigationController alloc] initWithRootViewController:creditsController];
-            creditsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            UINavigationController *creditsControllerView = [[UINavigationController alloc] initWithRootViewController:[[CreditsController alloc] init]];
+            [creditsControllerView setModalPresentationStyle:UIModalPresentationFullScreen]; 
 
             [self presentViewController:creditsControllerView animated:YES completion:nil];
         }
@@ -250,7 +256,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == 2) {
-        return @"YouTube Reborn v4.2.4";
+        return @"YouTube Reborn v5.0.0";
     }
     return nil;
 }
