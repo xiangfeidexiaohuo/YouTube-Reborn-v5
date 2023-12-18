@@ -288,12 +288,9 @@ static NSString *accessGroupID() {
 }
 %new;
 - (void)rebornRootOptionsAction {
-    RootOptionsController *rootOptionsController = [[RootOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
-    UINavigationController *rootOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:rootOptionsController];
-    rootOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
-
-    UIViewController *rootPrefsViewController = [self _viewControllerForAncestor];
-    [rootPrefsViewController presentViewController:rootOptionsControllerView animated:YES completion:nil];
+    UINavigationController *rootOptionsController = [[UINavigationController alloc] initWithRootViewController:[[rootPrefsViewController alloc] init]];
+    [rootOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self._viewControllerForAncestor presentViewController:rootOptionsController animated:YES completion:nil];
 }
 %end
 
@@ -309,7 +306,7 @@ static NSString *accessGroupID() {
     if (self) {
         self.rebornOverlayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self.rebornOverlayButton addTarget:self action:@selector(rebornOptionsAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.rebornOverlayButton setTitle:@"DL" forState:UIControlStateNormal];
+        [self.rebornOverlayButton setTitle:@"OP" forState:UIControlStateNormal];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kShowStatusBarInOverlay"] == YES) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPadStyleOniPhone"] == YES) {
                 self.rebornOverlayButton.frame = CGRectMake(40, 9, 40.0, 30.0);
