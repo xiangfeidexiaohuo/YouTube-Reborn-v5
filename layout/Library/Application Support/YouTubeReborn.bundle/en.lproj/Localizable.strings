@@ -1,6 +1,15 @@
+// Actions
+"OKAY_TEXT" = "Okay";
+"NOTICE_TEXT" = "Notice";
+
+// Downloads
+"VIEW_DOWNLOADS" = "View Downloads";
+"VIEW_DOWNLOADS_IN_FILZA" = "View Downloads In Filza";
+
 
 // Video Options
 "VIDEO_OPTIONS" = "Video Options";
+
 "ENABLE_NO_ADS" = "Enable No Ads";
 "ENABLE_BACKGROUND_PLAYBACK" = "Enable Background Playback";
 "ALLOW_HD_ON_CELLULAR_DATA" = "Allow HD On Cellular Data";
@@ -19,6 +28,9 @@
 "ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "Enable Custom Double Tap To Skip Duration";
 
 
+
+
 // Colour Options
 "COLOUR_OPTIONS" = "Color Options";
+
 "COLOUR_OPTIONS_ALERT" = "color Saved";
