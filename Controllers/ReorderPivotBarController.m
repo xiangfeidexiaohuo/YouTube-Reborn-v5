@@ -17,7 +17,14 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
     self.navigationItem.rightBarButtonItems = @[doneButton, saveButton];
-    
+
+    UITableViewStyle style;
+        if (@available(iOS 13, *)) {
+            style = UITableViewStyleInsetGrouped;
+        } else {
+            style = UITableViewStyleGrouped;
+        }
+
     if (@available(iOS 15.0, *)) {
         [self.tableView setSectionHeaderTopPadding:0.0f];
     }
@@ -82,8 +89,9 @@
     return cell;
 }
 
-- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)gestureRecognizer {
-    CGPoint location = [gestureRecognizer locationInView:self.tableView];
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        CGPoint location = [gesture locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
     
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan && indexPath.section == 0) {
@@ -96,10 +104,10 @@
             [self.tabOrder removeObjectAtIndex:indexPath.row];
             [self.tabOrder insertObject:movedTabIdentifier atIndex:destinationIndexPath.row];
             
-            // Update the pivot bar's tabs
             NSMutableArray *reorderedTabs = [NSMutableArray array];
-            
-            for (NSString *tabIdentifier in self.tabOrder) {
+
+        if (indexPath) {
+            NSString *tabIdentifier = self.tabOrder[indexPath.row];
                 if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
                     [reorderedTabs addObject:@"Home"];
                 }
@@ -116,8 +124,7 @@
                     [reorderedTabs addObject:@"You"];
                 }
             }
-            
-            // Set the new tab order
+           
             [self setTabOrder:reorderedTabs];
             
             [self.tableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
