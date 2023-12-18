@@ -951,6 +951,12 @@ BOOL isAd(id node) {
     }
     return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
 }
++ (UIColor *)systemGrayColor {
+    if (lcmHexColor) {
+        return lcmHexColor;
+    }
+    return [UIColor colorWithRed: 0.56 green: 0.56 blue: 0.56 alpha: 1.00];
+}
 + (UIColor *)lightTextColor {
     if (lcmHexColor) {
         return lcmHexColor;
@@ -1061,13 +1067,6 @@ BOOL isAd(id node) {
 }
 - (UIColor *)buttonBackgroundColor {
     return [UIColor whiteColor];
-}
-%end
-%hook YTQTMButton
-- (void)setImage:(UIImage *)image {
-    UIImage *currentImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self setTintColor:[UIColor whiteColor]];
-    %orig(currentImage);
 }
 %end
 %hook UIExtendedSRGColorSpace
@@ -1722,7 +1721,10 @@ BOOL selectedTabIndex = NO;
 %end
 
 %group gHideChannelWatermark
-%hook YTAnnotationsViewController
+%hook YTMainAppVideoPlayerOverlayView
+- (BOOL)isWatermarkEnabled { return NO; }
+%end
+%hook YTAnnotationsViewController // Deprecated
 - (void)loadFeaturedChannelWatermark {
 }
 %end
