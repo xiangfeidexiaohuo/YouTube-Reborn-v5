@@ -89,23 +89,10 @@
     return cell;
 }
 
-- (void)handleLongPress:(UILongPressGestureRecognizer *)gesture {
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        CGPoint location = [gesture locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
-    
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan && indexPath.section == 0) {
-        NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:self.tabOrder.count - 1 inSection:1];
-        
-        if (indexPath.row != self.tabOrder.count - 1) {
-            [self.tableView beginUpdates];
-            
-            NSString *movedTabIdentifier = self.tabOrder[indexPath.row];
-            [self.tabOrder removeObjectAtIndex:indexPath.row];
-            [self.tabOrder insertObject:movedTabIdentifier atIndex:destinationIndexPath.row];
-            
-            NSMutableArray *reorderedTabs = [NSMutableArray array];
-
+        CGPoint location = [gestureRecognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location]; 
         if (indexPath) {
             NSString *tabIdentifier = self.tabOrder[indexPath.row];
                 if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
@@ -114,19 +101,19 @@
                 if ([tabIdentifier isEqualToString:@"FEshorts"]) {
                     [reorderedTabs addObject:@"Shorts"];
                 }
-                else if ([tabIdentifier isEqualToString:@"FEuploads"]) {
+                if ([tabIdentifier isEqualToString:@"FEuploads"]) {
                     [reorderedTabs addObject:@"Create"];
                 }
-                else if ([tabIdentifier isEqualToString:@"FEsubscriptions"]) {
+                if ([tabIdentifier isEqualToString:@"FEsubscriptions"]) {
                     [reorderedTabs addObject:@"Subscriptions"];
                 }
-                else if ([tabIdentifier isEqualToString:@"FElibrary"]) {
+                if ([tabIdentifier isEqualToString:@"FElibrary"]) {
                     [reorderedTabs addObject:@"You"];
                 }
-            }
            
             [self setTabOrder:reorderedTabs];
-            
+            NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:reorderedTabs.count - 1 inSection:0];
+            [self.tableView beginUpdates];
             [self.tableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
             [self.tableView endUpdates];
         }
