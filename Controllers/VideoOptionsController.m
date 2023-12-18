@@ -80,7 +80,7 @@
             }
         }
         if (indexPath.row == 1) {
-            cell.textLabel.text = LOC(@"ENABLED_BACKGROUND_PLAYBACK");
+            cell.textLabel.text = LOC(@"ENABLE_BACKGROUND_PLAYBACK");
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == YES) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
             } else {
