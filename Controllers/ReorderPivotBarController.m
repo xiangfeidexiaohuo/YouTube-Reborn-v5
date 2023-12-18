@@ -70,18 +70,18 @@
         }
     }
     
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            cell.textLabel.text = @"Home";
-        } else if (indexPath.row == 0) { 
-            cell.textLabel.text = @"Shorts";
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"Create";
-        } else if (indexPath.row == 2) {
-            cell.textLabel.text = @"Subscriptions";
-        } else if (indexPath.row == 3) {
-            cell.textLabel.text = @"You";
-        }
+if (indexPath.section == 1) {
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"Home";
+    } else if (indexPath.row == 1) { 
+        cell.textLabel.text = @"Shorts";
+    } else if (indexPath.row == 2) {
+        cell.textLabel.text = @"Create";
+    } else if (indexPath.row == 2) {
+        cell.textLabel.text = @"Subscriptions";
+    } else if (indexPath.row == 3) {
+        cell.textLabel.text = @"You";
+    }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -90,26 +90,26 @@
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan && indexPath.section == 0) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint location = [gestureRecognizer locationInView:self.tableView];
-        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location]; 
-        if (indexPath) {
-            NSString *tabIdentifier = self.tabOrder[indexPath.row];
-                NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
-                if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
-                    [reorderedTabs addObject:@"Home"];
-                }
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+        if (indexPath && indexPath.section == 0) {
+            NSString *tabIdentifier = self.tabOrder[indexPath.row]; 
+            NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
+            if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Home"];
+            }
                 if ([tabIdentifier isEqualToString:@"FEshorts"]) {
-                    [reorderedTabs addObject:@"Shorts"];
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Shorts"];
                 }
                 if ([tabIdentifier isEqualToString:@"FEuploads"]) {
-                    [reorderedTabs addObject:@"Create"];
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Create"];
                 }
                 if ([tabIdentifier isEqualToString:@"FEsubscriptions"]) {
-                    [reorderedTabs addObject:@"Subscriptions"];
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Subscriptions"];
                 }
                 if ([tabIdentifier isEqualToString:@"FElibrary"]) {
-                    [reorderedTabs addObject:@"You"];
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"You"];
                 }
            
             [self setTabOrder:reorderedTabs];
