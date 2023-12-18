@@ -7,14 +7,22 @@
 
 @implementation TabBarOptionsController
 
-- (void)loadView {
-	[super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self coloursView];
 
     self.title = @"TabBar Options";
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
+
+    UITableViewStyle style;
+        if (@available(iOS 13, *)) {
+            style = UITableViewStyleInsetGrouped;
+        } else {
+            style = UITableViewStyleGrouped;
+        }
+
 
     if (@available(iOS 15.0, *)) {
     	[self.tableView setSectionHeaderTopPadding:0.0f];
@@ -136,9 +144,8 @@
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            StartupPageOptionsController *startupPageOptionsController = [[StartupPageOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
             UINavigationController *startupPageOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:startupPageOptionsController];
-            startupPageOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            [startupPageOptionsControllerView setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:startupPageOptionsControllerView animated:YES completion:nil];
         }
@@ -168,20 +175,6 @@
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
     [self.tableView reloadData];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.tableView.layer.borderWidth = 1.0;
-    self.tableView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.view.layer.borderWidth = 1.0;
-    self.view.layer.borderColor = [UIColor blackColor].CGColor;
-    UITableView *tableView = self.tableView;
-    tableView.contentInset = UIEdgeInsetsMake(10.0, 0.0, 0.0, 0.0);
-    tableView.layer.maskedCorners = kCALayerMinXMinYCorner;
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
-    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
 }
 
 @end
