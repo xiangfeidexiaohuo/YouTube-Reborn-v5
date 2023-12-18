@@ -6,9 +6,16 @@
 
 @implementation ColourOptionsController
 
-- (void)loadView {
-	[super loadView];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self coloursView];
+
+    UITableViewStyle style;
+        if (@available(iOS 13, *)) {
+            style = UITableViewStyleInsetGrouped;
+        } else {
+            style = UITableViewStyleGrouped;
+        }
 
     self.title = @"Colour Options";
     
