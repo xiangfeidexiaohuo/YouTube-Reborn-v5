@@ -1,4 +1,5 @@
 #import "VideoOptionsController.h"
+#import "Localization.h"
 
 @interface VideoOptionsController ()
 - (void)coloursView;
