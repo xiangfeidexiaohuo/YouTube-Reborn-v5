@@ -83,9 +83,6 @@
 @property(readonly, nonatomic) UIImageView *imageView;
 @end
 
-@protocol YTPlaybackController
-@end
-
 @interface YTPlayerView : UIView
 - (void)downloadVideo;
 @end
