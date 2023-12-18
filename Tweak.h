@@ -21,6 +21,8 @@
 #import "YouTubeHeader/YTTouchFeedbackController.h"
 #import "YouTubeHeader/YTWatchViewController.h"
 
+#define LOC(x) [tweakBundle localizedStringForKey:x value:nil table:nil]
+
 @interface YTQTMButton : UIButton
 @property (strong, nonatomic) UIImageView *imageView;
 + (instancetype)button;
