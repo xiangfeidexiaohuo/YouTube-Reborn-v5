@@ -10,7 +10,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"Video Options";
+    self.title = LOC(@"VIDEO_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -22,9 +22,18 @@
             style = UITableViewStyleGrouped;
         }
 
-    if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -38,12 +47,12 @@
     return 17;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"VideoTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellIdentifier"];
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -60,7 +69,7 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Enable No Ads";
+            cell.textLabel.text = LOC(@"ENABLE_NO_ADS");
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == YES) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
             } else {
@@ -71,7 +80,7 @@
             }
         }
         if (indexPath.row == 1) {
-            cell.textLabel.text = @"Enable Background Playback";
+            cell.textLabel.text = LOC(@"ENABLED_BACKGROUND_PLAYBACK");
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == YES) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
             } else {
@@ -82,77 +91,77 @@
             }
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = @"Allow HD On Cellular Data";
+            cell.textLabel.text = LOC(@"ALLOW_HD_ON_CELLULAR_DATA");
             UISwitch *allowHDOnCellularData = [[UISwitch alloc] initWithFrame:CGRectZero];
             [allowHDOnCellularData addTarget:self action:@selector(toggleAllowHDOnCellularData:) forControlEvents:UIControlEventValueChanged];
             allowHDOnCellularData.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAllowHDOnCellularData"];
             cell.accessoryView = allowHDOnCellularData;
         }
         if (indexPath.row == 3) {
-            cell.textLabel.text = @"Portrait FullScreen";
+            cell.textLabel.text = LOC(@"PORTRAIT_FULLSCREEN");
             UISwitch *portraitFullscreen = [[UISwitch alloc] initWithFrame:CGRectZero];
             [portraitFullscreen addTarget:self action:@selector(togglePortraitFullscreen:) forControlEvents:UIControlEventValueChanged];
             portraitFullscreen.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kPortraitFullscreen"];
             cell.accessoryView = portraitFullscreen;
         }
         if (indexPath.row == 4) {
-            cell.textLabel.text = @"Auto Play In FullScreen";
+            cell.textLabel.text = LOC(@"AUTO_PLAY_IN_FULLSCREEN");
             UISwitch *autoFullScreen = [[UISwitch alloc] initWithFrame:CGRectZero];
             [autoFullScreen addTarget:self action:@selector(toggleAutoFullScreen:) forControlEvents:UIControlEventValueChanged];
             autoFullScreen.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoFullScreen"];
             cell.accessoryView = autoFullScreen;
         }
         if (indexPath.row == 5) {
-            cell.textLabel.text = @"Disable Video Endscreen Popups";
+            cell.textLabel.text = LOC(@"DISABLE_VIDEO_FULLSCREEN_POPUPS");
             UISwitch *disableVideoEndscreenPopups = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableVideoEndscreenPopups addTarget:self action:@selector(toggleDisableVideoEndscreenPopups:) forControlEvents:UIControlEventValueChanged];
             disableVideoEndscreenPopups.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoEndscreenPopups"];
             cell.accessoryView = disableVideoEndscreenPopups;
         }
         if (indexPath.row == 6) {
-            cell.textLabel.text = @"Disable Video Info Cards";
+            cell.textLabel.text = LOC(@"DISABLE_VIDEO_INFO_CARDS");
             UISwitch *disableVideoInfoCards = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableVideoInfoCards addTarget:self action:@selector(toggleDisableVideoInfoCards:) forControlEvents:UIControlEventValueChanged];
             disableVideoInfoCards.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoInfoCards"];
             cell.accessoryView = disableVideoInfoCards;
         }
         if (indexPath.row == 7) {
-            cell.textLabel.text = @"Disable Video AutoPlay";
+            cell.textLabel.text = LOC(@"DISABLE_VIDEO_AUTOPLAY");
             UISwitch *disableVideoAutoPlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableVideoAutoPlay addTarget:self action:@selector(toggleDisableVideoAutoPlay:) forControlEvents:UIControlEventValueChanged];
             disableVideoAutoPlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoAutoPlay"];
             cell.accessoryView = disableVideoAutoPlay;
         }
         if (indexPath.row == 8) {
-            cell.textLabel.text = @"Hide Channel Watermark";
+            cell.textLabel.text = LOC(@"HIDE_CHANNEL_WATERMARK");
             UISwitch *hideChannelWatermark = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideChannelWatermark addTarget:self action:@selector(toggleHideChannelWatermark:) forControlEvents:UIControlEventValueChanged];
             hideChannelWatermark.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"];
             cell.accessoryView = hideChannelWatermark;
         }
 	if (indexPath.row == 9) {
-            cell.textLabel.text = @"Red Progress Bar";
+            cell.textLabel.text = LOC(@"RED_PROGRESS_BAR");
             UISwitch *redProgressBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [redProgressBar addTarget:self action:@selector(toggleRedProgressBar:) forControlEvents:UIControlEventValueChanged];
             redProgressBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kRedProgressBar"];
             cell.accessoryView = redProgressBar;
         }
 	if (indexPath.row == 10) {
-            cell.textLabel.text = @"Gray Buffer Progress";
+            cell.textLabel.text = LOC(@"GRAY_BUFFER_PROGRESS");
             UISwitch *grayBufferProgress = [[UISwitch alloc] initWithFrame:CGRectZero];
             [grayBufferProgress addTarget:self action:@selector(toggleGrayBufferProgress:) forControlEvents:UIControlEventValueChanged];
             grayBufferProgress.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kGrayBufferProgress"];
             cell.accessoryView = grayBufferProgress;
         }
         if (indexPath.row == 11) {
-            cell.textLabel.text = @"Hide Player Bar Heatwave";
+            cell.textLabel.text = LOC(@"HIDE_PLAYER_BAR_HEATWAVE");
             UISwitch *hidePlayerBarHeatwave = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlayerBarHeatwave addTarget:self action:@selector(toggleHidePlayerBarHeatwave:) forControlEvents:UIControlEventValueChanged];
             hidePlayerBarHeatwave.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayerBarHeatwave"];
             cell.accessoryView = hidePlayerBarHeatwave;
         }
         if (indexPath.row == 12) {
-            cell.textLabel.text = @"Always Show Player Bar";
+            cell.textLabel.text = LOC(@"ALWAYS_SHOW_PLAYER_BAR");
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == NO || [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == NO) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
             } else {
@@ -163,21 +172,21 @@
             }
         }
         if (indexPath.row == 13) {
-            cell.textLabel.text = @"Enable Extra Speed Options";
+            cell.textLabel.text = LOC(@"ENABLE_EXTRA_SPEED_OPTIONS");
             UISwitch *enableExtraSpeedOptions = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableExtraSpeedOptions addTarget:self action:@selector(toggleExtraSpeedOptions:) forControlEvents:UIControlEventValueChanged];
             enableExtraSpeedOptions.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableExtraSpeedOptions"];
             cell.accessoryView = enableExtraSpeedOptions;
         }
         if (indexPath.row == 14) {
-            cell.textLabel.text = @"Disable Double Tap To Skip";
+            cell.textLabel.text = LOC(@"DISABLE_DOUBLE_TAP_TO_SKIP";
             UISwitch *disableDoubleTapToSkip = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableDoubleTapToSkip addTarget:self action:@selector(toggleDisableDoubleTapToSkip:) forControlEvents:UIControlEventValueChanged];
             disableDoubleTapToSkip.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableDoubleTapToSkip"];
             cell.accessoryView = disableDoubleTapToSkip;
         }
         if (indexPath.row == 15) {
-            cell.textLabel.text = @"Enable Custom Double Tap To Skip Duration";
+            cell.textLabel.text = LOC(@"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION");
             UISwitch *enableCustomDoubleTapToSkipDuration = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableCustomDoubleTapToSkipDuration addTarget:self action:@selector(toggleEnableCustomDoubleTapToSkipDuration:) forControlEvents:UIControlEventValueChanged];
             enableCustomDoubleTapToSkipDuration.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"];
