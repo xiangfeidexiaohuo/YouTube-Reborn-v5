@@ -10,7 +10,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"Picture In Picture Options";
+    self.title = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -22,9 +22,18 @@
             style = UITableViewStyleGrouped;
         }
 
-    if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -57,7 +66,7 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Enable Picture In Picture";
+            cell.textLabel.text = LOC(@"ENABLE_PICTURE_IN_PICTURE");
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == YES) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
             } else {
@@ -68,14 +77,14 @@
             }
         }
         if (indexPath.row == 1) {
-            cell.textLabel.text = @"Hide PIP Ads Badge";
+            cell.textLabel.text = @"HIDE_PIP_ADS_BADGE";
             UISwitch *hidePictureInPictureAdsBadge = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePictureInPictureAdsBadge addTarget:self action:@selector(toggleHidePictureInPictureAdsBadge:) forControlEvents:UIControlEventValueChanged];
             hidePictureInPictureAdsBadge.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureAdsBadge"];
             cell.accessoryView = hidePictureInPictureAdsBadge;
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = @"Hide PIP Sponsor Badge";
+            cell.textLabel.text = @"HIDE_PIP_SPONSOR_BADGE";
             UISwitch *hidePictureInPictureSponsorBadge = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePictureInPictureSponsorBadge addTarget:self action:@selector(toggleHidePictureInPictureSponsorBadge:) forControlEvents:UIControlEventValueChanged];
             hidePictureInPictureSponsorBadge.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureSponsorBadge"];
