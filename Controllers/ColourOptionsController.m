@@ -17,7 +17,7 @@
             style = UITableViewStyleGrouped;
         }
 
-    self.title = @"Colour Options";
+    self.title = LOC(@"COLOR_OPTIONS");
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
