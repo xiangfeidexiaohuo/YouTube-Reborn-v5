@@ -7,29 +7,9 @@
 
 @implementation ColourOptionsController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadView {
+	[super loadView];
     [self coloursView];
-
-    UITableViewStyle style;
-        if (@available(iOS 13, *)) {
-            style = UITableViewStyleInsetGrouped;
-        } else {
-            style = UITableViewStyleGrouped;
-        }
-
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.view addSubview:self.tableView];
-    
-    [NSLayoutConstraint activateConstraints:@[
-        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
-        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
-        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
-    ]];
 
     self.title = LOC(@"COLOR_OPTIONS");
     
