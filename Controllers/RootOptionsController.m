@@ -218,13 +218,15 @@
             }
         }
         if (indexPath.row == 6) {
-            UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[ShortsOptionsController alloc] init]];
+            ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] init];
+            UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
             [shortsOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
-
+	    
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 7) {
-            UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[OtherOptionsController alloc] init]];
+            OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
+            UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             [otherOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:otherOptionsControllerView animated:YES completion:nil];
@@ -232,7 +234,8 @@
     }
     if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            UINavigationController *rebornSettingsControllerView = [[UINavigationController alloc] initWithRootViewController:[[RebornSettingsController alloc] init]];
+            RebornSettingsController *rebornSettingsController = [[RebornSettingsController alloc] init];
+            UINavigationController *rebornSettingsControllerView = [[UINavigationController alloc] initWithRootViewController:rebornSettingsController];
             [rebornSettingsController setModalPresentationStyle:UIModalPresentationFullScreen];
 
             [self presentViewController:rebornSettingsControllerView animated:YES completion:nil];
