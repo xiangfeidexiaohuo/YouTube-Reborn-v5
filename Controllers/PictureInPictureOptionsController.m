@@ -1,4 +1,5 @@
 #import "PictureInPictureOptionsController.h"
+#import "Localization.h"
 
 @interface PictureInPictureOptionsController ()
 - (void)coloursView;
