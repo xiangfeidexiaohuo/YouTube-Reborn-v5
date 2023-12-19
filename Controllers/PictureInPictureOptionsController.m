@@ -77,14 +77,14 @@
             }
         }
         if (indexPath.row == 1) {
-            cell.textLabel.text = @"HIDE_PIP_ADS_BADGE";
+            cell.textLabel.text = LOC(@"HIDE_PIP_ADS_BADGE");
             UISwitch *hidePictureInPictureAdsBadge = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePictureInPictureAdsBadge addTarget:self action:@selector(toggleHidePictureInPictureAdsBadge:) forControlEvents:UIControlEventValueChanged];
             hidePictureInPictureAdsBadge.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureAdsBadge"];
             cell.accessoryView = hidePictureInPictureAdsBadge;
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = @"HIDE_PIP_SPONSOR_BADGE";
+            cell.textLabel.text = LOC(@"HIDE_PIP_SPONSOR_BADGE");
             UISwitch *hidePictureInPictureSponsorBadge = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePictureInPictureSponsorBadge addTarget:self action:@selector(toggleHidePictureInPictureSponsorBadge:) forControlEvents:UIControlEventValueChanged];
             hidePictureInPictureSponsorBadge.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureSponsorBadge"];
