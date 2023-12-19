@@ -128,7 +128,7 @@
                 cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
             }
             if (indexPath.row == 6) {
-                cell.textLabel.text = @"Shorts Options";
+                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
             }
             if (indexPath.row == 7) {
                 cell.textLabel.text = @"Other Options";
