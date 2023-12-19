@@ -1,5 +1,6 @@
 #import "TabBarOptionsController.h"
 #import "StartupPageOptionsController.h"
+#import "Localization.h"
 
 @interface TabBarOptionsController ()
 - (void)coloursView;
@@ -11,7 +12,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"TabBar Options";
+    self.title = LOC(@"TAB_BAR_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -23,9 +24,18 @@
             style = UITableViewStyleGrouped;
         }
 
-    if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -63,7 +73,7 @@
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         if (indexPath.section == 0) {
-            cell.textLabel.text = @"Startup Page";
+            cell.textLabel.text = LOC(@"STARTUP_PAGE");
             if (![[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"]) {
                 cell.detailTextLabel.text = @"Home";
             } else {
@@ -87,7 +97,7 @@
         }
         if (indexPath.section == 1) {
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Hide Tab Bar Labels";
+                cell.textLabel.text = LOC(@"HIDE_TAB_BAR_LABELS");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UISwitch *hideTabBarLabels = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideTabBarLabels addTarget:self action:@selector(toggleHideTabBarLabels:) forControlEvents:UIControlEventValueChanged];
@@ -95,7 +105,7 @@
                 cell.accessoryView = hideTabBarLabels;
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Hide Explore Tab";
+                cell.textLabel.text = LOC(@"HIDE_EXPLORE_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UISwitch *hideExploreTab = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideExploreTab addTarget:self action:@selector(toggleHideExploreTab:) forControlEvents:UIControlEventValueChanged];
@@ -103,7 +113,7 @@
                 cell.accessoryView = hideExploreTab;
             }
             if (indexPath.row == 2) {
-                cell.textLabel.text = @"Hide Shorts Tab";
+                cell.textLabel.text = LOC(@"HIDE_SHORTS_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UISwitch *hideShortsTab = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideShortsTab addTarget:self action:@selector(toggleHideShortsTab:) forControlEvents:UIControlEventValueChanged];
@@ -111,7 +121,7 @@
                 cell.accessoryView = hideShortsTab;
             }
             if (indexPath.row == 3) {
-                cell.textLabel.text = @"Hide Create/Upload (+) Tab";
+                cell.textLabel.text = LOC(@"HIDE_CREATE_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UISwitch *hideUploadTab = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideUploadTab addTarget:self action:@selector(toggleHideUploadTab:) forControlEvents:UIControlEventValueChanged];
@@ -119,7 +129,7 @@
                 cell.accessoryView = hideUploadTab;
             }
             if (indexPath.row == 4) {
-                cell.textLabel.text = @"Hide Subscriptions Tab";
+                cell.textLabel.text = LOC(@"HIDE_SUBSCRIPTIONS_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UISwitch *hideSubscriptionsTab = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideSubscriptionsTab addTarget:self action:@selector(toggleHideSubscriptionsTab:) forControlEvents:UIControlEventValueChanged];
@@ -127,7 +137,7 @@
                 cell.accessoryView = hideSubscriptionsTab;
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = @"Hide You Tab";
+                cell.textLabel.text = LOC(@"HIDE_YOU_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 UISwitch *hideYouTab = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideYouTab addTarget:self action:@selector(toggleHideYouTab:) forControlEvents:UIControlEventValueChanged];
