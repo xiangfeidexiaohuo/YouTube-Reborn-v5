@@ -48,6 +48,16 @@
 "HIDE_CURRENT_TIME" = "Hide Current Time";
 "HIDE_DURATION" = "Hide Duration";
 
+// Tab Bar Options
+"TAB_BAR_OPTIONS" = "Tab Bar Options";
+"STARTUP_PAGE" = "Startup Page";
+"HIDE_TAB_BAR_LABELS" = "Hide Tab Bar Labels";
+"HIDE_EXPLORE_TAB" = "Hide Explore Tab";
+"HIDE_SHORTS_TAB" = "Hide Shorts Tab";
+"HIDE_CREATE_TAB" = "Hide Create/Upload (+) Tab";
+"HIDE_SUBSCRIPTIONS_TAB" = "Hide Subscriptions Tab";
+"HIDE_YOU_TAB" = "Hide You Tab";
+
 // Colour Options
 "COLOUR_OPTIONS" = "Color Options";
 
