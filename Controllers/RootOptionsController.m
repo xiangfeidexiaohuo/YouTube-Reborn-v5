@@ -42,7 +42,6 @@
         } else {
             style = UITableViewStyleGrouped;
         }
-}
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
