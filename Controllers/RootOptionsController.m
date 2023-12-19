@@ -116,10 +116,10 @@
                 cell.textLabel.text = LOC(@"OVERLAY_OPTIONS");
             }
             if (indexPath.row == 2) {
-                cell.textLabel.text = @"Tab Bar Options";
+                cell.textLabel.text = @"TAB_BAR_OPTIONS";
             }
             if (indexPath.row == 3) {
-                cell.textLabel.text = @"Reorder Tabs";
+                cell.textLabel.text = LOC(@"REORDER_TABS");
             }
             if (indexPath.row == 4) {
                 cell.textLabel.text = LOC(@"COLOUR_OPTIONS");
