@@ -1,4 +1,5 @@
 #import "YouTubeDownloadController.h"
+#import "Localization.h"
 #import "../MobileFFmpeg/MobileFFmpegConfig.h"
 #import "../MobileFFmpeg/MobileFFmpeg.h"
 #import "../MobileFFmpeg/libavcodec/avcodec.h"
