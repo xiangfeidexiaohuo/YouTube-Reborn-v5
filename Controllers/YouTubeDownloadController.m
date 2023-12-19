@@ -64,7 +64,7 @@
     [self.view addSubview:downloadPercentLabel];
 
     noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, boundsWindow.safeAreaInsets.top + 300 + titleLabel.frame.size.height + downloadPercentLabel.frame.size.height, self.view.bounds.size.width, 50)];
-    noticeLabel.text = @"Don't Exit The App\nThis will automatically close on completion";
+    noticeLabel.text = LOC(@"DOWNLOAD_NOTICE");
     noticeLabel.numberOfLines = 2;
     noticeLabel.adjustsFontSizeToFitWidth = YES;
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -216,8 +216,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
 }
 
 @end
