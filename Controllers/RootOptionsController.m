@@ -104,7 +104,7 @@
                 cell.textLabel.text = LOC(@"VIEW_DOWNLOADS");
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"VIEW_DOWNLOADS_IN_FILZA";
+                cell.textLabel.text = LOC(@"VIEW_DOWNLOADS_IN_FILZA");
             }
         }
         if (indexPath.section == 1) {
@@ -113,7 +113,7 @@
                 cell.textLabel.text = LOC(@"VIDEO_OPTIONS");
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Overlay Options";
+                cell.textLabel.text = LOC(@"OVERLAY_OPTIONS");
             }
             if (indexPath.row == 2) {
                 cell.textLabel.text = @"Tab Bar Options";
