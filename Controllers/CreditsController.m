@@ -1,4 +1,5 @@
 #import "CreditsController.h"
+#import "Localization.h"
 
 @interface CreditsController ()
 - (void)coloursView;
@@ -10,6 +11,11 @@
     [super viewDidLoad];
     [self coloursView];
 
+    self.title = LOC(@"CREDITS_BUTTON");
+
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    self.navigationItem.rightBarButtonItem = doneButton;
+
     UITableViewStyle style;
         if (@available(iOS 13, *)) {
             style = UITableViewStyleInsetGrouped;
@@ -17,14 +23,18 @@
             style = UITableViewStyleGrouped;
         }
 
-    self.title = @"Credits";
-
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = doneButton;
-
-    if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -65,13 +75,13 @@
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Lillie";
-                cell.detailTextLabel.text = @"Developer";
+                cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
             }
         }
         if (indexPath.section == 1) {
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Alpha_Stream";
-                cell.detailTextLabel.text = @"Icon Designer";
+                cell.detailTextLabel.text = LOC(@"ICON_DESIGNER_TEXT");
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = @"kirb";
