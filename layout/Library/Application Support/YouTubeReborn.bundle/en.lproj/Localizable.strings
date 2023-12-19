@@ -3,9 +3,11 @@
 "NOTICE_TEXT" = "Notice";
 
 // Downloads
+"VIDEO_TAB" = "Video";
+"AUDIO_TAB" = "Audio";
+"DOWNLOAD_NOTICE" = "Don't Exit The App\nThis will automatically close on completion";
 "VIEW_DOWNLOADS" = "View Downloads";
 "VIEW_DOWNLOADS_IN_FILZA" = "View Downloads In Filza";
-
 
 // Video Options
 "VIDEO_OPTIONS" = "Video Options";
@@ -27,8 +29,8 @@
 "DISABLE_DOUBLE_TAP_TO_SKIP" = "Disable Double Tap To Skip";
 "ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "Enable Custom Double Tap To Skip Duration";
 
-
-
+// Overlay Options
+"OVERLAY_OPTIONS" = "Overlay Options";
 
 // Colour Options
 "COLOUR_OPTIONS" = "Color Options";
