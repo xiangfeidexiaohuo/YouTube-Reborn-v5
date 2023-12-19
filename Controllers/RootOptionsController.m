@@ -131,7 +131,7 @@
                 cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
             }
             if (indexPath.row == 7) {
-                cell.textLabel.text = @"Other Options";
+                cell.textLabel.text = LOC(@"OTHER_OPTIONS");
             }
         }
         if (indexPath.section == 2) {
