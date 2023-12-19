@@ -1,4 +1,5 @@
 #import "OtherOptionsController.h"
+#import "Localization.h"
 
 @interface OtherOptionsController ()
 - (void)coloursView;
@@ -10,7 +11,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"Other Options";
+    self.title = LOC(@"OTHER_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -22,9 +23,18 @@
             style = UITableViewStyleGrouped;
         }
 
-    if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -57,84 +67,84 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Enable iPad Style On iPhone - iPad Layout";
+            cell.textLabel.text = LOC(@"IPAD_LAYOUT");
             UISwitch *enableiPadStyleOniPhone = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableiPadStyleOniPhone addTarget:self action:@selector(toggleEnableiPadStyleOniPhone:) forControlEvents:UIControlEventValueChanged];
             enableiPadStyleOniPhone.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPadStyleOniPhone"];
             cell.accessoryView = enableiPadStyleOniPhone;
         }
         if (indexPath.row == 1) {
-            cell.textLabel.text = @"Enable iPhone Style On iPad - iPhone Layout";
+            cell.textLabel.text = LOC(@"IPHONE_LAYOUT");
             UISwitch *enableiPhoneStyleOniPad = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableiPhoneStyleOniPad addTarget:self action:@selector(toggleEnableiPhoneStyleOniPad:) forControlEvents:UIControlEventValueChanged];
             enableiPhoneStyleOniPad.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPhoneStyleOniPad"];
             cell.accessoryView = enableiPhoneStyleOniPad;
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = @"No Cast Button";
+            cell.textLabel.text = LOC(@"HIDE_CAST_BUTTON");
             UISwitch *noCastButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [noCastButton addTarget:self action:@selector(toggleNoCastButton:) forControlEvents:UIControlEventValueChanged];
             noCastButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kNoCastButton"];
             cell.accessoryView = noCastButton;
         }
         if (indexPath.row == 3) {
-            cell.textLabel.text = @"No Notification Button";
+            cell.textLabel.text = LOC(@"HIDE_NOTIFICATION_BUTTON");
             UISwitch *noNotificationButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [noNotificationButton addTarget:self action:@selector(toggleNoNotificationButton:) forControlEvents:UIControlEventValueChanged];
             noNotificationButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kNoNotificationButton"];
             cell.accessoryView = noNotificationButton;
         }
         if (indexPath.row == 4) {
-            cell.textLabel.text = @"No Search Button";
+            cell.textLabel.text = LOC(@"HIDE_SEARCH_BUTTON");
             UISwitch *noSearchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [noSearchButton addTarget:self action:@selector(toggleNoSearchButton:) forControlEvents:UIControlEventValueChanged];
             noSearchButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kNoSearchButton"];
             cell.accessoryView = noSearchButton;
         }
          if (indexPath.row == 5) {
-            cell.textLabel.text = @"Hide 'Play next in queue'";
+            cell.textLabel.text = LOC(@"HIDE_PLAY_NEXT_IN_QUEUE");
             UISwitch *hidePlayNextInQueue = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlayNextInQueue addTarget:self action:@selector(toggleHidePlayNextInQueue:) forControlEvents:UIControlEventValueChanged];
             hidePlayNextInQueue.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayNextInQueue"];
             cell.accessoryView = hidePlayNextInQueue;
         }
         if (indexPath.row == 6) {
-            cell.textLabel.text = @"Disable YouTube Kids";
+            cell.textLabel.text = LOC(@"DISABLE_YOUTUBE_KIDS");
             UISwitch *disableYouTubeKidsPopup = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableYouTubeKidsPopup addTarget:self action:@selector(toggleDisableYouTubeKidsPopup:) forControlEvents:UIControlEventValueChanged];
             disableYouTubeKidsPopup.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableYouTubeKidsPopup"];
             cell.accessoryView = disableYouTubeKidsPopup;
         }
         if (indexPath.row == 7) {
-            cell.textLabel.text = @"Disable Hints";
+            cell.textLabel.text = LOC(@"DISABLE_HINTS");
             UISwitch *disableHints = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableHints addTarget:self action:@selector(toggleDisableHints:) forControlEvents:UIControlEventValueChanged];
             disableHints.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableHints"];
             cell.accessoryView = disableHints;
         }
         if (indexPath.row == 8) {
-            cell.textLabel.text = @"Hide YouTube Logo";
+            cell.textLabel.text = LOC(@"HIDE_YOUTUBE_LOGO");
             UISwitch *hideYouTubeLogo = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideYouTubeLogo addTarget:self action:@selector(toggleHideYouTubeLogo:) forControlEvents:UIControlEventValueChanged];
             hideYouTubeLogo.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"];
             cell.accessoryView = hideYouTubeLogo;
 	}
          if (indexPath.row == 9) {
-            cell.textLabel.text = @"Stick Navigation Bar";
+            cell.textLabel.text = LOC(@"STICK_NAVIGATION_BAR");
             UISwitch *stickNavigationBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [stickNavigationBar addTarget:self action:@selector(toggleStickNavigationBar:) forControlEvents:UIControlEventValueChanged];
             stickNavigationBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kStickNavigationBar"];
             cell.accessoryView = stickNavigationBar;
 	}
         if (indexPath.row == 10) {
-            cell.textLabel.text = @"Low Contrast Mode";
+            cell.textLabel.text = LOC(@"LOW_CONTRAST_MODE");
             UISwitch *lowContrastMode = [[UISwitch alloc] initWithFrame:CGRectZero];
             [lowContrastMode addTarget:self action:@selector(toggleLowContrastMode:) forControlEvents:UIControlEventValueChanged];
             lowContrastMode.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"];
             cell.accessoryView = lowContrastMode;
         }
         if (indexPath.row == 11) {
-            cell.textLabel.text = @"Auto-Hide Home Bar";
+            cell.textLabel.text = LOC(@"AUTO_HIDE_HOME_BAR");
             UISwitch *autoHideHomeBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [autoHideHomeBar addTarget:self action:@selector(toggleAutoHideHomeBar:) forControlEvents:UIControlEventValueChanged];
             autoHideHomeBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"];
