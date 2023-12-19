@@ -50,6 +50,7 @@
 
 // Tab Bar Options
 "TAB_BAR_OPTIONS" = "Tab Bar Options";
+
 "STARTUP_PAGE" = "Startup Page";
 "HIDE_TAB_BAR_LABELS" = "Hide Tab Bar Labels";
 "HIDE_EXPLORE_TAB" = "Hide Explore Tab";
@@ -57,6 +58,7 @@
 "HIDE_CREATE_TAB" = "Hide Create/Upload (+) Tab";
 "HIDE_SUBSCRIPTIONS_TAB" = "Hide Subscriptions Tab";
 "HIDE_YOU_TAB" = "Hide You Tab";
+"REORDER_TABS" = "Reorder Tabs";
 
 // Colour Options
 "COLOUR_OPTIONS" = "Color Options";
