@@ -170,29 +170,33 @@
         }
     }
     if (indexPath.section == 1) {
-        if (indexPath.row == 0) {    
+        if (indexPath.row == 0) {
+            VideoOptionsController *videoOptionsController = [[VideoOptionsController alloc] init];
             UINavigationController *videoOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[VideoOptionsController alloc] init]];
-            [rootOptionsControllerView setModalPresentationStyle:UIModalPresentationFullScreen];
+            [videoOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:videoOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
-            UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[OverlayOptionsController alloc] init]];
-            [overlayOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
+            OverlayOptionsController *overlayOptionsController = [[OverlayOptionsController alloc] init];
+            UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:OverlayOptionsController];
+            [overlayOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:overlayOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 2) {
-            UINavigationController *tabBarOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[TabBarOptionsController alloc] init]];
-            [tabBarOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
+            TabBarOptionsController *tabBarOptionsController = [[TabBarOptionsController alloc] init];
+            UINavigationController *tabBarOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:tabBarOptionsController];
+            [tabBarOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 3) {
-            UINavigationController *reorderPivotBarControllerView = [[UINavigationController alloc] initWithRootViewController:[[ReorderPivotBarController alloc] init]];
-            [reorderPivotBarController setModalPresentationStyle:UIModalPresentationFullScreen];
+            ReorderPivotBarController *reorderPivotBarController = [[ReorderPivotBarController alloc] init];
+	    UINavigationController *reorderPivotBarControllerView = [[UINavigationController alloc] initWithRootViewController:reorderPivotBarController];
+            [reorderPivotBarControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
-            [self presentViewController:ReorderPivotBarControllerView animated:YES completion:nil];
+            [self presentViewController:reorderPivotBarControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 4) {
             ColourOptionsController *colourOptionsController = [[ColourOptionsController alloc] init];
@@ -220,14 +224,14 @@
         if (indexPath.row == 6) {
             ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] init];
             UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
-            [shortsOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
+            [shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 	    
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 7) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
-            [otherOptionsController setModalPresentationStyle:UIModalPresentationFullScreen];
+            [otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:otherOptionsControllerView animated:YES completion:nil];
         }
@@ -236,13 +240,13 @@
         if (indexPath.row == 0) {
             RebornSettingsController *rebornSettingsController = [[RebornSettingsController alloc] init];
             UINavigationController *rebornSettingsControllerView = [[UINavigationController alloc] initWithRootViewController:rebornSettingsController];
-            [rebornSettingsController setModalPresentationStyle:UIModalPresentationFullScreen];
+            [rebornSettingsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:rebornSettingsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
             UINavigationController *creditsControllerView = [[UINavigationController alloc] initWithRootViewController:[[CreditsController alloc] init]];
-            [creditsControllerView setModalPresentationStyle:UIModalPresentationFullScreen]; 
+            [creditsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:creditsControllerView animated:YES completion:nil];
         }
