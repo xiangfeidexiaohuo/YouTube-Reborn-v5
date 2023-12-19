@@ -59,8 +59,10 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Hide Subscriptions Tab";
 "HIDE_YOU_TAB" = "Hide You Tab";
 "REORDER_TABS" = "Reorder Tabs";
+"COLOR_OPTIONS" = "Color Options";
 
-// Colour Options
-"COLOUR_OPTIONS" = "Color Options";
-
-"COLOUR_OPTIONS_ALERT" = "color Saved";
+// Picture In Picture Options
+"PICTURE_IN_PICTURE_OPTIONS" = "Picture In Picture Options";
+"ENABLE_PICTURE_IN_PICTURE" = "Enable Picture In Picture";
+"HIDE_PIP_ADS_BADGE" = "Hide PIP Ads Badge";
+"HIDE_PIP_SPONSOR_BADGE" = "Hide PIP Sponsor Badge";
