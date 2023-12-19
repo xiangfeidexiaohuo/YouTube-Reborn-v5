@@ -140,7 +140,7 @@
                 cell.textLabel.text = LOC(@"REBORN_SETTINGS");
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Credits";
+                cell.textLabel.text = LOC(@"CREDITS_BUTTON");
             }
         }
     }
