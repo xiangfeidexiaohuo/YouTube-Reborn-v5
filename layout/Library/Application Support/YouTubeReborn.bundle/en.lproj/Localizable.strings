@@ -32,6 +32,22 @@
 // Overlay Options
 "OVERLAY_OPTIONS" = "Overlay Options";
 
+"SHOW_STATUS_BAR_IN_OVERLAY" = "Show Status Bar In Overlay (Portrait Only)";
+"HIDE_PREVIOUS_BUTTON" = "Hide Previous Button";
+"HIDE_PREVIOUS_BUTTON_SHADOW" = "Hide Previous Button Shadow";
+"HIDE_NEXT_BUTTON" = "Hide Next Button";
+"HIDE_NEXT_BUTTON_SHADOW" = "Hide Next Button Shadow";
+"HIDE_SEEK_BACKWARD_BUTTON_SHADOW" = "Hide Seek Backward Button Shadow";
+"HIDE_SEEK_FORWARD_BUTTON_SHADOW" = "Hide Seek Forward Button Shadow";
+"HIDE_PLAY_AND_PAUSE_BUTTON_SHADOW" = "Hide Play/Pause Button Shadow";
+"HIDE_AUTOPLAY_SWITCH" = "Hide Autoplay Switch";
+"HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "Hide Captions/Subtitles Button";
+"DISABLE_RELATED_VIDEOS" = "Disable Related Videos";
+"HIDE_DARK_OVERLAY_BACKGROUND" = "Hide Dark Overlay Background";
+"HIDE_QUICK_ACTIONS" = "Hide Quick Actions";
+"HIDE_CURRENT_TIME" = "Hide Current Time";
+"HIDE_DURATION" = "Hide Duration";
+
 // Colour Options
 "COLOUR_OPTIONS" = "Color Options";
 
