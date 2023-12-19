@@ -1,4 +1,5 @@
 // Actions
+"CANCEL_TEXT" = "Cancel";
 "OKAY_TEXT" = "Okay";
 "NOTICE_TEXT" = "Notice";
 
@@ -100,4 +101,16 @@
 "LOW_CONTRAST_MODE" = "Low Contrast Mode";
 "AUTO_HIDE_HOME_BAR" = "Auto-Hide Home Bar"
 
+// Reborn Settings
+"REBORN_SETTINGS" = "Reborn Settings";
 
+"I_HAVE_YOUTUBE_PREMIUM" = "I Have YouTube Premium";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Hide Video Overlay 'OP' Button";
+"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Hide Shorts Overlay 'OP' Button";
+"RESET_COLOR_OPTIONS" = "Reset Color Options";
+"RESET_YOUTUBE_REBORN_OPTIONS" = "Reset All YouTube Reborn Options";
+
+// Credits
+"CREDITS_BUTTON" = "Credits";
+"DEVELOPER_TEXT" = "Developer";
+"ICON_DESIGNER_TEXT" = "Icon Designer";
