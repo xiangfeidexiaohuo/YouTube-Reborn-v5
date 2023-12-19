@@ -137,7 +137,7 @@
         if (indexPath.section == 2) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Reborn Settings";
+                cell.textLabel.text = LOC(@"REBORN_SETTINGS");
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = @"Credits";
