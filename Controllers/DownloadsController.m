@@ -34,13 +34,13 @@
     
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"Video");
-    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonvideoblack.png" inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil] tag:0];
+    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonvideoblack.png"] tag:0];
     videoViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonvideowhite.png" inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
     
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
     audioViewController.title = LOC(@"Audio");
-    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonaudioblack.png"] inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil] tag:1];
+    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonaudioblack.png"] tag:1];
     audioViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonaudiowhite.png" inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
     
