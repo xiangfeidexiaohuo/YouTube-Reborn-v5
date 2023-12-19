@@ -194,7 +194,7 @@
         if (indexPath.row == 3) {
             ReorderPivotBarController *reorderPivotBarController = [[ReorderPivotBarController alloc] init];
 	    UINavigationController *reorderPivotBarControllerView = [[UINavigationController alloc] initWithRootViewController:reorderPivotBarController];
-            [reorderPivotBarControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            reorderPivotBarControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:reorderPivotBarControllerView animated:YES completion:nil];
         }
