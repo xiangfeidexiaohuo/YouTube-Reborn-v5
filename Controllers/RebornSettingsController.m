@@ -1,4 +1,5 @@
 #import "RebornSettingsController.h"
+#import "Localization.h"
 
 @interface RebornSettingsController ()
 - (void)coloursView;
@@ -10,7 +11,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"Reborn Options";
+    self.title = LOC(@"REBORN_SETTINGS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -22,9 +23,18 @@
             style = UITableViewStyleGrouped;
         }
 
-    if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -67,7 +77,7 @@
         if (indexPath.section == 0) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"I Have YouTube Premium";
+                cell.textLabel.text = LOC(@"I_HAVE_YOUTUBE_PREMIUM");
                 UISwitch *rebornIHaveYouTubePremiumButton = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [rebornIHaveYouTubePremiumButton addTarget:self action:@selector(toggleRebornIHaveYouTubePremiumButton:) forControlEvents:UIControlEventValueChanged];
                 rebornIHaveYouTubePremiumButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"];
@@ -77,14 +87,14 @@
         if (indexPath.section == 1) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Hide Video Overlay 'OP' Button";
+                cell.textLabel.text = LOC(@"HIDE_VIDEO_OVERLAY_OP_BUTTON");
                 UISwitch *hideRebornOPButton = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideRebornOPButton addTarget:self action:@selector(toggleHideRebornOPButton:) forControlEvents:UIControlEventValueChanged];
                 hideRebornOPButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornOPButtonVTwo"];
                 cell.accessoryView = hideRebornOPButton;
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Hide Shorts Overlay 'OP' Button";
+                cell.textLabel.text = LOC(@"HIDE_SHORTS_OVERLAY_OP_BUTTON");
                 UISwitch *hideRebornShortsOPButton = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideRebornShortsOPButton addTarget:self action:@selector(toggleHideRebornShortsOPButton:) forControlEvents:UIControlEventValueChanged];
                 hideRebornShortsOPButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornShortsOPButton"];
@@ -93,11 +103,11 @@
         }
         if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Reset Colour Options";
+                cell.textLabel.text = LOC(@"RESET_COLOR_OPTIONS");
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = @"Reset All YouTube Reborn Options";
+                cell.textLabel.text = LOC(@"RESET_YOUTUBE_REBORN_OPTIONS");
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
