@@ -63,6 +63,27 @@
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Picture In Picture Options";
+
 "ENABLE_PICTURE_IN_PICTURE" = "Enable Picture In Picture";
 "HIDE_PIP_ADS_BADGE" = "Hide PIP Ads Badge";
 "HIDE_PIP_SPONSOR_BADGE" = "Hide PIP Sponsor Badge";
+
+// Shorts Options
+"SHORTS_OPTIONS" = "Shorts Options";
+
+"HIDE_CHANNEL_AVATAR_BUTTON" = "Hide Channel Avatar Button";
+"HIDE_LIKE_BUTTON" = "Hide Like Button";
+"HIDE_DISLIKE_BUTTON" = "Hide Dislike Button";
+"HIDE_COMMENTS_BUTTON" = "Hide Comments Button";
+"HIDE_REMIX_BUTTON" = "Hide Remix Button";
+"HIDE_SHARE_BUTTON" = "Hide Share Button";
+"HIDE_MORE_ACTIONS_BUTTON" = "Hide More Actions Button";
+"HIDE_SEARCH_BUTTON" = "Hide Search Button";
+"HIDE_BUY_SUPER_THANKS_BANNER" = "Hide 'Buy Super Thanks' Banner";
+"HIDE_SUBSCRIPTIONS_BUTTON" = "Hide Subscriptions Button";
+"DISABLE_RESUME_TO_SHORTS" = "Disable Resume to Shorts";
+"ALWAYS_SHOW_PROGRESS_BAR" = "Always Show Progress Bar";
+
+
+
+
