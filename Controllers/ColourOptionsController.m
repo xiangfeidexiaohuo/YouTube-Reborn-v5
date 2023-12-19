@@ -1,4 +1,5 @@
 #import "ColourOptionsController.h"
+#import "Localization.h"
 
 @interface ColourOptionsController ()
 - (void)coloursView;
