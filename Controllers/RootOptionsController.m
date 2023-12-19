@@ -172,14 +172,14 @@
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             VideoOptionsController *videoOptionsController = [[VideoOptionsController alloc] init];
-            UINavigationController *videoOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:[[VideoOptionsController alloc] init]];
+            UINavigationController *videoOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:videoOptionsController];
             [videoOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:videoOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
             OverlayOptionsController *overlayOptionsController = [[OverlayOptionsController alloc] init];
-            UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:OverlayOptionsController];
+            UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:overlayOptionsController];
             [overlayOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:overlayOptionsControllerView animated:YES completion:nil];
@@ -245,7 +245,8 @@
             [self presentViewController:rebornSettingsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
-            UINavigationController *creditsControllerView = [[UINavigationController alloc] initWithRootViewController:[[CreditsController alloc] init]];
+            CreditsController *creditsController = [[CreditsController alloc] init];
+            UINavigationController *creditsControllerView = [[UINavigationController alloc] initWithRootViewController:creditsController];
             [creditsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:creditsControllerView animated:YES completion:nil];
