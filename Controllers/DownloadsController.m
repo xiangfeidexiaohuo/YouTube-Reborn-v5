@@ -1,6 +1,7 @@
 #import "DownloadsController.h"
 #import "DownloadsVideoController.h"
 #import "DownloadsAudioController.h"
+#import "Localization.h"
 
 @interface DownloadsController ()
 - (void)configureUI;
@@ -32,15 +33,15 @@
     self.tabBar = [[UITabBarController alloc] init];
     
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
-    videoViewController.title = @"Video";
-    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonvideoblack.png"] tag:0];
-    videoViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonvideowhite.png"];
+    videoViewController.title = LOC(@"Video");
+    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonvideoblack.png" inBundle:tweakBundle compatibleWithTraitCollection:nil] tag:0];
+    videoViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonvideowhite.png" inBundle:tweakBundle compatibleWithTraitCollection:nil];
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
     
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
-    audioViewController.title = @"Audio";
-    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonaudioblack.png"] tag:1];
-    audioViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonaudiowhite.png"];
+    audioViewController.title = LOC(@"Audio");
+    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonaudioblack.png"] inBundle:tweakBundle compatibleWithTraitCollection:nil] tag:1];
+    audioViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonaudiowhite.png" inBundle:tweakBundle compatibleWithTraitCollection:nil];
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
     
     self.tabBar.viewControllers = @[videoNavViewController, audioNavViewController];
