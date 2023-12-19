@@ -13,7 +13,7 @@
     [super viewDidLoad];
     [self setupView];
     
-    self.title = @"Reorder Tabs";
+    self.title = LOC(@"REORDER_TABS");
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
