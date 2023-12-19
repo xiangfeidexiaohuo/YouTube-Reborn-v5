@@ -84,6 +84,20 @@
 "DISABLE_RESUME_TO_SHORTS" = "Disable Resume to Shorts";
 "ALWAYS_SHOW_PROGRESS_BAR" = "Always Show Progress Bar";
 
+// Other Options
+"OTHER_OPTIONS" = "Other Options";
 
+"IPAD_LAYOUT" = "iPad Layout";
+"IPHONE_LAYOUT" = "iPhone Layout";
+"HIDE_CAST_BUTTON" = "Hide Cast Button";
+"HIDE_NOTIFICATION_BUTTON" = "Hide Notification Button";
+"HIDE_SEARCH_BUTTON" = "Hide Search Button";
+"HIDE_PLAY_NEXT_IN_QUEUE" = "Hide 'Play next in queue'";
+"DISABLE_YOUTUBE_KIDS" = "Disable YouTube Kids";
+"DISABLE_HINTS" = "Disable Hints";
+"HIDE_YOUTUBE_LOGO" = "Hide YouTube Logo";
+"STICK_NAVIGATION_BAR" = "Stick Navigation Bar";
+"LOW_CONTRAST_MODE" = "Low Contrast Mode";
+"AUTO_HIDE_HOME_BAR" = "Auto-Hide Home Bar"
 
 
