@@ -1,4 +1,5 @@
 #import "ShortsOptionsController.h"
+#import "Localization.h"
 
 @interface ShortsOptionsController ()
 - (void)coloursView;
@@ -10,7 +11,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"Shorts Options";
+    self.title = LOC(@"SHORTS_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -22,9 +23,18 @@
             style = UITableViewStyleGrouped;
         }
 
-    if (@available(iOS 15.0, *)) {
-    	[self.tableView setSectionHeaderTopPadding:0.0f];
-	}
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
+    
+    [NSLayoutConstraint activateConstraints:@[
+        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
+        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
+    ]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -57,84 +67,84 @@
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Hide Channel Avatar Button";
+            cell.textLabel.text = LOC(@"HIDE_CHANNEL_AVATAR_BUTTON");
             UISwitch *hideShortsChannelAvatarButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsChannelAvatarButton addTarget:self action:@selector(toggleHideShortsChannelAvatarButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsChannelAvatarButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsChannelAvatarButton"];
             cell.accessoryView = hideShortsChannelAvatarButton;
         }
         if (indexPath.row == 1) {
-            cell.textLabel.text = @"Hide Like Button";
+            cell.textLabel.text = LOC(@"HIDE_LIKE_BUTTON");
             UISwitch *hideShortsLikeButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsLikeButton addTarget:self action:@selector(toggleHideShortsLikeButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsLikeButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsLikeButton"];
             cell.accessoryView = hideShortsLikeButton;
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = @"Hide Dislike Button";
+            cell.textLabel.text = LOC(@"HIDE_DISLIKE_BUTTON");
             UISwitch *hideShortsDislikeButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsDislikeButton addTarget:self action:@selector(toggleHideShortsDislikeButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsDislikeButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsDislikeButton"];
             cell.accessoryView = hideShortsDislikeButton;
         }
         if (indexPath.row == 3) {
-            cell.textLabel.text = @"Hide Comments Button";
+            cell.textLabel.text = LOC(@"HIDE_COMMENTS_BUTTON");
             UISwitch *hideShortsCommentsButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsCommentsButton addTarget:self action:@selector(toggleHideShortsCommentsButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsCommentsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsCommentsButton"];
             cell.accessoryView = hideShortsCommentsButton;
 	}
         if (indexPath.row == 4) {
-            cell.textLabel.text = @"Hide Remix Button";
+            cell.textLabel.text = LOC(@"HIDE_REMIX_BUTTON");
             UISwitch *hideShortsRemixButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsRemixButton addTarget:self action:@selector(toggleHideShortsRemixButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsRemixButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsRemixButton"];
             cell.accessoryView = hideShortsRemixButton;
         }
         if (indexPath.row == 5) {
-            cell.textLabel.text = @"Hide Share Button";
+            cell.textLabel.text = LOC(@"HIDE_SHARE_BUTTON");
             UISwitch *hideShortsShareButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsShareButton addTarget:self action:@selector(toggleHideShortsShareButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsShareButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsShareButton"];
             cell.accessoryView = hideShortsShareButton;
         }
         if (indexPath.row == 6) {
-            cell.textLabel.text = @"Hide More Actions Button";
+            cell.textLabel.text = LOC(@"HIDE_MORE_ACTIONS_BUTTON");
             UISwitch *hideShortsMoreActionsButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsMoreActionsButton addTarget:self action:@selector(toggleHideShortsMoreActionsButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsMoreActionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsMoreActionsButton"];
             cell.accessoryView = hideShortsMoreActionsButton;
         }
         if (indexPath.row == 7) {
-            cell.textLabel.text = @"Hide Search Button";
+            cell.textLabel.text = LOC(@"HIDE_SEARCH_BUTTON");
             UISwitch *hideShortsSearchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsSearchButton addTarget:self action:@selector(toggleHideShortsSearchButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsSearchButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSearchButton"];
             cell.accessoryView = hideShortsSearchButton;
         }
         if (indexPath.row == 8) {
-            cell.textLabel.text = @"Hide 'Buy Super Thanks' Banner";
+            cell.textLabel.text = LOC(@"HIDE_BUY_SUPER_THANKS_BANNER");
             UISwitch *hideShortsBuySuperThanks = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsBuySuperThanks addTarget:self action:@selector(toggleHideShortsBuySuperThanks:) forControlEvents:UIControlEventValueChanged];
             hideShortsBuySuperThanks.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsBuySuperThanks"];
             cell.accessoryView = hideShortsBuySuperThanks;
 	}
         if (indexPath.row == 9) {
-            cell.textLabel.text = @"Hide Subscriptions Button";
+            cell.textLabel.text = LOC(@"HIDE_SUBSCRIPTIONS_BUTTON");
             UISwitch *hideShortsSubscriptionsButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShortsSubscriptionsButton addTarget:self action:@selector(toggleHideShortsSubscriptionsButton:) forControlEvents:UIControlEventValueChanged];
             hideShortsSubscriptionsButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsSubscriptionsButton"];
             cell.accessoryView = hideShortsSubscriptionsButton;
 	}
         if (indexPath.row == 10) {
-            cell.textLabel.text = @"Disable Resume to Shorts";
+            cell.textLabel.text = LOC(@"DISABLE_RESUME_TO_SHORTS");
             UISwitch *disableResumeToShorts = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableResumeToShorts addTarget:self action:@selector(toggleDisableResumeToShorts:) forControlEvents:UIControlEventValueChanged];
             disableResumeToShorts.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableResumeToShorts"];
             cell.accessoryView = disableResumeToShorts;
 	}
          if (indexPath.row == 11) {
-            cell.textLabel.text = @"Always Show Shorts Player Bar";
+            cell.textLabel.text = LOC(@"ALWAYS_SHOW_PROGRESS_BAR");
             UISwitch *alwaysShowShortsPlayerBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [alwaysShowShortsPlayerBar addTarget:self action:@selector(toggleAlwaysShowShortsPlayerBar:) forControlEvents:UIControlEventValueChanged];
             alwaysShowShortsPlayerBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAlwaysShowShortsPlayerBar"];
