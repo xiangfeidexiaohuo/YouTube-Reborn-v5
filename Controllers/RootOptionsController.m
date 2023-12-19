@@ -116,16 +116,16 @@
                 cell.textLabel.text = LOC(@"OVERLAY_OPTIONS");
             }
             if (indexPath.row == 2) {
-                cell.textLabel.text = @"TAB_BAR_OPTIONS";
+                cell.textLabel.text = LOC(@"TAB_BAR_OPTIONS");
             }
             if (indexPath.row == 3) {
                 cell.textLabel.text = LOC(@"REORDER_TABS");
             }
             if (indexPath.row == 4) {
-                cell.textLabel.text = LOC(@"COLOUR_OPTIONS");
+                cell.textLabel.text = LOC(@"COLOR_OPTIONS");
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = @"Picture In Picture Options";
+                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
             }
             if (indexPath.row == 6) {
                 cell.textLabel.text = @"Shorts Options";
