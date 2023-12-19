@@ -173,21 +173,21 @@
         if (indexPath.row == 0) {
             VideoOptionsController *videoOptionsController = [[VideoOptionsController alloc] init];
             UINavigationController *videoOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:videoOptionsController];
-            [videoOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            videoOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:videoOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
             OverlayOptionsController *overlayOptionsController = [[OverlayOptionsController alloc] init];
             UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:overlayOptionsController];
-            [overlayOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            overlayOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:overlayOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 2) {
             TabBarOptionsController *tabBarOptionsController = [[TabBarOptionsController alloc] init];
             UINavigationController *tabBarOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:tabBarOptionsController];
-            [tabBarOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            tabBarOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
         }
@@ -224,14 +224,14 @@
         if (indexPath.row == 6) {
             ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] init];
             UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
-            [shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 	    
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 7) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
-            [otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:otherOptionsControllerView animated:YES completion:nil];
         }
@@ -240,14 +240,14 @@
         if (indexPath.row == 0) {
             RebornSettingsController *rebornSettingsController = [[RebornSettingsController alloc] init];
             UINavigationController *rebornSettingsControllerView = [[UINavigationController alloc] initWithRootViewController:rebornSettingsController];
-            [rebornSettingsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            rebornSettingsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:rebornSettingsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
             CreditsController *creditsController = [[CreditsController alloc] init];
             UINavigationController *creditsControllerView = [[UINavigationController alloc] initWithRootViewController:creditsController];
-            [creditsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+            creditsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:creditsControllerView animated:YES completion:nil];
         }
