@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 
-extern NSBundle *YTRebornBundle();
+extern NSBundle *YouTubeRebornBundle();
 
 static inline NSString *LOC(NSString *key) {
-    NSBundle *tweakBundle = YTRebornBundle();
+    NSBundle *tweakBundle = YouTubeRebornBundle();
     return [tweakBundle localizedStringForKey:key value:nil table:nil];
 }
