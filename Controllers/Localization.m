@@ -1,7 +1,7 @@
 #import <rootless.h>
 #import "Localization.h"
 
-NSBundle *YTRebornBundle() {
+NSBundle *YouTubeRebornBundle() {
     static NSBundle *bundle = nil;
     static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
