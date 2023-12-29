@@ -17,6 +17,17 @@ static BOOL hasDeviceNotch() {
 		return [context biometryType] == LABiometryTypeFaceID;
 	}
 }
+static void bootstrapReborn(YTPlayerViewController *self) {
+    [self.rebornHeaderView rebornOptionsAction];
+    
+    original_bootstrapReborn(self);
+}
+
+@interface ASCollectionView (Reborn)
+@property (retain, nonatomic) UIButton *rebornDownloadButton;
+@property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
+- (void)didPressPiP:(UIButton *)button event:(UIEvent *)event;
+@end
 
 UIColor *rebornHexColour;
 UIColor *lcmHexColor;
@@ -776,6 +787,79 @@ static NSString *accessGroupID() {
     UIViewController *alertAppViewController = [self _viewControllerForAncestor];
     [alertAppViewController presentViewController:alertApp animated:YES completion:nil];
 }
+%end
+
+#pragma mark - @NguyenASang - Video tab bar Reborn Download Video or Audio Button (17.01.4 and up)
+
+static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title, NSString *accessibilityLabel) {
+    ELMContainerNode *containerNode = (ELMContainerNode *)[[node yogaChildren][0] yogaChildren][0]; // To get node container properties
+    UIButton *buttonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, containerNode.calculatedSize.height)];
+    buttonView.center = CGPointMake(CGRectGetMaxX([node.layoutAttributes frame]) + 65 / 2, CGRectGetMidY([node.layoutAttributes frame]));
+    buttonView.backgroundColor = containerNode.backgroundColor;
+    buttonView.accessibilityLabel = accessibilityLabel;
+    buttonView.layer.cornerRadius = 16;
+
+    UIImageView *buttonImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, ([buttonView frame].size.height - 15.5) / 2, 15.5, 15.5)];
+    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath] color:[%c(YTColor) white1]];
+
+    UILabel *buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(33, 9, 20, 14)];
+    buttonTitle.font = [UIFont fontWithName:@".SFUIText-Semibold" size:12];
+    buttonTitle.textColor = [%c(YTColor) white3];
+    buttonTitle.text = title;
+
+    [buttonView addSubview:buttonImage];
+    [buttonView addSubview:buttonTitle];
+    return buttonView;
+}
+
+%hook ASCollectionView
+
+%property (retain, nonatomic) UIButton *rebornDownloadButton;
+%property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
+
+- (BOOL)touchesShouldCancelInContentView:(id)arg1 {
+    return YES; // Ensure we can scroll
+}
+
+- (ELMCellNode *)nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornDownloadButton) {
+        self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
+        if ([self numberOfItemsInSection:0] - 1 == indexPath.row) {
+            self.rebornDownloadButton = makeUnderRebornPlayerButton(%orig, @"Reborn", @"Download Video or Audio Files");
+            [self addSubview:self.rebornDownloadButton];
+
+            [self.rebornDownloadButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
+            YTTouchFeedbackController *controller = [[%c(YTTouchFeedbackController) alloc] initWithView:self.rebornDownloadButton];
+            controller.touchFeedbackView.customCornerRadius = 16;
+            self.rebornTouchController = controller;
+        }
+    }
+    return %orig;
+}
+
+- (void)nodesDidRelayout:(NSArray <ELMCellNode *> *)nodes {
+    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
+        CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.rebornDownloadButton.center = (CGPoint){self.rebornDownloadButton.center.x + offset, self.rebornDownloadButton.center.y};
+        }];
+    }
+    %orig;
+}
+
+%new(v@:@@)
+- (void)didPressReborn:(UIButton *)button event:(UIEvent *)event {
+    CGPoint location = [[[event allTouches] anyObject] locationInView:button];
+    if (CGRectContainsPoint(button.bounds, location)) {
+        UIViewController *controller = [self.collectionNode closestViewController];
+        YTPlaybackStrippedWatchController *provider = [controller valueForKey:@"_metadataPanelStateProvider"];
+        YTWatchViewController *watchViewController = [provider valueForKey:@"_watchViewController"];
+        YTPlayerViewController *playerViewController = [watchViewController valueForKey:@"_playerViewController"];
+        FromUser = YES;
+        bootstrapReborn(playerViewController, YES);
+    }
+}
+
 %end
 
 // No YouTube Ads
