@@ -792,7 +792,12 @@ static NSString *accessGroupID() {
 #pragma mark - @NguyenASang - Video tab bar Reborn Download Video or Audio Button (17.01.4 and up)
 
 static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title, NSString *accessibilityLabel) {
-    ELMContainerNode *containerNode = (ELMContainerNode *)[[node yogaChildren][0] yogaChildren][0]; // To get node container properties
+    NSInteger pageStyle = [%c(YTPageStyleController) pageStyle];
+    YTColorPalette *palette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle];
+    YTCommonColorPalette *palette = pageStyle == 1 ? [%c(YTCommonColorPalette) darkPalette] : [%c(YTCommonColorPalette) lightPalette];
+    if (!palette) palette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle]; // YouTube 17.18.4 and below
+    UIColor *textColor = [palette textPrimary];
+    ELMContainerNode *containerNode = (ELMContainerNode *)[[[[node yogaChildren] firstObject] yogaChildren] firstObject]; // To get node container properties
     UIButton *buttonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, containerNode.calculatedSize.height)];
     buttonView.center = CGPointMake(CGRectGetMaxX([node.layoutAttributes frame]) + 65 / 2, CGRectGetMidY([node.layoutAttributes frame]));
     buttonView.backgroundColor = containerNode.backgroundColor;
@@ -800,11 +805,11 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     buttonView.layer.cornerRadius = 16;
 
     UIImageView *buttonImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, ([buttonView frame].size.height - 15.5) / 2, 15.5, 15.5)];
-    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath] color:[%c(YTColor) white1]];
+    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath] color:textColor];
 
     UILabel *buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(33, 9, 20, 14)];
-    buttonTitle.font = [UIFont fontWithName:@".SFUIText-Semibold" size:12];
-    buttonTitle.textColor = [%c(YTColor) white3];
+    buttonTitle.font = [UIFont boldSystemFontOfSize:12];
+    buttonTitle.textColor = textColor;
     buttonTitle.text = title;
 
     [buttonView addSubview:buttonImage];
@@ -814,7 +819,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 
 %hook ASCollectionView
 
-%property (retain, nonatomic) UIButton *rebornDownloadButton;
+%property (retain, nonatomic) UIButton *rebornOverlayButton;
 %property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
 
 - (BOOL)touchesShouldCancelInContentView:(id)arg1 {
@@ -822,14 +827,14 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (ELMCellNode *)nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornDownloadButton) {
+    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
         if ([self numberOfItemsInSection:0] - 1 == indexPath.row) {
-            self.rebornDownloadButton = makeUnderRebornPlayerButton(%orig, @"Reborn", @"Download Video or Audio Files");
-            [self addSubview:self.rebornDownloadButton];
+            self.rebornOverlayButton = makeUnderRebornPlayerButton(%orig, @"Reborn", @"Download Audio or Video Files");
+            [self addSubview:self.rebornOverlayButton];
 
-            [self.rebornDownloadButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
-            YTTouchFeedbackController *controller = [[%c(YTTouchFeedbackController) alloc] initWithView:self.rebornDownloadButton];
+            [self.rebornOverlayButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
+            YTTouchFeedbackController *controller = [[%c(YTTouchFeedbackController) alloc] initWithView:self.rebornOverlayButton];
             controller.touchFeedbackView.customCornerRadius = 16;
             self.rebornTouchController = controller;
         }
@@ -841,7 +846,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
         CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
         [UIView animateWithDuration:0.3 animations:^{
-            self.rebornDownloadButton.center = (CGPoint){self.rebornDownloadButton.center.x + offset, self.rebornDownloadButton.center.y};
+            self.rebornOverlayButton.center = CGPointMake(self.rebornOverlayButton.center.x + offset, self.rebornOverlayButton.center.y);
         }];
     }
     %orig;
