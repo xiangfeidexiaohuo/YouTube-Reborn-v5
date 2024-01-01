@@ -268,7 +268,7 @@ static NSString *accessGroupID() {
     if (!self.youtubeRebornButton) {
         self.youtubeRebornButton = [%c(YTQTMButton) iconButton];
         [self.youtubeRebornButton enableNewTouchFeedback];
-        self.youtubeRebornButton.frame = CGRectMake(0, 0, 24, 24);
+        self.youtubeRebornButton.frame = CGRectMake(0, 0, 40, 40);
         
         if ([%c(YTPageStyleController) pageStyle] == 0) {
             [self.youtubeRebornButton setImage:[UIImage imageWithContentsOfFile:youtubeRebornDarkSettingsPath] forState:UIControlStateNormal];
