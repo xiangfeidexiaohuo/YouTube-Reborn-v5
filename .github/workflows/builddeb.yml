@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@main
         with:
           repository: SDWebImage/SDWebImage
-          ref: main
+          ref: master
           path: SDWebImage
 
       - name: Build Package 
