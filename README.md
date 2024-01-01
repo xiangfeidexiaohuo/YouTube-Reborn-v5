@@ -21,8 +21,8 @@ Get ready to have a better YouTube experience! Download the Ipa or Deb file from
 </p>
 
 <p align="center">
-    <a href="https://github.com/arichorn/YouTube-Reborn/stargazers"><img src="https://custom-icon-badges.demolab.com/github/stars/arichorn/YouTube-Reborn?logo=star&logoColor=white&color=%23ff0000&label=Stars" alt="Stars Badge"></img></a>
-<a href="https://github.com/arichorn/YouTube-Reborn/network/members"><img src="https://custom-icon-badges.demolab.com/github/forks/arichorn/YouTube-Reborn?logo=github&logoColor=white&color=%23ff0000&label=Forks"></a>
+<a href="https://github.com/arichorn/YouTube-Reborn/stargazers"><img src="https://custom-icon-badges.demolab.com/github/stars/arichorn/YouTube-Reborn?style=flat&logo=star&logoColor=white&color=%23ff0000&label=Stars"></a>
+<a href="https://github.com/arichorn/YouTube-Reborn/network/members"><img src="https://custom-icon-badges.demolab.com/github/forks/arichorn/YouTube-Reborn?style=flat&logo=github&logoColor=white&color=%23ff0000&label=Forks"></a>
 </p>
 
 -----
