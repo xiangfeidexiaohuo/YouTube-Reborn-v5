@@ -1,6 +1,5 @@
 #import <rootless.h>
 #import "Localization.h"
-#import "../Tweak.xm"
 
 NSBundle *YouTubeRebornBundle() {
     static NSBundle *bundle = nil;
