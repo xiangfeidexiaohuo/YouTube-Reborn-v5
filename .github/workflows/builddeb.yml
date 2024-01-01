@@ -34,6 +34,13 @@ jobs:
           ref: main
           path: YouTubeHeader
 
+      - name: Checkout SDWebImage/SDWebImage
+        uses: actions/checkout@main
+        with:
+          repository: SDWebImage/SDWebImage
+          ref: main
+          path: SDWebImage
+
       - name: Build Package 
         run: |
           brew install make xz ldid 
