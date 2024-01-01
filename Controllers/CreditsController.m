@@ -46,7 +46,7 @@
         return 1;
     }
     if (section == 1) {
-        return 4;
+        return 5;
     }
     return 0;
 }
@@ -76,28 +76,67 @@
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Lillie";
                 cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
+//              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/91358136?v=4"]
+                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                cell.imageView.image = profileImageView.image;
             }
         }
         if (indexPath.section == 1) {
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Alpha_Stream";
                 cell.detailTextLabel.text = LOC(@"ICON_DESIGNER_TEXT");
+//              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]
+                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = @"kirb";
                 cell.detailTextLabel.text = @"Development Support";
+//              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/773309?v=4"]
+                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 2) {
                 cell.textLabel.text = @"Dayanch96";
-                cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+                cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\""
+                cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/38832025?v=4"]
+                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 3) {
                 cell.textLabel.text = @"PoomSmart";
-                cell.detailTextLabel.text = @"Features: \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
+                cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
+                cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/3608783?v=4"]
+                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 4) {
+                cell.textLabel.text = @"NguyenASang";
+                cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\"";
+    //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/87893636?v=4"]
+                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                cell.imageView.image = profileImageView.image;
+            }
+            if (indexPath.row == 5) {
                 cell.textLabel.text = @"Snoolie";
                 cell.detailTextLabel.text = @"Features: \"Enable Extra Video Speed\"";
+    //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]
+                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                cell.imageView.image = profileImageView.image;
             }
         }
     }
