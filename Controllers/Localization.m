@@ -13,3 +13,13 @@ NSBundle *YouTubeRebornBundle() {
     });
     return bundle;
 }
+
+NSString *youtubeRebornLightSettingsPath;
+NSString *youtubeRebornDarkSettingsPath;
+if (YouTubeRebornBundle()) {
+    youtubeRebornLightSettingsPath = [[YouTubeRebornBundle() pathForResource:@"ytrebornbuttonwhite" ofType:@"png"]];
+    youtubeRebornDarkSettingsPath = [[YouTubeRebornBundle() pathForResource:@"ytrebornbuttonblack" ofType:@"png"]];
+} else {
+    youtubeRebornLightSettingsPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonwhite.png");
+    youtubeRebornDarkSettingsPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonblack.png");
+}
