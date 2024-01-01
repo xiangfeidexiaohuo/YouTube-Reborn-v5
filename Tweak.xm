@@ -17,14 +17,9 @@ static BOOL hasDeviceNotch() {
 		return [context biometryType] == LABiometryTypeFaceID;
 	}
 }
-static void bootstrapReborn(YTPlayerViewController *self) {
-    [self.rebornHeaderView rebornOptionsAction];
-    
-    original_bootstrapReborn(self);
-}
 
 @interface ASCollectionView (Reborn)
-@property (retain, nonatomic) UIButton *rebornDownloadButton;
+@property (retain, nonatomic) UIButton *rebornOverlayButton;
 @property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
 - (void)didPressReborn:(UIButton *)button event:(UIEvent *)event;
 @end
