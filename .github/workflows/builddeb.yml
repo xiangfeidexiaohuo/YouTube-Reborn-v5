@@ -34,6 +34,16 @@ jobs:
           ref: main
           path: YouTubeHeader
 
+      - name: Move SDWebImage Submodule
+        run: |
+          cd SDWebImage 
+          git remote set-url origin Controllers/SDWebImage
+          git pull
+          cd ..
+          git add .
+          git commit -m "Moved SDWebImage submodule"
+          git push origin
+
       - name: Build Package 
         run: |
           brew install make xz ldid 
