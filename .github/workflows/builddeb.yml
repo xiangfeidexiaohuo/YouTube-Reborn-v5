@@ -34,13 +34,6 @@ jobs:
           ref: main
           path: YouTubeHeader
 
-      - name: Add SDWebImage submodule
-        run: |
-          git submodule add https://github.com/SDWebImage/SDWebImage.git Controllers/SDWebImage
-          git add .
-          git commit -m "added SDWebImage submodule"
-          git push origin
-
       - name: Build Package 
         run: |
           brew install make xz ldid 
