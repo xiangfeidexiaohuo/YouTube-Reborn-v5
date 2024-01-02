@@ -37,9 +37,7 @@ jobs:
       - name: Move SDWebImage Submodule
         run: |
           cd SDWebImage 
-          git remote set-url origin Controllers/SDWebImage
-          git pull
-          cd ..
+          git mv SDWebImage Controllers/SDWebImage
           git add .
           git commit -m "Moved SDWebImage submodule"
           git push origin
