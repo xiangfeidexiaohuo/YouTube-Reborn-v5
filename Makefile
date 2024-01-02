@@ -13,12 +13,16 @@ BUNDLE_ID = com.google.ios.youtube
 INSTALL_TARGET_PROCESSES = YouTube
 
 YouTubeReborn_FILES = Tweak.xm $(shell find Controllers -name '*.m') $(shell find AFNetworking -name '*.m') $(shell find YouTubeExtractor -name '*.m')
-YouTubeReborn_IPA = tmp/Payload/YouTube.app
+YouTubeReborn_IPA = ./tmp/Payload/YouTube.app
 YouTubeReborn_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
-YouTubeReborn_FRAMEWORKS = UIKit Foundation AVFoundation AVKit Photos Accelerate CoreMotion GameController VideoToolbox
+YouTubeReborn_FRAMEWORKS = UIKit Security Foundation AVFoundation AVKit Photos Accelerate CoreMotion GameController VideoToolbox
 YouTubeReborn_OBJ_FILES = $(shell find lib -name '*.a')
 YouTubeReborn_LIBRARIES = bz2 c++ iconv z
 
 include $(THEOS)/makefiles/common.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
 include $(THEOS_MAKE_PATH)/aggregate.mk
+
+before-package::
+	@echo -e "==> \033[1mMoving tweak's bundle to Resources/...\033[0m
+	@cp -R layout/Library/Application\ Support/YouTubeReborn.bundle Resources/
