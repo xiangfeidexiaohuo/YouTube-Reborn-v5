@@ -784,6 +784,7 @@ static NSString *accessGroupID() {
 }
 %end
 
+/* WIP - YouTube Reborn v5 Button
 #pragma mark - @NguyenASang - Video tab bar Reborn Download Video or Audio Button (17.01.4 and up)
 
 static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title, NSString *accessibilityLabel) {
@@ -861,6 +862,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 %end
+*/
 
 // No YouTube Ads
 %group gNoVideoAds
@@ -921,7 +923,7 @@ BOOL isAd(id node) {
 
 %hook YTAsyncCollectionView
 - (id)collectionView:(id)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    id *cell = %orig;
+    id cell = %orig;
     if ([cell isKindOfClass:NSClassFromString(@"YTCompactPromotedVideoCell")]
         || ([cell isKindOfClass:NSClassFromString(@"_ASCollectionViewCell")]
             && [cell respondsToSelector:@selector(node)]
