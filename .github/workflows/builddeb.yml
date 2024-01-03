@@ -34,6 +34,13 @@ jobs:
           ref: main
           path: YouTubeHeader
 
+      - name: Remove Submodule
+        run: |
+          git ls-files --stage | grep '^160000' | grep 'SDWebImage' | awk '{print $2}' | xargs -I {} git submodule deinit -f {}
+          git rm -f .gitmodules
+          git config -f .git/config --remove-section submodule.SDWebImage
+          rm -rf .git/modules/SDWebImage
+
       - name: Build Package 
         run: |
           brew install make xz ldid 
