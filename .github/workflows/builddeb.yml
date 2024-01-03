@@ -39,6 +39,8 @@ jobs:
           git submodule deinit -f Controllers/SDWebImage
           git rm -f Controllers/SDWebImage
           rm -rf .git/modules/Controllers/SDWebImage
+          git commit -m "Remove it"
+          git push origin
 
       - name: Build Package 
         run: |
