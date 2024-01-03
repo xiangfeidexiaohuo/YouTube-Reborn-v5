@@ -24,5 +24,5 @@ include $(THEOS_MAKE_PATH)/tweak.mk
 include $(THEOS_MAKE_PATH)/aggregate.mk
 
 before-package::
-	@mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support; cp -r $(THEOS_STAGING_DIR)/Library/Application\ Support/YouTubeReborn.bundle $(THEOS_STAGING_DIR)/Library/Application\ Support/
-endif
+    @mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support
+    @cp -r layout/Library/Application\ Support/YouTubeReborn.bundle Resources/
