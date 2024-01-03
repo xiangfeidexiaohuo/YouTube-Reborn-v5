@@ -26,13 +26,6 @@
 #import "YouTubeHeader/YTTouchFeedbackController.h"
 #import "YouTubeHeader/YTWatchViewController.h"
 
-@interface YTQTMButton : UIButton
-@property (strong, nonatomic) UIImageView *imageView;
-+ (instancetype)button;
-+ (instancetype)iconButton;
-- (void)enableNewTouchFeedback;
-@end
-
 @interface YTPlaybackButton : UIControl
 @end
 
