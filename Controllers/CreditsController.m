@@ -1,15 +1,6 @@
 #import "CreditsController.h"
 #import "Localization.h"
 
-NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubeReborn" ofType:@"bundle"];
-NSString *youtubeRebornLightSettingsPath;
-if (tweakBundlePath) {
-    NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
-    youtubeRebornLightSettingsPath = [tweakBundle pathForResource:@"ytrebornbuttonwhite" ofType:@"png"];
-} else {
-    youtubeRebornLightSettingsPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonwhite.png");
-}
-
 @interface CreditsController ()
 - (void)coloursView;
 @end
