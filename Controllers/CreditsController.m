@@ -104,7 +104,7 @@
             }
             if (indexPath.row == 2) {
                 cell.textLabel.text = @"Dayanch96";
-                cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\""
+                cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
                 cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/38832025?v=4"]
