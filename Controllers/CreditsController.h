@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import "../Tweak.xm"
 #import "SDWebImage/Core/UIImageView+WebCache.h"
 
 @interface CreditsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
