@@ -79,7 +79,7 @@
 //              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/91358136?v=4"]
-                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                placeholderImage:[UIImage imageNamed:@"ytrebornbuttonwhite"]
                 cell.imageView.image = profileImageView.image;
             }
         }
@@ -90,7 +90,7 @@
 //              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]
-                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                placeholderImage:[UIImage imageNamed:@"ytrebornbuttonwhite"]
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 1) {
@@ -99,7 +99,7 @@
 //              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/773309?v=4"]
-                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                placeholderImage:[UIImage imageNamed:@"ytrebornbuttonwhite"]
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 2) {
@@ -108,7 +108,7 @@
                 cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/38832025?v=4"]
-                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                placeholderImage:[UIImage imageNamed:@"ytrebornbuttonwhite"]
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 3) {
@@ -117,7 +117,7 @@
                 cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/3608783?v=4"]
-                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                placeholderImage:[UIImage imageNamed:@"ytrebornbuttonwhite"]
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 4) {
@@ -126,7 +126,7 @@
     //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/87893636?v=4"]
-                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                placeholderImage:[UIImage imageNamed:@"ytrebornbuttonwhite"]
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 5) {
@@ -135,7 +135,7 @@
     //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
                 [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]
-                placeholderImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath]];
+                placeholderImage:[UIImage imageNamed:@"ytrebornbuttonwhite"]
                 cell.imageView.image = profileImageView.image;
             }
         }
