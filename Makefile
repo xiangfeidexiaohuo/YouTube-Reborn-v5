@@ -24,5 +24,5 @@ include $(THEOS_MAKE_PATH)/tweak.mk
 include $(THEOS_MAKE_PATH)/aggregate.mk
 
 before-package::
-	@echo -e "==> \033[1mMoving tweak's bundle to Resources/...\033[0m
-	@cp -R layout/Library/Application\ Support/YouTubeReborn.bundle Resources/
+    @echo -e "==> \033[1mMoving tweak's bundle to Resources/...\033[0m"
+    @cp -R layout/Library/Application\ Support/YouTubeReborn.bundle Resources/
