@@ -7,6 +7,7 @@
 */
 
 #import "SDImageHEICCoder.h"
+#import "SDImageIOAnimatedCoderInternal.h"
 
 // These constants are available from iOS 13+ and Xcode 11. This raw value is used for toolchain and firmware compatibility
 static NSString * kSDCGImagePropertyHEICSDictionary = @"{HEICS}";
