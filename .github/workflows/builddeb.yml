@@ -36,10 +36,10 @@ jobs:
 
       - name: Remove Submodule
         run: |
-          git ls-files --stage | grep '^160000' | grep 'SDWebImage' | awk '{print $2}' | xargs -I {} git submodule deinit -f {}
-          git rm -f .gitmodules
-          git config -f .git/config --remove-section submodule.SDWebImage
-          rm -rf .git/modules/SDWebImage
+          git submodule deinit -f Controllers/SDWebImage
+          git rm -f Controllers/SDWebImage
+          git config -f .git/config --remove-section submodule.Controllers/SDWebImage
+          rm -rf .git/modules/Controllers/SDWebImage
 
       - name: Build Package 
         run: |
