@@ -28,7 +28,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"Options";
+    self.title = @"YouTube Reborn";
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
