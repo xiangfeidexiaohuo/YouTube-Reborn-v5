@@ -1,0 +1,117 @@
+// Actions
+"CANCEL_TEXT" = "キャンセル";
+"OKAY_TEXT" = "OK";
+"NOTICE_TEXT" = "通知";
+
+// Downloads
+"VIDEO_TAB" = "動画";
+"AUDIO_TAB" = "音声";
+"DOWNLOAD_NOTICE" = "アプリを終了しないでください\n完了時に自動で閉じます";
+"VIEW_DOWNLOADS" = "ダウンロードを表示";
+"VIEW_DOWNLOADS_IN_FILZA" = "Filzaでダウンロードを表示";
+
+// Video Options
+"VIDEO_OPTIONS" = "動画の設定";
+
+"ENABLE_NO_ADS" = "広告を削除する";
+"ENABLE_BACKGROUND_PLAYBACK" = "バックグラウンド再生を有効化";
+"ALLOW_HD_ON_CELLULAR_DATA" = "モバイルネットワークでHD再生を許可";
+"PORTRAIT_FULLSCREEN" = "フルスクリーン(縦画面)";
+"AUTO_PLAY_IN_FULLSCREEN" = "フルスクリーンで自動再生";
+"DISABLE_VIDEO_ENDSCREEN_POPUPS" = "動画終了画面のポップアップを無効化";
+"DISABLE_VIDEO_INFO_CARDS" = "動画情報カードを無効化";
+"DISABLE_VIDEO_AUTOPLAY" = "動画の自動再生を無効化";
+"HIDE_CHANNEL_WATERMARK" = "チャンネルのウォーターマークを非表示";
+"RED_PROGRESS_BAR" = "赤いプログレスバー";
+"GRAY_BUFFER_PROGRESS" = "灰色のバッファプログレス";
+"HIDE_PLAYER_BAR_HEATWAVE" = "プレーヤーバーのヒートウェーブを非表示";
+"ALWAYS_SHOW_PLAYER_BAR" = "プレーヤーバーを常に表示";
+"ENABLE_EXTRA_SPEED_OPTIONS" = "追加の速度オプションを有効化";
+"DISABLE_DOUBLE_TAP_TO_SKIP" = "ダブルタップによるスキップを無効化";
+"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "カスタムダブルタップスキップ時間を有効化";
+
+// Overlay Options
+"OVERLAY_OPTIONS" = "オーバーレイの設定";
+
+"SHOW_STATUS_BAR_IN_OVERLAY" = "画面上部にステータスバーを表示(縦画面のみ)";
+"HIDE_PREVIOUS_BUTTON" = "前へボタンを非表示";
+"HIDE_PREVIOUS_BUTTON_SHADOW" = "前へボタンの影を非表示";
+
+"HIDE_NEXT_BUTTON" = "次へボタンを非表示";
+"HIDE_NEXT_BUTTON_SHADOW" = "次へボタンの影を非表示";
+"HIDE_SEEK_BACKWARD_BUTTON_SHADOW" = "巻き戻しボタンの影を非表示";
+"HIDE_SEEK_FORWARD_BUTTON_SHADOW" = "早送りボタンの影を非表示";
+"HIDE_PLAY_AND_PAUSE_BUTTON_SHADOW" = "再生/一時停止ボタンの影を非表示";
+"HIDE_AUTOPLAY_SWITCH" = "自動再生スイッチを非表示";
+"HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "字幕/CCボタンを非表示";
+"DISABLE_RELATED_VIDEOS" = "関連動画を非表示";
+"HIDE_DARK_OVERLAY_BACKGROUND" = "暗いオーバーレイ背景を非表示";
+"HIDE_QUICK_ACTIONS" = "クイックアクションを非表示";
+"HIDE_CURRENT_TIME" = "現在の再生時間を非表示";
+"HIDE_DURATION" = "再生時間の長さを非表示";
+
+// Tab Bar Options
+"TAB_BAR_OPTIONS" = "タブバーの設定";
+
+"STARTUP_PAGE" = "スタートアップページ";
+"HIDE_TAB_BAR_LABELS" = "タブバーのラベルを非表示";
+"HIDE_EXPLORE_TAB" = "探索タブを非表示";
+"HIDE_SHORTS_TAB" = "ショートタブを非表示";
+"HIDE_CREATE_TAB" = "作成/アップロード(+)タブを非表示";
+"HIDE_SUBSCRIPTIONS_TAB" = "登録チャンネルタブを非表示";
+"HIDE_YOU_TAB" = "マイページタブを非表示";
+"REORDER_TABS" = "タブの並べ替え";
+"COLOR_OPTIONS" = "色のオプション";
+
+// Picture In Picture Options
+"PICTURE_IN_PICTURE_OPTIONS" = "ピクチャインピクチャの設定";
+
+"ENABLE_PICTURE_IN_PICTURE" = "ピクチャインピクチャ(PIP)を有効化";
+"HIDE_PIP_ADS_BADGE" = "PIP広告バッジを非表示";
+"HIDE_PIP_SPONSOR_BADGE" = "PIPスポンサーバッジを非表示";
+
+// Shorts Options
+"SHORTS_OPTIONS" = "ショート動画の設定";
+
+"HIDE_CHANNEL_AVATAR_BUTTON" = "チャンネルアバターを非表示";
+"HIDE_LIKE_BUTTON" = "いいねボタンを非表示";
+"HIDE_DISLIKE_BUTTON" = "低評価ボタンを非表示";
+"HIDE_COMMENTS_BUTTON" = "コメントボタンを非表示";
+"HIDE_REMIX_BUTTON" = "リミックスボタンを非表示";
+"HIDE_SHARE_BUTTON" = "共有ボタンを非表示";
+"HIDE_MORE_ACTIONS_BUTTON" = "その他のアクションボタンを非表示";
+"HIDE_SEARCH_BUTTON" = "検索ボタンを非表示";
+"HIDE_BUY_SUPER_THANKS_BANNER" = "「Thanksを購入」バナーを非表示";
+"HIDE_SUBSCRIPTIONS_BUTTON" = "チャンネル登録ボタンを非表示";
+"DISABLE_RESUME_TO_SHORTS" = "ショート動画の再開を無効化";
+"ALWAYS_SHOW_PROGRESS_BAR" = "プログレスバーを常に表示";
+
+// Other Options
+"OTHER_OPTIONS" = "その他の設定";
+
+"IPAD_LAYOUT" = "iPadレイアウト";
+"IPHONE_LAYOUT" = "iPhoneレイアウト";
+"HIDE_CAST_BUTTON" = "キャストボタンを非表示";
+"HIDE_NOTIFICATION_BUTTON" = "通知ボタンを非表示";
+"HIDE_SEARCH_BUTTON" = "検索ボタンを非表示";
+"HIDE_PLAY_NEXT_IN_QUEUE" = "「次に再生」を非表示";
+"DISABLE_YOUTUBE_KIDS" = "YouTube Kidsを無効化";
+"DISABLE_HINTS" = "ヒントを無効化";
+"HIDE_YOUTUBE_LOGO" = "YouTubeロゴを非表示";
+"STICK_NAVIGATION_BAR" = "ナビゲーションバーを固定";
+"LOW_CONTRAST_MODE" = "低コントラストモード";
+"AUTO_HIDE_HOME_BAR" = "ホームバーを自動非表示";
+
+// Reborn Settings
+"REBORN_SETTINGS" = "Rebornの設定";
+
+"I_HAVE_YOUTUBE_PREMIUM" = "YouTubeプレミアムを利用中";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "動画オーバーレイのOPボタンを非表示";
+"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "ショート動画オーバーレイのOPボタンを非表示";
+"RESET_COLOR_OPTIONS" = "色の設定をリセット";
+"RESET_YOUTUBE_REBORN_OPTIONS" = "すべての設定をリセット";
+
+// Credits
+"CREDITS_BUTTON" = "クレジット";
+"DEVELOPER_TEXT" = "開発者";
+"ICON_DESIGNER_TEXT" = "アイコンデザイナー";
