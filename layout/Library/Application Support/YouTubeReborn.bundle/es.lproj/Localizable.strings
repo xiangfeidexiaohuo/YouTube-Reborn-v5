@@ -72,7 +72,7 @@
 // Shorts Options
 "SHORTS_OPTIONS" = "Opciones de Shorts";
 
-"HIDE_CHANNEL_AVATAR_BUTTON" = "Botón Ocultar Avatar de Canal";
+"HIDE_CHANNEL_AVATAR_BUTTON" = "Ocultar avatar de Canal";
 "HIDE_LIKE_BUTTON" = "Ocultar botón Me gusta";
 "HIDE_DISLIKE_BUTTON" = "Ocultar botón No me gusta";
 "HIDE_COMMENTS_BUTTON" = "Botón Ocultar comentarios";
@@ -90,7 +90,7 @@
 
 "IPAD_LAYOUT" = "Diseño iPad";
 "IPHONE_LAYOUT" = "Diseño iPhone";
-"HIDE_CAST_BUTTON" = "Ocultar botón de reparto";
+"HIDE_CAST_BUTTON" = "Ocultar botón de Emitir";
 "HIDE_NOTIFICATION_BUTTON" = "Ocultar botón de notificación";
 "HIDE_SEARCH_BUTTON" = "Ocultar botón de búsqueda";
 "HIDE_PLAY_NEXT_IN_QUEUE" = "Ocultar 'Reproducir siguiente en cola'";
