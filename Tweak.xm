@@ -256,11 +256,11 @@ static NSString *accessGroupID() {
     NSString *youtubeRebornDarkSettingsPath;
     if (tweakBundlePath) {
         NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
-        youtubeRebornLightSettingsPath = [tweakBundle pathForResource:@"ytrebornbuttonwhite" ofType:@"png"];
-		youtubeRebornDarkSettingsPath = [tweakBundle pathForResource:@"ytrebornbuttonblack" ofType:@"png"];
+        youtubeRebornLightSettingsPath = [tweakBundle pathForResource:@"ytrebornbuttonwhite-20@2x" ofType:@"png"];
+		youtubeRebornDarkSettingsPath = [tweakBundle pathForResource:@"ytrebornbuttonblack-20@2x" ofType:@"png"];
     } else {
-		youtubeRebornLightSettingsPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonwhite.png");
-        youtubeRebornDarkSettingsPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonblack.png");
+		youtubeRebornLightSettingsPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonwhite-20@2x.png");
+        youtubeRebornDarkSettingsPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonblack-20@2x.png");
     }
     NSMutableArray *retVal = %orig.mutableCopy;
     [self.youtubeRebornButton removeFromSuperview];
