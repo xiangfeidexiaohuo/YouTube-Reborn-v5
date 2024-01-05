@@ -328,23 +328,20 @@
 }
 
 - (void)versionTextFieldChanged:(UITextField *)textField {
-    NSString *validVersionFormat = @"\\d{2}\\.\\d{1}\\.\\d{1}";
-    NSPredicate *validVersionPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validVersionFormat];
+    NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
     
-    if (![validVersionPredicate evaluateWithObject:textField.text]) {
-        // Invalid format, clear the text field or display an error message
+    if ([textField.text length] > 7 || ![textField.text stringByTrimmingCharactersInSet:allowedCharacterSet].length) {
+        // Invalid format or length, clear the text field or display an error message
         textField.text = @"";
         return;
     }
     
-    NSString *firstTwoDigits = [textField.text substringToIndex:2];
+    NSString *validVersionFormat = @"(17|18|19)(\\.\\d{1,2}){2}"; // Regular expression for the desired format
+    NSPredicate *validVersionPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validVersionFormat];
     
-    if (![self.defaultFirstTwoDigits containsObject:firstTwoDigits]) {
-        // Invalid first two digits, set the default value or display an error message
-        textField.text = [NSString stringWithFormat:@"%@.0.0", self.defaultFirstTwoDigits[0]];
+    if (![validVersionPredicate evaluateWithObject:textField.text]) {
+        // Invalid format, set the default value or display an error message
+        textField.text = @"17.00.0";
+        return;
     }
-        }
-    }
-    return cell;
-}
 @end
