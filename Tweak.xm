@@ -2635,5 +2635,6 @@ NSString *customAppVersion = nil; // Declare the global variable
             lcmHexColor = [lcmUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
             %init(gColourOptions2);
         }
+        %init(_ungrouped);
     }
 }
