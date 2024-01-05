@@ -22,7 +22,6 @@
 
 @interface RootOptionsController ()
 - (void)coloursView;
-- (void)coloursView2;
 @end
 
 @implementation RootOptionsController
@@ -30,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coloursView];
-    [self coloursView2];
 
     self.title = @"YouTube Reborn";
     
