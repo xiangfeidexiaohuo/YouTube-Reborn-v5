@@ -1,15 +1,17 @@
 #import "RootOptionsController.h"
+#import "DownloadsController.h"
 #import "VideoOptionsController.h"
 #import "OverlayOptionsController.h"
 #import "TabBarOptionsController.h"
 #import "ReorderPivotBarController.h"
-#import "CreditsController.h"
 #import "ColourOptionsController.h"
-#import "ShortsOptionsController.h"
-#import "RebornSettingsController.h"
-#import "DownloadsController.h"
-#import "OtherOptionsController.h"
+#import "ColourOptionsController2.h"
 #import "PictureInPictureOptionsController.h"
+#import "ShortsOptionsController.h"
+#import "SponsorBlockOptionsController.h"
+#import "OtherOptionsController.h"
+#import "RebornSettingsController.h"
+#import "CreditsController.h"
 #import "Localization.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
@@ -20,6 +22,7 @@
 
 @interface RootOptionsController ()
 - (void)coloursView;
+- (void)coloursView2;
 @end
 
 @implementation RootOptionsController
@@ -27,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coloursView];
+    [self coloursView2];
 
     self.title = @"YouTube Reborn";
     
@@ -70,7 +74,7 @@
         }
     }
     if (section == 1) {
-        return 8;
+        return 10;
     }
     if (section == 2) {
         return 2;
@@ -125,12 +129,18 @@
                 cell.textLabel.text = LOC(@"COLOR_OPTIONS");
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
+                cell.textLabel.text = LOC(@"COLOR_OPTIONS_2");
             }
             if (indexPath.row == 6) {
-                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
+                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
             }
             if (indexPath.row == 7) {
+                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
+            }
+            if (indexPath.row == 8) {
+                cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
+            }
+            if (indexPath.row == 9) {
                 cell.textLabel.text = LOC(@"OTHER_OPTIONS");
             }
         }
@@ -206,6 +216,13 @@
             [self presentViewController:colourOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 5) {
+            ColourOptionsController2 *colourOptionsController2 = [[ColourOptionsController2 alloc] init];
+            UINavigationController *colourOptionsController2View = [[UINavigationController alloc] initWithRootViewController:colourOptionsController2];
+            colourOptionsController2View.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:colourOptionsController2View animated:YES completion:nil];
+        }
+        if (indexPath.row == 6) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
                 PictureInPictureOptionsController *pictureInPictureOptionsController = [[PictureInPictureOptionsController alloc] init];
                 UINavigationController *pictureInPictureOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:pictureInPictureOptionsController];
@@ -221,14 +238,21 @@
                 [self presentViewController:alertError animated:YES completion:nil];
             }
         }
-        if (indexPath.row == 6) {
+        if (indexPath.row == 7) {
             ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] init];
             UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
             shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 	    
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 7) {
+        if (indexPath.row == 8) {
+            SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc] initWithStyle:UITableViewStyleGrouped];
+            UINavigationController *sponsorBlockOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:sponsorBlockOptionsController];
+            sponsorBlockOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:sponsorBlockOptionsControllerView animated:YES completion:nil];
+        }
+        if (indexPath.row == 9) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -292,6 +316,7 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
+    [self coloursView2];
     [self.tableView reloadData];
 }
 
