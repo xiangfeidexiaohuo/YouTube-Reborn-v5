@@ -88,6 +88,7 @@
 
 // Sponsor Block Options
 "SPONSOR_BLOCK_OPTIONS" = "Sponsor Block Options";
+
 "MAIN" = "Main";
 "MIRROR" = "Mirror";
 "DISABLE" = "Disable";
