@@ -3,6 +3,7 @@
 
 @interface RebornSettingsController ()
 - (void)coloursView;
+- (void)coloursView2;
 @end
 
 @implementation RebornSettingsController
@@ -10,6 +11,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coloursView];
+    [self coloursView2];
 
     self.title = LOC(@"REBORN_SETTINGS");
 
@@ -126,6 +128,7 @@
 
             [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTRebornColourOptionsVFour"];
+	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTLcmColourOptionVFive"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 exit(0);
             }]];
