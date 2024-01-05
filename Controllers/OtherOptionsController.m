@@ -206,7 +206,7 @@
         textField.text = @"18.49.3";
         return;
     } 
-    customAppVersion = customVersion;
+    self.customAppVersion = customVersion;
 }
 
 @end
