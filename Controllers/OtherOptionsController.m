@@ -43,7 +43,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 13;
+    return 14;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -124,34 +124,41 @@
             cell.accessoryView = disableHints;
         }
         if (indexPath.row == 8) {
+            cell.textLabel.text = LOC(@"PREMIUM_YOUTUBE_LOGO");
+            UISwitch *premiumYouTubeLogo = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [premiumYouTubeLogo addTarget:self action:@selector(togglePremiumYouTubeLogo:) forControlEvents:UIControlEventValueChanged];
+            premiumYouTubeLogo.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kPremiumYouTubeLogo"];
+            cell.accessoryView = premiumYouTubeLogo;
+	}
+        if (indexPath.row == 9) {
             cell.textLabel.text = LOC(@"HIDE_YOUTUBE_LOGO");
             UISwitch *hideYouTubeLogo = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideYouTubeLogo addTarget:self action:@selector(toggleHideYouTubeLogo:) forControlEvents:UIControlEventValueChanged];
             hideYouTubeLogo.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"];
             cell.accessoryView = hideYouTubeLogo;
 	}
-         if (indexPath.row == 9) {
+         if (indexPath.row == 10) {
             cell.textLabel.text = LOC(@"STICK_NAVIGATION_BAR");
             UISwitch *stickNavigationBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [stickNavigationBar addTarget:self action:@selector(toggleStickNavigationBar:) forControlEvents:UIControlEventValueChanged];
             stickNavigationBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kStickNavigationBar"];
             cell.accessoryView = stickNavigationBar;
 	}
-        if (indexPath.row == 10) {
+        if (indexPath.row == 11) {
             cell.textLabel.text = LOC(@"LOW_CONTRAST_MODE");
             UISwitch *lowContrastMode = [[UISwitch alloc] initWithFrame:CGRectZero];
             [lowContrastMode addTarget:self action:@selector(toggleLowContrastMode:) forControlEvents:UIControlEventValueChanged];
             lowContrastMode.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"];
             cell.accessoryView = lowContrastMode;
         }
-        if (indexPath.row == 11) {
+        if (indexPath.row == 12) {
             cell.textLabel.text = LOC(@"AUTO_HIDE_HOME_BAR");
             UISwitch *autoHideHomeBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [autoHideHomeBar addTarget:self action:@selector(toggleAutoHideHomeBar:) forControlEvents:UIControlEventValueChanged];
             autoHideHomeBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"];
             cell.accessoryView = autoHideHomeBar;
         }
-        if (indexPath.row == 12) {
+        if (indexPath.row == 13) {
             cell.textLabel.text = LOC(@"APP_VERSION_SPOOFER");
             UISwitch *appVersionSpoofer = [[UISwitch alloc] initWithFrame:CGRectZero];
             [appVersionSpoofer addTarget:self action:@selector(toggleAppVersionSpoofer:) forControlEvents:UIControlEventValueChanged];
@@ -293,6 +300,16 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kDisableHints"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)togglePremiumYouTubeLogo:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kPremiumYouTubeLogo"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kPremiumYouTubeLogo"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
