@@ -43,7 +43,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 14;
+    return 13;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -145,20 +145,13 @@
             cell.accessoryView = stickNavigationBar;
 	}
         if (indexPath.row == 11) {
-            cell.textLabel.text = LOC(@"LOW_CONTRAST_MODE");
-            UISwitch *lowContrastMode = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [lowContrastMode addTarget:self action:@selector(toggleLowContrastMode:) forControlEvents:UIControlEventValueChanged];
-            lowContrastMode.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"];
-            cell.accessoryView = lowContrastMode;
-        }
-        if (indexPath.row == 12) {
             cell.textLabel.text = LOC(@"AUTO_HIDE_HOME_BAR");
             UISwitch *autoHideHomeBar = [[UISwitch alloc] initWithFrame:CGRectZero];
             [autoHideHomeBar addTarget:self action:@selector(toggleAutoHideHomeBar:) forControlEvents:UIControlEventValueChanged];
             autoHideHomeBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"];
             cell.accessoryView = autoHideHomeBar;
         }
-        if (indexPath.row == 13) {
+        if (indexPath.row == 12) {
             cell.textLabel.text = LOC(@"APP_VERSION_SPOOFER");
             UISwitch *appVersionSpoofer = [[UISwitch alloc] initWithFrame:CGRectZero];
             [appVersionSpoofer addTarget:self action:@selector(toggleAppVersionSpoofer:) forControlEvents:UIControlEventValueChanged];
@@ -330,16 +323,6 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kStickNavigationBar"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
-- (void)toggleLowContrastMode:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kLowContrastMode"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kLowContrastMode"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
