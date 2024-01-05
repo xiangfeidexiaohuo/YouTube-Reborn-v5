@@ -2615,7 +2615,16 @@ NSString *customAppVersion = nil; // Declare the global variable
         if (hexString != nil) {
             rebornHexColour = [unarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
             %init(gColourOptions);
+            %init(_ungrouped);
         }
-        %init(_ungrouped);
+        NSData *lcmColorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kYTLcmColourOptionVFive"];
+        NSKeyedUnarchiver *lcmUnarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:lcmColorData error:nil];
+        [lcmUnarchiver setRequiresSecureCoding:NO];
+        NSString *lcmHexString = [lcmUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+        if (lcmHexString != nil) {
+            lcmHexColor = [lcmUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+            %init(gColourOptions2);
+            %init(_ungrouped);
+        }
     }
 }
