@@ -1,0 +1,116 @@
+// Actions
+"CANCEL_TEXT" = "Cancelar";
+"OKAY_TEXT" = "De acuerdo";
+"NOTICE_TEXT" = "Aviso";
+
+// Downloads
+"VIDEO_TAB" = "Vídeo";
+"AUDIO_TAB" = "Audio";
+"DOWNLOAD_NOTICE" = "No salga de la aplicación. Se cerrará automáticamente al finalizar";
+"VIEW_DOWNLOADS" = "Ver descargas";
+"VIEW_DOWNLOADS_IN_FILZA" = "Ver descargas en Filza";
+
+// Video Options
+"VIDEO_OPTIONS" = "Opciones de vídeo";
+
+"ENABLE_NO_ADS" = "Activar sin anuncios";
+"ENABLE_BACKGROUND_PLAYBACK" = "Activar reproducción en segundo plano";
+"ALLOW_HD_ON_CELLULAR_DATA" = "Permitir HD en datos móviles";
+"PORTRAIT_FULLSCREEN" = "Retrato a pantalla completa";
+"AUTO_PLAY_IN_FULLSCREEN" = "Reproducción automática en pantalla completa";
+"DISABLE_VIDEO_ENDSCREEN_POPUPS" = "Desactivar ventanas emergentes de fin de pantalla de vídeo";
+"DISABLE_VIDEO_INFO_CARDS" = "Desactivar tarjetas de información de vídeo";
+"DISABLE_VIDEO_AUTOPLAY" = "Desactivar reproducción automática de vídeo";
+"HIDE_CHANNEL_WATERMARK" = "Ocultar marca de agua del canal";
+"RED_PROGRESS_BAR" = "Barra de progreso roja";
+"GRAY_BUFFER_PROGRESS" = "Progreso del búfer gris";
+"HIDE_PLAYER_BAR_HEATWAVE" = "Ocultar ola de calor de la barra del reproductor";
+"ALWAYS_SHOW_PLAYER_BAR" = "Mostrar siempre la barra de reproductor";
+"ENABLE_EXTRA_SPEED_OPTIONS" = "Activar opciones de velocidad extra";
+"DISABLE_DOUBLE_TAP_TO_SKIP" = "Desactivar doble toque para saltar";
+"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "Activar la duración personalizada de la doble pulsación para saltar";
+
+// Overlay Options
+"OVERLAY_OPTIONS" = "Opciones de superposición";
+
+"SHOW_STATUS_BAR_IN_OVERLAY" = "Mostrar barra de estado en superposición (sólo en vertical)";
+"HIDE_PREVIOUS_BUTTON" = "Ocultar botón anterior";
+"HIDE_PREVIOUS_BUTTON_SHADOW" = "Ocultar la sombra del botón anterior";
+"HIDE_NEXT_BUTTON" = "Ocultar botón siguiente";
+"HIDE_NEXT_BUTTON_SHADOW" = "Ocultar sombra del botón siguiente";
+"HIDE_SEEK_BACKWARD_BUTTON_SHADOW" = "Ocultar sombra del botón de búsqueda hacia atrás";
+"HIDE_SEEK_FORWARD_BUTTON_SHADOW" = "Ocultar sombra del botón de búsqueda hacia delante";
+"HIDE_PLAY_AND_PAUSE_BUTTON_SHADOW" = "Ocultar la sombra del botón de reproducción/pausa";
+"HIDE_AUTOPLAY_SWITCH" = "Ocultar interruptor de reproducción automática";
+"HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "Ocultar botón de subtítulos";
+"DISABLE_RELATED_VIDEOS" = "Desactivar vídeos relacionados";
+"HIDE_DARK_OVERLAY_BACKGROUND" = "Ocultar fondo oscuro superpuesto";
+"HIDE_QUICK_ACTIONS" = "Ocultar acciones rápidas";
+"HIDE_CURRENT_TIME" = "Ocultar hora actual";
+"HIDE_DURATION" = "Ocultar duración";
+
+// Tab Bar Options
+"TAB_BAR_OPTIONS" = "Opciones de la barra de pestañas";
+
+"STARTUP_PAGE" = "Página de inicio";
+"HIDE_TAB_BAR_LABELS" = "Ocultar etiquetas de la barra de pestañas";
+"HIDE_EXPLORE_TAB" = "Ocultar pestaña Explorar";
+"HIDE_SHORTS_TAB" = "Ocultar pestaña Shorts";
+"HIDE_CREATE_TAB" = "Ocultar pestaña Crear/Subir (+)";
+"HIDE_SUBSCRIPTIONS_TAB" = "Ocultar pestaña Suscripciones";
+"HIDE_YOU_TAB" = "Ocultar pestaña Tú";
+"REORDER_TABS" = "Reordenar pestañas";
+"COLOR_OPTIONS" = "Opciones de color";
+
+// Picture In Picture Options
+"PICTURE_IN_PICTURE_OPTIONS" = "Opciones de imagen en imagen";
+
+"ENABLE_PICTURE_IN_PICTURE" = "Activar imagen en imagen";
+"HIDE_PIP_ADS_BADGE" = "Ocultar distintivo de anuncios PIP";
+"HIDE_PIP_SPONSOR_BADGE" = "Ocultar distintivo de patrocinador PIP";
+
+// Shorts Options
+"SHORTS_OPTIONS" = "Opciones de Shorts";
+
+"HIDE_CHANNEL_AVATAR_BUTTON" = "Ocultar avatar de Canal";
+"HIDE_LIKE_BUTTON" = "Ocultar botón Me gusta";
+"HIDE_DISLIKE_BUTTON" = "Ocultar botón No me gusta";
+"HIDE_COMMENTS_BUTTON" = "Botón Ocultar comentarios";
+"HIDE_REMIX_BUTTON" = "Ocultar botón Remix";
+"HIDE_SHARE_BUTTON" = "Ocultar botón de compartir";
+"HIDE_MORE_ACTIONS_BUTTON" = "Ocultar botón de más acciones";
+"HIDE_SEARCH_BUTTON" = "Ocultar botón de búsqueda";
+"HIDE_BUY_SUPER_THANKS_BANNER" = "Ocultar banner 'Comprar Supergracias'";
+"HIDE_SUBSCRIPTIONS_BUTTON" = "Ocultar botón de suscripciones";
+"DISABLE_RESUME_TO_SHORTS" = "Desactivar Reanudar en Shorts";
+"ALWAYS_SHOW_PROGRESS_BAR" = "Mostrar siempre barra de progreso";
+
+// Other Options
+"OTHER_OPTIONS" = "Otras opciones";
+
+"IPAD_LAYOUT" = "Diseño iPad";
+"IPHONE_LAYOUT" = "Diseño iPhone";
+"HIDE_CAST_BUTTON" = "Ocultar botón de Emitir";
+"HIDE_NOTIFICATION_BUTTON" = "Ocultar botón de notificación";
+"HIDE_SEARCH_BUTTON" = "Ocultar botón de búsqueda";
+"HIDE_PLAY_NEXT_IN_QUEUE" = "Ocultar 'Reproducir siguiente en cola'";
+"DISABLE_YOUTUBE_KIDS" = "Desactivar YouTube Kids";
+"DISABLE_HINTS" = "Desactivar sugerencias";
+"HIDE_YOUTUBE_LOGO" = "Ocultar el logotipo de YouTube";
+"STICK_NAVIGATION_BAR" = "Barra de navegación";
+"LOW_CONTRAST_MODE" = "Modo de bajo contraste";
+"AUTO_HIDE_HOME_BAR" = "Ocultar automáticamente la barra de inicio";
+
+// Reborn Settings
+"REBORN_SETTINGS" = "Ajustes de Reborn";
+
+"I_HAVE_YOUTUBE_PREMIUM" = "Tengo YouTube Premium";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Ocultar botón 'OP' de superposición de vídeo";
+"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ocultar superposición de Shorts 'OP' Botón";
+"RESET_COLOR_OPTIONS" = "Restablecer opciones de color";
+"RESET_YOUTUBE_REBORN_OPTIONS" = "Restablecer todas las opciones de YouTube Reborn";
+
+// Credits
+"CREDITS_BUTTON" = "Créditos";
+"DEVELOPER_TEXT" = "Desarrollador";
+"ICON_DESIGNER_TEXT" = "Diseñador de iconos";
