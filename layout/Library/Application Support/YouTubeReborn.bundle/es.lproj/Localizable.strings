@@ -24,7 +24,7 @@
 "HIDE_CHANNEL_WATERMARK" = "Ocultar marca de agua del canal";
 "RED_PROGRESS_BAR" = "Barra de progreso roja";
 "GRAY_BUFFER_PROGRESS" = "Progreso del búfer gris";
-"HIDE_PLAYER_BAR_HEATWAVE" = "Ocultar ola de calor de la barra del reproductor";
+"HIDE_PLAYER_BAR_HEATWAVE" = "Ocultar Heatwave de la barra del reproductor";
 "ALWAYS_SHOW_PLAYER_BAR" = "Mostrar siempre la barra de reproductor";
 "ENABLE_EXTRA_SPEED_OPTIONS" = "Activar opciones de velocidad extra";
 "DISABLE_DOUBLE_TAP_TO_SKIP" = "Desactivar doble toque para saltar";
@@ -60,8 +60,8 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Ocultar pestaña Suscripciones";
 "HIDE_YOU_TAB" = "Ocultar pestaña Tú";
 "REORDER_TABS" = "Reordenar pestañas";
-"COLOR_OPTIONS" = "Opciones de color (Custom Theme)";
-"COLOR_OPTIONS_2" = "Opciones de color (Custom Texts and Icons)";
+"COLOR_OPTIONS" = "Opciones de color (Tema custom)";
+"COLOR_OPTIONS_2" = "Opciones de color (Textos e iconos customs)";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Opciones de imagen en imagen";
@@ -87,22 +87,22 @@
 "ALWAYS_SHOW_PROGRESS_BAR" = "Mostrar siempre barra de progreso";
 
 // Sponsor Block Options
-"SPONSOR_BLOCK_OPTIONS" = "Sponsor Block Options";
+"SPONSOR_BLOCK_OPTIONS" = "Opciones Sponsor Block";
 
-"MAIN" = "Main";
-"MIRROR" = "Mirror";
-"DISABLE" = "Disable";
-"AUTO_SKIP" = "Auto Skip";
-"MANUAL_SKIP" = "Manual Skip";
-"SOURCE" = "Source";
+"MAIN" = "Principal";
+"MIRROR" = "Espejo";
+"DISABLE" = "Desactivar";
+"AUTO_SKIP" = "Auto";
+"MANUAL_SKIP" = "Manual";
+"SOURCE" = "Fuente";
 "SPONSOR" = "Sponsor";
-"SELFPROMO" = "Self Promo";
-"INTERACTION" = "Interaction";
+"SELFPROMO" = "Autopromoción";
+"INTERACTION" = "Interacción";
 "INTRO" = "Intro";
-"OUTRO" = "Outro";
-"PREVIEW" = "Preview";
-"FILLER" = "Filler Tangent/Jokes";
-"MUSIC_AND_OFFTOPIC" = "Music/OffTopic";
+"OUTRO" = "Final";
+"PREVIEW" = "Vista previa";
+"FILLER" = "Bromas/chistes de relleno";
+"MUSIC_AND_OFFTOPIC" = "Música/Sin tema";
 
 // Other Options
 "OTHER_OPTIONS" = "Otras opciones";
@@ -119,8 +119,8 @@
 "HIDE_YOUTUBE_LOGO" = "Ocultar el logotipo de YouTube";
 "STICK_NAVIGATION_BAR" = "Barra de navegación";
 "AUTO_HIDE_HOME_BAR" = "Ocultar automáticamente la barra de inicio";
-"APP_VERSION_SPOOFER" = "App Version Spoofer";
-"ENTER_CUSTOM_APP_VERSION" = "Enter custom app version";
+"APP_VERSION_SPOOFER" = "Spoofer de versión de la aplicación";
+"ENTER_CUSTOM_APP_VERSION" = "Introduzca la versión custom de la app";
 
 // Reborn Settings
 "REBORN_SETTINGS" = "Ajustes de Reborn";
