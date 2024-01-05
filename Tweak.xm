@@ -2510,6 +2510,16 @@ BOOL selectedTabIndex = NO;
 %end
 %end
 
+// App Version Spoofer (YouTube Reborn Version) - @arichorn
+%hook YTVersionUtils
++ (NSString *)appVersion {
+    if (customAppVersion) {
+        return customAppVersion;
+    }
+    return %orig;
+}
+%end
+
 %hook YTColdConfig
 - (BOOL)shouldUseAppThemeSetting {
     return YES;
