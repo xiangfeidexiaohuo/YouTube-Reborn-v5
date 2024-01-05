@@ -157,7 +157,7 @@
             appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
             cell.accessoryView = appVersionSpoofer;
             self.versionTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-            self.versionTextField.placeholder = @"Enter custom version";
+            self.versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
             self.versionTextField.enabled = appVersionSpoofer.isOn;
             // Add a target to detect when the text field text changes
             [self.versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
@@ -188,6 +188,24 @@
     self.view.layer.cornerRadius = 10.0;
     self.view.layer.masksToBounds = YES;
 }
+
+- (void)versionTextFieldChanged:(UITextField *)textField {
+    NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    
+    if ([textField.text length] > 7 || ![textField.text stringByTrimmingCharactersInSet:allowedCharacterSet].length) {
+        // Invalid format or length, clear the text field or display an error message
+        textField.text = @"";
+        return;
+    }
+    
+    NSString *validVersionFormat = @"(17|18|19)(\\.\\d{1,2}){2}"; // Regular expression for the desired format
+    NSPredicate *validVersionPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validVersionFormat];
+    
+    if (![validVersionPredicate evaluateWithObject:textField.text]) {
+        // Invalid format, set the default value or display an error message
+        textField.text = @"18.49.3";
+        return;
+    }
 
 @end
 
@@ -326,22 +344,4 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
-
-- (void)versionTextFieldChanged:(UITextField *)textField {
-    NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
-    
-    if ([textField.text length] > 7 || ![textField.text stringByTrimmingCharactersInSet:allowedCharacterSet].length) {
-        // Invalid format or length, clear the text field or display an error message
-        textField.text = @"";
-        return;
-    }
-    
-    NSString *validVersionFormat = @"(17|18|19)(\\.\\d{1,2}){2}"; // Regular expression for the desired format
-    NSPredicate *validVersionPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validVersionFormat];
-    
-    if (![validVersionPredicate evaluateWithObject:textField.text]) {
-        // Invalid format, set the default value or display an error message
-        textField.text = @"17.00.0";
-        return;
-    }
 @end
