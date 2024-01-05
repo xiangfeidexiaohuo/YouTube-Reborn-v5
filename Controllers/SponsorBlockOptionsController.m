@@ -11,7 +11,7 @@
 	[super loadView];
     [self coloursView];
 
-    self.title = @"SponsorBlock Options (Beta)";
+    self.title = LOC(@"SPONSOR_BLOCK_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
