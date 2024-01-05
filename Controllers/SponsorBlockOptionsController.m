@@ -1,4 +1,5 @@
 #import "SponsorBlockOptionsController.h"
+#import "Localization.h"
 
 @interface SponsorBlockOptionsController ()
 - (void)coloursView;
