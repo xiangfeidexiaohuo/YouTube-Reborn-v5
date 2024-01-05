@@ -2512,6 +2512,7 @@ BOOL selectedTabIndex = NO;
 
 // App Version Spoofer (YouTube Reborn Version) - @arichorn
 %hook YTVersionUtils
+NSString *customAppVersion = nil; // Declare the global variable
 + (NSString *)appVersion {
     if (customAppVersion) {
         return customAppVersion;
