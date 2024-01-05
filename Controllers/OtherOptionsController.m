@@ -42,7 +42,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 12;
+    return 13;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,9 +150,19 @@
             autoHideHomeBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"];
             cell.accessoryView = autoHideHomeBar;
         }
-    }
-    return cell;
-}
+        if (indexPath.row == 12) {
+            cell.textLabel.text = LOC(@"APP_VERSION_SPOOFER");
+            UISwitch *appVersionSpoofer = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [appVersionSpoofer addTarget:self action:@selector(toggleAppVersionSpoofer:) forControlEvents:UIControlEventValueChanged];
+            appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
+            cell.accessoryView = appVersionSpoofer;
+            self.versionTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+            self.versionTextField.placeholder = @"Enter custom version";
+            self.versionTextField.enabled = appVersionSpoofer.isOn;
+            // Add a target to detect when the text field text changes
+            [self.versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+            cell.accessoryType = UITableViewCellAccessoryNone; // Remove the checkmark for Version spoofer
+            cell.accessoryView = self.versionTextField;
 
 - (void)coloursView {
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
@@ -305,5 +315,36 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kAutoHideHomeBar"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+
+- (void)toggleAppVersionSpoofer:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kAppVersionSpoofer"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kAppVersionSpoofer"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)versionTextFieldChanged:(UITextField *)textField {
+    NSString *validVersionFormat = @"\\d{2}\\.\\d{1}\\.\\d{1}";
+    NSPredicate *validVersionPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validVersionFormat];
+    
+    if (![validVersionPredicate evaluateWithObject:textField.text]) {
+        // Invalid format, clear the text field or display an error message
+        textField.text = @"";
+        return;
+    }
+    
+    NSString *firstTwoDigits = [textField.text substringToIndex:2];
+    
+    if (![self.defaultFirstTwoDigits containsObject:firstTwoDigits]) {
+        // Invalid first two digits, set the default value or display an error message
+        textField.text = [NSString stringWithFormat:@"%@.0.0", self.defaultFirstTwoDigits[0]];
+    }
+        }
+    }
+    return cell;
 }
 @end
