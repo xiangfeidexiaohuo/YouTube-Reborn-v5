@@ -60,7 +60,8 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Hide Subscriptions Tab";
 "HIDE_YOU_TAB" = "Hide You Tab";
 "REORDER_TABS" = "Reorder Tabs";
-"COLOR_OPTIONS" = "Color Options";
+"COLOR_OPTIONS" = "Color Options (Custom Theme)";
+"COLOR_OPTIONS_2" = "Color Options (Custom Texts and Icons)";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Picture In Picture Options";
@@ -85,6 +86,23 @@
 "DISABLE_RESUME_TO_SHORTS" = "Disable Resume to Shorts";
 "ALWAYS_SHOW_PROGRESS_BAR" = "Always Show Progress Bar";
 
+// Sponsor Block Options
+"SPONSOR_BLOCK_OPTIONS" = "Sponsor Block Options";
+"MAIN" = "Main";
+"MIRROR" = "Mirror";
+"DISABLE" = "Disable";
+"AUTO_SKIP" = "Auto Skip";
+"MANUAL_SKIP" = "Manual Skip";
+"SOURCE" = "Source";
+"SPONSOR" = "Sponsor";
+"SELFPROMO" = "Self Promo";
+"INTERACTION" = "Interaction";
+"INTRO" = "Intro";
+"OUTRO" = "Outro";
+"PREVIEW" = "Preview";
+"FILLER" = "Filler Tangent/Jokes";
+"MUSIC_AND_OFFTOPIC" = "Music/OffTopic";
+
 // Other Options
 "OTHER_OPTIONS" = "Other Options";
 
@@ -96,6 +114,7 @@
 "HIDE_PLAY_NEXT_IN_QUEUE" = "Hide 'Play next in queue'";
 "DISABLE_YOUTUBE_KIDS" = "Disable YouTube Kids";
 "DISABLE_HINTS" = "Disable Hints";
+"PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
 "HIDE_YOUTUBE_LOGO" = "Hide YouTube Logo";
 "STICK_NAVIGATION_BAR" = "Stick Navigation Bar";
 "LOW_CONTRAST_MODE" = "Low Contrast Mode";
