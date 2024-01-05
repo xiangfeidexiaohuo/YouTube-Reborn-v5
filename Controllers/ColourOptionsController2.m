@@ -22,7 +22,7 @@
     self.supportsAlpha = NO;
     NSData *lcmColorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kYTLcmColourOptionVFive"];
     NSKeyedUnarchiver *lcmUnarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:lcmColorData error:nil];
-    [lcmColorData setRequiresSecureCoding:NO];
+    [lcmUnarchiver setRequiresSecureCoding:NO];
     UIColor *color = [lcmUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
     self.selectedColor = color;
 }
