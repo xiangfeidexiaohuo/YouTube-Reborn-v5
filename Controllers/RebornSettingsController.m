@@ -3,7 +3,6 @@
 
 @interface RebornSettingsController ()
 - (void)coloursView;
-- (void)coloursView2;
 @end
 
 @implementation RebornSettingsController
@@ -11,7 +10,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coloursView];
-    [self coloursView2];
 
     self.title = LOC(@"REBORN_SETTINGS");
 
