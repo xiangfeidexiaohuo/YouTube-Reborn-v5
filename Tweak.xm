@@ -2566,7 +2566,6 @@ NSString *customAppVersion = nil; // Declare the global variable
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kPremiumYouTubeLogo"] == YES) %init(gPremiumYouTubeLogo);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"] == YES) %init(gHideYouTubeLogo);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kStickNavigationBar"] == YES) %init(gStickNavigationBar);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"] == YES) %init(gLowContrastMode);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"] == YES) %init(gAutoHideHomeBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideTabBarLabels"] == YES) %init(gHideTabBarLabels);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideExploreTab"] == YES) %init(gHideExploreTab);
