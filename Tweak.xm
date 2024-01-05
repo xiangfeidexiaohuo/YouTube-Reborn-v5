@@ -1029,7 +1029,7 @@ BOOL isAd(id node) {
 %end
 %end
 
-%group gLowContrastMode // Low Contrast Mode v1.4.2 (Compatible with only YouTube v16.05.7-v17.38.10)
+%group gColourOptions2 (Compatible with only YouTube v16.05.7-v17.38.10)
 %hook UIColor
 + (UIColor *)whiteColor { // Dark Theme Color
     if (lcmHexColor) {
@@ -1110,6 +1110,9 @@ BOOL isAd(id node) {
 }
 %end
 %hook YTColor
++ (UIColor *)white1 {
+    return [UIColor whiteColor];
+}
 + (UIColor *)white2 {
     return [UIColor whiteColor];
 }
@@ -1252,24 +1255,6 @@ BOOL isAd(id node) {
 %hook ASButtonNode
 - (void)setTextColor:(UIColor *)textColor {
    %orig([UIColor whiteColor]);
-}
-%end
-%hook UIImage
-+ (UIImage *)imageNamed:(NSString *)name {
-    UIImage *originalImage = %orig;
-    if ([name isEqualToString:@"sponsorblocksettings-20@2x.png"] || [name isEqualToString:@"ytrebornbuttonwhite.png"]) {
-        UIGraphicsBeginImageContextWithOptions(originalImage.size, NO, originalImage.scale);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGRect rect = CGRectMake(0, 0, originalImage.size.width, originalImage.size.height);
-        [originalImage drawInRect:rect];
-        CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-        CGContextSetBlendMode(context, kCGBlendModeSourceAtop);
-        CGContextFillRect(context, rect);
-        UIImage *modifiedImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        return modifiedImage;
-    }
-    return originalImage;
 }
 %end
 %end
@@ -2354,6 +2339,32 @@ BOOL selectedTabIndex = NO;
 %end
 %end
 
+%group gPremiumYouTubeLogo
+%hook YTHeaderLogoController
+- (void)setPremiumLogo:(BOOL)isPremiumLogo {
+    isPremiumLogo = YES;
+    %orig;
+}
+- (BOOL)isPremiumLogo {
+    return YES;
+}
+- (void)setTopbarLogoRenderer:(id)renderer {
+}
+%end
+%hook YTVersionUtils
++ (NSString *)appVersion { return @"18.34.5"; }
+%end
+%hook YTSettingsCell // Remove v18.34.5 Version Number - @Dayanch96
+- (void)setDetailText:(id)arg1 {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = infoDictionary[@"CFBundleShortVersionString"];
+    if ([arg1 isEqualToString:@"18.34.5"]) {
+        arg1 = appVersion;
+    } %orig(arg1);
+}
+%end
+%end
+
 %group gHideYouTubeLogo
 %hook YTHeaderLogoController
 - (YTHeaderLogoController *)init {
@@ -2552,6 +2563,7 @@ NSString *customAppVersion = nil; // Declare the global variable
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableYouTubeKidsPopup"] == YES) %init(gDisableYouTubeKids);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableExtraSpeedOptions"] == YES) %init(gExtraSpeedOptions);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableHints"] == YES) %init(gDisableHints);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kPremiumYouTubeLogo"] == YES) %init(gPremiumYouTubeLogo);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTubeLogo"] == YES) %init(gHideYouTubeLogo);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kStickNavigationBar"] == YES) %init(gStickNavigationBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kLowContrastMode"] == YES) %init(gLowContrastMode);
