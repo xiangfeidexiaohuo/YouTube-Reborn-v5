@@ -60,7 +60,8 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Ocultar pestaña Suscripciones";
 "HIDE_YOU_TAB" = "Ocultar pestaña Tú";
 "REORDER_TABS" = "Reordenar pestañas";
-"COLOR_OPTIONS" = "Opciones de color";
+"COLOR_OPTIONS" = "Opciones de color (Custom Theme)";
+"COLOR_OPTIONS_2" = "Opciones de color (Custom Texts and Icons)";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Opciones de imagen en imagen";
@@ -85,6 +86,24 @@
 "DISABLE_RESUME_TO_SHORTS" = "Desactivar Reanudar en Shorts";
 "ALWAYS_SHOW_PROGRESS_BAR" = "Mostrar siempre barra de progreso";
 
+// Sponsor Block Options
+"SPONSOR_BLOCK_OPTIONS" = "Sponsor Block Options";
+
+"MAIN" = "Main";
+"MIRROR" = "Mirror";
+"DISABLE" = "Disable";
+"AUTO_SKIP" = "Auto Skip";
+"MANUAL_SKIP" = "Manual Skip";
+"SOURCE" = "Source";
+"SPONSOR" = "Sponsor";
+"SELFPROMO" = "Self Promo";
+"INTERACTION" = "Interaction";
+"INTRO" = "Intro";
+"OUTRO" = "Outro";
+"PREVIEW" = "Preview";
+"FILLER" = "Filler Tangent/Jokes";
+"MUSIC_AND_OFFTOPIC" = "Music/OffTopic";
+
 // Other Options
 "OTHER_OPTIONS" = "Otras opciones";
 
@@ -96,10 +115,13 @@
 "HIDE_PLAY_NEXT_IN_QUEUE" = "Ocultar 'Reproducir siguiente en cola'";
 "DISABLE_YOUTUBE_KIDS" = "Desactivar YouTube Kids";
 "DISABLE_HINTS" = "Desactivar sugerencias";
+"PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
 "HIDE_YOUTUBE_LOGO" = "Ocultar el logotipo de YouTube";
 "STICK_NAVIGATION_BAR" = "Barra de navegación";
 "LOW_CONTRAST_MODE" = "Modo de bajo contraste";
 "AUTO_HIDE_HOME_BAR" = "Ocultar automáticamente la barra de inicio";
+"APP_VERSION_SPOOFER" = "App Version Spoofer";
+"ENTER_CUSTOM_APP_VERSION" = "Enter custom app version";
 
 // Reborn Settings
 "REBORN_SETTINGS" = "Ajustes de Reborn";
