@@ -100,6 +100,8 @@
 "STICK_NAVIGATION_BAR" = "Stick Navigation Bar";
 "LOW_CONTRAST_MODE" = "Low Contrast Mode";
 "AUTO_HIDE_HOME_BAR" = "Auto-Hide Home Bar";
+"APP_VERSION_SPOOFER" = "App Version Spoofer";
+"ENTER_CUSTOM_APP_VERSION" = "Enter custom app version";
 
 // Reborn Settings
 "REBORN_SETTINGS" = "Reborn Settings";
