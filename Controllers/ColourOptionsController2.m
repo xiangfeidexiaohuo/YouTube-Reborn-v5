@@ -30,7 +30,7 @@
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
-    [self coloursView2];
+    [self coloursView];
 }
 
 @end
