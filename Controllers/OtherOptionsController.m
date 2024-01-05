@@ -164,6 +164,10 @@
             [self.versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
             cell.accessoryType = UITableViewCellAccessoryNone; // Remove the checkmark for Version spoofer
             cell.accessoryView = self.versionTextField;
+	}
+    }
+    return cell;
+}
 
 - (void)coloursView {
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
