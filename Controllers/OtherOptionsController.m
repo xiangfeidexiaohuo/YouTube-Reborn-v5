@@ -190,27 +190,23 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
 }
 
 - (void)versionTextFieldChanged:(UITextField *)textField {
-    NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    NSString *customVersion = textField.text;
     
-    if ([textField.text length] > 7 || ![textField.text stringByTrimmingCharactersInSet:allowedCharacterSet].length) {
-        // Invalid format or length, clear the text field or display an error message
-        textField.text = @"";
-        return;
-    }
-    
-    NSString *validVersionFormat = @"(17|18|19)(\\.\\d{1,2}){2}"; // Regular expression for the desired format
+    NSString *validVersionFormat = @"(17|18|19)(\\.\\d{1,2}){2}";
     NSPredicate *validVersionPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validVersionFormat];
-    
-    if (![validVersionPredicate evaluateWithObject:textField.text]) {
+
+    NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    NSCharacterSet *inputCharacterSet = [NSCharacterSet characterSetWithCharactersInString:customVersion];
+
+   if (![validVersionPredicate evaluateWithObject:customVersion] || ![allowedCharacterSet isSupersetOfSet:inputCharacterSet]) {
         // Invalid format, set the default value or display an error message
         textField.text = @"18.49.3";
         return;
-    }
+    } 
+    customAppVersion = customVersion;
 }
 
 @end
