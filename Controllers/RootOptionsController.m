@@ -314,7 +314,6 @@
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
-    [self coloursView2];
     [self.tableView reloadData];
 }
 
