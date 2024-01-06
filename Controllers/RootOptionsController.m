@@ -244,7 +244,7 @@
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 8) {
-            SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc];
+            SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc] init];
             UINavigationController *sponsorBlockOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:sponsorBlockOptionsController];
             sponsorBlockOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
