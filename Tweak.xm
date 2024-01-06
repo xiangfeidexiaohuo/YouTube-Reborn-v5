@@ -1029,7 +1029,7 @@ BOOL isAd(id node) {
 %end
 %end
 
-%group gColourOptions2 (Compatible with only YouTube v16.05.7-v17.38.10)
+%group gColourOptions2 // (Compatible with only YouTube v16.05.7-v17.38.10)
 %hook UIColor
 + (UIColor *)whiteColor { // Dark Theme Color
     if (lcmHexColor) {
