@@ -105,33 +105,33 @@
 "MUSIC_AND_OFFTOPIC" = "Music/OffTopic";
 
 // Other Options
-"OTHER_OPTIONS" = "Other Options";
+"OTHER_OPTIONS" = "Tuỳ chọn khác";
 
-"IPAD_LAYOUT" = "iPad Layout";
-"IPHONE_LAYOUT" = "iPhone Layout";
-"HIDE_CAST_BUTTON" = "Hide Cast Button";
-"HIDE_NOTIFICATION_BUTTON" = "Hide Notification Button";
-"HIDE_SEARCH_BUTTON" = "Hide Search Button";
-"HIDE_PLAY_NEXT_IN_QUEUE" = "Hide 'Play next in queue'";
-"DISABLE_YOUTUBE_KIDS" = "Disable YouTube Kids";
-"DISABLE_HINTS" = "Disable Hints";
-"PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
-"HIDE_YOUTUBE_LOGO" = "Hide YouTube Logo";
-"STICK_NAVIGATION_BAR" = "Stick Navigation Bar";
-"AUTO_HIDE_HOME_BAR" = "Auto-Hide Home Bar";
-"APP_VERSION_SPOOFER" = "App Version Spoofer";
-"ENTER_CUSTOM_APP_VERSION" = "Enter custom app version";
+"IPAD_LAYOUT" = "Bố cục iPad";
+"IPHONE_LAYOUT" = "Bố cục iPhone";
+"HIDE_CAST_BUTTON" = "Ẩn nút truyền";
+"HIDE_NOTIFICATION_BUTTON" = "Ẩn nút thông báo";
+"HIDE_SEARCH_BUTTON" = "Ẩn nút tìm kiếm";
+"HIDE_PLAY_NEXT_IN_QUEUE" = "Ẩn 'Chơi tiếp theo trong hàng đợi'";
+"DISABLE_YOUTUBE_KIDS" = "Tắt YouTube Kids";
+"DISABLE_HINTS" = "Tắt gợi ý";
+"PREMIUM_YOUTUBE_LOGO" = "Biểu tượng YouTube cao cấp";
+"HIDE_YOUTUBE_LOGO" = "Ẩn biểu tượng YouTube";
+"STICK_NAVIGATION_BAR" = "Thanh điều hướng thanh";
+"AUTO_HIDE_HOME_BAR" = "Tự động ẩn thanh chính";
+"APP_VERSION_SPOOFER" = "Phiên bản ứng dụng giả mạo";
+"ENTER_CUSTOM_APP_VERSION" = "Nhập phiên bản ứng dụng tùy chỉnh";
 
 // Reborn Settings
-"REBORN_SETTINGS" = "Reborn Settings";
+"REBORN_SETTINGS" = "Cài đặt Reborn";
 
-"I_HAVE_YOUTUBE_PREMIUM" = "I Have YouTube Premium";
-"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Hide Video Overlay 'OP' Button";
-"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Hide Shorts Overlay 'OP' Button";
-"RESET_COLOR_OPTIONS" = "Reset Color Options";
-"RESET_YOUTUBE_REBORN_OPTIONS" = "Reset All YouTube Reborn Options";
+"I_HAVE_YOUTUBE_PREMIUM" = "Tôi có YouTube Premium";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' Lớp phủ video";
+"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' lớp phủ quần short";
+"RESET_COLOR_OPTIONS" = "Đặt lại tùy chọn màu";
+"RESET_YOUTUBE_REBORN_OPTIONS" = "Đặt lại tất cả các tùy chọn tái sinh trên YouTube";
 
 // Credits
-"CREDITS_BUTTON" = "Credits";
-"DEVELOPER_TEXT" = "Developer";
-"ICON_DESIGNER_TEXT" = "Icon Designer";
+"CREDITS_BUTTON" = "Tín dụng";
+"DEVELOPER_TEXT" = "Nhà phát triển";
+"ICON_DESIGNER_TEXT" = "Trình thiết kế biểu tượng";
