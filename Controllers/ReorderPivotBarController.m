@@ -101,6 +101,18 @@ if (indexPath.section == 1) {
     return cell;
 }
 
+- (void)setTabItemsWithOrder:(NSArray *)order {
+    NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
+    for (NSString *tabItem in order) {
+        NSInteger index = [self.tabOrder indexOfObject:tabItem];
+        if (index != NSNotFound) {
+            [reorderedTabs replaceObjectAtIndex:index withObject:tabItem];
+        }
+    }
+    self.tabOrder = reorderedTabs;
+    [self.tableView reloadData];
+}
+
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint location = [gestureRecognizer locationInView:self.tableView];
@@ -110,7 +122,7 @@ if (indexPath.section == 1) {
             NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
             if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
                 [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Home"];
-            }
+                }
                 if ([tabIdentifier isEqualToString:@"FEshorts"]) {
                 [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Shorts"];
                 }
@@ -126,7 +138,8 @@ if (indexPath.section == 1) {
             [self setTabOrder:reorderedTabs];
             NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:reorderedTabs.count - 1 inSection:0];
             [self.tableView beginUpdates];
-            [self.tableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
+            NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
             [self.tableView endUpdates];
         }
     }
