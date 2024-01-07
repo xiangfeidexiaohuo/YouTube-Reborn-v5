@@ -13,19 +13,25 @@
     [super viewDidLoad];
     [self configureUI];
 
-    NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
-    NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
-    NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
-    NSString *whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
+    NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubeReborn" ofType:@"bundle"];
+    NSString *whiteImageVideoPath;
+    NSString *blackImageVideoPath;
+    NSString *whiteImageAudioPath;
+    NSString *blackImageAudioPath;
+    NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
 
-    UIImage *blackImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-    blackImageVideo = [blackImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage *whiteImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-    blackImageVideo = [whiteImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage *blackImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-    blackImageVideo = [blackImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage *whiteImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-    blackImageVideo = [whiteImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    if (tweakBundlePath) {
+        NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
+        whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
+        blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
+		whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
+        blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
+    } else {
+		whiteImageVideoPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonvideowhite.png");
+        blackImageVideoPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonvideoblack.png");
+		whiteImageAudioPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonaudiowhite.png");
+        blackImageAudioPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonaudioblack.png");
+    }
 }
 
 - (void)configureUI {
