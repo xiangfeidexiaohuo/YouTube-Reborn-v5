@@ -1509,38 +1509,59 @@ BOOL isAd(id node) {
 %end
 %end
 
-%hook YTIPivotBarItemRender
+%hook YTIPivotBarItemRenderer
 - (void)viewDidLoad {
     %orig();
     NSArray *tabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
-    
     NSDictionary *tabPositions = @{
-        @"FEwhat_to_watch": @(0), // Home
-        @"FEshorts": @(1), // Shorts
-        @"FEuploads": @(2), // Create
-        @"FEsubscriptions": @(3), // Subscriptions
-        @"FElibrary": @(4) // You
+        @"id.ui.pivotbar.FEwhat_to_watch.button": @(0), // Home
+        @"id.ui.pivotbar.FEshorts.button": @(1), // Shorts
+        @"id.ui.pivotbar.FEuploads.button": @(2), // Create
+        @"id.ui.pivotbar.FEsubscriptions.button": @(3), // Subscriptions
+        @"id.ui.pivotbar.FElibrary.button": @(4) // You
     };
-    NSArray *sortedTabOrder = [tabOrder sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSNumber *position1 = tabPositions[obj1];
-        NSNumber *position2 = tabPositions[obj2];
+    NSMutableArray *sortedTabOrder = [NSMutableArray array];
+    for (NSString *tabIdentifier in tabOrder) {
+        NSNumber *position = tabPositions[tabIdentifier];
+        if (position != nil) {
+            [sortedTabOrder addObject:@{@"identifier": tabIdentifier, @"position": position}];
+        }
+    }
+    [sortedTabOrder sortUsingComparator:^NSComparisonResult(NSDictionary *tab1, NSDictionary *tab2) {
+        NSNumber *position1 = tab1[@"position"];
+        NSNumber *position2 = tab2[@"position"];
         return [position1 compare:position2];
     }];
     NSMutableArray *reorderedTabs = [NSMutableArray array];
-    for (NSString *tabIdentifier in sortedTabOrder) {
-        for (id tabItem in self.tabItems) {
-            if ([tabItem respondsToSelector:@selector(pivotIdentifier)]) {
-                NSString *pivotIdentifier = [tabItem pivotIdentifier];
-                if ([pivotIdentifier isEqualToString:tabIdentifier]) {
-                    [reorderedTabs addObject:tabItem];
-                    break;
-                }
+    for (NSDictionary *tabInfo in sortedTabOrder) {
+        NSString *tabIdentifier = tabInfo[@"identifier"];
+        [reorderedTabs addObject:tabIdentifier];
+    }
+    [self setTabOrder:reorderedTabs];
+
+    for (int i = 0; i < reorderedTabs.count; i++) {
+        NSString *tabIdentifier = reorderedTabs[i];
+        NSString *accessibilityIdentifier = [NSString stringWithFormat:@"id.ui.pivotbar.%@.button", tabIdentifier];
+        UIView *tabView = [self findTabViewWithAccessibilityIdentifier:accessibilityIdentifier];
+        if (tabView != nil) {
+            NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:cell];
+            if (![currentIndexPath isEqual:destinationIndexPath]) {
+                [self.tableView moveRowAtIndexPath:currentIndexPath toIndexPath:destinationIndexPath];
             }
         }
     }
-    [self setTabItems:reorderedTabs];
+}
+- (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier {
+    for (UITableViewCell *cell in self.tableView.visibleCells) {
+        if ([cell.accessibilityIdentifier isEqualToString:accessibilityIdentifier]) {
+            return cell;
+        }
+    }
+    return nil;
 }
 %end
+
 
 BOOL selectedTabIndex = NO;
 
