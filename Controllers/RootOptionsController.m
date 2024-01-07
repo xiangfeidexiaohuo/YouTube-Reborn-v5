@@ -36,7 +36,6 @@
     self.navigationItem.rightBarButtonItem = searchButton;
     self.filteredItems = [NSArray array];
     self.isSearching = NO;
-}
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
