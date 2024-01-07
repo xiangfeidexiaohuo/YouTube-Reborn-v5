@@ -89,6 +89,7 @@
     } else {
         return self.allItems.count;
     }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"VideoDownloadsTableViewCell";
@@ -121,14 +122,13 @@
     }
     @catch (NSException *exception) {
     }
+    NSString *item;
+    if (self.isSearching) {
+        item = self.filteredItems[indexPath.row];
+    } else {
+        item = self.allItems[indexPath.row];
+    }
     return cell;
-}
-
-NSString *item;
-if (self.isSearching) {
-item = self.filteredItems[indexPath.row];
-} else {
-item = self.allItems[indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
