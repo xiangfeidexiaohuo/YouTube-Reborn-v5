@@ -78,8 +78,7 @@
                 cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
 //              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/91358136?v=4"]
-                placeholderImage:[tweakBundle pathForResource:@"ytrebornbuttonwhite.png"]];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/91358136?v=4"]];
                 cell.imageView.image = profileImageView.image;
             }
         }
@@ -89,8 +88,7 @@
                 cell.detailTextLabel.text = LOC(@"ICON_DESIGNER_TEXT");
 //              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]
-                placeholderImage:[tweakBundle pathForResource:@"ytrebornbuttonwhite.png"]];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]];
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 1) {
@@ -98,8 +96,7 @@
                 cell.detailTextLabel.text = @"Development Support";
 //              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/773309?v=4"]
-                placeholderImage:[tweakBundle pathForResource:@"ytrebornbuttonwhite.png"]];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/773309?v=4"]];
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 2) {
@@ -107,8 +104,7 @@
                 cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
                 cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/38832025?v=4"]
-                placeholderImage:[tweakBundle pathForResource:@"ytrebornbuttonwhite.png"]];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/38832025?v=4"]];
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 3) {
@@ -116,8 +112,7 @@
                 cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
                 cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/3608783?v=4"]
-                placeholderImage:[tweakBundle pathForResource:@"ytrebornbuttonwhite.png"]];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/3608783?v=4"]];
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 4) {
@@ -125,8 +120,7 @@
                 cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\"";
     //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/87893636?v=4"]
-                placeholderImage:[tweakBundle pathForResource:@"ytrebornbuttonwhite.png"]];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/87893636?v=4"]];
                 cell.imageView.image = profileImageView.image;
             }
             if (indexPath.row == 5) {
@@ -134,8 +128,7 @@
                 cell.detailTextLabel.text = @"Features: \"Enable Extra Video Speed\"";
     //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]
-                placeholderImage:[tweakBundle pathForResource:@"ytrebornbuttonwhite.png"]];
+                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]];
                 cell.imageView.image = profileImageView.image;
             }
         }
