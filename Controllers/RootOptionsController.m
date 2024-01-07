@@ -97,19 +97,26 @@
     if (section == 2) {
         return 2;
     }
-    return 0;
-}
-
-    if (self.isSearching) {
-        return self.filteredItems.count;
-    } else {
-        return self.allItems.count;
+    if (section == 3) {
+        if (self.isSearching) {
+            return self.filteredItems.count;
+        } else {
+            return self.allItems.count;
+        }
     }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"RootTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *item;
+    
+    if (self.isSearching) {
+        item = self.filteredItems[indexPath.row];
+    } else {
+        item = self.allItems[indexPath.row];
+    }
 
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
@@ -182,12 +189,11 @@
     return cell;
 }
 
-NSString *item;
-if (self.isSearching) {
-item = self.filteredItems[indexPath.row];
-} else {
-item = self.allItems[indexPath.row];
-}
+    if (self.isSearching) {
+        return self.filteredItems.count;
+    } else {
+        return self.allItems.count;
+    }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
