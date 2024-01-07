@@ -39,14 +39,24 @@
     ]];
 }
 
-UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonTapped)];
-self.navigationItem.rightBarButtonItem = searchButton;
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+    self.navigationItem.rightBarButtonItem = searchButton;
+    self.filteredItems = [NSArray array];
+    self.isSearching = NO;
 
-- (void)searchButtonTapped {
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44)];
-    searchBar.delegate = self;
-    self.tableView.tableHeaderView = searchBar;
-    [searchBar becomeFirstResponder];
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    NSString *searchText = searchBar.text;
+
+    if (searchText.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", searchText];
+        self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
+        self.isSearching = YES;
+    } else {
+        self.filteredItems = [NSArray array];
+        self.isSearching = NO;
+    }
+    [self.tableView reloadData];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -72,10 +82,12 @@ self.navigationItem.rightBarButtonItem = searchButton;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView.tableHeaderView) {
-        return self.filteredVideoArray.count;
+    return [filePathsVideoArray count];
+
+        if (self.isSearching) {
+        return self.filteredItems.count;
     } else {
-        return filePathsVideoArray.count;
+        return self.allItems.count;
     }
 }
 
@@ -111,6 +123,13 @@ self.navigationItem.rightBarButtonItem = searchButton;
     @catch (NSException *exception) {
     }
     return cell;
+}
+
+NSString *item;
+if (self.isSearching) {
+item = self.filteredItems[indexPath.row];
+} else {
+item = self.allItems[indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
