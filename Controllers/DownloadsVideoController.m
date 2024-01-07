@@ -82,14 +82,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [filePathsVideoArray count];
-
-        if (self.isSearching) {
-        return self.filteredItems.count;
-    } else {
-        return self.allItems.count;
-    }
+NSString *item;
+if (self.isSearching) {
+item = self.filteredItems[indexPath.row];
+} else {
+item = self.allItems[indexPath.row];
 }
+    return [filePathsVideoArray count];
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"VideoDownloadsTableViewCell";
