@@ -47,6 +47,9 @@
         self.tabOrder = [NSMutableArray arrayWithArray:savedTabOrder];
 }
 
+- (void)setupView {
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -104,8 +107,6 @@ if (indexPath.section == 1) {
             [reorderedTabs replaceObjectAtIndex:index withObject:tabItem];
         }
     }
-    self.tabOrder = reorderedTabs;
-    [self.tableView reloadData];
 }
 - (void)reset {
     self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You"];
