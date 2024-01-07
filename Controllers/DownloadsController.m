@@ -13,6 +13,7 @@
     [super viewDidLoad];
     [self configureUI];
 
+    NSBundle *tweakBundle = [NSBundle bundleForClass:[self class]];
     NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
     NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
     NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
