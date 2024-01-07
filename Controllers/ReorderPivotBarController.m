@@ -1,7 +1,7 @@
 #import "ReorderPivotBarController.h"
 #import "Localization.h"
 
-@interface ReorderPivotBarController () <UITableViewDelegate>
+@interface ReorderPivotBarController ()
 
 @property (nonatomic, strong) NSMutableArray *tabOrder;
 
@@ -45,9 +45,6 @@
     NSArray *savedTabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
     if (savedTabOrder != nil) {
         self.tabOrder = [NSMutableArray arrayWithArray:savedTabOrder];
-}
-
-- (void)setupView {
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -99,18 +96,6 @@ if (indexPath.section == 1) {
     return cell;
 }
 
-- (void)reset {
-    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
-    [self.tableView reloadData];
-    [self save];
-}
-- (void)save {
-    [[NSUserDefaults standardUserDefaults] setObject:self.tabOrder forKey:@"kTabOrder"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-- (void)done {   
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
 - (void)setTabItemsWithOrder:(NSArray *)order {
     NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
     for (NSString *tabItem in order) {
@@ -121,6 +106,18 @@ if (indexPath.section == 1) {
     }
     self.tabOrder = reorderedTabs;
     [self.tableView reloadData];
+}
+- (void)reset {
+    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You"];
+    [self.tableView reloadData];
+    [self save];
+}
+- (void)save {
+    [[NSUserDefaults standardUserDefaults] setObject:self.tabOrder forKey:@"kTabOrder"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+- (void)done {   
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
