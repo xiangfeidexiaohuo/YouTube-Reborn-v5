@@ -17,7 +17,9 @@
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
+    UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
     self.navigationItem.rightBarButtonItems = @[doneButton, saveButton];
+    self.navigationItem.leftBarButtonItems = @[resetButton];
 
     UITableViewStyle style;
         if (@available(iOS 13, *)) {
@@ -28,8 +30,9 @@
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
     [self.view addSubview:self.tableView];
     
     [NSLayoutConstraint activateConstraints:@[
@@ -39,10 +42,9 @@
         [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
     ]];
     
-    self.tabOrder = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"]];
-    
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-    [self.tableView addGestureRecognizer:longPressGesture];
+    NSArray *savedTabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
+    if (savedTabOrder != nil) {
+        self.tabOrder = [NSMutableArray arrayWithArray:savedTabOrder];
 }
 
 - (void)setupView {
@@ -87,9 +89,9 @@ if (indexPath.section == 1) {
         cell.textLabel.text = @"Shorts";
     } else if (indexPath.row == 2) {
         cell.textLabel.text = @"Create";
-    } else if (indexPath.row == 2) {
-        cell.textLabel.text = @"Subscriptions";
     } else if (indexPath.row == 3) {
+        cell.textLabel.text = @"Subscriptions";
+    } else if (indexPath.row == 4) {
         cell.textLabel.text = @"You";
     }
         
@@ -128,6 +130,11 @@ if (indexPath.section == 1) {
             [self.tableView endUpdates];
         }
     }
+}
+- (void)reset {
+    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
+    [self.tableView reloadData];
+    [self save];
 }
 - (void)save {
     [[NSUserDefaults standardUserDefaults] setObject:self.tabOrder forKey:@"kTabOrder"];
