@@ -94,56 +94,11 @@ if (indexPath.section == 1) {
     } else if (indexPath.row == 4) {
         cell.textLabel.text = @"You";
     }
-        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
     return cell;
 }
 
-- (void)setTabItemsWithOrder:(NSArray *)order {
-    NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
-    for (NSString *tabItem in order) {
-        NSInteger index = [self.tabOrder indexOfObject:tabItem];
-        if (index != NSNotFound) {
-            [reorderedTabs replaceObjectAtIndex:index withObject:tabItem];
-        }
-    }
-    self.tabOrder = reorderedTabs;
-    [self.tableView reloadData];
-}
-
-- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint location = [gestureRecognizer locationInView:self.tableView];
-        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
-        if (indexPath && indexPath.section == 0) {
-            NSString *tabIdentifier = self.tabOrder[indexPath.row]; 
-            NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
-            if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
-                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Home"];
-                }
-                if ([tabIdentifier isEqualToString:@"FEshorts"]) {
-                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Shorts"];
-                }
-                if ([tabIdentifier isEqualToString:@"FEuploads"]) {
-                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Create"];
-                }
-                if ([tabIdentifier isEqualToString:@"FEsubscriptions"]) {
-                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Subscriptions"];
-                }
-                if ([tabIdentifier isEqualToString:@"FElibrary"]) {
-                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"You"];
-                }
-            [self setTabOrder:reorderedTabs];
-            NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:reorderedTabs.count - 1 inSection:0];
-            [self.tableView beginUpdates];
-            NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            [self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-            [self.tableView endUpdates];
-        }
-    }
-}
 - (void)reset {
     self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
     [self.tableView reloadData];
@@ -155,6 +110,17 @@ if (indexPath.section == 1) {
 }
 - (void)done {   
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)setTabItemsWithOrder:(NSArray *)order {
+    NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
+    for (NSString *tabItem in order) {
+        NSInteger index = [self.tabOrder indexOfObject:tabItem];
+        if (index != NSNotFound) {
+            [reorderedTabs replaceObjectAtIndex:index withObject:tabItem];
+        }
+    }
+    self.tabOrder = reorderedTabs;
+    [self.tableView reloadData];
 }
 
 @end
