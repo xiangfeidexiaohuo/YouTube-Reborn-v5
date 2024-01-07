@@ -43,6 +43,12 @@
     UIBarButtonItem *applyButton = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(apply)];
     self.navigationItem.rightBarButtonItem = applyButton;
 
+        if (self.isSearching) {
+            return self.filteredItems.count;
+        } else {
+            return self.allItems.count;
+        }
+
     UITableViewStyle style;
         if (@available(iOS 13, *)) {
             style = UITableViewStyleInsetGrouped;
@@ -96,13 +102,6 @@
     }
     if (section == 2) {
         return 2;
-    }
-    if (section == 3) {
-        if (self.isSearching) {
-            return self.filteredItems.count;
-        } else {
-            return self.allItems.count;
-        }
     }
     return 0;
 }
