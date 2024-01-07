@@ -43,7 +43,7 @@
     static NSString *cellIdentifier = @"VideoDownloadsCollectionViewCell";
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
 
-    VideoFile *videoFile = [FileManager.defaultManager getVideoFileAtIndex:indexPath.item];
+    VideoFile *videoFile = [NSFileManager.defaultManager getVideoFileAtIndex:indexPath.item];
     [cell configureWithVideoFile:videoFile];
 
     UIImageView *thumbnailImageView = [cell viewWithTag:100];
@@ -91,7 +91,6 @@
 return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     NSString *currentFileName = filePathsVideoArray[indexPath.item];
@@ -108,7 +107,6 @@ return cell;
     [self presentViewController:playerViewController animated:YES completion:nil];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *currentVideoFileName = filePathsVideoArray[indexPath.item];
     NSString *currentArtworkFileName = filePathsVideoArtworkArray[indexPath.item];
 
