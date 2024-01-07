@@ -32,6 +32,7 @@
     
     self.tabBar = [[UITabBarController alloc] init];
 
+    NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubeReborn" ofType:@"bundle"];
     NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
     NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
     NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
