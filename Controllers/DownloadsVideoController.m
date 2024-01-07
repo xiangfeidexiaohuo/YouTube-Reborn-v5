@@ -39,6 +39,42 @@
     ]];
 }
 
+UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButtonTapped)];
+self.navigationItem.rightBarButtonItem = searchButton;
+
+- (void)searchButtonTapped {
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44)];
+    searchBar.delegate = self;
+    self.tableView.tableHeaderView = searchBar;
+    [searchBar becomeFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.lastPathComponent CONTAINS[cd] %@", searchText];
+        self.filteredVideoArray = [[filePathsVideoArray filteredArrayUsingPredicate:predicate] mutableCopy];
+    } else {
+        self.filteredVideoArray = [filePathsVideoArray mutableCopy];
+    }
+    [self.tableView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+    self.tableView.tableHeaderView = nil;
+    self.filteredVideoArray = [filePathsVideoArray mutableCopy];
+    [self.tableView reloadData];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView.tableHeaderView) {
+        return self.filteredVideoArray.count;
+    } else {
+        return filePathsVideoArray.count;
+    }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -54,7 +90,9 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
+        cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+        cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
@@ -183,8 +221,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
 }
 
 @end
