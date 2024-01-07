@@ -18,18 +18,17 @@
     NSString *blackImageVideoPath;
     NSString *whiteImageAudioPath;
     NSString *blackImageAudioPath;
-    NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
 
     if (tweakBundlePath) {
         NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
         whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
         blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
-		whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
+	whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
         blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
     } else {
-		whiteImageVideoPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonvideowhite.png");
+	whiteImageVideoPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonvideowhite.png");
         blackImageVideoPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonvideoblack.png");
-		whiteImageAudioPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonaudiowhite.png");
+	whiteImageAudioPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonaudiowhite.png");
         blackImageAudioPath = ROOT_PATH_NS(@"/Library/Application Support/YouTubeReborn.bundle/ytrebornbuttonaudioblack.png");
     }
 }
@@ -54,15 +53,15 @@
     
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"VIDEO_TAB");
-    UITabBarItem *videoTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageVideo tag:0];
-    [videoTabBarItem setSelectedImage:whiteImageVideo];
+    UITabBarItem *videoTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageVideoPath tag:0];
+    [videoTabBarItem setSelectedImage:whiteImageVideoPath];
     videoViewController.tabBarItem = videoTabBarItem;
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
     
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
     audioViewController.title = LOC(@"AUDIO_TAB");
-    UITabBarItem *audioTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageAudio tag:1];
-    [audioTabBarItem setSelectedImage:whiteImageAudio];
+    UITabBarItem *audioTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageAudioPath tag:1];
+    [audioTabBarItem setSelectedImage:whiteImageAudioPath];
     audioViewController.tabBarItem = audioTabBarItem;
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
     
