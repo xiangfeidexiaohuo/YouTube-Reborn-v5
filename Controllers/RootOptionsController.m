@@ -31,7 +31,13 @@
     [self coloursView];
 
     self.title = @"YouTube Reborn";
-    
+
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+    self.navigationItem.rightBarButtonItem = searchButton;
+    self.filteredItems = [NSArray array];
+    self.isSearching = NO;
+}
+
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
 
@@ -59,6 +65,21 @@
     ]];
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    NSString *searchText = searchBar.text;
+    
+    if (searchText.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", searchText];
+        self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
+        self.isSearching = YES;
+    } else {
+        self.filteredItems = [NSArray array];
+        self.isSearching = NO;
+    }
+    [self.tableView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
@@ -78,6 +99,13 @@
         return 2;
     }
     return 0;
+}
+
+    if (self.isSearching) {
+        return self.filteredItems.count;
+    } else {
+        return self.allItems.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -153,6 +181,13 @@
         }
     }
     return cell;
+}
+
+NSString *item;
+if (self.isSearching) {
+item = self.filteredItems[indexPath.row];
+} else {
+item = self.allItems[indexPath.row];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
