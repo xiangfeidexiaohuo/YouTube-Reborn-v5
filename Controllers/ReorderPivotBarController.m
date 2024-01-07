@@ -2,9 +2,8 @@
 #import "Localization.h"
 
 @interface ReorderPivotBarController ()
-
 @property (nonatomic, strong) NSMutableArray *tabOrder;
-
+- (void)setupView;
 @end
 
 @implementation ReorderPivotBarController
