@@ -31,17 +31,26 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     
     self.tabBar = [[UITabBarController alloc] init];
+
+    NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
+    NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
+    NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
+    NSString *whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
+    UIImage *blackImageVideo = [[UIImage imageWithContentsOfFile:blackImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *whiteImageVideo = [[UIImage imageWithContentsOfFile:whiteImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *blackImageAudio = [[UIImage imageWithContentsOfFile:blackImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *whiteImageAudio = [[UIImage imageWithContentsOfFile:whiteImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"Video");
-    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonvideoblack.png"] tag:0];
-    videoViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonvideowhite.png" inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
+    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageVideo tag:0];
+    videoViewController.tabBarItem.selectedImage = whiteImageVideo;
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
     
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
     audioViewController.title = LOC(@"Audio");
-    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonaudioblack.png"] tag:1];
-    audioViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonaudiowhite.png" inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
+    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageAudio tag:1];
+    audioViewController.tabBarItem.selectedImage = whiteImageAudio;
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
     
     self.tabBar.viewControllers = @[videoNavViewController, audioNavViewController];
