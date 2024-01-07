@@ -38,13 +38,13 @@ UIImage *whiteImageAudio = [[UIImage imageWithContentsOfFile:whiteImageAudioPath
     self.tabBar = [[UITabBarController alloc] init];
     
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
-    videoViewController.title = LOC(@"Video");
+    videoViewController.title = LOC(@"VIDEO_TAB");
     videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageVideo tag:0];
     videoViewController.tabBarItem.selectedImage = whiteImageVideo;
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
     
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
-    audioViewController.title = LOC(@"Audio");
+    audioViewController.title = LOC(@"AUDIO_TAB");
     audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageAudio tag:1];
     audioViewController.tabBarItem.selectedImage = whiteImageAudio;
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
