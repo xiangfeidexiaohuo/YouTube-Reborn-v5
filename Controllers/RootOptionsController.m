@@ -182,12 +182,6 @@
     return cell;
 }
 
-    if (self.isSearching) {
-        return self.filteredItems.count;
-    } else {
-        return self.allItems.count;
-    }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
