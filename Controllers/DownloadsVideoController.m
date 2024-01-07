@@ -17,6 +17,11 @@
     [super viewDidLoad];
     [self coloursView];
 
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
+    self.navigationItem.rightBarButtonItem = searchButton;
+    self.filteredItems = [NSArray array];
+    self.isSearching = NO;
+
     UITableViewStyle style;
         if (@available(iOS 13, *)) {
             style = UITableViewStyleInsetGrouped;
@@ -39,11 +44,6 @@
     ]];
 }
 
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
-    self.navigationItem.rightBarButtonItem = searchButton;
-    self.filteredItems = [NSArray array];
-    self.isSearching = NO;
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     NSString *searchText = searchBar.text;
@@ -56,24 +56,6 @@
         self.filteredItems = [NSArray array];
         self.isSearching = NO;
     }
-    [self.tableView reloadData];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if (searchText.length > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.lastPathComponent CONTAINS[cd] %@", searchText];
-        self.filteredVideoArray = [[filePathsVideoArray filteredArrayUsingPredicate:predicate] mutableCopy];
-    } else {
-        self.filteredVideoArray = [filePathsVideoArray mutableCopy];
-    }
-    [self.tableView reloadData];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    searchBar.text = @"";
-    [searchBar resignFirstResponder];
-    self.tableView.tableHeaderView = nil;
-    self.filteredVideoArray = [filePathsVideoArray mutableCopy];
     [self.tableView reloadData];
 }
 
