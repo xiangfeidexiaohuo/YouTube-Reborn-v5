@@ -3,6 +3,17 @@
 #import "DownloadsAudioController.h"
 #import "Localization.h"
 
+@interface DownloadsController ()
+- (void)configureUI;
+- (void)doneButtonTapped;
+@end
+
+@implementation DownloadsController
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self configureUI];
+}
+
 NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
 NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
 NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
@@ -16,17 +27,6 @@ UIImage *blackImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath]
 blackImageVideo = [blackImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 UIImage *whiteImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
 blackImageVideo = [whiteImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-
-@interface DownloadsController ()
-- (void)configureUI;
-- (void)doneButtonTapped;
-@end
-
-@implementation DownloadsController
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self configureUI];
-}
 
 - (void)configureUI {
     self.view.backgroundColor = [UIColor systemBackgroundColor];
