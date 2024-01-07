@@ -12,21 +12,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureUI];
+
+    NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
+    NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
+    NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
+    NSString *whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
+
+    UIImage *blackImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+    blackImageVideo = [blackImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *whiteImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+    blackImageVideo = [whiteImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *blackImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+    blackImageVideo = [blackImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *whiteImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+    blackImageVideo = [whiteImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
-
-NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
-NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
-NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
-NSString *whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
-
-UIImage *blackImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-blackImageVideo = [blackImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-UIImage *whiteImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-blackImageVideo = [whiteImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-UIImage *blackImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-blackImageVideo = [blackImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-UIImage *whiteImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
-blackImageVideo = [whiteImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
 - (void)configureUI {
     self.view.backgroundColor = [UIColor systemBackgroundColor];
