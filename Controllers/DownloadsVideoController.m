@@ -41,7 +41,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"VideoDownloadsCollectionViewCell";
-    VideoDownloadsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
 
     VideoFile *videoFile = [FileManager.defaultManager getVideoFileAtIndex:indexPath.item];
     [cell configureWithVideoFile:videoFile];
