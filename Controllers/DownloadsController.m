@@ -3,6 +3,11 @@
 #import "DownloadsAudioController.h"
 #import "Localization.h"
 
+NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
+NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
+NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
+NSString *whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
+
 UIImage *blackImageVideo = [[UIImage imageWithContentsOfFile:blackImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 UIImage *whiteImageVideo = [[UIImage imageWithContentsOfFile:whiteImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 UIImage *blackImageAudio = [[UIImage imageWithContentsOfFile:blackImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -39,14 +44,16 @@ UIImage *whiteImageAudio = [[UIImage imageWithContentsOfFile:whiteImageAudioPath
     
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"VIDEO_TAB");
-    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageVideo tag:0];
-    videoViewController.tabBarItem.selectedImage = whiteImageVideo;
+    UITabBarItem *videoTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageVideo tag:0];
+    [videoTabBarItem setSelectedImage:whiteImageVideo];
+    videoViewController.tabBarItem = videoTabBarItem;
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
     
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
     audioViewController.title = LOC(@"AUDIO_TAB");
-    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageAudio tag:1];
-    audioViewController.tabBarItem.selectedImage = whiteImageAudio;
+    UITabBarItem *audioTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:blackImageAudio tag:1];
+    [audioTabBarItem setSelectedImage:whiteImageAudio];
+    audioViewController.tabBarItem = audioTabBarItem;
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
     
     self.tabBar.viewControllers = @[videoNavViewController, audioNavViewController];
