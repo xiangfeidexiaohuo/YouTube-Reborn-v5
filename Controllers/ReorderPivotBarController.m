@@ -119,6 +119,7 @@ if (indexPath.section == 1) {
 }
 - (void)done {   
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+   }
 }
 
 @end
