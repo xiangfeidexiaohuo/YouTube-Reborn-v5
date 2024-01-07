@@ -1,4 +1,3 @@
-#import "ColourOptionsController.h"
 #import "ColourOptionsController2.h"
 #import "Localization.h"
 
