@@ -3,14 +3,14 @@
 
 @interface ReorderPivotBarController ()
 @property (nonatomic, strong) NSMutableArray *tabOrder;
-- (void)setupView;
+- (void)coloursView;
 @end
 
 @implementation ReorderPivotBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupView];
+    [self coloursView];
     
     self.title = LOC(@"REORDER_TABS");
     
@@ -31,7 +31,6 @@
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
     [self.view addSubview:self.tableView];
     
     [NSLayoutConstraint activateConstraints:@[
@@ -40,13 +39,10 @@
         [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
         [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
     ]];
-    
+
     NSArray *savedTabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
     if (savedTabOrder != nil) {
-        self.tabOrder = [NSMutableArray arrayWithArray:savedTabOrder];
-}
-
-- (void)setupView {
+    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -98,15 +94,25 @@ if (indexPath.section == 1) {
     return cell;
 }
 
-- (void)setTabItemsWithOrder:(NSArray *)order {
-    NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
-    for (NSString *tabItem in order) {
-        NSInteger index = [self.tabOrder indexOfObject:tabItem];
-        if (index != NSNotFound) {
-            [reorderedTabs replaceObjectAtIndex:index withObject:tabItem];
-        }
+- (void)coloursView {
+    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    }
+    else {
+        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     }
 }
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    [self coloursView];
+    [self.tableView reloadData];
+}
+
 - (void)reset {
     self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You"];
     [self.tableView reloadData];
