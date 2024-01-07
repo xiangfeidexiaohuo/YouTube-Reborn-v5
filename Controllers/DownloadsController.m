@@ -8,10 +8,14 @@ NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvid
 NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
 NSString *whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
 
-UIImage *blackImageVideo = [[UIImage imageWithContentsOfFile:blackImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-UIImage *whiteImageVideo = [[UIImage imageWithContentsOfFile:whiteImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-UIImage *blackImageAudio = [[UIImage imageWithContentsOfFile:blackImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-UIImage *whiteImageAudio = [[UIImage imageWithContentsOfFile:whiteImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+UIImage *blackImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+blackImageVideo = [blackImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+UIImage *whiteImageVideo = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+blackImageVideo = [whiteImageVideo imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+UIImage *blackImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+blackImageVideo = [blackImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+UIImage *whiteImageAudio = [UIImage imageWithContentsOfFile:blackImageVideoPath];
+blackImageVideo = [whiteImageAudio imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
 @interface DownloadsController ()
 - (void)configureUI;
