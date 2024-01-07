@@ -3,6 +3,11 @@
 #import "DownloadsAudioController.h"
 #import "Localization.h"
 
+UIImage *blackImageVideo = [[UIImage imageWithContentsOfFile:blackImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+UIImage *whiteImageVideo = [[UIImage imageWithContentsOfFile:whiteImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+UIImage *blackImageAudio = [[UIImage imageWithContentsOfFile:blackImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+UIImage *whiteImageAudio = [[UIImage imageWithContentsOfFile:whiteImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
 @interface DownloadsController ()
 - (void)configureUI;
 - (void)doneButtonTapped;
