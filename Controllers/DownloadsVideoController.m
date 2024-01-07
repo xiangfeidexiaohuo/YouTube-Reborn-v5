@@ -17,42 +17,54 @@
     [super viewDidLoad];
     [self coloursView];
 
-    UITableViewStyle style;
-        if (@available(iOS 13, *)) {
-            style = UITableViewStyleInsetGrouped;
-        } else {
-            style = UITableViewStyleGrouped;
-        }
-
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.view addSubview:self.tableView];
-    [self setupVideoArrays];
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    [self.collectionView setDelegate:self];
+    [self.collectionView setDataSource:self];
+    [self.collectionView setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:self.collectionView];
     
-    [NSLayoutConstraint activateConstraints:@[
-        [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-        [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
-        [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
-        [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
-    ]];
+    [self.collectionView registerClass:[VideoCollectionViewCell class] forCellWithReuseIdentifier:@"VideoDownloadsTableViewCell"];
+    
+    layout.minimumInteritemSpacing = 10;
+    layout.minimumLineSpacing = 10;
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [filePathsVideoArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"VideoDownloadsTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"VideoDownloadsCollectionViewCell";
+    VideoDownloadsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+
+    VideoFile *videoFile = [FileManager.defaultManager getVideoFileAtIndex:indexPath.item];
+    [cell configureWithVideoFile:videoFile];
+
+    UIImageView *thumbnailImageView = [cell viewWithTag:100];
+    UILabel *titleLabel = [cell viewWithTag:200];
+    
+    NSString *videoFilePath = filePathsVideoArray[indexPath.item];
+    NSString *artworkFilePath = filePathsVideoArtworkArray[indexPath.item];
+    
+    thumbnailImageView.image = [UIImage imageNamed:artworkFilePath];
+    titleLabel.text = [[videoFilePath lastPathComponent] stringByDeletingPathExtension];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    VideoFile *videoFile = [FileManager.defaultManager getVideoFileAtIndex:indexPath.item];
+    [self playVideoWithFile:videoFile];
+}
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
@@ -71,18 +83,18 @@
     }
     cell.textLabel.text = [filePathsVideoArray objectAtIndex:indexPath.row];
     @try {
-        NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
+        NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.item];
         cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
     }
     @catch (NSException *exception) {
     }
-    return cell;
+return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    NSString *currentFileName = filePathsVideoArray[indexPath.row];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+    NSString *currentFileName = filePathsVideoArray[indexPath.item];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:currentFileName];
     
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];
@@ -96,9 +108,9 @@
     [self presentViewController:playerViewController animated:YES completion:nil];
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    NSString *currentVideoFileName = filePathsVideoArray[indexPath.row];
-    NSString *currentArtworkFileName = filePathsVideoArtworkArray[indexPath.row];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *currentVideoFileName = filePathsVideoArray[indexPath.item];
+    NSString *currentArtworkFileName = filePathsVideoArtworkArray[indexPath.item];
 
     UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:@"Options" message:nil preferredStyle:UIAlertControllerStyleAlert];
 
@@ -183,8 +195,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
 }
 
 @end
