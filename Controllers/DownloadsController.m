@@ -32,6 +32,7 @@
     
     self.tabBar = [[UITabBarController alloc] init];
 
+    NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
     NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
     NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
     NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
