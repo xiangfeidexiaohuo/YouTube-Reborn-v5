@@ -31,17 +31,6 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     
     self.tabBar = [[UITabBarController alloc] init];
-
-    NSString *tweakBundlePath = [[NSBundle mainBundle] pathForResource:@"YouTubeReborn" ofType:@"bundle"];
-    NSBundle *tweakBundle = [NSBundle bundleWithPath:tweakBundlePath];
-    NSString *blackImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideoblack" ofType:@"png"];
-    NSString *whiteImageVideoPath = [tweakBundle pathForResource:@"ytrebornbuttonvideowhite" ofType:@"png"];
-    NSString *blackImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudioblack" ofType:@"png"];
-    NSString *whiteImageAudioPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
-    UIImage *blackImageVideo = [[UIImage imageWithContentsOfFile:blackImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage *whiteImageVideo = [[UIImage imageWithContentsOfFile:whiteImageVideoPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage *blackImageAudio = [[UIImage imageWithContentsOfFile:blackImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    UIImage *whiteImageAudio = [[UIImage imageWithContentsOfFile:whiteImageAudioPath] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"Video");
