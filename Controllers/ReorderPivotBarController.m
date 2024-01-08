@@ -16,8 +16,7 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
     UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
-    self.navigationItem.rightBarButtonItems = @[doneButton, saveButton];
-    self.navigationItem.leftBarButtonItems = @[resetButton];
+    self.navigationItem.rightBarButtonItems = @[doneButton, saveButton, resetButton];
 
     UITableViewStyle style;
         if (@available(iOS 13, *)) {
@@ -42,6 +41,10 @@
     NSArray *savedTabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
     if (savedTabOrder != nil) {
     self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
+
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+    [self.tableView addGestureRecognizer:longPressGesture];
+}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -88,8 +91,10 @@ if (indexPath.section == 1) {
     } else if (indexPath.row == 4) {
         cell.textLabel.text = @"You";
     }
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+
     return cell;
 }
 
@@ -105,13 +110,41 @@ if (indexPath.section == 1) {
         self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     }
 }
-
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
     [self.tableView reloadData];
 }
-
+- (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint location = [gestureRecognizer locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+        if (indexPath && indexPath.section == 0) {
+            NSString *tabIdentifier = self.tabOrder[indexPath.row]; 
+            NSMutableArray *reorderedTabs = [NSMutableArray arrayWithArray:self.tabOrder];
+            if ([tabIdentifier isEqualToString:@"FEwhat_to_watch"]) {
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Home"];
+            }
+                if ([tabIdentifier isEqualToString:@"FEshorts"]) {
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Shorts"];
+                }
+                if ([tabIdentifier isEqualToString:@"FEuploads"]) {
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Create"];
+                }
+                if ([tabIdentifier isEqualToString:@"FEsubscriptions"]) {
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"Subscriptions"];
+                }
+                if ([tabIdentifier isEqualToString:@"FElibrary"]) {
+                [reorderedTabs replaceObjectAtIndex:indexPath.row withObject:@"You"];
+                }
+            [self setTabOrder:reorderedTabs];
+            NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:reorderedTabs.count - 1 inSection:0];
+            [self.tableView beginUpdates];
+            [self.tableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
+            [self.tableView endUpdates];
+        }
+    }
+}
 - (void)reset {
     self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You"];
     [self.tableView reloadData];
