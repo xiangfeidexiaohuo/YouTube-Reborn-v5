@@ -146,7 +146,7 @@ if (indexPath.section == 1) {
     }
 }
 - (void)reset {
-    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You"];
+    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
     [self.tableView reloadData];
     [self save];
 }
