@@ -1556,7 +1556,7 @@ BOOL isAd(id node) {
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         if ([cell.accessibilityIdentifier isEqualToString:accessibilityIdentifier]) {
             NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:cell];
-            return cell.contentView;
+            return [cell.contentView retain];
         }
     }
     return nil;
