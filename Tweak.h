@@ -146,6 +146,7 @@
 - (NSString *)pivotIdentifier;
 - (void)setTabOrder:(NSArray *)orderedTabs;
 - (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @interface YTIPivotBarIconOnlyItemRenderer : GPBMessage
