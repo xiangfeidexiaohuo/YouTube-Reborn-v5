@@ -1545,9 +1545,7 @@ BOOL isAd(id node) {
         UIView *tabView = [self findTabViewWithAccessibilityIdentifier:accessibilityIdentifier];
         if (tabView != nil) {
             NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            if (![currentIndexPath isEqual:destinationIndexPath]) {
                 [self.tableView moveRowAtIndexPath:currentIndexPath toIndexPath:destinationIndexPath];
-            }
         }
     }
 }
