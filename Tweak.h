@@ -143,6 +143,8 @@
 
 @interface YTIPivotBarItemRenderer : NSObject
 - (NSString *)pivotIdentifier;
+- (void)setTabOrder:(NSArray *)orderedTabs;
+- (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 @end
 
 @interface YTIPivotBarIconOnlyItemRenderer : GPBMessage
