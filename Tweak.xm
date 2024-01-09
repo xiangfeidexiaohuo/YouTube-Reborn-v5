@@ -1545,7 +1545,6 @@ BOOL isAd(id node) {
         UIView *tabView = [self findTabViewWithAccessibilityIdentifier:accessibilityIdentifier];
         if (tabView != nil) {
             NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
-            NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:cell];
             if (![currentIndexPath isEqual:destinationIndexPath]) {
                 [self.tableView moveRowAtIndexPath:currentIndexPath toIndexPath:destinationIndexPath];
             }
@@ -1555,8 +1554,7 @@ BOOL isAd(id node) {
 - (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier {
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         if ([cell.accessibilityIdentifier isEqualToString:accessibilityIdentifier]) {
-            NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:cell];
-            return [cell.contentView retain];
+            return cell.contentView;
         }
     }
     return nil;
