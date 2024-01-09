@@ -147,6 +147,7 @@
 
 @interface YTIPivotBarIconOnlyItemRenderer : GPBMessage
 - (NSString *)pivotIdentifier;
+- (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 @end
 
 @interface YTIPivotBarSupportedRenderers : NSObject
@@ -156,6 +157,7 @@
 
 @interface YTIPivotBarRenderer : NSObject
 - (NSMutableArray <YTIPivotBarSupportedRenderers *> *)itemsArray;
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @interface YTReelHeaderView : UIView
