@@ -40,6 +40,7 @@
 
 @interface YTIPivotBarItemRender : NSObject
 @property(nonatomic, copy) NSArray *tabItems;
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @interface _ASCollectionViewCell : UICollectionViewCell
