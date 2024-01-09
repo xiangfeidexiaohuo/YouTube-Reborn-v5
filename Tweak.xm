@@ -1555,6 +1555,7 @@ BOOL isAd(id node) {
 - (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier {
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         if ([cell.accessibilityIdentifier isEqualToString:accessibilityIdentifier]) {
+            NSIndexPath *currentIndexPath = [self.tableView indexPathForCell:cell];
             return cell.contentView;
         }
     }
