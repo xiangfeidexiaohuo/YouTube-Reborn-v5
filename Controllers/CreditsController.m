@@ -45,7 +45,7 @@
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 7;
+        return 8;
     }
     return 0;
 }
@@ -107,7 +107,12 @@
             cell.textLabel.text = @"xiangfeidexiaohuo";
             cell.detailTextLabel.text = LOC(@"🇨🇳简体中文@秋名山巨魔俱乐部");
             [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 7) {
+            cell.textLabel.text = @"arichornlover";
+            cell.detailTextLabel.text = LOC(@"YouTube_Reborn_v5_DEV");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         }
+
     }
 
     return cell;
@@ -136,8 +141,10 @@
         } else if (indexPath.row == 5) {
             [self openURLWithString:@"https://github.com/0xilis"];
         } else if (indexPath.row == 6) {
-            [self openURLWithString:@"https://xiangfeidexiaohuo.github.io"];
-        }
+            [self openURLWithString:@"https://xiangfeidexiaohuo.github.io"]; 
+        } else if (indexPath.row == 7) {
+            [self openURLWithString:@"https://github.com/arichornlover/YouTube-Reborn-v5"];
+        }    
     }
 }
 

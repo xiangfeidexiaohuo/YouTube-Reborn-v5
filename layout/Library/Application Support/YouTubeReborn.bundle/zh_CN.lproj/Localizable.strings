@@ -213,9 +213,9 @@
 "REBORN_SETTINGS" = "附加功能选项";
 
 "I_HAVE_YOUTUBE_PREMIUM" = "我有 YouTube Premium";
-"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "隐藏播放器下方“OP”按钮";
-"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "隐藏视频左上角“OP”按钮";
-"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "隐藏短视频左上角“OP”按钮";
+"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "隐藏播放器下方“⇩”按钮";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "隐藏视频左上角“⇩”按钮";
+"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "隐藏短视频左上角“⇩”按钮";
 "RESET_COLOR_OPTIONS" = "重置颜色选项";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "重置插件设置";
 "RESET_CACHE" = "清除缓存";
@@ -231,3 +231,4 @@
 "FEATURES_POOMSMART_TEXT" = "功能：“视频播放器下的 YouTube Reborn 按钮”、“YouTube-X/Adblock”、“自动全屏播放”";
 "FEATURES_NGUYEASANG_TEXT" = "功能：“视频播放器下的 YouTube Reborn 按钮”";
 "FEATURES_NSNOOLIE_TEXT" = "功能：“额外的视频速度”";
+"YouTube_Reborn_v5_DEV" = "YouTube Reborn v5 开发者";

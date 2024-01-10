@@ -324,7 +324,7 @@ static NSString *accessGroupID() {
     if (self) {
         self.rebornOverlayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self.rebornOverlayButton addTarget:self action:@selector(rebornOptionsAction) forControlEvents:UIControlEventTouchUpInside];
-        [self.rebornOverlayButton setTitle:@"OP" forState:UIControlStateNormal];
+        [self.rebornOverlayButton setTitle:@"⇩" forState:UIControlStateNormal];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kShowStatusBarInOverlay"] == YES) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableiPadStyleOniPhone"] == YES) {
                 self.rebornOverlayButton.frame = CGRectMake(40, 9, 40.0, 30.0);
@@ -579,7 +579,7 @@ static NSString *accessGroupID() {
 	%orig();
     UIButton *rebornOverlayButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [rebornOverlayButton addTarget:self action:@selector(rebornOptionsAction) forControlEvents:UIControlEventTouchUpInside];
-    [rebornOverlayButton setTitle:@"OP" forState:UIControlStateNormal];
+    [rebornOverlayButton setTitle:@"⇩" forState:UIControlStateNormal];
     rebornOverlayButton.frame = CGRectMake(40, 5, 40.0, 30.0);
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornShortsOPButton"] == YES) {
         rebornOverlayButton.hidden = YES;
@@ -859,7 +859,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
         if (!hideOPButton) {
             ELMCellNode *node = %orig;
             if (CGRectGetMaxX([node.layoutAttributes frame]) == [self contentSize].width) {
-                self.rebornOverlayButton = makeUnderRebornPlayerButton(node, @"OP", LOC(@"DOWNLOAD_FILES_TEXT"));
+                self.rebornOverlayButton = makeUnderRebornPlayerButton(node, @"⇩", LOC(@"DOWNLOAD_FILES_TEXT"));
                 [self addSubview:self.rebornOverlayButton];
 
                 [self.rebornOverlayButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
@@ -2889,13 +2889,13 @@ BOOL selectedTabIndex = NO;
     BOOL hideSaveToPlaylistButton = [defaults boolForKey:@"kHideSaveToPlaylistButton"];
     BOOL hideReportButton = [defaults boolForKey:@"kHideReportButton"];
     for (UIView *subview in self.subviews) {
-        if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
+        if ([subview.accessibilityLabel isEqualToString:@"连接帐户"]) {
             subview.hidden = hideConnectButton;
             subview.frame = hideConnectButton ? CGRectZero : subview.frame;
-        } else if ([subview.accessibilityLabel isEqualToString:@"Thanks"]) {
+        } else if ([subview.accessibilityLabel isEqualToString:@"感谢"]) {
             subview.hidden = hideThanksButton;
             subview.frame = hideThanksButton ? CGRectZero : subview.frame;
-        } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
+        } else if ([subview.accessibilityLabel isEqualToString:@"保存到播放列表"]) {
             subview.hidden = hideSaveToPlaylistButton;
             subview.frame = hideSaveToPlaylistButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityLabel isEqualToString:@"Report"]) {
