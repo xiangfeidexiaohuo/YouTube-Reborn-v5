@@ -1,0 +1,137 @@
+// Actions
+"CANCEL_TEXT" = "取消";
+"OKAY_TEXT" = "好的";
+"NOTICE_TEXT" = "注意";
+
+// Downloads
+"VIDEO_TAB" = "视频";
+"AUDIO_TAB" = "音频";
+"DOWNLOAD_NOTICE" = "不要退出应用程序\n下载完成后将自动关闭";
+"VIEW_DOWNLOADS" = "浏览下载项目";
+"VIEW_DOWNLOADS_IN_FILZA" = "Filza浏览下载";
+
+// Video Options
+"VIDEO_OPTIONS" = "视频播放选项";
+
+"ENABLE_NO_ADS" = "启用去广告";
+"ENABLE_BACKGROUND_PLAYBACK" = "启用后台播放";
+"ALLOW_HD_ON_CELLULAR_DATA" = "允许蜂窝数据播放高清视频";
+"PORTRAIT_FULLSCREEN" = "竖屏全屏";
+"AUTO_PLAY_IN_FULLSCREEN" = "自动全屏播放";
+"DISABLE_VIDEO_ENDSCREEN_POPUPS" = "禁用视频片尾弹窗";
+"DISABLE_VIDEO_INFO_CARDS" = "禁用视频信息卡";
+"DISABLE_VIDEO_AUTOPLAY" = "禁用视频自动播放";
+"HIDE_CHANNEL_WATERMARK" = "隐藏频道水印";
+"RED_PROGRESS_BAR" = "红色进度条";
+"GRAY_BUFFER_PROGRESS" = "灰色缓冲区进度";
+"HIDE_PLAYER_BAR_HEATWAVE" = "隐藏播放栏热度频谱";
+"ALWAYS_SHOW_PLAYER_BAR" = "始终显示播放栏";
+"ENABLE_EXTRA_SPEED_OPTIONS" = "启用额外速度选项";
+"DISABLE_DOUBLE_TAP_TO_SKIP" = "禁用双击\"前进/后退\"";
+"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "自定义双击\"前进/后退\"的时间";
+
+// Overlay Options
+"OVERLAY_OPTIONS" = "播放界面选项";
+
+"SHOW_STATUS_BAR_IN_OVERLAY" = "显示状态栏(仅竖屏)";
+"HIDE_PREVIOUS_BUTTON" = "隐藏上一个按钮";
+"HIDE_PREVIOUS_BUTTON_SHADOW" = "隐藏上一个按钮阴影";
+"HIDE_NEXT_BUTTON" = "隐藏下一个按钮";
+"HIDE_NEXT_BUTTON_SHADOW" = "隐藏下一个按钮阴影";
+"HIDE_SEEK_BACKWARD_BUTTON_SHADOW" = "隐藏快退按钮阴影";
+"HIDE_SEEK_FORWARD_BUTTON_SHADOW" = "隐藏快进按钮阴影";
+"HIDE_PLAY_AND_PAUSE_BUTTON_SHADOW" = "隐藏播放/暂停按钮阴影";
+"HIDE_AUTOPLAY_SWITCH" = "隐藏自动播放开关";
+"HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "隐藏字幕/字幕按钮";
+"DISABLE_RELATED_VIDEOS" = "禁用相关视频";
+"HIDE_DARK_OVERLAY_BACKGROUND" = "隐藏深色覆盖背景";
+"HIDE_QUICK_ACTIONS" = "隐藏快速操作";
+"HIDE_CURRENT_TIME" = "隐藏已播放时长";
+"HIDE_DURATION" = "隐藏视频总时长";
+
+// Tab Bar Options
+"TAB_BAR_OPTIONS" = "标签栏的选项";
+
+"STARTUP_PAGE" = "启动页面";
+"HIDE_TAB_BAR_LABELS" = "隐藏标签";
+"HIDE_EXPLORE_TAB" = "隐藏探索";
+"HIDE_SHORTS_TAB" = "隐藏短视频";
+"HIDE_CREATE_TAB" = "隐藏创建/上传(＋)";
+"HIDE_SUBSCRIPTIONS_TAB" = "隐藏订阅";
+"HIDE_YOU_TAB" = "隐藏“我”";
+"REORDER_TABS" = "标签重新排序";
+"COLOR_OPTIONS" = "界面颜色选项(主题)";
+"COLOR_OPTIONS_2" = "界面颜色选项(文本和图标)";
+
+// Picture In Picture Options
+"PICTURE_IN_PICTURE_OPTIONS" = "画中画的选项";
+
+"ENABLE_PICTURE_IN_PICTURE" = "启用画中画";
+"HIDE_PIP_ADS_BADGE" = "隐藏画中画广告角标";
+"HIDE_PIP_SPONSOR_BADGE" = "隐藏画中画推广角标";
+
+// Shorts Options
+"SHORTS_OPTIONS" = "短视频的选项";
+
+"HIDE_CHANNEL_AVATAR_BUTTON" = "隐藏频道头像";
+"HIDE_LIKE_BUTTON" = "隐藏喜欢按钮";
+"HIDE_DISLIKE_BUTTON" = "隐藏不喜欢按钮";
+"HIDE_COMMENTS_BUTTON" = "隐藏评论按钮";
+"HIDE_REMIX_BUTTON" = "隐藏混剪按钮";
+"HIDE_SHARE_BUTTON" = "隐藏分享按钮";
+"HIDE_MORE_ACTIONS_BUTTON" = "隐藏更多操作按钮";
+"HIDE_SEARCH_BUTTON" = "隐藏搜索按钮";
+"HIDE_BUY_SUPER_THANKS_BANNER" = "隐藏“付费”横幅";
+"HIDE_SUBSCRIPTIONS_BUTTON" = "隐藏订阅按钮";
+"DISABLE_RESUME_TO_SHORTS" = "禁用恢复短视频";
+"ALWAYS_SHOW_PROGRESS_BAR" = "始终显示进度条";
+
+// Sponsor Block Options
+"SPONSOR_BLOCK_OPTIONS" = "推广拦截选项";
+
+"MAIN" = "主";
+"MIRROR" = "镜像";
+"DISABLE" = "禁用";
+"AUTO_SKIP" = "自动跳过";
+"MANUAL_SKIP" = "手动跳过";
+"SOURCE" = "源";
+"SPONSOR" = "赞助";
+"SELFPROMO" = "推销";
+"INTERACTION" = "关注";
+"INTRO" = "介绍";
+"OUTRO" = "其他";
+"PREVIEW" = "预览";
+"FILLER" = "话题/笑话";
+"MUSIC_AND_OFFTOPIC" = "无关音乐";
+
+// Other Options
+"OTHER_OPTIONS" = "其他功能选项";
+
+"IPAD_LAYOUT" = "iPad 布局";
+"IPHONE_LAYOUT" = "iPhone 布局";
+"HIDE_CAST_BUTTON" = "隐藏投射按钮";
+"HIDE_NOTIFICATION_BUTTON" = "隐藏通知按钮";
+"HIDE_SEARCH_BUTTON" = "隐藏搜索按钮";
+"HIDE_PLAY_NEXT_IN_QUEUE" = "隐藏“播放队列中的下一个”";
+"DISABLE_YOUTUBE_KIDS" = "禁用 YouTube 儿童";
+"DISABLE_HINTS" = "禁用提示";
+"PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
+"HIDE_YOUTUBE_LOGO" = "隐藏 YouTube Logo";
+"STICK_NAVIGATION_BAR" = "条形导航栏";
+"AUTO_HIDE_HOME_BAR" = "自动隐藏手势横条";
+"APP_VERSION_SPOOFER" = "程序版本伪装";
+"ENTER_CUSTOM_APP_VERSION" = "输入自定义油管版本号";
+
+// Reborn Settings
+"REBORN_SETTINGS" = "附加功能选项";
+
+"I_HAVE_YOUTUBE_PREMIUM" = "我有 YouTube Premium";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "隐藏视频左上角蓝色下载按钮";
+"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "隐藏短视频左上角蓝色下载按钮";
+"RESET_COLOR_OPTIONS" = "重置颜色选项";
+"RESET_YOUTUBE_REBORN_OPTIONS" = "重置插件设置";
+
+// Credits
+"CREDITS_BUTTON" = "开发相关信息";
+"DEVELOPER_TEXT" = "开发者";
+"ICON_DESIGNER_TEXT" = "图标设计";
