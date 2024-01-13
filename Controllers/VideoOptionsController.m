@@ -113,32 +113,32 @@
             cell.accessoryView = autoFullScreen;
         }
         if (indexPath.row == 5) {
+            cell.textLabel.text = LOC(@"DISABLE_PINCH_TO_ZOOM");
+            UISwitch *disablePinchToZoom = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [disablePinchToZoom addTarget:self action:@selector(toggleDisablePinchToZoom:) forControlEvents:UIControlEventValueChanged];
+            disablePinchToZoom.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisablePinchToZoom"];
+            cell.accessoryView = disablePinchToZoom;
+        }
+        if (indexPath.row == 6) {
             cell.textLabel.text = LOC(@"DISABLE_VIDEO_ENDSCREEN_POPUPS");
             UISwitch *disableVideoEndscreenPopups = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableVideoEndscreenPopups addTarget:self action:@selector(toggleDisableVideoEndscreenPopups:) forControlEvents:UIControlEventValueChanged];
             disableVideoEndscreenPopups.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoEndscreenPopups"];
             cell.accessoryView = disableVideoEndscreenPopups;
         }
-        if (indexPath.row == 6) {
+        if (indexPath.row == 7) {
             cell.textLabel.text = LOC(@"DISABLE_VIDEO_INFO_CARDS");
             UISwitch *disableVideoInfoCards = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableVideoInfoCards addTarget:self action:@selector(toggleDisableVideoInfoCards:) forControlEvents:UIControlEventValueChanged];
             disableVideoInfoCards.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoInfoCards"];
             cell.accessoryView = disableVideoInfoCards;
         }
-        if (indexPath.row == 7) {
+        if (indexPath.row == 8) {
             cell.textLabel.text = LOC(@"DISABLE_VIDEO_AUTOPLAY");
             UISwitch *disableVideoAutoPlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableVideoAutoPlay addTarget:self action:@selector(toggleDisableVideoAutoPlay:) forControlEvents:UIControlEventValueChanged];
             disableVideoAutoPlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoAutoPlay"];
             cell.accessoryView = disableVideoAutoPlay;
-        }
-        if (indexPath.row == 8) {
-            cell.textLabel.text = LOC(@"HIDE_CHANNEL_WATERMARK");
-            UISwitch *hideChannelWatermark = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [hideChannelWatermark addTarget:self action:@selector(toggleHideChannelWatermark:) forControlEvents:UIControlEventValueChanged];
-            hideChannelWatermark.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"];
-            cell.accessoryView = hideChannelWatermark;
         }
 	if (indexPath.row == 9) {
             cell.textLabel.text = LOC(@"RED_PROGRESS_BAR");
@@ -318,6 +318,16 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kAutoFullScreen"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleDisablePinchToZoom:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kDisablePinchToZoom"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kDisablePinchToZoom"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
