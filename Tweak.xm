@@ -943,14 +943,6 @@ BOOL isAd(id node) {
 %end
 %end
 
-// Hide Upgrade Dialog by @arichorn
-%hook YTGlobalConfig
-- (BOOL)shouldBlockUpgradeDialog { return YES;}
-- (BOOL)shouldForceUpgrade { return NO;}
-- (BOOL)shouldShowUpgrade { return NO;}
-- (BOOL)shouldShowUpgradeDialog { return NO;}
-%end
-
 %group gBackgroundPlayback
 %hook YTIPlayerResponse
 - (BOOL)isPlayableInBackground {
@@ -990,6 +982,42 @@ BOOL isAd(id node) {
     return YES;
 }
 %end
+%end
+
+// Disable Pinch to Zoom (video player)
+%group gDisablePinchToZoom
+%hook YTColdConfig
+- (BOOL)enableFreeZoomHaptics { return NO; }
+- (BOOL)enableFreeZoomInPotraitOrientation { return NO; }
+- (BOOL)isVideoZoomEnabled { return NO; }
+- (BOOL)uiSystemsClientGlobalConfigEnableDisplayZoomMenuBugFix { return NO; }
+- (BOOL)videoZoomFreeZoomEnabledGlobalConfig { return NO; }
+- (BOOL)videoZoomFreeZoomIndicatorPersistentGlobalConfig { return NO; }
+- (BOOL)videoZoomFreeZoomIndicatorTopGlobalConfig { return NO; }
+- (BOOL)deprecateTabletPinchFullscreenGestures { return NO; } // <-- this flag is only required for iPad Devices
+%end
+%end
+
+// YTStockVolumeHUD - https://github.com/lilacvibes/YTStockVolumeHUD
+%group gStockVolumeHUD
+%hook YTVolumeBarView
+- (void)volumeChanged:(id)arg1 {
+	%orig(nil);
+}
+%end
+%hook UIApplication 
+- (void)setSystemVolumeHUDEnabled:(BOOL)arg1 forAudioCategory:(id)arg2 {
+	%orig(true, arg2);
+}
+%end
+%end
+
+// Hide Upgrade Dialog by @arichornlover
+%hook YTGlobalConfig
+- (BOOL)shouldBlockUpgradeDialog { return YES;}
+- (BOOL)shouldForceUpgrade { return NO;}
+- (BOOL)shouldShowUpgrade { return NO;}
+- (BOOL)shouldShowUpgradeDialog { return NO;}
 %end
 
 %group gExtraSpeedOptions
@@ -2594,15 +2622,17 @@ NSString *customAppVersion = nil; // Declare the global variable
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideUploadTab"] == YES) %init(gHideUploadTab);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSubscriptionsTab"] == YES) %init(gHideSubscriptionsTab);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTab"] == YES) %init(gHideYouTab);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kStockVolumeHUD"] == YES) %init(gStockVolumeHUD);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayDarkBackground"] == YES) %init(gHideOverlayDarkBackground);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"] == YES) %init(gHideChannelWatermark);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePreviousButtonInOverlay"] == YES) %init(gHidePreviousButtonInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideNextButtonInOverlay"] == YES) %init(gHideNextButtonInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoAutoPlay"] == YES) %init(gDisableVideoAutoPlay);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisablePinchToZoom"] == YES) %init(gDisablePinchToZoom);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideAutoPlaySwitchInOverlay"] == YES) %init(gHideAutoPlaySwitchInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCaptionsSubtitlesButtonInOverlay"] == YES) %init(gHideCaptionsSubtitlesButtonInOverlay);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableVideoInfoCards"] == YES) %init(gDisableVideoInfoCards);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kNoSearchButton"] == YES) %init(gNoSearchButton);
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"] == YES) %init(gHideChannelWatermark);
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsChannelAvatarButton"] == YES) %init(gHideShortsChannelAvatarButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsLikeButton"] == YES) %init(gHideShortsLikeButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsDislikeButton"] == YES) %init(gHideShortsDislikeButton);
