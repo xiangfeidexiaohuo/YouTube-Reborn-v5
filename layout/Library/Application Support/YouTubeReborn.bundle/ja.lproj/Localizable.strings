@@ -60,8 +60,8 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "登録チャンネルタブを非表示";
 "HIDE_YOU_TAB" = "マイページタブを非表示";
 "REORDER_TABS" = "タブの並べ替え";
-"COLOR_OPTIONS" = "色のオプション (Custom Theme)";
-"COLOR_OPTIONS_2" = "色のオプション (Custom Texts and Icons)";
+"COLOR_OPTIONS" = "色のオプション (カスタムテーマ)";
+"COLOR_OPTIONS_2" = "色のオプション (カスタムテキストとアイコン)";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "ピクチャインピクチャの設定";
@@ -87,22 +87,22 @@
 "ALWAYS_SHOW_PROGRESS_BAR" = "プログレスバーを常に表示";
 
 // Sponsor Block Options
-"SPONSOR_BLOCK_OPTIONS" = "Sponsor Block Options";
+"SPONSOR_BLOCK_OPTIONS" = "Sponsor Blockの設定";
 
-"MAIN" = "Main";
-"MIRROR" = "Mirror";
-"DISABLE" = "Disable";
-"AUTO_SKIP" = "Auto Skip";
-"MANUAL_SKIP" = "Manual Skip";
-"SOURCE" = "Source";
-"SPONSOR" = "Sponsor";
-"SELFPROMO" = "Self Promo";
-"INTERACTION" = "Interaction";
-"INTRO" = "Intro";
-"OUTRO" = "Outro";
-"PREVIEW" = "Preview";
-"FILLER" = "Filler Tangent/Jokes";
-"MUSIC_AND_OFFTOPIC" = "Music/OffTopic";
+"MAIN" = "メイン";
+"MIRROR" = "ミラー";
+"DISABLE" = "無効";
+"AUTO_SKIP" = "自動スキップ";
+"MANUAL_SKIP" = "手動スキップ";
+"SOURCE" = "ソース";
+"SPONSOR" = "スポンサー";
+"SELFPROMO" = "自己宣伝";
+"INTERACTION" = "行動のお願い";
+"INTRO" = "合間/導入アニメ";
+"OUTRO" = "終了画面/クレジット";
+"PREVIEW" = "プレビュー";
+"FILLER" = "繋ぎの話/冗談";
+"MUSIC_AND_OFFTOPIC" = "音楽/音楽ではない区間";
 
 // Other Options
 "OTHER_OPTIONS" = "その他の設定";
@@ -119,8 +119,8 @@
 "HIDE_YOUTUBE_LOGO" = "YouTubeロゴを非表示";
 "STICK_NAVIGATION_BAR" = "ナビゲーションバーを固定";
 "AUTO_HIDE_HOME_BAR" = "ホームバーを自動非表示";
-"APP_VERSION_SPOOFER" = "App Version Spoofer";
-"ENTER_CUSTOM_APP_VERSION" = "Enter custom app version";
+"APP_VERSION_SPOOFER" = "アプリバージョンの偽装";
+"ENTER_CUSTOM_APP_VERSION" = "カスタムアプリバージョンを入力";
 
 // Reborn Settings
 "REBORN_SETTINGS" = "Rebornの設定";
