@@ -53,7 +53,7 @@ static BOOL hasDeviceNotch() {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 15;
+    return 17;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -91,97 +91,111 @@ static BOOL hasDeviceNotch() {
             }
         }
         if (indexPath.row == 1) {
+            cell.textLabel.text = LOC(@"STOCK_VOLUME_HUD");
+            UISwitch *stockVolumeHUD = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [stockVolumeHUD addTarget:self action:@selector(toggleStockVolumeHUD:) forControlEvents:UIControlEventValueChanged];
+            stockVolumeHUD.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kStockVolumeHUD"];
+            cell.accessoryView = stockVolumeHUD;
+        }
+        if (indexPath.row == 2) {
             cell.textLabel.text = LOC(@"HIDE_PREVIOUS_BUTTON");
             UISwitch *hidePreviousButtonInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePreviousButtonInOverlay addTarget:self action:@selector(toggleHidePreviousButtonInOverlay:) forControlEvents:UIControlEventValueChanged];
             hidePreviousButtonInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePreviousButtonInOverlay"];
             cell.accessoryView = hidePreviousButtonInOverlay;
         }
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             cell.textLabel.text = LOC(@"HIDE_PREVIOUS_BUTTON_SHADOW");
             UISwitch *hidePreviousButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePreviousButtonShadowInOverlay addTarget:self action:@selector(toggleHidePreviousButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
             hidePreviousButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePreviousButtonShadowInOverlay"];
             cell.accessoryView = hidePreviousButtonShadowInOverlay;
         }
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             cell.textLabel.text = LOC(@"HIDE_NEXT_BUTTON");
             UISwitch *hideNextButtonInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideNextButtonInOverlay addTarget:self action:@selector(toggleHideNextButtonInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideNextButtonInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideNextButtonInOverlay"];
             cell.accessoryView = hideNextButtonInOverlay;
         }
-        if (indexPath.row == 4) {
+        if (indexPath.row == 5) {
             cell.textLabel.text = LOC(@"HIDE_PREVIOUS_BUTTON_SHADOW");
             UISwitch *hideNextButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideNextButtonShadowInOverlay addTarget:self action:@selector(toggleHideNextButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideNextButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideNextButtonShadowInOverlay"];
             cell.accessoryView = hideNextButtonShadowInOverlay;
         }
-        if (indexPath.row == 5) {
+        if (indexPath.row == 6) {
             cell.textLabel.text = LOC(@"HIDE_SEEK_BACKWARD_BUTTON_SHADOW");
             UISwitch *hideSeekBackwardButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideSeekBackwardButtonShadowInOverlay addTarget:self action:@selector(toggleHideSeekBackwardButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideSeekBackwardButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSeekBackwardButtonShadowInOverlay"];
             cell.accessoryView = hideSeekBackwardButtonShadowInOverlay;
         }
-        if (indexPath.row == 6) {
+        if (indexPath.row == 7) {
             cell.textLabel.text = LOC(@"HIDE_SEEK_FORWARD_BUTTON_SHADOW");
             UISwitch *hideSeekForwardButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideSeekForwardButtonShadowInOverlay addTarget:self action:@selector(toggleHideSeekForwardButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideSeekForwardButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSeekForwardButtonShadowInOverlay"];
             cell.accessoryView = hideSeekForwardButtonShadowInOverlay;
         }
-        if (indexPath.row == 7) {
+        if (indexPath.row == 8) {
             cell.textLabel.text = LOC(@"HIDE_PLAY_AND_PAUSE_BUTTON_SHADOW");
             UISwitch *hidePlayPauseButtonShadowInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlayPauseButtonShadowInOverlay addTarget:self action:@selector(toggleHidePlayPauseButtonShadowInOverlay:) forControlEvents:UIControlEventValueChanged];
             hidePlayPauseButtonShadowInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayPauseButtonShadowInOverlay"];
             cell.accessoryView = hidePlayPauseButtonShadowInOverlay;
         }
-        if (indexPath.row == 8) {
+        if (indexPath.row == 9) {
             cell.textLabel.text = LOC(@"HIDE_AUTOPLAY_SWITCH");
             UISwitch *hideAutoPlaySwitchInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideAutoPlaySwitchInOverlay addTarget:self action:@selector(toggleHideAutoPlaySwitchInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideAutoPlaySwitchInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideAutoPlaySwitchInOverlay"];
             cell.accessoryView = hideAutoPlaySwitchInOverlay;
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 10) {
             cell.textLabel.text = LOC(@"HIDE_CAPTIONS_AND_SUBTITLES_BUTTON");
             UISwitch *hideCaptionsSubtitlesButtonInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideCaptionsSubtitlesButtonInOverlay addTarget:self action:@selector(toggleHideCaptionsSubtitlesButtonInOverlay:) forControlEvents:UIControlEventValueChanged];
             hideCaptionsSubtitlesButtonInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCaptionsSubtitlesButtonInOverlay"];
             cell.accessoryView = hideCaptionsSubtitlesButtonInOverlay;
         }
-        if (indexPath.row == 10) {
+        if (indexPath.row == 11) {
             cell.textLabel.text = LOC(@"DISABLE_RELATED_VIDEOS");
             UISwitch *disableRelatedVideosInOverlay = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableRelatedVideosInOverlay addTarget:self action:@selector(toggleDisableRelatedVideosInOverlay:) forControlEvents:UIControlEventValueChanged];
             disableRelatedVideosInOverlay.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"];
             cell.accessoryView = disableRelatedVideosInOverlay;
         }
-        if (indexPath.row == 11) {
+        if (indexPath.row == 12) {
+            cell.textLabel.text = LOC(@"HIDE_CHANNEL_WATERMARK");
+            UISwitch *hideChannelWatermark = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideChannelWatermark addTarget:self action:@selector(toggleHideChannelWatermark:) forControlEvents:UIControlEventValueChanged];
+            hideChannelWatermark.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideChannelWatermark"];
+            cell.accessoryView = hideChannelWatermark;
+        }
+        if (indexPath.row == 13) {
             cell.textLabel.text = LOC(@"HIDE_DARK_OVERLAY_BACKGROUND");
             UISwitch *hideOverlayDarkBackground = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideOverlayDarkBackground addTarget:self action:@selector(toggleHideOverlayDarkBackground:) forControlEvents:UIControlEventValueChanged];
             hideOverlayDarkBackground.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayDarkBackground"];
             cell.accessoryView = hideOverlayDarkBackground;
         }
-        if (indexPath.row == 12) {
+        if (indexPath.row == 14) {
             cell.textLabel.text = LOC(@"HIDE_QUICK_ACTIONS");
             UISwitch *hideOverlayQuickActions = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideOverlayQuickActions addTarget:self action:@selector(toggleHideOverlayQuickActions:) forControlEvents:UIControlEventValueChanged];
             hideOverlayQuickActions.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"];
             cell.accessoryView = hideOverlayQuickActions;
         }
-        if (indexPath.row == 13) {
+        if (indexPath.row == 15) {
             cell.textLabel.text = LOC(@"HIDE_CURRENT_TIME");
             UISwitch *hideCurrentTime = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideCurrentTime addTarget:self action:@selector(toggleHideCurrentTime:) forControlEvents:UIControlEventValueChanged];
             hideCurrentTime.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCurrentTime"];
             cell.accessoryView = hideCurrentTime;
         }
-        if (indexPath.row == 14) {
+        if (indexPath.row == 16) {
             cell.textLabel.text = LOC(@"HIDE_DURATION");
             UISwitch *hideDuration = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideDuration addTarget:self action:@selector(toggleHideDuration:) forControlEvents:UIControlEventValueChanged];
@@ -249,6 +263,16 @@ static BOOL hasDeviceNotch() {
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kShowStatusBarInOverlay"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleStockVolumeHUD:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kStockVolumeHUD"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kStockVolumeHUD"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -349,6 +373,16 @@ static BOOL hasDeviceNotch() {
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kDisableRelatedVideosInOverlay"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideChannelWatermark:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideChannelWatermark"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideChannelWatermark"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
