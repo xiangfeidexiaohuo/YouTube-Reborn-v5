@@ -1,7 +1,10 @@
 // Actions
 "CANCEL_TEXT" = "取消";
+"RESET_TEXT" = "Reset";
+"SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "好的";
 "NOTICE_TEXT" = "注意";
+"COLOR_SAVED" = "Color Saved";
 
 // Downloads
 "VIDEO_TAB" = "视频";
@@ -18,10 +21,10 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "允许蜂窝数据播放高清视频";
 "PORTRAIT_FULLSCREEN" = "竖屏全屏";
 "AUTO_PLAY_IN_FULLSCREEN" = "自动全屏播放";
+"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "禁用视频片尾弹窗";
 "DISABLE_VIDEO_INFO_CARDS" = "禁用视频信息卡";
 "DISABLE_VIDEO_AUTOPLAY" = "禁用视频自动播放";
-"HIDE_CHANNEL_WATERMARK" = "隐藏频道水印";
 "RED_PROGRESS_BAR" = "红色进度条";
 "GRAY_BUFFER_PROGRESS" = "灰色缓冲区进度";
 "HIDE_PLAYER_BAR_HEATWAVE" = "隐藏播放栏热度频谱";
@@ -34,6 +37,7 @@
 "OVERLAY_OPTIONS" = "播放界面选项";
 
 "SHOW_STATUS_BAR_IN_OVERLAY" = "显示状态栏(仅竖屏)";
+"STOCK_VOLUME_HUD" = "Stock Volume HUD";
 "HIDE_PREVIOUS_BUTTON" = "隐藏上一个按钮";
 "HIDE_PREVIOUS_BUTTON_SHADOW" = "隐藏上一个按钮阴影";
 "HIDE_NEXT_BUTTON" = "隐藏下一个按钮";
@@ -44,6 +48,7 @@
 "HIDE_AUTOPLAY_SWITCH" = "隐藏自动播放开关";
 "HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "隐藏字幕/字幕按钮";
 "DISABLE_RELATED_VIDEOS" = "禁用相关视频";
+"HIDE_CHANNEL_WATERMARK" = "隐藏频道水印";
 "HIDE_DARK_OVERLAY_BACKGROUND" = "隐藏深色覆盖背景";
 "HIDE_QUICK_ACTIONS" = "隐藏快速操作";
 "HIDE_CURRENT_TIME" = "隐藏已播放时长";
@@ -60,8 +65,9 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "隐藏订阅";
 "HIDE_YOU_TAB" = "隐藏“我”";
 "REORDER_TABS" = "标签重新排序";
-"COLOR_OPTIONS" = "界面颜色选项(主题)";
-"COLOR_OPTIONS_2" = "界面颜色选项(文本和图标)";
+"COLOR_OPTIONS" = "界面颜色选项-主题";
+"COLOR_OPTIONS_2" = "界面颜色选项-文本和图标";
+"COLOR_OPTIONS_3" = "界面颜色选项-Custom Progress Bar";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "画中画的选项";
