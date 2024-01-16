@@ -1,7 +1,10 @@
 // Actions
 "CANCEL_TEXT" = "キャンセル";
+"RESET_TEXT" = "Reset";
+"SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "OK";
 "NOTICE_TEXT" = "通知";
+"COLOR_SAVED" = "Color Saved";
 
 // Downloads
 "VIDEO_TAB" = "動画";
@@ -18,10 +21,10 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "モバイルネットワークでHD再生を許可";
 "PORTRAIT_FULLSCREEN" = "フルスクリーン(縦画面)";
 "AUTO_PLAY_IN_FULLSCREEN" = "フルスクリーンで自動再生";
+"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "動画終了画面のポップアップを無効化";
 "DISABLE_VIDEO_INFO_CARDS" = "動画情報カードを無効化";
 "DISABLE_VIDEO_AUTOPLAY" = "動画の自動再生を無効化";
-"HIDE_CHANNEL_WATERMARK" = "チャンネルのウォーターマークを非表示";
 "RED_PROGRESS_BAR" = "赤いプログレスバー";
 "GRAY_BUFFER_PROGRESS" = "灰色のバッファプログレス";
 "HIDE_PLAYER_BAR_HEATWAVE" = "プレーヤーバーのヒートウェーブを非表示";
@@ -34,6 +37,7 @@
 "OVERLAY_OPTIONS" = "オーバーレイの設定";
 
 "SHOW_STATUS_BAR_IN_OVERLAY" = "画面上部にステータスバーを表示(縦画面のみ)";
+"STOCK_VOLUME_HUD" = "Stock Volume HUD";
 "HIDE_PREVIOUS_BUTTON" = "前へボタンを非表示";
 "HIDE_PREVIOUS_BUTTON_SHADOW" = "前へボタンの影を非表示";
 "HIDE_NEXT_BUTTON" = "次へボタンを非表示";
@@ -44,6 +48,7 @@
 "HIDE_AUTOPLAY_SWITCH" = "自動再生スイッチを非表示";
 "HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "字幕/CCボタンを非表示";
 "DISABLE_RELATED_VIDEOS" = "関連動画を非表示";
+"HIDE_CHANNEL_WATERMARK" = "チャンネルのウォーターマークを非表示";
 "HIDE_DARK_OVERLAY_BACKGROUND" = "暗いオーバーレイ背景を非表示";
 "HIDE_QUICK_ACTIONS" = "クイックアクションを非表示";
 "HIDE_CURRENT_TIME" = "現在の再生時間を非表示";
@@ -60,8 +65,9 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "登録チャンネルタブを非表示";
 "HIDE_YOU_TAB" = "マイページタブを非表示";
 "REORDER_TABS" = "タブの並べ替え";
-"COLOR_OPTIONS" = "色のオプション (カスタムテーマ)";
-"COLOR_OPTIONS_2" = "色のオプション (カスタムテキストとアイコン)";
+"COLOR_OPTIONS" = "色のオプション - カスタムテーマ";
+"COLOR_OPTIONS_2" = "色のオプション - カスタムテキストとアイコン";
+"COLOR_OPTIONS_3" = "色のオプション - Custom Progress Bar";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "ピクチャインピクチャの設定";
