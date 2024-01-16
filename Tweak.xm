@@ -26,6 +26,7 @@ static BOOL hasDeviceNotch() {
 
 UIColor *rebornHexColour;
 UIColor *lcmHexColor;
+UIColor *progressbarHexColor;
 
 YTLocalPlaybackController *playingVideoID;
 
@@ -1288,6 +1289,14 @@ BOOL isAd(id node) {
 %hook ASButtonNode
 - (void)setTextColor:(UIColor *)textColor {
    %orig([UIColor whiteColor]);
+}
+%end
+%end
+
+%group gColourOptions3
+%hook YTInlinePlayerBarContainerView
+- (id)quietProgressBarColor {
+    return progressbarHexColor;
 }
 %end
 %end
@@ -2685,6 +2694,14 @@ NSString *customAppVersion = nil; // Declare the global variable
         if (lcmHexString != nil) {
             lcmHexColor = [lcmUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
             %init(gColourOptions2);
+        }
+        NSData *progressbarColorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kYTProgreessBarColourOption"];
+        NSKeyedUnarchiver *progressbarUnarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:progressbarColorData error:nil];
+        [progressbarUnarchiver setRequiresSecureCoding:NO];
+        NSString *progressbarHexString = [progressbarUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+        if (progressbarHexString != nil) {
+            progressbarHexColor = [progressbarUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+            %init(gColourOptions3);
         }
         %init(_ungrouped);
     }
