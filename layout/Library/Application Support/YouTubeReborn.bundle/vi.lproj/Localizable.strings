@@ -1,7 +1,10 @@
 // Actions
 "CANCEL_TEXT" = "Huỷ";
+"RESET_TEXT" = "Reset";
+"SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "Okay";
 "NOTICE_TEXT" = "Chú ý";
+"COLOR_SAVED" = "Color Saved";
 
 // Downloads
 "VIDEO_TAB" = "Video";
@@ -18,10 +21,10 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "Cho phép HD trên dữ liệu di động";
 "PORTRAIT_FULLSCREEN" = "Toàn màn hình dọc";
 "AUTO_PLAY_IN_FULLSCREEN" = "Tự động phát ở chế độ toàn màn hình";
+"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "Tắt cửa sổ bật lên màn hình cuối video";
 "DISABLE_VIDEO_INFO_CARDS" = "Tắt thẻ thông tin video";
 "DISABLE_VIDEO_AUTOPLAY" = "Tắt tính năng tự động phát video";
-"HIDE_CHANNEL_WATERMARK" = "Ẩn hình mờ kênh";
 "RED_PROGRESS_BAR" = "Thanh tiến trình màu đỏ";
 "GRAY_BUFFER_PROGRESS" = "Tiến trình bộ đệm xám";
 "HIDE_PLAYER_BAR_HEATWAVE" = "Ẩn sóng nhiệt thanh người chơi";
@@ -34,6 +37,7 @@
 "OVERLAY_OPTIONS" = "Tùy chọn Overlay";
 
 "SHOW_STATUS_BAR_IN_OVERLAY" = "Hiển thị thanh trạng thái trong lớp phủ (Chỉ dọc)";
+"STOCK_VOLUME_HUD" = "Stock Volume HUD";
 "HIDE_PREVIOUS_BUTTON" = "Ẩn nút trước";
 "HIDE_PREVIOUS_BUTTON_SHADOW" = "Ẩn bóng nút trước";
 "HIDE_NEXT_BUTTON" = "Ẩn nút tiếp theo";
@@ -44,6 +48,7 @@
 "HIDE_AUTOPLAY_SWITCH" = "Ẩn công tắc tự động phát";
 "HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "Nút Ẩn chú thích/phụ đề";
 "DISABLE_RELATED_VIDEOS" = "Tắt các video có liên quan";
+"HIDE_CHANNEL_WATERMARK" = "Ẩn hình mờ kênh";
 "HIDE_DARK_OVERLAY_BACKGROUND" = "Ẩn nền lớp phủ tối";
 "HIDE_QUICK_ACTIONS" = "Ẩn thao tác nhanh";
 "HIDE_CURRENT_TIME" = "Ẩn thời gian hiện tại";
@@ -60,8 +65,9 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Ẩn tab đăng ký";
 "HIDE_YOU_TAB" = "Ẩn tab của bạn";
 "REORDER_TABS" = "Sắp xếp lại các tab";
-"COLOR_OPTIONS" = "Tùy chọn màu sắc (Chủ đề tùy chỉnh)";
-"COLOR_OPTIONS_2" = "Tùy chọn màu sắc (Văn bản và biểu tượng tùy chỉnh)";
+"COLOR_OPTIONS" = "Tùy chọn màu sắc - Chủ đề tùy chỉnh";
+"COLOR_OPTIONS_2" = "Tùy chọn màu sắc - Văn bản và biểu tượng tùy chỉnh";
+"COLOR_OPTIONS_3" = "Tùy chọn màu sắc - Custom Progress Bar";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Tùy chọn Hình trong Hình";
