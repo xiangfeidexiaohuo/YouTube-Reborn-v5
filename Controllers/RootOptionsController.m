@@ -6,6 +6,7 @@
 #import "ReorderPivotBarController.h"
 #import "ColourOptionsController.h"
 #import "ColourOptionsController2.h"
+#import "ColourOptionsController3.h"
 #import "PictureInPictureOptionsController.h"
 #import "ShortsOptionsController.h"
 #import "SponsorBlockOptionsController.h"
@@ -92,7 +93,7 @@
         }
     }
     if (section == 1) {
-        return 10;
+        return 11;
     }
     if (section == 2) {
         return 2;
@@ -157,15 +158,18 @@
                 cell.textLabel.text = LOC(@"COLOR_OPTIONS_2");
             }
             if (indexPath.row == 6) {
-                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
+                cell.textLabel.text = LOC(@"COLOR_OPTIONS_3");
             }
             if (indexPath.row == 7) {
-                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
+                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
             }
             if (indexPath.row == 8) {
-                cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
+                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
             }
             if (indexPath.row == 9) {
+                cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
+            }
+            if (indexPath.row == 10) {
                 cell.textLabel.text = LOC(@"OTHER_OPTIONS");
             }
         }
@@ -248,6 +252,13 @@
             [self presentViewController:colourOptionsController2View animated:YES completion:nil];
         }
         if (indexPath.row == 6) {
+            ColourOptionsController3 *colourOptionsController3 = [[ColourOptionsController3 alloc] init];
+            UINavigationController *colourOptionsController3View = [[UINavigationController alloc] initWithRootViewController:colourOptionsController3];
+            colourOptionsController3View.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:colourOptionsController2View animated:YES completion:nil];
+        }
+        if (indexPath.row == 7) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
                 PictureInPictureOptionsController *pictureInPictureOptionsController = [[PictureInPictureOptionsController alloc] init];
                 UINavigationController *pictureInPictureOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:pictureInPictureOptionsController];
@@ -263,21 +274,21 @@
                 [self presentViewController:alertError animated:YES completion:nil];
             }
         }
-        if (indexPath.row == 7) {
+        if (indexPath.row == 8) {
             ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] init];
             UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
             shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 	    
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 8) {
+        if (indexPath.row == 9) {
             SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc] init];
             UINavigationController *sponsorBlockOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:sponsorBlockOptionsController];
             sponsorBlockOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:sponsorBlockOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 10) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
@@ -357,6 +368,8 @@
 }
 
 - (void)apply {
+    [[UIApplication sharedApplication] performSelector:@selector(suspend)];
+    [NSThread sleepForTimeInterval:0.5];
     exit(0); 
 }
 
