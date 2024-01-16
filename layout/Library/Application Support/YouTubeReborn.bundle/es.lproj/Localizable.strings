@@ -1,7 +1,10 @@
 // Actions
 "CANCEL_TEXT" = "Cancelar";
+"RESET_TEXT" = "Reset";
+"SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "De acuerdo";
 "NOTICE_TEXT" = "Aviso";
+"COLOR_SAVED" = "Color Saved";
 
 // Downloads
 "VIDEO_TAB" = "Vídeo";
@@ -18,10 +21,10 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "Permitir HD en datos móviles";
 "PORTRAIT_FULLSCREEN" = "Retrato a pantalla completa";
 "AUTO_PLAY_IN_FULLSCREEN" = "Reproducción automática en pantalla completa";
+"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "Desactivar ventanas emergentes de fin de pantalla de vídeo";
 "DISABLE_VIDEO_INFO_CARDS" = "Desactivar tarjetas de información de vídeo";
 "DISABLE_VIDEO_AUTOPLAY" = "Desactivar reproducción automática de vídeo";
-"HIDE_CHANNEL_WATERMARK" = "Ocultar marca de agua del canal";
 "RED_PROGRESS_BAR" = "Barra de progreso roja";
 "GRAY_BUFFER_PROGRESS" = "Progreso del búfer gris";
 "HIDE_PLAYER_BAR_HEATWAVE" = "Ocultar Heatwave de la barra del reproductor";
@@ -34,6 +37,7 @@
 "OVERLAY_OPTIONS" = "Opciones de superposición";
 
 "SHOW_STATUS_BAR_IN_OVERLAY" = "Mostrar barra de estado en superposición (sólo en vertical)";
+"STOCK_VOLUME_HUD" = "Stock Volume HUD";
 "HIDE_PREVIOUS_BUTTON" = "Ocultar botón anterior";
 "HIDE_PREVIOUS_BUTTON_SHADOW" = "Ocultar la sombra del botón anterior";
 "HIDE_NEXT_BUTTON" = "Ocultar botón siguiente";
@@ -44,6 +48,7 @@
 "HIDE_AUTOPLAY_SWITCH" = "Ocultar interruptor de reproducción automática";
 "HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "Ocultar botón de subtítulos";
 "DISABLE_RELATED_VIDEOS" = "Desactivar vídeos relacionados";
+"HIDE_CHANNEL_WATERMARK" = "Ocultar marca de agua del canal";
 "HIDE_DARK_OVERLAY_BACKGROUND" = "Ocultar fondo oscuro superpuesto";
 "HIDE_QUICK_ACTIONS" = "Ocultar acciones rápidas";
 "HIDE_CURRENT_TIME" = "Ocultar hora actual";
@@ -60,8 +65,9 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Ocultar pestaña Suscripciones";
 "HIDE_YOU_TAB" = "Ocultar pestaña Tú";
 "REORDER_TABS" = "Reordenar pestañas";
-"COLOR_OPTIONS" = "Opciones de color (Tema custom)";
-"COLOR_OPTIONS_2" = "Opciones de color (Textos e iconos customs)";
+"COLOR_OPTIONS" = "Opciones de color - Tema custom";
+"COLOR_OPTIONS_2" = "Opciones de color - Textos e iconos customs";
+"COLOR_OPTIONS_3" = "Opciones de color - Custom Progress Bar";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Opciones de imagen en imagen";
