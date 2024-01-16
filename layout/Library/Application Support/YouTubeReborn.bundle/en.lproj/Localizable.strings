@@ -1,7 +1,10 @@
 // Actions
 "CANCEL_TEXT" = "Cancel";
+"RESET_TEXT" = "Reset";
+"SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "Okay";
 "NOTICE_TEXT" = "Notice";
+"COLOR_SAVED" = "Color Saved";
 
 // Downloads
 "VIDEO_TAB" = "Video";
@@ -18,10 +21,10 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "Allow HD On Cellular Data";
 "PORTRAIT_FULLSCREEN" = "Portrait Fullscreen";
 "AUTO_PLAY_IN_FULLSCREEN" = "Auto Play In Fullscreen";
+"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "Disable Video Endscreen Popups";
 "DISABLE_VIDEO_INFO_CARDS" = "Disable Video Info Cards";
 "DISABLE_VIDEO_AUTOPLAY" = "Disable Video Autoplay";
-"HIDE_CHANNEL_WATERMARK" = "Hide Channel Watermark";
 "RED_PROGRESS_BAR" = "Red Progress Bar";
 "GRAY_BUFFER_PROGRESS" = "Gray Buffer Progress";
 "HIDE_PLAYER_BAR_HEATWAVE" = "Hide Player Bar Heatwave";
@@ -34,6 +37,7 @@
 "OVERLAY_OPTIONS" = "Overlay Options";
 
 "SHOW_STATUS_BAR_IN_OVERLAY" = "Show Status Bar In Overlay (Portrait Only)";
+"STOCK_VOLUME_HUD" = "Stock Volume HUD";
 "HIDE_PREVIOUS_BUTTON" = "Hide Previous Button";
 "HIDE_PREVIOUS_BUTTON_SHADOW" = "Hide Previous Button Shadow";
 "HIDE_NEXT_BUTTON" = "Hide Next Button";
@@ -44,6 +48,7 @@
 "HIDE_AUTOPLAY_SWITCH" = "Hide Autoplay Switch";
 "HIDE_CAPTIONS_AND_SUBTITLES_BUTTON" = "Hide Captions/Subtitles Button";
 "DISABLE_RELATED_VIDEOS" = "Disable Related Videos";
+"HIDE_CHANNEL_WATERMARK" = "Hide Channel Watermark";
 "HIDE_DARK_OVERLAY_BACKGROUND" = "Hide Dark Overlay Background";
 "HIDE_QUICK_ACTIONS" = "Hide Quick Actions";
 "HIDE_CURRENT_TIME" = "Hide Current Time";
@@ -60,8 +65,9 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Hide Subscriptions Tab";
 "HIDE_YOU_TAB" = "Hide You Tab";
 "REORDER_TABS" = "Reorder Tabs";
-"COLOR_OPTIONS" = "Color Options (Custom Theme)";
-"COLOR_OPTIONS_2" = "Color Options (Custom Texts and Icons)";
+"COLOR_OPTIONS" = "Color Options - Custom Theme";
+"COLOR_OPTIONS_2" = "Color Options - Custom Texts/Icons";
+"COLOR_OPTIONS_3" = "Color Options - Custom Progress Bar";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Picture In Picture Options";
