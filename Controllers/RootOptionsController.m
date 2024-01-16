@@ -256,7 +256,7 @@
             UINavigationController *colourOptionsController3View = [[UINavigationController alloc] initWithRootViewController:colourOptionsController3];
             colourOptionsController3View.modalPresentationStyle = UIModalPresentationFullScreen;
 
-            [self presentViewController:colourOptionsController2View animated:YES completion:nil];
+            [self presentViewController:colourOptionsController3View animated:YES completion:nil];
         }
         if (indexPath.row == 7) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
