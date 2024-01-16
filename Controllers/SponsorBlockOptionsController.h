@@ -1,5 +1,5 @@
-#import "UIKit/UIKit.h"
+#import <UIKit/UIKit.h>
 
-@interface SponsorBlockOptionsController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, strong) UITableView* tableView;
+@interface SponsorBlockOptionsController : UITableViewController
+
 @end
