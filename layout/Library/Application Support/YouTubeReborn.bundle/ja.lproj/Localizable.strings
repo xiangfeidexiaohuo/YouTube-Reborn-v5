@@ -1,10 +1,10 @@
 // Actions
 "CANCEL_TEXT" = "キャンセル";
-"RESET_TEXT" = "Reset";
-"SAVE_TEXT" = "Save";
+"RESET_TEXT" = "リセット";
+"SAVE_TEXT" = "保存";
 "OKAY_TEXT" = "OK";
 "NOTICE_TEXT" = "通知";
-"COLOR_SAVED" = "Color Saved";
+"COLOR_SAVED" = "保存しました";
 
 // Downloads
 "VIDEO_TAB" = "動画";
@@ -21,7 +21,7 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "モバイルネットワークでHD再生を許可";
 "PORTRAIT_FULLSCREEN" = "フルスクリーン(縦画面)";
 "AUTO_PLAY_IN_FULLSCREEN" = "フルスクリーンで自動再生";
-"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
+"DISABLE_PINCH_TO_ZOOM" = "ピンチで拡大を無効化";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "動画終了画面のポップアップを無効化";
 "DISABLE_VIDEO_INFO_CARDS" = "動画情報カードを無効化";
 "DISABLE_VIDEO_AUTOPLAY" = "動画の自動再生を無効化";
@@ -65,9 +65,9 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "登録チャンネルタブを非表示";
 "HIDE_YOU_TAB" = "マイページタブを非表示";
 "REORDER_TABS" = "タブの並べ替え";
-"COLOR_OPTIONS" = "色のオプション - カスタムテーマ";
-"COLOR_OPTIONS_2" = "色のオプション - カスタムテキストとアイコン";
-"COLOR_OPTIONS_3" = "色のオプション - Custom Progress Bar";
+"COLOR_OPTIONS" = "カラーオプション - カスタムテーマ";
+"COLOR_OPTIONS_2" = "カラーオプション - カスタムテキストとアイコン";
+"COLOR_OPTIONS_3" = "カラーオプション - カスタムプログレスバー";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "ピクチャインピクチャの設定";
@@ -121,7 +121,7 @@
 "HIDE_PLAY_NEXT_IN_QUEUE" = "「次に再生」を非表示";
 "DISABLE_YOUTUBE_KIDS" = "YouTube Kidsを無効化";
 "DISABLE_HINTS" = "ヒントを無効化";
-"PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
+"PREMIUM_YOUTUBE_LOGO" = "YouTube Premiumのロゴ";
 "HIDE_YOUTUBE_LOGO" = "YouTubeロゴを非表示";
 "STICK_NAVIGATION_BAR" = "ナビゲーションバーを固定";
 "AUTO_HIDE_HOME_BAR" = "ホームバーを自動非表示";
