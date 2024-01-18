@@ -1,10 +1,10 @@
 // Actions
 "CANCEL_TEXT" = "取消";
-"RESET_TEXT" = "Reset";
-"SAVE_TEXT" = "Save";
+"RESET_TEXT" = "重置";
+"SAVE_TEXT" = "保存";
 "OKAY_TEXT" = "好的";
 "NOTICE_TEXT" = "注意";
-"COLOR_SAVED" = "Color Saved";
+"COLOR_SAVED" = "颜色已保存";
 
 // Downloads
 "VIDEO_TAB" = "视频";
@@ -21,7 +21,7 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "允许蜂窝数据播放高清视频";
 "PORTRAIT_FULLSCREEN" = "竖屏全屏";
 "AUTO_PLAY_IN_FULLSCREEN" = "自动全屏播放";
-"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
+"DISABLE_PINCH_TO_ZOOM" = "禁用捏合缩放";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "禁用视频片尾弹窗";
 "DISABLE_VIDEO_INFO_CARDS" = "禁用视频信息卡";
 "DISABLE_VIDEO_AUTOPLAY" = "禁用视频自动播放";
@@ -37,7 +37,7 @@
 "OVERLAY_OPTIONS" = "播放界面选项";
 
 "SHOW_STATUS_BAR_IN_OVERLAY" = "显示状态栏(仅竖屏)";
-"STOCK_VOLUME_HUD" = "Stock Volume HUD";
+"STOCK_VOLUME_HUD" = "原生音量 HUD";
 "HIDE_PREVIOUS_BUTTON" = "隐藏上一个按钮";
 "HIDE_PREVIOUS_BUTTON_SHADOW" = "隐藏上一个按钮阴影";
 "HIDE_NEXT_BUTTON" = "隐藏下一个按钮";
@@ -67,7 +67,7 @@
 "REORDER_TABS" = "标签重新排序";
 "COLOR_OPTIONS" = "界面颜色选项-主题";
 "COLOR_OPTIONS_2" = "界面颜色选项-文本和图标";
-"COLOR_OPTIONS_3" = "界面颜色选项-Custom Progress Bar";
+"COLOR_OPTIONS_3" = "界面颜色选项-自定义进度条";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "画中画的选项";
