@@ -1554,7 +1554,9 @@ BOOL isAd(id node) {
 %hook YTIPivotBarItemRenderer
 - (void)viewDidLoad {
     %orig();
+    
     NSArray *tabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
+    
     NSDictionary *tabPositions = @{
         @"id.ui.pivotbar.FEwhat_to_watch.button": @(0), // Home
         @"id.ui.pivotbar.FEshorts.button": @(1), // Shorts
@@ -1562,6 +1564,7 @@ BOOL isAd(id node) {
         @"id.ui.pivotbar.FEsubscriptions.button": @(3), // Subscriptions
         @"id.ui.pivotbar.FElibrary.button": @(4) // You
     };
+    
     NSMutableArray *sortedTabOrder = [NSMutableArray array];
     for (NSString *tabIdentifier in tabOrder) {
         NSNumber *position = tabPositions[tabIdentifier];
@@ -1574,24 +1577,27 @@ BOOL isAd(id node) {
         NSNumber *position2 = tab2[@"position"];
         return [position1 compare:position2];
     }];
+    
     NSMutableArray *reorderedTabs = [NSMutableArray array];
     for (NSDictionary *tabInfo in sortedTabOrder) {
         NSString *tabIdentifier = tabInfo[@"identifier"];
         [reorderedTabs addObject:tabIdentifier];
     }
+    
     [self setTabOrder:reorderedTabs];
-
+    
+    UITableView *tableView = [self valueForKey:@"tableView"];
     for (int i = 0; i < reorderedTabs.count; i++) {
         NSString *tabIdentifier = reorderedTabs[i];
         NSString *accessibilityIdentifier = [NSString stringWithFormat:@"id.ui.pivotbar.%@.button", tabIdentifier];
         UIView *tabView = [self findTabViewWithAccessibilityIdentifier:accessibilityIdentifier];
-        if (tabView != nil) {
-            NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
-        }
+        NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        [tableView moveRowAtIndexPath:destinationIndexPath toIndexPath:destinationIndexPath];
     }
 }
 - (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier {
-    for (UITableViewCell *cell in self.tableView.visibleCells) {
+    UITableView *tableView = [self valueForKey:@"tableView"];
+    for (UITableViewCell *cell in tableView.visibleCells) {
         if ([cell.accessibilityIdentifier isEqualToString:accessibilityIdentifier]) {
             return cell.contentView;
         }
