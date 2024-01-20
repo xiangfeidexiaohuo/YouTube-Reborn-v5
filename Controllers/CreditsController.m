@@ -16,12 +16,10 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.rightBarButtonItem = doneButton;
 
-    UITableViewStyle style;
-        if (@available(iOS 13, *)) {
-            style = UITableViewStyleInsetGrouped;
-        } else {
-            style = UITableViewStyleGrouped;
-        }
+    UITableViewStyle style = UITableViewStyleGrouped;
+    if (@available(iOS 13, *)) {
+        style = UITableViewStyleInsetGrouped;
+    }
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:style];
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -37,6 +35,8 @@
     ]];
 }
 
+#pragma mark - UITableViewDataSource
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
@@ -44,9 +44,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-    }
-    if (section == 1) {
-        return 5;
+    } else if (section == 1) {
+        return 6;
     }
     return 0;
 }
@@ -56,108 +55,70 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-        cell.textLabel.adjustsFontSizeToFitWidth = YES;
-        cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-            cell.textLabel.textColor = [UIColor blackColor];
-            cell.detailTextLabel.textColor = [UIColor blackColor];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+
+    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"Lillie";
+            cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
+            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/91358136?v=4" forImageView:cell.imageView];
         }
-        else {
-            cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.textLabel.shadowColor = [UIColor blackColor];
-            cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
-            cell.detailTextLabel.textColor = [UIColor whiteColor];
-        }
-        if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"Lillie";
-                cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
-//              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/91358136?v=4"]];
-                cell.imageView.image = profileImageView.image;
-            }
-        }
-        if (indexPath.section == 1) {
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"Alpha_Stream";
-                cell.detailTextLabel.text = LOC(@"ICON_DESIGNER_TEXT");
-//              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]];
-                cell.imageView.image = profileImageView.image;
-            }
-            if (indexPath.row == 1) {
-                cell.textLabel.text = @"kirb";
-                cell.detailTextLabel.text = @"Development Support";
-//              cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/773309?v=4"]];
-                cell.imageView.image = profileImageView.image;
-            }
-            if (indexPath.row == 2) {
-                cell.textLabel.text = @"Dayanch96";
-                cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\" \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
-                cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/38832025?v=4"]];
-                cell.imageView.image = profileImageView.image;
-            }
-            if (indexPath.row == 3) {
-                cell.textLabel.text = @"PoomSmart";
-                cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
-                cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/3608783?v=4"]];
-                cell.imageView.image = profileImageView.image;
-            }
-            if (indexPath.row == 4) {
-                cell.textLabel.text = @"NguyenASang";
-                cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\"";
-    //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@"https://avatars.githubusercontent.com/u/87893636?v=4"]];
-                cell.imageView.image = profileImageView.image;
-            }
-            if (indexPath.row == 5) {
-                cell.textLabel.text = @"Snoolie";
-                cell.detailTextLabel.text = @"Features: \"Enable Extra Video Speed\"";
-    //          cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-                UIImageView *profileImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-                [profileImageView sd_setImageWithURL:[NSURL URLWithString:@""]];
-                cell.imageView.image = profileImageView.image;
-            }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"Alpha_Stream";
+            cell.detailTextLabel.text = LOC(@"ICON_DESIGNER_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 1) {
+            cell.textLabel.text = @"kirb";
+            cell.detailTextLabel.text = @"Development Support";
+            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/773309?v=4" forImageView:cell.imageView];
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = @"Dayanch96";
+            cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/38832025?v=4" forImageView:cell.imageView];
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = @"PoomSmart";
+            cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
+            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/3608783?v=4" forImageView:cell.imageView];
+        } else if (indexPath.row == 4) {
+            cell.textLabel.text = @"NguyenASang";
+            cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\"";
+            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/87893636?v=4" forImageView:cell.imageView];
+        } else if (indexPath.row == 5) {
+            cell.textLabel.text = @"Snoolie";
+            cell.detailTextLabel.text = @"Features: \"Enable Extra Video Speed\"";
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         }
     }
+
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
+
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/LillieH1000"] options:@{} completionHandler:nil];
+            [self openURLWithString:@"https://github.com/LillieH1000"];
         }
-    }
-    if (indexPath.section == 1) {
+    } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/Kutarin_"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/Dayanch96"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 2) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/kirb"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 3) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/PoomSmart"] options:@{} completionHandler:nil];
-        }
-        if (indexPath.row == 4) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/0xilis"] options:@{} completionHandler:nil];
+            [self openURLWithString:@"https://twitter.com/Kutarin_"];
+        } else if (indexPath.row == 1) {
+            [self openURLWithString:@"https://github.com/Dayanch96"];
+        } else if (indexPath.row == 2) {
+            [self openURLWithString:@"https://github.com/kirb"];
+        } else if (indexPath.row == 3) {
+            [self openURLWithString:@"https://twitter.com/PoomSmart"];
+        } else if (indexPath.row == 4) {
+            [self openURLWithString:@"https://github.com/0xilis"];
         }
     }
 }
@@ -181,8 +142,22 @@
     [self.tableView reloadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)loadImageWithURLString:(NSString *)urlString forImageView:(UIImageView *)imageView {
+    if (urlString.length > 0) {
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        UIImage *image = [UIImage imageWithData:imageData];
+        imageView.image = image;
+    } else {
+        imageView.image = nil;
+    }
+}
+
+- (void)openURLWithString:(NSString *)urlString {
+    NSURL *url = [NSURL URLWithString:urlString];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+    }
 }
 
 @end
