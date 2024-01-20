@@ -15,7 +15,7 @@
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"SAVE_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(save)];
     UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"RESET_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
     self.navigationItem.leftBarButtonItems = @[saveButton, resetButton];
-    self.navigationItem.rightBarButtonItem = doneButton
+    self.navigationItem.rightBarButtonItem = doneButton;
 
     UITableViewStyle style;
     if (@available(iOS 13, *)) {
@@ -39,7 +39,7 @@
 
     NSArray *savedTabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
     if (savedTabOrder != nil) {
-        self.pivotBarController = [self.navigationController.viewControllers objectAtIndex:0];
+        self.pivotBarController = (YTIPivotBarController *)[self.navigationController.viewControllers objectAtIndex:0];
         self.pivotBarController.tabOrder = [NSMutableArray arrayWithArray:savedTabOrder];
         self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
 
