@@ -16,39 +16,43 @@
 
 - (void)configureUI {
     self.view.backgroundColor = [UIColor systemBackgroundColor];
-    
+
     UINavigationBarAppearance *navigationBarAppearance = [[UINavigationBarAppearance alloc] init];
     navigationBarAppearance.backgroundColor = [UIColor systemBackgroundColor];
     navigationBarAppearance.backgroundEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemUltraThinMaterial];
 
     [self.navigationController.navigationBar setStandardAppearance:navigationBarAppearance];
     [self.navigationController.navigationBar setScrollEdgeAppearance:navigationBarAppearance];
-    
+
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor labelColor], NSFontAttributeName:[UIFont systemFontOfSize:18]}];
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    
+
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
     self.navigationItem.rightBarButtonItem = doneButton;
-    
-    self.tabBar = [[UITabBarController alloc] init];
-    
+
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.delegate = self;
+
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"VIDEO_TAB");
-    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonvideoblack.png"] tag:0];
-    videoViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonvideowhite.png"];
+    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage systemImageNamed:@"video.circle.fill"] tag:0];
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
-    
+
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
     audioViewController.title = LOC(@"AUDIO_TAB");
-    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ytrebornbuttonaudioblack.png"] tag:1];
-    audioViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"ytrebornbuttonaudiowhite.png"];
+    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage systemImageNamed:@"music.note"] tag:1];
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
-    
-    self.tabBar.viewControllers = @[videoNavViewController, audioNavViewController];
-    [self addChildViewController:self.tabBar];
-    self.tabBar.view.frame = self.view.bounds;
-    [self.view addSubview:self.tabBar.view];
-    [self.tabBar didMoveToParentViewController:self];
+
+    self.tabBarController.viewControllers = @[videoNavViewController, audioNavViewController];
+    [self addChildViewController:self.tabBarController];
+    self.tabBarController.view.frame = self.view.bounds;
+    [self.view addSubview:self.tabBarController.view];
+    [self.tabBarController didMoveToParentViewController:self];
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    UIView *selectedItemView = [tabBarController.tabBar.subviews objectAtIndex:tabBarController.selectedIndex + 1];
+    selectedItemView.backgroundColor = [UIColor systemBlueColor];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
