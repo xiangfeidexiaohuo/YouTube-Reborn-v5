@@ -17,6 +17,9 @@
     [super viewDidLoad];
     [self coloursView];
 
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
+    self.searchBar.delegate = self;
+
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
     self.navigationItem.rightBarButtonItem = searchButton;
     self.filteredItems = [NSArray array];
@@ -64,9 +67,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [filePathsVideoArray count];
-
-        if (self.isSearching) {
+    if (self.isSearching) {
         return self.filteredItems.count;
     } else {
         return self.allItems.count;
@@ -78,7 +79,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
@@ -92,7 +93,7 @@
         else {
             cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
             cell.textLabel.textColor = [UIColor whiteColor];
-	    cell.textLabel.shadowColor = [UIColor blackColor];
+            cell.textLabel.shadowColor = [UIColor blackColor];
             cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
@@ -104,12 +105,7 @@
     }
     @catch (NSException *exception) {
     }
-    NSString *item;
-    if (self.isSearching) {
-        item = self.filteredItems[indexPath.row];
-    } else {
-        item = self.allItems[indexPath.row];
-    }
+
     return cell;
 }
 
@@ -198,6 +194,7 @@
             [filePathsVideoArtworkArray addObject:jpg];
         }
     }
+    self.allItems = [NSArray arrayWithArray:filePathsVideoArray];
 }
 
 - (void)coloursView {
