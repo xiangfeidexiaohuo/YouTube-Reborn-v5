@@ -58,9 +58,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:colorData forKey:@"kYTRebornColourOptionsVFour"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    UIAlertController *alertSaved = [UIAlertController alertControllerWithTitle:@"Colour Saved" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertSaved = [UIAlertController alertControllerWithTitle:LOC(@"COLOR_SAVED") message:nil preferredStyle:UIAlertControllerStyleAlert];
 
-    [alertSaved addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    [alertSaved addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }]];
 
     [self presentViewController:alertSaved animated:YES completion:nil];
