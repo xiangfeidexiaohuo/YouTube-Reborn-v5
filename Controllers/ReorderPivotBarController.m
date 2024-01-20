@@ -39,8 +39,6 @@
 
     NSArray *savedTabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
     if (savedTabOrder != nil) {
-        self.pivotBarController = (YTIPivotBarController *)[self.navigationController.viewControllers objectAtIndex:0];
-        self.pivotBarController.tabOrder = [NSMutableArray arrayWithArray:savedTabOrder];
         self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
 
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -128,7 +126,9 @@
             [self.tableView setEditing:YES animated:YES];
             NSInteger sourceIndex = indexPath.row;
             NSInteger destinationIndex = [self.tableView numberOfRowsInSection:0] - 1;
-            [self.pivotBarController.tabOrder exchangeObjectAtIndex:sourceIndex withObjectAtIndex:destinationIndex];
+            NSRange sourceRange = NSMakeRange(sourceIndex, 1);
+            NSRange destinationRange = NSMakeRange(destinationIndex, 1);
+            [self.tabOrder replaceObjectsInRange:sourceRange withObjectsFromArray:[self.tabOrder subarrayWithRange:destinationRange]];
         }
     }
 }
