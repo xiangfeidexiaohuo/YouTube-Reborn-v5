@@ -14,7 +14,8 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"SAVE_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(save)];
     UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"RESET_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
-    self.navigationItem.rightBarButtonItems = @[doneButton, saveButton, resetButton];
+    self.navigationItem.leftBarButtonItems = @[saveButton, resetButton];
+    self.navigationItem.rightBarButtonItem = doneButton
 
     UITableViewStyle style;
     if (@available(iOS 13, *)) {
@@ -38,6 +39,8 @@
 
     NSArray *savedTabOrder = [[NSUserDefaults standardUserDefaults] objectForKey:@"kTabOrder"];
     if (savedTabOrder != nil) {
+        self.pivotBarController = [self.navigationController.viewControllers objectAtIndex:0];
+        self.pivotBarController.tabOrder = [NSMutableArray arrayWithArray:savedTabOrder];
         self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
 
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
@@ -123,6 +126,9 @@
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
         if (indexPath && indexPath.section == 0) {
             [self.tableView setEditing:YES animated:YES];
+            NSInteger sourceIndex = indexPath.row;
+            NSInteger destinationIndex = [self.tableView numberOfRowsInSection:0] - 1;
+            [self.pivotBarController.tabOrder exchangeObjectAtIndex:sourceIndex withObjectAtIndex:destinationIndex];
         }
     }
 }
