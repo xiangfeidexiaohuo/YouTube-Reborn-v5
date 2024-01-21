@@ -854,9 +854,14 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 
 %new;
 - (void)rebornOptionsAction {
-    NSString *videoIdentifier = [shortsPlayingVideoID videoId];
+    NSInteger videoStatus = [stateOut playerState];
+    if (videoStatus == 3) {
+        [self didPressPause:[self playPauseButton]];
+    }
 
-    UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:nil message:@"Please Pause The Video Before Continuing" preferredStyle:UIAlertControllerStyleActionSheet];
+    NSString *videoIdentifier = [playingVideoID currentVideoID];
+
+    UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO) {
         [alertMenu addAction:[UIAlertAction actionWithTitle:@"Download Audio" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
