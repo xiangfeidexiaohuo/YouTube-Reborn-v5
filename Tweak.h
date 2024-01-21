@@ -46,6 +46,7 @@
 - (id)_viewControllerForAncestor;
 @property (retain, nonatomic) UIButton *rebornOverlayButton;
 @property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
+- (id)playPauseButton;
 - (void)didPressReborn:(UIButton *)button event:(UIEvent *)event;
 - (void)rebornOptionsAction;
 - (void)rebornVideoDownloader :(NSString *)videoID;
