@@ -33,6 +33,9 @@
 
     self.title = @"YouTube Reborn";
 
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
+    self.searchBar.delegate = self;
+
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
     self.navigationItem.rightBarButtonItem = searchButton;
     self.filteredItems = [NSArray array];
@@ -68,7 +71,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     NSString *searchText = searchBar.text;
-    
+
     if (searchText.length > 0) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", searchText];
         self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
@@ -104,12 +107,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"RootTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    NSString *item;
     
     if (self.isSearching) {
-        item = self.filteredItems[indexPath.row];
+        return self.filteredItems.count;
     } else {
-        item = self.allItems[indexPath.row];
+        return self.allItems.count;
     }
 
     if (cell == nil) {
