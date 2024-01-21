@@ -1619,7 +1619,6 @@ BOOL isAd(id node) {
     
     UITableView *tableView = [self valueForKey:@"tableView"];
     for (int i = 0; i < reorderedTabs.count; i++) {
-        NSString *tabIdentifier = reorderedTabs[i];
         NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
         [tableView moveRowAtIndexPath:destinationIndexPath toIndexPath:destinationIndexPath];
     }
