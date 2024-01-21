@@ -43,6 +43,7 @@
 @end
 
 @interface ASCollectionView (Reborn)
+- (id)_viewControllerForAncestor;
 @property (retain, nonatomic) UIButton *rebornOverlayButton;
 @property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
 - (void)didPressReborn:(UIButton *)button event:(UIEvent *)event;
