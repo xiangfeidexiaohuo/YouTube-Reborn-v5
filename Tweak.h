@@ -212,10 +212,6 @@
 @property(readonly, nonatomic) YTLabel *currentTimeLabel;
 @end
 
-@interface YTCommonColorPalette : NSObject
-@property(readonly, nonatomic) long long pageStyle;
-@end
-
 // YouTube Reborn Settings
 @interface FRPreferences : UITableViewController
 @end
