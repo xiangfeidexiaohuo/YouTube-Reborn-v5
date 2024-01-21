@@ -42,9 +42,15 @@
 @interface YTCommentDetailHeaderCell : UIView
 @end
 
-@interface YTIPivotBarItemRender : NSObject
-@property(nonatomic, copy) NSArray *tabItems;
-@property (nonatomic, strong) UITableView *tableView;
+@interface ASCollectionView (Reborn)
+@property (retain, nonatomic) UIButton *rebornOverlayButton;
+@property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
+- (void)didPressReborn:(UIButton *)button event:(UIEvent *)event;
+- (void)rebornOptionsAction;
+- (void)rebornVideoDownloader :(NSString *)videoID;
+- (void)rebornAudioDownloader :(NSString *)videoID;
+- (void)rebornPictureInPicture :(NSString *)videoID;
+- (void)rebornPlayInExternalApp :(NSString *)videoID;
 @end
 
 @interface _ASCollectionViewCell : UICollectionViewCell
