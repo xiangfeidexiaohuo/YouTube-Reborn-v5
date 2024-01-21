@@ -779,7 +779,7 @@ static NSString *accessGroupID() {
 }
 %end
 
-// WIP - YouTube Reborn v5 Button
+// YouTube Reborn Video Player Button (v5.0.0+)
 #pragma mark - @NguyenASang - Video tab bar Reborn Download Video or Audio Button (17.01.4 and up)
 
 static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title, NSString *accessibilityLabel) {
@@ -849,7 +849,6 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     if (CGRectContainsPoint(button.bounds, location)) {
          UIViewController *controller = [self.collectionNode closestViewController];
         YTPlaybackStrippedWatchController *provider = [controller valueForKey:@"_metadataPanelStateProvider"];
-        YTWatchViewController *watchViewController = [provider valueForKey:@"_watchViewController"];
         [self rebornOptionsAction];
     }
 }
