@@ -173,27 +173,6 @@
 @property (nonatomic, strong) UITableView *tableView;
 @end
 
-@interface YTMBrowseViewController: UIViewController
-@end
-
-@interface YTIFormattedString : NSObject
-+ (id)formattedStringWithString:(id)arg1;
-@end
-
-@interface YTIIcon : NSObject
-- (id)iconImageWithColor:(UIColor *)arg1;
-- (id)newIconImageWithColor:(id)arg1;
-@property(nonatomic) int iconType;
-@end
-
-@interface YTIBrowseEndpoint : NSObject
-@property(copy, nonatomic) NSString *browseId;
-@end
-
-@interface YTICommand : NSObject
-@property(retain, nonatomic) YTIBrowseEndpoint *browseEndpoint;
-@end
-
 @interface YTReelHeaderView : UIView
 - (id)_viewControllerForAncestor;
 - (void)rebornOptionsAction;
