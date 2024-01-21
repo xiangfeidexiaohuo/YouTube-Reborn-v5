@@ -847,7 +847,6 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 - (void)didPressReborn:(UIButton *)button event:(UIEvent *)event {
     CGPoint location = [[[event allTouches] anyObject] locationInView:button];
     if (CGRectContainsPoint(button.bounds, location)) {
-        UIViewController *controller = [self.collectionNode closestViewController];
         [self rebornOptionsAction];
     }
 }
