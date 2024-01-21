@@ -18,17 +18,6 @@ static BOOL hasDeviceNotch() {
 	}
 }
 
-@interface ASCollectionView (Reborn)
-@property (retain, nonatomic) UIButton *rebornOverlayButton;
-@property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
-- (void)didPressReborn:(UIButton *)button event:(UIEvent *)event;
-- (void)rebornOptionsAction;
-- (void)rebornVideoDownloader :(NSString *)videoID;
-- (void)rebornAudioDownloader :(NSString *)videoID;
-- (void)rebornPictureInPicture :(NSString *)videoID;
-- (void)rebornPlayInExternalApp :(NSString *)videoID;
-@end
-
 UIColor *rebornHexColour;
 UIColor *lcmHexColor;
 UIColor *progressbarHexColor;
