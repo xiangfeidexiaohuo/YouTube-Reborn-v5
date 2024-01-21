@@ -1620,7 +1620,6 @@ BOOL isAd(id node) {
     UITableView *tableView = [self valueForKey:@"tableView"];
     for (int i = 0; i < reorderedTabs.count; i++) {
         NSString *tabIdentifier = reorderedTabs[i];
-        NSString *pivotIdentifier = [NSString stringWithFormat:@"id.ui.pivotbar.%@.button", tabIdentifier];
         NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
         [tableView moveRowAtIndexPath:destinationIndexPath toIndexPath:destinationIndexPath];
     }
