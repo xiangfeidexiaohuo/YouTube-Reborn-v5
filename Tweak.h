@@ -16,6 +16,7 @@
 #import "YouTubeHeader/ELMNodeController.h"
 #import "YouTubeHeader/QTMIcon.h"
 #import "YouTubeHeader/YTColor.h"
+#import "YouTubeHeader/YTColorPalette.h"
 #import "YouTubeHeader/YTHotConfig.h"
 #import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
