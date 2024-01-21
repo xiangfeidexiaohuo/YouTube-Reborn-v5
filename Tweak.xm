@@ -784,9 +784,9 @@ static NSString *accessGroupID() {
 
 static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title, NSString *accessibilityLabel) {
     NSInteger pageStyle = [%c(YTPageStyleController) pageStyle];
+    YTColorPalette *palette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle];
     YTCommonColorPalette *commonPalette = pageStyle == 1 ? [%c(YTCommonColorPalette) darkPalette] : [%c(YTCommonColorPalette) lightPalette];
-    YTColorPalette *palette = commonPalette ? commonPalette.colorPalette : nil;
-    if (!palette) palette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle]; // YouTube 17.18.4 and below
+    if (!commonPalette) commonPalette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle]; // YouTube 17.18.4 and below
     UIColor *textColor = [palette textPrimary];
     ELMContainerNode *containerNode = (ELMContainerNode *)[[[[node yogaChildren] firstObject] yogaChildren] firstObject]; // To get node container properties
     UIButton *buttonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, containerNode.calculatedSize.height)];
@@ -818,7 +818,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (ELMCellNode *)nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
+    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
         if ([self numberOfItemsInSection:0] - 1 == indexPath.row) {
             self.rebornOverlayButton = makeUnderRebornPlayerButton(%orig, @"Reborn", @"Download Audio or Video Files");
@@ -834,7 +834,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (void)nodesDidRelayout:(NSArray <ELMCellNode *> *)nodes {
-    if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
+    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
         CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
         [UIView animateWithDuration:0.3 animations:^{
             self.rebornOverlayButton.center = CGPointMake(self.rebornOverlayButton.center.x + offset, self.rebornOverlayButton.center.y);
@@ -847,14 +847,14 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 - (void)didPressReborn:(UIButton *)button event:(UIEvent *)event {
     CGPoint location = [[[event allTouches] anyObject] locationInView:button];
     if (CGRectContainsPoint(button.bounds, location)) {
-        UIViewController *controller = [self.collectionNode closestViewController];
+         UIViewController *controller = [self.collectionNode closestViewController];
         YTPlaybackStrippedWatchController *provider = [controller valueForKey:@"_metadataPanelStateProvider"];
         YTWatchViewController *watchViewController = [provider valueForKey:@"_watchViewController"];
-        YTPlayerViewController *playerViewController = [watchViewController valueForKey:@"_playerViewController"];
         [self rebornOptionsAction];
     }
 }
 
+%new;
 - (void)rebornOptionsAction {
     NSString *videoIdentifier = [shortsPlayingVideoID videoId];
 
@@ -870,7 +870,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
         }]];
     }
 
-    if (SYSTESYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14.0") && SYSTEM_VERSION_LESS_THAN(@"15.0")) {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14.0") && SYSTEM_VERSION_LESS_THAN(@"15.0")) {
         [alertMenu addAction:[UIAlertAction actionWithTitle:@"Picture In Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornPictureInPicture:videoIdentifier];
         }]];
