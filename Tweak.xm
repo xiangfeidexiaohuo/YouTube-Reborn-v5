@@ -818,7 +818,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (ELMCellNode *)nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
+    if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
         if ([self numberOfItemsInSection:0] - 1 == indexPath.row) {
             self.rebornOverlayButton = makeUnderRebornPlayerButton(%orig, @"Reborn", @"Download Audio or Video Files");
@@ -834,7 +834,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (void)nodesDidRelayout:(NSArray <ELMCellNode *> *)nodes {
-    if (UseTabBarRebornButton() && [self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
+    if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
         CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
         [UIView animateWithDuration:0.3 animations:^{
             self.rebornOverlayButton.center = CGPointMake(self.rebornOverlayButton.center.x + offset, self.rebornOverlayButton.center.y);
