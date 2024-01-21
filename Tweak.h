@@ -150,6 +150,11 @@
 - (void)setTabOrder:(NSArray *)orderedTabs;
 - (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 @property (nonatomic, strong) UITableView *tableView;
+@property(retain, nonatomic) YTIIcon *icon;
+@property(retain, nonatomic) YTICommand *navigationEndpoint;
+@property(copy, nonatomic) NSString *pivotIdentifier;
+@property(retain, nonatomic) YTIFormattedString *title;
+@property(copy, nonatomic) NSData *trackingParams;
 @end
 
 @interface YTIPivotBarIconOnlyItemRenderer : GPBMessage
@@ -160,11 +165,33 @@
 @interface YTIPivotBarSupportedRenderers : NSObject
 - (YTIPivotBarItemRenderer *)pivotBarItemRenderer;
 - (YTIPivotBarIconOnlyItemRenderer *)pivotBarIconOnlyItemRenderer;
+@property(retain, nonatomic) YTIPivotBarItemRenderer *pivotBarItemRenderer;
 @end
 
 @interface YTIPivotBarRenderer : NSObject
 - (NSMutableArray <YTIPivotBarSupportedRenderers *> *)itemsArray;
 @property (nonatomic, strong) UITableView *tableView;
+@end
+
+@interface YTMBrowseViewController: UIViewController
+@end
+
+@interface YTIFormattedString : NSObject
++ (id)formattedStringWithString:(id)arg1;
+@end
+
+@interface YTIIcon : NSObject
+- (id)iconImageWithColor:(UIColor *)arg1;
+- (id)newIconImageWithColor:(id)arg1;
+@property(nonatomic) int iconType;
+@end
+
+@interface YTIBrowseEndpoint : NSObject
+@property(copy, nonatomic) NSString *browseId;
+@end
+
+@interface YTICommand : NSObject
+@property(retain, nonatomic) YTIBrowseEndpoint *browseEndpoint;
 @end
 
 @interface YTReelHeaderView : UIView
@@ -203,10 +230,6 @@
 @interface YTInlinePlayerBarContainerView : UIView
 @property(readonly, nonatomic) YTLabel *durationLabel;
 @property(readonly, nonatomic) YTLabel *currentTimeLabel;
-@end
-
-@interface YTColorPalette : NSObject
-@property(readonly, nonatomic) long long pageStyle;
 @end
 
 @interface YTCommonColorPalette : NSObject
