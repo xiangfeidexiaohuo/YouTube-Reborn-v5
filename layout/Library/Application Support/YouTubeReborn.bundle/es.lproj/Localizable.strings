@@ -1,15 +1,22 @@
-// Actions
+// Actions/Prompts
 "CANCEL_TEXT" = "Cancelar";
 "RESET_TEXT" = "Reset";
 "SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "De acuerdo";
 "NOTICE_TEXT" = "Aviso";
 "COLOR_SAVED" = "Color Saved";
+"IMPORT_VIDEO" = "Import Video To Camera Roll";
+"SAVED_VIDEO" = "Video Saved To Camera Roll";
+"SAVED_VIDEO_2" = "Save To Camera Roll Failed \nMake Sure To Give Camera Roll Permission To YouTube In The iOS Settings App";
 
 // Downloads
 "VIDEO_TAB" = "Vídeo";
 "AUDIO_TAB" = "Audio";
 "DOWNLOAD_NOTICE" = "No salga de la aplicación. Se cerrará automáticamente al finalizar";
+"DELETE_VIDEO" = "Delete Video";
+"DELETE_AUDIO" = "Delete Audio";
+"VIDEO_DELETED" = "Video Successfully Deleted";
+"AUDIO_DELETED" = "Audio Successfully Deleted";
 "VIEW_DOWNLOADS" = "Ver descargas";
 "VIEW_DOWNLOADS_IN_FILZA" = "Ver descargas en Filza";
 
