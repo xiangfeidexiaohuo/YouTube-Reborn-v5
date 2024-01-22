@@ -796,7 +796,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     buttonView.layer.cornerRadius = 16;
 
     UIImageView *buttonImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, ([buttonView frame].size.height - 15.5) / 2, 15.5, 15.5)];
-    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:@"layout/Library/Application Support/YouTubeReborn.bundle
+    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:@"../layout/Library/Application\ Support/YouTubeReborn.bundle
 /ytrebornbuttonwhite-20@2x"] color:textColor];
 
     UILabel *buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(33, 9, 20, 14)];
@@ -835,17 +835,30 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (void)nodesDidRelayout:(NSArray <ELMCellNode *> *)nodes {
-    if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"]) {
-        CGFloat offset = 0;
-        if (self.pipButton) { // YouPiP Video Player Button - Compatibility
-            offset = self.pipButton.frame.size.width;
-        }
-        if (self.rebornOverlayButton) {
-            [UIView animateWithDuration:0.3 animations:^{
-                self.rebornOverlayButton.center = CGPointMake(self.rebornOverlayButton.center.x + offset, self.rebornOverlayButton.center.y);
-            }];
-        }
+    if (UseTabBarPiPButton() && self.pipButton && self.rebornOverlayButton) { // Check if pipButton and rebornOverlayButton both exist
+        CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
+        CGFloat rebornButtonOffset = self.pipButton.frame.size.width;
+
+        [UIView animateWithDuration:0.3 animations:^{
+            self.pipButton.center = CGPointMake(self.pipButton.center.x + offset, self.pipButton.center.y);
+            self.rebornOverlayButton.center = CGPointMake(self.rebornOverlayButton.center.x + offset + rebornButtonOffset, self.rebornOverlayButton.center.y);
+        }];
+
+    } else if (self.pipButton && !self.rebornOverlayButton) { // Check if only YouPiP Button exists
+        CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
+
+        [UIView animateWithDuration:0.3 animations:^{
+            self.pipButton.center = CGPointMake(self.pipButton.center.x + offset, self.pipButton.center.y);
+        }];
+
+    } else if (!self.pipButton && self.rebornOverlayButton) { // Check if only rebornOverlayButton exists
+        CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
+
+        [UIView animateWithDuration:0.3 animations:^{
+            self.rebornOverlayButton.center = CGPointMake(self.rebornOverlayButton.center.x + offset, self.rebornOverlayButton.center.y);
+        }];
     }
+    
     %orig;
 }
 
