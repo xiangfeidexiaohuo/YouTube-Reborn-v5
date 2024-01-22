@@ -46,6 +46,7 @@
 - (id)_viewControllerForAncestor;
 @property (retain, nonatomic) UIButton *rebornOverlayButton;
 @property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
+@property (retain, nonatomic) UIButton *pipButton; // YouPiP
 - (id)playPauseButton;
 - (void)didPressPause:(id)button;
 - (void)didPressReborn:(UIButton *)button event:(UIEvent *)event;
