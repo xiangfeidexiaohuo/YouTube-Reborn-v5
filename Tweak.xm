@@ -17,6 +17,7 @@ static BOOL hasDeviceNotch() {
 		return [context biometryType] == LABiometryTypeFaceID;
 	}
 }
+static NSString *TabBarOPIconPath;
 
 UIColor *rebornHexColour;
 UIColor *lcmHexColor;
@@ -796,7 +797,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     buttonView.layer.cornerRadius = 16;
 
     UIImageView *buttonImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, ([buttonView frame].size.height - 15.5) / 2, 15.5, 15.5)];
-    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage systemImageNamed:@"video.circle.fil"] color:textColor];
+    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:TabBarOPIconPath] color:textColor];
 
     UILabel *buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(33, 9, 20, 14)];
     buttonTitle.font = [UIFont boldSystemFontOfSize:12];
@@ -2925,6 +2926,8 @@ NSString *customAppVersion = nil; // Declare the global variable
             progressbarHexColor = [progressbarUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
             %init(gColourOptions3);
         }
+        NSBundle *tweakBundle = YouTubeRebornBundle();
+        TabBarOPIconPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
         %init(_ungrouped);
     }
 }
