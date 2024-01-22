@@ -796,8 +796,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     buttonView.layer.cornerRadius = 16;
 
     UIImageView *buttonImage = [[UIImageView alloc] initWithFrame:CGRectMake(12, ([buttonView frame].size.height - 15.5) / 2, 15.5, 15.5)];
-    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:@"../layout/Library/Application\ Support/YouTubeReborn.bundle
-/ytrebornbuttonwhite-20@2x"] color:textColor];
+    buttonImage.image = [%c(QTMIcon) tintImage:[UIImage systemImageNamed:@"video.circle.fil"] color:textColor];
 
     UILabel *buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(33, 9, 20, 14)];
     buttonTitle.font = [UIFont boldSystemFontOfSize:12];
@@ -813,6 +812,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 
 %property (retain, nonatomic) UIButton *rebornOverlayButton;
 %property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
+@property (retain, nonatomic) UIButton *pipButton; // YouPiP
 
 - (BOOL)touchesShouldCancelInContentView:(id)arg1 {
     return YES; // Ensure we can scroll
@@ -835,7 +835,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (void)nodesDidRelayout:(NSArray <ELMCellNode *> *)nodes {
-    if (UseTabBarPiPButton() && self.pipButton && self.rebornOverlayButton) { // Check if pipButton and rebornOverlayButton both exist
+    if (self.pipButton && self.rebornOverlayButton) { // Check if YouPiP and rebornOverlayButton both exist
         CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
         CGFloat rebornButtonOffset = self.pipButton.frame.size.width;
 
