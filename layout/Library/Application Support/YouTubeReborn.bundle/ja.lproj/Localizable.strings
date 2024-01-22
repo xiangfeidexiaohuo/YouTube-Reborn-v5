@@ -1,15 +1,22 @@
-// Actions
+// Actions/Prompts
 "CANCEL_TEXT" = "キャンセル";
 "RESET_TEXT" = "リセット";
 "SAVE_TEXT" = "保存";
 "OKAY_TEXT" = "OK";
 "NOTICE_TEXT" = "通知";
 "COLOR_SAVED" = "保存しました";
+"IMPORT_VIDEO" = "Import Video To Camera Roll";
+"SAVED_VIDEO" = "Video Saved To Camera Roll";
+"SAVED_VIDEO_2" = "Save To Camera Roll Failed \nMake Sure To Give Camera Roll Permission To YouTube In The iOS Settings App";
 
 // Downloads
 "VIDEO_TAB" = "動画";
 "AUDIO_TAB" = "音声";
 "DOWNLOAD_NOTICE" = "アプリを終了しないでください\n完了時に自動で閉じます";
+"DELETE_VIDEO" = "Delete Video";
+"DELETE_AUDIO" = "Delete Audio";
+"VIDEO_DELETED" = "Video Successfully Deleted";
+"AUDIO_DELETED" = "Audio Successfully Deleted";
 "VIEW_DOWNLOADS" = "ダウンロードを表示";
 "VIEW_DOWNLOADS_IN_FILZA" = "Filzaでダウンロードを表示";
 
