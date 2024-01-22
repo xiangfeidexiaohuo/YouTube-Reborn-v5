@@ -1,4 +1,5 @@
 #import "DownloadsVideoController.h"
+#import "Localization.h"
 #import <Photos/Photos.h>
 
 @interface DownloadsVideoController ()
