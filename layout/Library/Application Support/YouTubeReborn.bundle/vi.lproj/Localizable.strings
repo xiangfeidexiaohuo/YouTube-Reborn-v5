@@ -1,15 +1,22 @@
-// Actions
+// Actions/Prompts
 "CANCEL_TEXT" = "Huỷ";
 "RESET_TEXT" = "Reset";
 "SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "Okay";
 "NOTICE_TEXT" = "Chú ý";
 "COLOR_SAVED" = "Color Saved";
+"IMPORT_VIDEO" = "Import Video To Camera Roll";
+"SAVED_VIDEO" = "Video Saved To Camera Roll";
+"SAVED_VIDEO_2" = "Save To Camera Roll Failed \nMake Sure To Give Camera Roll Permission To YouTube In The iOS Settings App";
 
 // Downloads
 "VIDEO_TAB" = "Video";
 "AUDIO_TAB" = "Audio";
 "DOWNLOAD_NOTICE" = "Đừng thoát khỏi ứng dụng\nỨng dụng này sẽ tự động đóng khi hoàn thành";
+"DELETE_VIDEO" = "Delete Video";
+"DELETE_AUDIO" = "Delete Audio";
+"VIDEO_DELETED" = "Video Successfully Deleted";
+"AUDIO_DELETED" = "Audio Successfully Deleted";
 "VIEW_DOWNLOADS" = "Xem tải xuống";
 "VIEW_DOWNLOADS_IN_FILZA" = "Xem nội dung tải xuống trong Filza";
 
