@@ -1,4 +1,13 @@
 #import "Tweak.h"
+#import <rootless.h>
+#import <Foundation/Foundation.h>
+
+extern NSBundle *YouTubeRebornBundle();
+
+static inline NSString *LOC(NSString *key) {
+    NSBundle *tweakBundle = YouTubeRebornBundle();
+    return [tweakBundle localizedStringForKey:key value:nil table:nil];
+}
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -357,26 +366,26 @@ static NSString *accessGroupID() {
     UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO) {
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Download Audio" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DOWNLOAD_AUDIO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornAudioDownloader:videoIdentifier];
         }]];
 
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Download Video" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DOWNLOAD_VIDEO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornVideoDownloader:videoIdentifier];
         }]];
     }
 
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14.0") && SYSTEM_VERSION_LESS_THAN(@"15.0")) {
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Picture In Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"PIP_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornPictureInPicture:videoIdentifier];
         }]];
     }
 
-    [alertMenu addAction:[UIAlertAction actionWithTitle:@"Play In External App" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"PLAY_APP_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self rebornPlayInExternalApp:videoIdentifier];
     }]];
 
-    [alertMenu addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }]];
 
     [alertMenu setModalPresentationStyle:UIModalPresentationPopover];
@@ -526,9 +535,9 @@ static NSString *accessGroupID() {
         UIViewController *pictureInPictureViewController = self._viewControllerForAncestor;
         [pictureInPictureViewController presentViewController:pictureInPictureControllerView animated:YES completion:nil];
     } else {
-        UIAlertController *alertPip = [UIAlertController alertControllerWithTitle:@"Notice" message:@"You must enable 'Background Playback' in YouTube Reborn settings to use Picture-In-Picture" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertPip = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"PIP_NOTICE_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
-        [alertPip addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertPip addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
 
         UIViewController *pipViewController = [self _viewControllerForAncestor];
@@ -541,9 +550,9 @@ static NSString *accessGroupID() {
     NSDictionary *youtubePlayerRequest = [YouTubeExtractor youtubePlayerRequest:@"ios":videoID];
     NSURL *videoPath = [NSURL URLWithString:[NSString stringWithFormat:@"%@", youtubePlayerRequest[@"streamingData"][@"hlsManifestUrl"]]];
 
-    UIAlertController *alertApp = [UIAlertController alertControllerWithTitle:@"Choose App" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertApp = [UIAlertController alertControllerWithTitle:LOC(@"CHOOSE_TEXT") message:nil preferredStyle:UIAlertControllerStyleAlert];
 
-    [alertApp addAction:[UIAlertAction actionWithTitle:@"Play In Infuse" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertApp addAction:[UIAlertAction actionWithTitle:LOC(@"INFUSE_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"infuse://x-callback-url/play?url=%@", videoPath]] options:@{} completionHandler:nil];
     }]];
 
@@ -551,7 +560,7 @@ static NSString *accessGroupID() {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"vlc-x-callback://x-callback-url/stream?url=%@", videoPath]] options:@{} completionHandler:nil];
     }]];
 
-    [alertApp addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertApp addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }]];
 
     UIViewController *alertAppViewController = [self _viewControllerForAncestor];
@@ -576,29 +585,29 @@ static NSString *accessGroupID() {
 - (void)rebornOptionsAction {
     NSString *videoIdentifier = [shortsPlayingVideoID videoId];
 
-    UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:nil message:@"Please Pause The Video Before Continuing" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:nil message:LOC(@"DOWNLOAD_NOTICE_TEXT") preferredStyle:UIAlertControllerStyleActionSheet];
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO) {
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Download Audio" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DOWNLOAD_AUDIO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornAudioDownloader:videoIdentifier];
         }]];
 
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Download Video" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DOWNLOAD_VIDEO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornVideoDownloader:videoIdentifier];
         }]];
     }
 
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14.0") && SYSTEM_VERSION_LESS_THAN(@"15.0")) {
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Picture In Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"PIP_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornPictureInPicture:videoIdentifier];
         }]];
     }
 
-    [alertMenu addAction:[UIAlertAction actionWithTitle:@"Play In External App" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"PLAY_APP_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self rebornPlayInExternalApp:videoIdentifier];
     }]];
 
-    [alertMenu addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }]];
 
     [alertMenu setModalPresentationStyle:UIModalPresentationPopover];
@@ -747,9 +756,9 @@ static NSString *accessGroupID() {
         UIViewController *pictureInPictureViewController = self._viewControllerForAncestor;
         [pictureInPictureViewController presentViewController:pictureInPictureControllerView animated:YES completion:nil];
     } else {
-        UIAlertController *alertPip = [UIAlertController alertControllerWithTitle:@"Notice" message:@"You must enable 'Background Playback' in YouTube Reborn settings to use Picture-In-Picture" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertPip = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"PIP_NOTICE_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
-        [alertPip addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertPip addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
 
         UIViewController *pipViewController = [self _viewControllerForAncestor];
@@ -762,9 +771,9 @@ static NSString *accessGroupID() {
     NSDictionary *youtubePlayerRequest = [YouTubeExtractor youtubePlayerRequest:@"ios":videoID];
     NSURL *videoPath = [NSURL URLWithString:[NSString stringWithFormat:@"%@", youtubePlayerRequest[@"streamingData"][@"hlsManifestUrl"]]];
 
-    UIAlertController *alertApp = [UIAlertController alertControllerWithTitle:@"Choose App" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertApp = [UIAlertController alertControllerWithTitle:LOC(@"CHOOSE_TEXT") message:nil preferredStyle:UIAlertControllerStyleAlert];
 
-    [alertApp addAction:[UIAlertAction actionWithTitle:@"Play In Infuse" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertApp addAction:[UIAlertAction actionWithTitle:LOC(@"INFUSE_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"infuse://x-callback-url/play?url=%@", videoPath]] options:@{} completionHandler:nil];
     }]];
 
@@ -772,7 +781,7 @@ static NSString *accessGroupID() {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"vlc-x-callback://x-callback-url/stream?url=%@", videoPath]] options:@{} completionHandler:nil];
     }]];
 
-    [alertApp addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertApp addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }]];
 
     UIViewController *alertAppViewController = [self _viewControllerForAncestor];
@@ -823,7 +832,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
         if ([self numberOfItemsInSection:0] - 1 == indexPath.row) {
-            self.rebornOverlayButton = makeUnderRebornPlayerButton(%orig, @"OP", @"Download Audio or Video Files");
+            self.rebornOverlayButton = makeUnderRebornPlayerButton(%orig, @"OP", LOC(@"DOWNLOAD_FILES_TEXT"));
             [self addSubview:self.rebornOverlayButton];
 
             [self.rebornOverlayButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
@@ -885,26 +894,26 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRebornIHaveYouTubePremium"] == NO) {
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Download Audio" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DOWNLOAD_AUDIO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornAudioDownloader:videoIdentifier];
         }]];
 
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Download Video" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DOWNLOAD_VIDEO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornVideoDownloader:videoIdentifier];
         }]];
     }
 
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14.0") && SYSTEM_VERSION_LESS_THAN(@"15.0")) {
-        [alertMenu addAction:[UIAlertAction actionWithTitle:@"Picture In Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"PIP_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self rebornPictureInPicture:videoIdentifier];
         }]];
     }
 
-    [alertMenu addAction:[UIAlertAction actionWithTitle:@"Play In External App" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"PLAY_APP_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self rebornPlayInExternalApp:videoIdentifier];
     }]];
 
-    [alertMenu addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+    [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }]];
 
     [alertMenu setModalPresentationStyle:UIModalPresentationPopover];
@@ -1054,9 +1063,9 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
         UIViewController *pictureInPictureViewController = self._viewControllerForAncestor;
         [pictureInPictureViewController presentViewController:pictureInPictureControllerView animated:YES completion:nil];
     } else {
-        UIAlertController *alertPip = [UIAlertController alertControllerWithTitle:@"Notice" message:@"You must enable 'Background Playback' in YouTube Reborn settings to use Picture-In-Picture" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertPip = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"PIP_NOTICE_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
-        [alertPip addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertPip addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
 
         UIViewController *pipViewController = [self _viewControllerForAncestor];
@@ -1069,9 +1078,9 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     NSDictionary *youtubePlayerRequest = [YouTubeExtractor youtubePlayerRequest:@"ios":videoID];
     NSURL *videoPath = [NSURL URLWithString:[NSString stringWithFormat:@"%@", youtubePlayerRequest[@"streamingData"][@"hlsManifestUrl"]]];
 
-    UIAlertController *alertApp = [UIAlertController alertControllerWithTitle:@"Choose App" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertApp = [UIAlertController alertControllerWithTitle:LOC(@"CHOOSE_TEXT") message:nil preferredStyle:UIAlertControllerStyleAlert];
 
-    [alertApp addAction:[UIAlertAction actionWithTitle:@"Play In Infuse" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertApp addAction:[UIAlertAction actionWithTitle:LOC(@"INFUSE_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"infuse://x-callback-url/play?url=%@", videoPath]] options:@{} completionHandler:nil];
     }]];
 
@@ -1079,7 +1088,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"vlc-x-callback://x-callback-url/stream?url=%@", videoPath]] options:@{} completionHandler:nil];
     }]];
 
-    [alertApp addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [alertApp addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }]];
 
     UIViewController *alertAppViewController = [self _viewControllerForAncestor];

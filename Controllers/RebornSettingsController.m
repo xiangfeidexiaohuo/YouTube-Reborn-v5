@@ -126,7 +126,7 @@
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:@"Are you sure you want to reset all your set colors?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"RESET_COLOR_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
             [alert addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             }]];
@@ -144,7 +144,7 @@
             [self presentViewController:alert animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:@"Are you sure you want to reset all your options?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"RESET_OPTIONS_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
             [alert addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             }]];

@@ -139,7 +139,7 @@
     NSString *currentVideoFileName = filePathsVideoArray[indexPath.row];
     NSString *currentArtworkFileName = filePathsVideoArtworkArray[indexPath.row];
 
-    UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:@"Options" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:LOC(@"OPTIONS_TEXT") message:nil preferredStyle:UIAlertControllerStyleAlert];
 
     [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"IMPORT_VIDEO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
