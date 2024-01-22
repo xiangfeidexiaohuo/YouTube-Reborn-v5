@@ -140,7 +140,25 @@
 }
 
 - (void)save {
-    [[NSUserDefaults standardUserDefaults] setObject:self.tabOrder forKey:@"kTabOrder"];
+    NSMutableArray *orderedTabs = [NSMutableArray array];
+    for (NSIndexPath *indexPath in self.tableView.indexPathsForVisibleRows) {
+        if (indexPath.section == 0) {
+            NSString *tabIdentifier = @"";
+            if (indexPath.row == 0) {
+                tabIdentifier = @"Home";
+            } else if (indexPath.row == 1) {
+                tabIdentifier = @"Shorts";
+            } else if (indexPath.row == 2) {
+                tabIdentifier = @"Create";
+            } else if (indexPath.row == 3) {
+                tabIdentifier = @"Subscriptions";
+            } else if (indexPath.row == 4) {
+                tabIdentifier = @"You";
+            }
+            [orderedTabs addObject:tabIdentifier];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:orderedTabs forKey:@"kTabOrder"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
