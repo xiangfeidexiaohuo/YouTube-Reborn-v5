@@ -812,7 +812,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 
 %property (retain, nonatomic) UIButton *rebornOverlayButton;
 %property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
-@property (retain, nonatomic) UIButton *pipButton; // YouPiP
+%property (retain, nonatomic) UIButton *pipButton; // YouPiP
 
 - (BOOL)touchesShouldCancelInContentView:(id)arg1 {
     return YES; // Ensure we can scroll
