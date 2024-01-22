@@ -1,4 +1,5 @@
 #import "DownloadsAudioController.h"
+#import "Localization.h"
 
 @interface DownloadsAudioController ()
 {
