@@ -46,7 +46,7 @@
         return 1;
     }
     if (section == 1) {
-        return 2;
+        return 3;
     }
     if (section == 2) {
         return 2;
@@ -87,13 +87,20 @@
         if (indexPath.section == 1) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             if (indexPath.row == 0) {
+                cell.textLabel.text = LOC(@"HIDE_PLAYER_OVERLAY_OP_BUTTON");
+                UISwitch *hideRebornPlayerOPButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+                [hideRebornPlayerOPButton addTarget:self action:@selector(toggleHideRebornPlayerOPButton:) forControlEvents:UIControlEventValueChanged];
+                hideRebornPlayerOPButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornOPButtonVThree"];
+                cell.accessoryView = hideRebornPlayerOPButton;
+            }
+            if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"HIDE_VIDEO_OVERLAY_OP_BUTTON");
                 UISwitch *hideRebornOPButton = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideRebornOPButton addTarget:self action:@selector(toggleHideRebornOPButton:) forControlEvents:UIControlEventValueChanged];
                 hideRebornOPButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornOPButtonVTwo"];
                 cell.accessoryView = hideRebornOPButton;
             }
-            if (indexPath.row == 1) {
+            if (indexPath.row == 2) {
                 cell.textLabel.text = LOC(@"HIDE_SHORTS_OVERLAY_OP_BUTTON");
                 UISwitch *hideRebornShortsOPButton = [[UISwitch alloc] initWithFrame:CGRectZero];
                 [hideRebornShortsOPButton addTarget:self action:@selector(toggleHideRebornShortsOPButton:) forControlEvents:UIControlEventValueChanged];
@@ -119,27 +126,30 @@
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Notice" message:@"Are you sure you want to reset your set colour?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:@"Are you sure you want to reset all your set colors?" preferredStyle:UIAlertControllerStyleAlert];
 
-            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [alert addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             }]];
 
-            [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTRebornColourOptionsVFour"];
 	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTLcmColourOptionVFive"];
+	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTProgreessBarColourOption"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                [[UIApplication sharedApplication] performSelector:@selector(suspend)];
+                [NSThread sleepForTimeInterval:0.5];
                 exit(0);
             }]];
 
             [self presentViewController:alert animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Notice" message:@"Are you sure you want to reset all your options?" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:@"Are you sure you want to reset all your options?" preferredStyle:UIAlertControllerStyleAlert];
 
-            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [alert addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             }]];
 
-            [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableNoVideoAds"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableBackgroundPlayback"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kNoCastButton"];
@@ -152,7 +162,6 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableHints"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideYouTubeLogo"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kStickNavigationBar"];
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kLowContrastMode"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kAutoHideHomeBar"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideTabBarLabels"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideExploreTab"];
@@ -166,6 +175,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePreviousButtonInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideNextButtonInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableVideoAutoPlay"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisablePinchToZoom"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideAutoPlaySwitchInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideCaptionsSubtitlesButtonInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableVideoInfoCards"];
@@ -193,6 +203,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePlayerBarHeatwave"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureAdsBadge"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureSponsorBadge"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kStockVolumeHUD"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePreviousButtonShadowInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideNextButtonShadowInOverlay"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideSeekBackwardButtonShadowInOverlay"];
@@ -216,11 +227,14 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kFillerSegmentedInt"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kMusicOffTopicSegmentedInt"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kStartupPageIntVTwo"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornOPButtonVThree"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornOPButtonVTwo"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRebornShortsOPButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideCurrentTime"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideDuration"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                [[UIApplication sharedApplication] performSelector:@selector(suspend)];
+                [NSThread sleepForTimeInterval:0.5];
                 exit(0);
             }]];
 
@@ -268,6 +282,16 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kRebornIHaveYouTubePremium"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideRebornPlayerOPButton:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideRebornOPButtonVThree"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideRebornOPButtonVThree"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
