@@ -159,6 +159,7 @@
 @interface YTIPivotBarItemRenderer : NSObject
 - (NSString *)pivotIdentifier;
 - (void)setTabOrder:(NSArray *)orderedTabs;
+- (void)reorderTabs;
 - (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 @property (nonatomic, strong) UITableView *tableView;
 @property(retain, nonatomic) YTIIcon *icon;
