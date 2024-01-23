@@ -1521,6 +1521,15 @@ BOOL isAd(id node) {
     return progressbarHexColor;
 }
 %end
+
+%hook YTSegmentableInlinePlayerBarView
+- (UIColor *)progressBarColor {
+    return progressbarHexColor;
+}
+- (UIColor *)userIsScrubbingProgressBarColor {
+    return progressbarHexColor;
+}
+%end
 %end
 
 // Auto-Hide Home Bar by @arichorn
@@ -2065,6 +2074,10 @@ BOOL selectedTabIndex = NO;
 
 %group gHideShortsLikeButton
 %hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_reelLikeButton").hidden = YES;
+}
 - (void)setReelLikeButton:(id)arg1 {
     %orig;
 }
@@ -2073,6 +2086,10 @@ BOOL selectedTabIndex = NO;
 
 %group gHideShortsDislikeButton
 %hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_reelDislikeButton").hidden = YES;
+}
 - (void)setReelDislikeButton:(id)arg1 {
     %orig;
 }
@@ -2081,6 +2098,10 @@ BOOL selectedTabIndex = NO;
 
 %group gHideShortsCommentsButton
 %hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_viewCommentButton").hidden = YES;
+}
 - (void)setViewCommentButton:(id)arg1 {
     %orig;
 }
@@ -2089,6 +2110,10 @@ BOOL selectedTabIndex = NO;
 
 %group gHideShortsRemixButton
 %hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_remixButton").hidden = YES;
+}
 - (void)setRemixButton:(id)arg1 {
     %orig;
 }
@@ -2097,6 +2122,10 @@ BOOL selectedTabIndex = NO;
 
 %group gHideShortsShareButton
 %hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_shareButton").hidden = YES;
+}
 - (void)setShareButton:(id)arg1 {
     %orig;
 }
