@@ -116,14 +116,21 @@
 }
 
 - (void)reset {
-    self.tabOrder = [NSMutableArray arrayWithObjects:LOC(@"HOME_TEXT"), LOC(@"SHORTS_TEXT"), LOC(@"CREATE_TEXT"), LOC(@"SUB_TEXT"), LOC(@"YOU_TEXT"), nil];
+    self.tabOrder = [@[
+        LOC(@"HOME_TEXT"),
+        LOC(@"SHORTS_TEXT"),
+        LOC(@"CREATE_TEXT"),
+        LOC(@"SUB_TEXT"),
+        LOC(@"YOU_TEXT")
+    ] mutableCopy];
     [self.tableView reloadData];
     [self save];
 }
 
 - (void)save {
-    [[NSUserDefaults standardUserDefaults] setObject:self.tabOrder forKey:@"kTabOrder"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.tabOrder forKey:@"kTabOrder"];
+    [defaults synchronize];
 }
 
 - (void)done {
