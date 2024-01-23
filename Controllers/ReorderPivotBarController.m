@@ -94,6 +94,7 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     NSString *tabIdentifier = self.tabOrder[sourceIndexPath.row];
+    [self.tabOrder removeObjectAtIndex:sourceIndexPath.row];
     [self.tabOrder insertObject:tabIdentifier atIndex:destinationIndexPath.row];
 }
 
@@ -107,7 +108,7 @@
             NSInteger destinationIndex = [self.tableView numberOfRowsInSection:0] - 1;
             NSRange sourceRange = NSMakeRange(sourceIndex, 1);
             NSRange destinationRange = NSMakeRange(destinationIndex, 1);
-            [self.tabOrder replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:sourceRange] withObjects:[self.tabOrder objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:destinationRange]]];
+            [self.tabOrder exchangeObjectsAtIndexes:sourceRange withObjectsAtIndexes:destinationRange];
         }
     }
 }
