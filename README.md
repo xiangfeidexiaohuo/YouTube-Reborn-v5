@@ -12,30 +12,14 @@ Get ready to have a better YouTube experience! Download the Ipa or Deb file from
 
 # YouTube Reborn Repository Statistics
 
--New Badges-
 <p align="center">
-    <a href="https://github.com/arichorn/YouTube-Reborn/releases/latest"><img src="https://custom-icon-badges.demolab.com/github/v/release/arichorn/YouTube-Reborn?logo=youtube&color=%23ff0000&label=Latest%20Release" alt="Latest Release Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/releases/latest"><img src="https://img.shields.io/github/downloads/arichorn/YouTube-Reborn/total?color=%23ff0000&label=Downloads&logo=cloudsmith&logoColor=white" alt="Download Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/commit"><img src="https://custom-icon-badges.demolab.com/github/last-commit/arichorn/YouTube-Reborn?logo=history&logoColor=white&color=%23ff0000&label=Last%20Commit" alt="Last Commit Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/issues"><img src="https://custom-icon-badges.demolab.com/github/issues-raw/arichorn/YouTube-Reborn?logo=issue-opened&logoColor=white&color=%23ff0000&label=Issues" alt="Issues Badge"></img</a>
+    <a href="https://github.com/arichornlover/YouTube-Reborn-v5/releases/latest"><img src="https://custom-icon-badges.demolab.com/github/v/release/arichornlover/YouTube-Reborn-v5?logo=youtube&color=%23ff0000&label=Latest%20Release" alt="Latest Release Badge"></img></a>
+    <a href="https://github.com/arichornlover/YouTube-Reborn-v5/releases/latest"><img src="https://img.shields.io/github/downloads/arichornlover/YouTube-Reborn-v5/total?color=%23ff0000&label=Downloads&logo=cloudsmith&logoColor=white" alt="Download Badge"></img></a>
+    <a href="https://github.com/arichornlover/YouTube-Reborn-v5/commit"><img src="https://custom-icon-badges.demolab.com/github/last-commit/arichornlover/YouTube-Reborn-v5?logo=history&logoColor=white&color=%23ff0000&label=Last%20Commit" alt="Last Commit Badge"></img></a>
+    <a href="https://github.com/arichornlover/YouTube-Reborn-v5/issues"><img src="https://custom-icon-badges.demolab.com/github/issues-raw/arichornlover/YouTube-Reborn-v5?logo=issue-opened&logoColor=white&color=%23ff0000&label=Issues" alt="Issues Badge"></img</a>
 </p>
 
 <p align="center">
 <a href="https://github.com/arichorn/YouTube-Reborn/stargazers"><img src="https://custom-icon-badges.demolab.com/github/stars/arichorn/YouTube-Reborn?style=flat&logo=star&logoColor=white&color=%23ff0000&label=Stars"></a>
 <a href="https://github.com/arichorn/YouTube-Reborn/network/members"><img src="https://custom-icon-badges.demolab.com/github/forks/arichorn/YouTube-Reborn?style=flat&logo=github&logoColor=white&color=%23ff0000&label=Forks"></a>
-</p>
-
------
-
--Old Badges-
-<p align="center">
-    <a href="https://github.com/arichorn/YouTube-Reborn/release/latest"><img src="https://custom-icon-badges.demolab.com/github/v/release/arichorn/YouTube-Reborn?color=brightgreen&label=Latest%20release" alt="Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/releases/latest"><img src="https://img.shields.io/github/downloads/arichorn/YouTube-Reborn/total?label=Download" alt="Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/commit"><img src="https://custom-icon-badges.demolab.com/github/last-commit/arichorn/YouTube-Reborn?logo=history&logoColor=white&label=Last commit" alt="Badge"></img></a>
-    <a href="https://github.com/arichorn/YouTube-Reborn/issues"><img src="https://custom-icon-badges.demolab.com/github/issues-raw/arichorn/YouTube-Reborn?logo=issue-opened&label=Issues" alt="Badge"></img></a>
-</p>
-
-<p align="center">
-   <img src="https://img.shields.io/github/stars/arichorn/YouTube-Reborn?style=social" alt="Badge"/>
-   <img src="https://img.shields.io/github/forks/arichorn/YouTube-Reborn?style=social" alt="Badge"/>
 </p>
