@@ -7,6 +7,7 @@
 @end
 
 @implementation OtherOptionsController
+@synthesize versionTextField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -157,12 +158,12 @@
             [appVersionSpoofer addTarget:self action:@selector(toggleAppVersionSpoofer:) forControlEvents:UIControlEventValueChanged];
             appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
             cell.accessoryView = appVersionSpoofer;
+	    
             self.versionTextField = [[UITextField alloc] initWithFrame:CGRectZero];
             self.versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
             self.versionTextField.enabled = appVersionSpoofer.isOn;
-            // Add a target to detect when the text field text changes
             [self.versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-            cell.accessoryType = UITableViewCellAccessoryNone; // Remove the checkmark for Version spoofer
+            cell.accessoryType = UITableViewCellAccessoryNone;
             cell.accessoryView = self.versionTextField;
 	}
     }
@@ -203,7 +204,7 @@
 
    if (![validVersionPredicate evaluateWithObject:customVersion] || ![allowedCharacterSet isSupersetOfSet:inputCharacterSet]) {
         // Invalid format, set the default value or display an error message
-        textField.text = @"18.49.3";
+        textField.text = @"19.03.1";
         return;
     } 
     self.customAppVersion = customVersion;
