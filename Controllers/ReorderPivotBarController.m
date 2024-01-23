@@ -108,7 +108,7 @@
             NSInteger destinationIndex = [self.tableView numberOfRowsInSection:0] - 1;
             NSRange sourceRange = NSMakeRange(sourceIndex, 1);
             NSRange destinationRange = NSMakeRange(destinationIndex, 1);
-            [self.tabOrder exchangeObjectsAtIndexes:sourceRange withObjectsAtIndexes:destinationRange];
+            [self.tabOrder exchangeObjectsAtIndexes:[NSIndexSet indexSetWithIndex:sourceIndex] withObjectsAtIndexes:[NSIndexSet indexSetWithIndex:destinationIndex]];
         }
     }
 }
