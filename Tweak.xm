@@ -2913,7 +2913,7 @@ NSBundle *YouTubeRebornBundle() {
             %init(gColourOptions3);
         }
         NSBundle *tweakBundle = YouTubeRebornBundle();
-        TabBarOPIconPath = [tweakBundle pathForResource:@"ytrebornbuttonaudiowhite" ofType:@"png"];
+        TabBarOPIconPath = [tweakBundle pathForResource:@"ytrebornbuttonblack" ofType:@"png"];
         %init(_ungrouped);
     }
 }
