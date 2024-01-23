@@ -46,7 +46,6 @@
 - (id)_viewControllerForAncestor;
 @property (retain, nonatomic) UIButton *rebornOverlayButton;
 @property (retain, nonatomic) YTTouchFeedbackController *rebornTouchController;
-@property (retain, nonatomic) UIButton *pipButton; // YouPiP
 - (id)playPauseButton;
 - (void)didPressPause:(id)button;
 - (void)didPressReborn:(UIButton *)button event:(UIEvent *)event;
@@ -55,6 +54,12 @@
 - (void)rebornAudioDownloader :(NSString *)videoID;
 - (void)rebornPictureInPicture :(NSString *)videoID;
 - (void)rebornPlayInExternalApp :(NSString *)videoID;
+@end
+
+@interface ASCollectionView (YP) // YouPiP
+@property (retain, nonatomic) UIButton *pipButton;
+- (void)didPressPiP:(id)arg;
+- (UIImage *)pipImage;
 @end
 
 @interface _ASCollectionViewCell : UICollectionViewCell
