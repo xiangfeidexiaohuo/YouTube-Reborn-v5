@@ -2,7 +2,6 @@
 #import "Localization.h"
 
 @interface OtherOptionsController ()
-@property (nonatomic, strong) UITextField *versionTextField;
 - (void)coloursView;
 @end
 
