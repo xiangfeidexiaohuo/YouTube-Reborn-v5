@@ -1774,8 +1774,9 @@ BOOL isAd(id node) {
 %hook YTIPivotBarItemRenderer
 - (void)viewWillAppear:(BOOL)animated {
     %orig(animated);
-    [self reorderTabs];
+    [self performSelector:@selector(reorderTabs)];
 }
+
 - (void)reorderTabs {
     NSArray *presetTabOrder = @[
         @"id.ui.pivotbar.FEwhat_to_watch.button", // Home
@@ -1793,7 +1794,7 @@ BOOL isAd(id node) {
         return index1 - index2;
     }];
   
-    [self.tableView.dataSource setTabOrder:sortedTabOrder];
+    [self.tableView.dataSource setValue:[NSArray arrayWithArray:sortedTabOrder] forKey:@"kTabOrder"];
     [self.tableView reloadData];
   
     if ([self respondsToSelector:@selector(findTabViewWithAccessibilityIdentifier:)]) {
@@ -1811,7 +1812,7 @@ BOOL isAd(id node) {
 - (void)setRenderer:(YTIPivotBarItemRenderer *)renderer {
     %orig(renderer);
     if (renderer) {
-        [renderer setTabOrder:self.renderer.tabOrder];
+        [renderer setValue:[NSArray arrayWithArray:self.renderer.tabOrder] forKey:@"kTabOrder"];
     }
 }
 %end
