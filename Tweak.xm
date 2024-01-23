@@ -1774,32 +1774,31 @@ BOOL isAd(id node) {
 %hook YTIPivotBarItemRenderer
 - (void)viewWillAppear:(BOOL)animated {
     %orig(animated);
-    [self performSelector:@selector(reorderTabs)];
+    [self reorderTabs];
 }
-
 - (void)reorderTabs {
     NSArray *presetTabOrder = @[
-        @"id.ui.pivotbar.FEwhat_to_watch.button", // Home
-        @"id.ui.pivotbar.FEshorts.button", // Shorts
-        @"id.ui.pivotbar.FEuploads.button", // Create
-        @"id.ui.pivotbar.FEsubscriptions.button", // Subscriptions
-        @"id.ui.pivotbar.FElibrary.button" // You
+        @"id.ui.pivotbar.FEwhat_to_watch.button",  // Home
+        @"id.ui.pivotbar.FEshorts.button",         // Shorts
+        @"id.ui.pivotbar.FEuploads.button",        // Create
+        @"id.ui.pivotbar.FEsubscriptions.button",  // Subscriptions
+        @"id.ui.pivotbar.FElibrary.button"         // You
     ];
-  
-    NSMutableArray *sortedTabOrder = [NSMutableArray arrayWithArray:self.tabOrder];
-  
+
+    NSMutableArray *sortedTabOrder = [NSMutableArray arrayWithArray:[self.tableView.dataSource tabOrder]];
+
     [sortedTabOrder sortUsingComparator:^NSComparisonResult(NSString *tab1, NSString *tab2) {
         NSUInteger index1 = [presetTabOrder indexOfObject:tab1];
         NSUInteger index2 = [presetTabOrder indexOfObject:tab2];
         return index1 - index2;
     }];
-  
-    [self.tableView.dataSource setValue:[NSArray arrayWithArray:sortedTabOrder] forKey:@"kTabOrder"];
+
+    [self.tableView.dataSource setTabOrder:sortedTabOrder];
     [self.tableView reloadData];
-  
+
     if ([self respondsToSelector:@selector(findTabViewWithAccessibilityIdentifier:)]) {
         UITableView *tableView = [self valueForKey:@"tableView"];
-      
+
         for (int i = 0; i < sortedTabOrder.count; i++) {
             NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
             [tableView moveRowAtIndexPath:destinationIndexPath toIndexPath:destinationIndexPath];
@@ -1812,10 +1811,11 @@ BOOL isAd(id node) {
 - (void)setRenderer:(YTIPivotBarItemRenderer *)renderer {
     %orig(renderer);
     if (renderer) {
-        [renderer setValue:[NSArray arrayWithArray:self.renderer.tabOrder] forKey:@"kTabOrder"];
+        [renderer setTabOrder:[NSArray arrayWithArray:(NSMutableArray *)[self.renderer valueForKey:@"tabOrder"]]];
     }
 }
 %end
+
 
 BOOL selectedTabIndex = NO;
 
