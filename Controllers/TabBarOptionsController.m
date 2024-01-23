@@ -75,23 +75,23 @@
         if (indexPath.section == 0) {
             cell.textLabel.text = LOC(@"STARTUP_PAGE");
             if (![[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"]) {
-                cell.detailTextLabel.text = @"Home";
+                cell.detailTextLabel.text = LOC(@"HOME_TEXT");
             } else {
                 int selectedTab = [[NSUserDefaults standardUserDefaults] integerForKey:@"kStartupPageIntVTwo"];
                 if (selectedTab == 0) {
-                    cell.detailTextLabel.text = @"Home";
+                    cell.detailTextLabel.text = LOC(@"HOME_TEXT");
                 }
                 if (selectedTab == 1) {
-                    cell.detailTextLabel.text = @"Explore";
+                    cell.detailTextLabel.text = LOC(@"EXPLORE_TEXT");
                 }
                 if (selectedTab == 2) {
-                    cell.detailTextLabel.text = @"Shorts";
+                    cell.detailTextLabel.text = LOC(@"SHORTS_TEXT");
                 }
                 if (selectedTab == 3) {
-                    cell.detailTextLabel.text = @"Subscriptions";
+                    cell.detailTextLabel.text = LOC(@"SUB_TEXT");
                 }
                 if (selectedTab == 4) {
-                    cell.detailTextLabel.text = @"You";
+                    cell.detailTextLabel.text = LOC(@"YOU_TEXT");
                 }
             }
         }

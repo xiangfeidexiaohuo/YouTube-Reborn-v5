@@ -75,23 +75,23 @@
             [self loadImageWithURLString:@"" forImageView:cell.imageView];
         } else if (indexPath.row == 1) {
             cell.textLabel.text = @"kirb";
-            cell.detailTextLabel.text = @"Development Support";
+            cell.detailTextLabel.text = LOC(@"DEV_SUPPORT_TEXT");
             [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/773309?v=4" forImageView:cell.imageView];
         } else if (indexPath.row == 2) {
             cell.textLabel.text = @"Dayanch96";
-            cell.detailTextLabel.text = @"Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+            cell.detailTextLabel.text = LOC(@"FEATURES_DAYANCH96_TEXT");
             [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/38832025?v=4" forImageView:cell.imageView];
         } else if (indexPath.row == 3) {
             cell.textLabel.text = @"PoomSmart";
-            cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
+            cell.detailTextLabel.text = LOC(@"FEATURES_POOMSMART_TEXT");
             [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/3608783?v=4" forImageView:cell.imageView];
         } else if (indexPath.row == 4) {
             cell.textLabel.text = @"NguyenASang";
-            cell.detailTextLabel.text = @"Features: \"YouTube Reborn Button under Video Player\"";
+            cell.detailTextLabel.text = LOC(@"FEATURES_NGUYEASANG_TEXT");
             [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/87893636?v=4" forImageView:cell.imageView];
         } else if (indexPath.row == 5) {
             cell.textLabel.text = @"Snoolie";
-            cell.detailTextLabel.text = @"Features: \"Enable Extra Video Speed\"";
+            cell.detailTextLabel.text = LOC(@"FEATURES_NSNOOLIE_TEXT");
             [self loadImageWithURLString:@"" forImageView:cell.imageView];
         }
     }
@@ -112,13 +112,15 @@
         if (indexPath.row == 0) {
             [self openURLWithString:@"https://twitter.com/Kutarin_"];
         } else if (indexPath.row == 1) {
-            [self openURLWithString:@"https://github.com/Dayanch96"];
-        } else if (indexPath.row == 2) {
             [self openURLWithString:@"https://github.com/kirb"];
+        } else if (indexPath.row == 2) {
+            [self openURLWithString:@"https://github.com/Dayanch96"];
         } else if (indexPath.row == 3) {
             [self openURLWithString:@"https://twitter.com/PoomSmart"];
         } else if (indexPath.row == 4) {
-            [self openURLWithString:@"https://github.com/0xilis"];
+            [self openURLWithString:@"https://github.com/NguyenASang"];
+        } else if (indexPath.row == 5) {
+            [self openURLWithString:@"https://github.com/0xilis"];            
         }
     }
 }

@@ -116,7 +116,7 @@
 }
 
 - (void)reset {
-    self.tabOrder = [NSMutableArray arrayWithObjects:@"Home", @"Shorts", @"Create", @"Subscriptions", @"You", nil];
+    self.tabOrder = [NSMutableArray arrayWithObjects:LOC(@"HOME_TEXT"), LOC(@"SHORTS_TEXT"), LOC(@"CREATE_TEXT"), LOC(@"SUB_TEXT"), LOC(@"YOU_TEXT"), nil];
     [self.tableView reloadData];
     [self save];
 }
