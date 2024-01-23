@@ -8,9 +8,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.title = LOC(@"REORDER_TABS");
-    
+
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"SAVE_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(save)];
     UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"RESET_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
@@ -29,7 +29,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
-    
+
     [NSLayoutConstraint activateConstraints:@[
         [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
         [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
@@ -60,7 +60,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"TabBarTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
@@ -77,7 +77,7 @@
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
     }
-    
+
     if (indexPath.section == 0) {
         NSString *tabIdentifier = self.tabOrder[indexPath.row];
         cell.textLabel.text = tabIdentifier;
@@ -93,9 +93,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSString *tabIdentifier = self.tabOrder[sourceIndexPath.row];
-    [self.tabOrder removeObjectAtIndex:sourceIndexPath.row];
-    [self.tabOrder insertObject:tabIdentifier atIndex:destinationIndexPath.row];
+    NSInteger sourceIndex = sourceIndexPath.row;
+    NSInteger destinationIndex = destinationIndexPath.row;
+
+    NSString *tabIdentifier = self.tabOrder[sourceIndex];
+    [self.tabOrder removeObjectAtIndex:sourceIndex];
+    [self.tabOrder insertObject:tabIdentifier atIndex:destinationIndex];
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
@@ -106,9 +109,8 @@
             [self.tableView setEditing:YES animated:YES];
             NSInteger sourceIndex = indexPath.row;
             NSInteger destinationIndex = [self.tableView numberOfRowsInSection:0] - 1;
-            NSRange sourceRange = NSMakeRange(sourceIndex, 1);
-            NSRange destinationRange = NSMakeRange(destinationIndex, 1);
-            [self.tabOrder exchangeObjectsAtIndexes:[NSIndexSet indexSetWithIndex:sourceIndex] withObjectsAtIndexes:[NSIndexSet indexSetWithIndex:destinationIndex]];
+            NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:destinationIndex inSection:0];
+            [self.tableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
         }
     }
 }
@@ -124,7 +126,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)done {   
+- (void)done {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
