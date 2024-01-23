@@ -1793,23 +1793,26 @@ BOOL isAd(id node) {
 
 %hook YTPivotBarView // Reorder Pivot Bar - @arichornlover
 - (void)setRenderer:(YTIPivotBarRenderer *)renderer {
-    NSMutableArray <YTIPivotBarSupportedRenderers *> *items = [renderer itemsArray];
-
-    NSUInteger index = [items indexOfObjectPassingTest:^BOOL(YTIPivotBarSupportedRenderers *renderers, NSUInteger idx, BOOL *stop) {
-        NSString *pivotIdentifier = [[renderers pivotBarItemRenderer] pivotIdentifier];
-        NSArray *presetTabOrder = @[
-            @"FEwhat_to_watch",   // Home
-            @"FEshorts",          // Shorts
-            @"FEuploads",         // Create
-            @"FEsubscriptions",   // Subscriptions
-            @"FElibrary"          // You
-        ];
-        return [presetTabOrder containsObject:pivotIdentifier];
-    }];
-
-    if (index != NSNotFound) {
-        [items exchangeObjectAtIndex:index withObjectAtIndex:0];
+    NSMutableArray<YTIPivotBarSupportedRenderers *> *items = [renderer itemsArray];
+    NSMutableArray<YTIPivotBarSupportedRenderers *> *reorderedItems = [NSMutableArray arrayWithCapacity:[items count]];
+    NSArray *presetTabOrder = @[
+        @"FEwhat_to_watch",   // Home
+        @"FEshorts",          // Shorts
+        @"FEuploads",         // Create
+        @"FEsubscriptions",   // Subscriptions
+        @"FElibrary"          // You
+    ]; 
+    for (NSString *pivotIdentifier in presetTabOrder) {
+        for (YTIPivotBarSupportedRenderers *item in items) {
+            NSString *itemIdentifier = [[item pivotBarItemRenderer] pivotIdentifier];
+            if ([pivotIdentifier isEqualToString:itemIdentifier]) {
+                [reorderedItems addObject:item];
+                break;
+            }
+        }
     }
+    [items removeAllObjects];
+    [items addObjectsFromArray:reorderedItems]; 
     %orig;
 }
 %end
