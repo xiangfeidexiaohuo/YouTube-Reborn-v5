@@ -875,7 +875,9 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 - (void)rebornOptionsAction {
     NSInteger videoStatus = [stateOut playerState];
     if (videoStatus == 3) {
-        [self didPressPause:[self playPauseButton]];
+        YTMainAppControlsOverlayView *overlayView = [self _viewControllerForAncestor];
+        UIButton *playPauseButton = [overlayView playPauseButton];
+        [overlayView didPressPause:playPauseButton];
     }
 
     NSString *videoIdentifier = [playingVideoID currentVideoID];
