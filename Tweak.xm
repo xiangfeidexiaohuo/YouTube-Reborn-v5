@@ -1794,7 +1794,7 @@ BOOL isAd(id node) {
     }
     %orig;
 }
-@end
+%end
 
 BOOL selectedTabIndex = NO;
 
