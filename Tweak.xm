@@ -1787,7 +1787,7 @@ BOOL isAd(id node) {
         @"id.ui.pivotbar.FElibrary.button"         // You
     ];
 
-    NSMutableArray *sortedTabOrder = [NSMutableArray arrayWithArray:[self.tableView.dataSource tabOrder]];
+    NSMutableArray *sortedTabOrder = [NSMutableArray arrayWithArray:self.tabOrder];
 
     [sortedTabOrder sortUsingComparator:^NSComparisonResult(NSString *tab1, NSString *tab2) {
         NSUInteger index1 = [presetTabOrder indexOfObject:tab1];
@@ -1795,7 +1795,7 @@ BOOL isAd(id node) {
         return index1 - index2;
     }];
 
-    [self.tableView.dataSource setTabOrder:sortedTabOrder];
+    self.tabOrder = sortedTabOrder;
     [self.tableView reloadData];
 
     if ([self respondsToSelector:@selector(findTabViewWithAccessibilityIdentifier:)]) {
@@ -1810,14 +1810,13 @@ BOOL isAd(id node) {
 %end
 
 %hook YTPivotBarItemView
-- (void)setRenderer:(YTIPivotBarItemRenderer *)renderer {
-    %orig(renderer);
-    if (renderer) {
-        [renderer setTabOrder:[NSArray arrayWithArray:(NSMutableArray *)[self.renderer valueForKey:@"tabOrder"]]];
+- (void)setTabOrder:(NSArray *)tabOrder {
+    %orig;
+    if (tabOrder) {
+        [self.renderer setTabOrder:[NSMutableArray arrayWithArray:tabOrder]];
     }
 }
 %end
-
 
 BOOL selectedTabIndex = NO;
 
