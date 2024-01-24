@@ -5,33 +5,33 @@
 "OKAY_TEXT" = "OK";
 "NOTICE_TEXT" = "通知";
 "COLOR_SAVED" = "保存しました";
-"IMPORT_VIDEO" = "Import Video To Camera Roll";
-"SAVED_VIDEO" = "Video Saved To Camera Roll";
-"SAVED_VIDEO_2" = "Save To Camera Roll Failed \nMake Sure To Give Camera Roll Permission To YouTube In The iOS Settings App";
-"OPTIONS_TEXT" = "Options";
-"APPLY_TEXT" = "Apply";
+"IMPORT_VIDEO" = "動画をカメラロールに保存";
+"SAVED_VIDEO" = "動画をカメラロールに保存しました";
+"SAVED_VIDEO_2" = "カメラロールへの保存に失敗しました \niOSの設定からYouTubeの写真へのアクセス許可を確認してください";
+"OPTIONS_TEXT" = "オプション";
+"APPLY_TEXT" = "適用";
 
 // Downloads
 "VIDEO_TAB" = "動画";
 "AUDIO_TAB" = "音声";
 "DOWNLOAD_NOTICE" = "アプリを終了しないでください\n完了時に自動で閉じます";
-"DELETE_VIDEO" = "Delete Video";
-"DELETE_AUDIO" = "Delete Audio";
-"VIDEO_DELETED" = "Video Successfully Deleted";
-"AUDIO_DELETED" = "Audio Successfully Deleted";
+"DELETE_VIDEO" = "動画を削除";
+"DELETE_AUDIO" = "音声を削除";
+"VIDEO_DELETED" = "動画を正常に削除しました";
+"AUDIO_DELETED" = "音声を正常に削除しました";
 "VIEW_DOWNLOADS" = "ダウンロードを表示";
 "VIEW_DOWNLOADS_IN_FILZA" = "Filzaでダウンロードを表示";
-"PROGRESS_PART1_TEXT" = "Progress (Part 1/2): %.02f%%";
-"PROGRESS_PART2_TEXT" = "Progress (Part 2/2): %.02f%%";
-"PROGRESS_TEXT" = "Progress: %.02f%%";
-"DOWNLOAD_AUDIO" = "Download Audio";
-"DOWNLOAD_VIDEO" = "Download Video";
-"PLAY_APP_TEXT" = "Play In External App";
-"CHOOSE_TEXT" = "Choose App";
-"INFUSE_TEXT" = "Play In Infuse";
-"VLC_TEXT" = "Play In VLC";
-"DOWNLOAD_NOTICE_TEXT" = "Please Pause The Video Before Continuing";
-"DOWNLOAD_FILES_TEXT" = "Download Audio or Video Files";
+"PROGRESS_PART1_TEXT" = "進行状況 (Part 1/2): %.02f%%";
+"PROGRESS_PART2_TEXT" = "進行状況 (Part 2/2): %.02f%%";
+"PROGRESS_TEXT" = "進行状況: %.02f%%";
+"DOWNLOAD_AUDIO" = "音声をダウンロード";
+"DOWNLOAD_VIDEO" = "動画をダウンロード";
+"PLAY_APP_TEXT" = "外部アプリで再生";
+"CHOOSE_TEXT" = "アプリを選択";
+"INFUSE_TEXT" = "Infuseで再生";
+"VLC_TEXT" = "VLCで再生";
+"DOWNLOAD_NOTICE_TEXT" = "続ける前に動画を一時停止してください";
+"DOWNLOAD_FILES_TEXT" = "音声/動画ファイルをダウンロード";
 
 // Video Options
 "VIDEO_OPTIONS" = "動画の設定";
@@ -52,10 +52,10 @@
 "ENABLE_EXTRA_SPEED_OPTIONS" = "追加の速度オプションを有効化";
 "DISABLE_DOUBLE_TAP_TO_SKIP" = "ダブルタップによるスキップを無効化";
 "ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "カスタムダブルタップスキップ時間を有効化";
-"VALUE_10_TEXT" = "Value (Seconds): 10";
-"VALUE_TEXT" = "Value (Seconds): %.lf";
-"DISABLE_PREMIUM_TEXT" = "This feature has been disabled cause you have the 'I Have YouTube Premium' option enabled";
-"ALWAYS_SHOW_BAR_TEXT" = "You must enable 'Disable Related Videos In Overlay' and 'Hide Overlay Quick Actions' in YouTube Reborn settings to use 'Always Show Player Bar'";
+"VALUE_10_TEXT" = "値 (秒): 10";
+"VALUE_TEXT" = "値 (秒): %.lf";
+"DISABLE_PREMIUM_TEXT" = "「私はYouTubeプレミアムを利用中です」オプションが有効なためこの機能は無効化されます";
+"ALWAYS_SHOW_BAR_TEXT" = "「関連動画を非表示」と「クイックアクションを非表示」を有効にする必要があります";
 
 // Overlay Options
 "OVERLAY_OPTIONS" = "オーバーレイの設定";
@@ -77,19 +77,19 @@
 "HIDE_QUICK_ACTIONS" = "クイックアクションを非表示";
 "HIDE_CURRENT_TIME" = "現在の再生時間を非表示";
 "HIDE_DURATION" = "再生時間の長さを非表示";
-"STATUS_BAR_TEXT" = "This option can't be enabled on notched idevices";
-"IPAD_TEXT" = "This option can't be enabled with 'Enable iPad Style On iPhone' enabled";
+"STATUS_BAR_TEXT" = "ノッチ有りのデバイスでこのオプションは無効です";
+"IPAD_TEXT" = "'iPhoneでiPadスタイルを有効化'が有効な場合このオプションは無効です";
 
 // Tab Bar Options
 "TAB_BAR_OPTIONS" = "タブバーの設定";
 
 "STARTUP_PAGE" = "スタートアップページ";
-"HOME_TEXT" = "Home";
-"EXPLORE_TEXT" = "Explore";
-"SHORTS_TEXT" = "Shorts";
-"CREATE_TEXT" = "Create";
-"SUB_TEXT" = "Subscriptions";
-"YOU_TEXT" = "You";
+"HOME_TEXT" = "ホーム";
+"EXPLORE_TEXT" = "探索";
+"SHORTS_TEXT" = "ショート";
+"CREATE_TEXT" = "作成/アップロード";
+"SUB_TEXT" = "登録チャンネル";
+"YOU_TEXT" = "マイページ";
 
 "HIDE_TAB_BAR_LABELS" = "タブバーのラベルを非表示";
 "HIDE_EXPLORE_TAB" = "探索タブを非表示";
@@ -105,8 +105,8 @@
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "ピクチャインピクチャの設定";
 
-"PIP_TEXT" = "Picture In Picture";
-"PIP_NOTICE_TEXT" = "You must enable 'Background Playback' in YouTube Reborn settings to use Picture-In-Picture";
+"PIP_TEXT" = "ピクチャインピクチャ";
+"PIP_NOTICE_TEXT" = "ピクチャインピクチャを使用するにはYouTube Rebornの設定で「バックグラウンド再生を有効化」する必要があります";
 
 "ENABLE_PICTURE_IN_PICTURE" = "ピクチャインピクチャ(PIP)を有効化";
 "HIDE_PIP_ADS_BADGE" = "PIP広告バッジを非表示";
@@ -168,20 +168,20 @@
 "REBORN_SETTINGS" = "Rebornの設定";
 
 "I_HAVE_YOUTUBE_PREMIUM" = "私はYouTubeプレミアムを利用中です";
-"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Hide Player Overlay 'OP' Button";
+"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "プレイヤーオーバーレイのOPボタンを非表示";
 "HIDE_VIDEO_OVERLAY_OP_BUTTON" = "動画オーバーレイのOPボタンを非表示";
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "ショート動画オーバーレイのOPボタンを非表示";
 "RESET_COLOR_OPTIONS" = "カラーオプションをリセット";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "すべての設定をリセット";
-"RESET_COLOR_TEXT" = "Are you sure you want to reset all your set colors?";
-"RESET_OPTIONS_TEXT" = "Are you sure you want to reset all your options?";
+"RESET_COLOR_TEXT" = "カラーオプションを全てリセットしてもよろしいですか?";
+"RESET_OPTIONS_TEXT" = "設定を全てリセットしてもよろしいですか?";
 
 // Credits
 "CREDITS_BUTTON" = "クレジット";
 "DEVELOPER_TEXT" = "開発者";
 "ICON_DESIGNER_TEXT" = "アイコンデザイナー";
-"DEV_SUPPORT_TEXT" = "Development Support";
-"FEATURES_DAYANCH96_TEXT" = "Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
-"FEATURES_POOMSMART_TEXT" = "Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
-"FEATURES_NGUYEASANG_TEXT" = "Features: \"YouTube Reborn Button under Video Player\"";
-"FEATURES_NSNOOLIE_TEXT" = "Features: \"Enable Extra Video Speed\"";
+"DEV_SUPPORT_TEXT" = "開発者サポート";
+"FEATURES_DAYANCH96_TEXT" = "機能: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+"FEATURES_POOMSMART_TEXT" = "機能: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
+"FEATURES_NGUYEASANG_TEXT" = "機能: \"YouTube Reborn Button under Video Player\"";
+"FEATURES_NSNOOLIE_TEXT" = "機能: \"Enable Extra Video Speed\"";
