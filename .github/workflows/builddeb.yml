@@ -11,10 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
-      - name: Checkout theos/theos
+      - name: Checkout RootHide/theos
         uses: actions/checkout@main
         with:
-          repository: theos/theos
+          repository: RootHide/theos
           ref: master
           submodules: recursive
           path: theos
@@ -40,6 +40,7 @@ jobs:
           export THEOS=theos
           gmake clean package FINALPACKAGE=1
           gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
+          gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=roothide
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
