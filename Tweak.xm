@@ -2616,6 +2616,7 @@ BOOL selectedTabIndex = NO;
         if ([self.accessibilityIdentifier isEqualToString:@"id.comment.channel_guidelines_bottom_sheet_container"]) { self.backgroundColor = rebornHexColour; }
         if ([self.accessibilityIdentifier isEqualToString:@"id.comment.channel_guidelines_entry_banner_container"]) { self.backgroundColor = rebornHexColour; }
 	if ([self.accessibilityIdentifier isEqualToString:@"id.comment.comment_group_detail_container"]) { self.backgroundColor = [UIColor clearColor]; }
+        if ([self.accessibilityIdentifier hasPrefix:@"id.elements.components.overflow_menu_item_"]) { self.backgroundColor = [UIColor clearColor]; }
 }
 %end
 %end
