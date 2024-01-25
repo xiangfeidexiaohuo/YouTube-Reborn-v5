@@ -62,12 +62,12 @@ int selectedIndex;
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed: 0.06 green: 0.06 blue: 0.06 alpha: 1.00];
+            cell.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
         }
         else {
-            cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
+            cell.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor whiteColor];
 	    cell.textLabel.shadowColor = [UIColor blackColor];
             cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
@@ -118,9 +118,13 @@ int selectedIndex;
 - (void)coloursView {
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
         self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     }
     else {
         self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     }
 }
 
