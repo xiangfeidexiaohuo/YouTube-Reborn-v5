@@ -12,6 +12,7 @@
 "APPLY_TEXT" = "Apply";
 
 // Downloads
+"ALL_TAB" = "All";
 "VIDEO_TAB" = "Video";
 "AUDIO_TAB" = "Audio";
 "DOWNLOAD_NOTICE" = "Đừng thoát khỏi ứng dụng\nỨng dụng này sẽ tự động đóng khi hoàn thành";
