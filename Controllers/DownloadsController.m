@@ -1,4 +1,5 @@
 #import "DownloadsController.h"
+#import "DownloadsAllController.h"
 #import "DownloadsVideoController.h"
 #import "DownloadsAudioController.h"
 #import "Localization.h"
