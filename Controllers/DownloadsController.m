@@ -33,6 +33,11 @@
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
 
+    DownloadsAllController *allDownloadsViewController = [[DownloadsAllController alloc] init];
+    allFilesViewController.title = LOC(@"ALL_TAB");
+    allFilesViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"ALL_TAB") image:[UIImage systemImageNamed:@"folder"] tag:2];
+    UINavigationController *allDownloadsNavViewController = [[UINavigationController alloc] initWithRootViewController:allFilesViewController];
+
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"VIDEO_TAB");
     videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"VIDEO_TAB") image:[UIImage systemImageNamed:@"video.circle.fill"] tag:0];
@@ -43,7 +48,7 @@
     audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"AUDIO_TAB") image:[UIImage systemImageNamed:@"music.note"] tag:1];
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
 
-    self.tabBarController.viewControllers = @[videoNavViewController, audioNavViewController];
+    self.tabBarController.viewControllers = @[allDownloadsNavViewController, videoNavViewController, audioNavViewController];
     [self addChildViewController:self.tabBarController];
     self.tabBarController.view.frame = self.view.bounds;
     [self.view addSubview:self.tabBarController.view];
