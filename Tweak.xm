@@ -1114,7 +1114,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 %end
 
 %hook YTAdsInnerTubeContextDecorator
-- (void)decorateContext:(id)arg1 {
+- (void)decorateContext:(id)context {
 }
 %end
 
@@ -1138,7 +1138,6 @@ BOOL isAd(id node) {
         NSString *description = [[[node controller] owningComponent] description];
         if ([description containsString:@"brand_promo"]
             || [description containsString:@"statement_banner"]
-            || [description containsString:@"product_carousel"]
             || [description containsString:@"product_engagement_panel"]
             || [description containsString:@"product_item"]
             || [description containsString:@"text_search_ad"]
