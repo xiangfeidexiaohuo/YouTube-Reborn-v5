@@ -12,6 +12,7 @@
 "APPLY_TEXT" = "適用";
 
 // Downloads
+"ALL_TAB" = "全て";
 "VIDEO_TAB" = "動画";
 "AUDIO_TAB" = "音声";
 "DOWNLOAD_NOTICE" = "アプリを終了しないでください\n完了時に自動で閉じます";
