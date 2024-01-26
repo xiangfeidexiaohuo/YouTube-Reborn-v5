@@ -5,14 +5,11 @@
 @interface DownloadsAllController ()
 {
     NSString *documentsDirectory;
-    NSMutableArray *filePathsAudioArray;
-    NSMutableArray *filePathsAudioArtworkArray;
-    NSMutableArray *filePathsVideoArray;
-    NSMutableArray *filePathsVideoArtworkArray;
+    NSMutableArray *filePathsAllArray;
+    NSMutableArray *filePathsAllArtworkArray;
 }
 - (void)coloursView;
-- (void)setupAudioArrays;
-- (void)setupVideoArrays;
+- (void)setupAllArrays;
 @end
 
 @implementation DownloadsAllController
@@ -205,40 +202,22 @@
     [self presentViewController:alertMenu animated:YES completion:nil];
 }
 
-- (void)setupVideoArrays {
+- (void)setupAllArrays {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     documentsDirectory = [paths objectAtIndex:0];
 
     NSArray *filePathsList = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:documentsDirectory error:nil];
-    filePathsVideoArray = [[NSMutableArray alloc] init];
-    filePathsVideoArtworkArray = [[NSMutableArray alloc] init];
+    filePathsAllArray = [[NSMutableArray alloc] init];
+    filePathsAllArtworkArray = [[NSMutableArray alloc] init];
     for (id object in filePathsList) {
-        if ([[object pathExtension] isEqualToString:@"mp4"]){
+        if ([[object pathExtension] isEqualToString:@"mp4"] || [[object pathExtension] isEqualToString:@"mp3"] || [[object pathExtension] isEqualToString:@"m4a"]){
             [filePathsVideoArray addObject:object];
             NSString *cut = [object substringToIndex:[object length]-4];
             NSString *jpg = [NSString stringWithFormat:@"%@.jpg", cut];
-            [filePathsVideoArtworkArray addObject:jpg];
+            [filePathsAllArtworkArray addObject:jpg];
         }
     }
-    self.allItems = [NSArray arrayWithArray:filePathsVideoArray];
-}
-
-- (void)setupAudioArrays {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    documentsDirectory = [paths objectAtIndex:0];
-
-    NSArray *filePathsList = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:documentsDirectory error:nil];
-    filePathsAudioArray = [[NSMutableArray alloc] init];
-    filePathsAudioArtworkArray = [[NSMutableArray alloc] init];
-    for (id object in filePathsList) {
-        if ([[object pathExtension] isEqualToString:@"m4a"] || [[object pathExtension] isEqualToString:@"mp3"]){
-            [filePathsAudioArray addObject:object];
-            NSString *cut = [object substringToIndex:[object length]-4];
-            NSString *jpg = [NSString stringWithFormat:@"%@.jpg", cut];
-            [filePathsAudioArtworkArray addObject:jpg];
-        }
-    }
-    self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
+    self.allItems = [NSArray arrayWithArray:filePathsAllArray];
 }
 
 - (void)coloursView {
