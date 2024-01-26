@@ -1114,7 +1114,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 %end
 
 %hook YTAdsInnerTubeContextDecorator
-- (void)decorateContext:(id)arg1 {
+- (void)decorateContext:(id)context {
 }
 %end
 
