@@ -45,7 +45,7 @@
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 6;
+        return 7;
     }
     return 0;
 }
@@ -92,6 +92,10 @@
         } else if (indexPath.row == 5) {
             cell.textLabel.text = @"Snoolie";
             cell.detailTextLabel.text = LOC(@"FEATURES_NSNOOLIE_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 7) {
+            cell.textLabel.text = @"xiangfeidexiaohuo";
+            cell.detailTextLabel.text = LOC(@"🇨🇳简体中文@秋名山巨魔俱乐部");
             [self loadImageWithURLString:@"" forImageView:cell.imageView];
         }
     }
