@@ -12,6 +12,7 @@
 "APPLY_TEXT" = "Apply";
 
 // Downloads
+"ALL_TAB" = "All";
 "VIDEO_TAB" = "Vídeo";
 "AUDIO_TAB" = "Audio";
 "DOWNLOAD_NOTICE" = "No salga de la aplicación. Se cerrará automáticamente al finalizar";
