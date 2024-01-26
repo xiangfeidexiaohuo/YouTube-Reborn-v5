@@ -60,12 +60,21 @@
     [searchBar resignFirstResponder];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length == 0) {
+        searchBar.text = @"";
+        self.filteredItems = [NSArray array];
+        self.isSearching = NO;
+        [self.tableView reloadData];
+    }
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     NSString *searchText = searchBar.text;
 
     if (searchText.length > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH[cd] %@", searchText];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", searchText];
         self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
         self.isSearching = YES;
     } else {
@@ -73,6 +82,10 @@
         self.isSearching = NO;
     }
     [self.tableView reloadData];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.searchBar resignFirstResponder];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
