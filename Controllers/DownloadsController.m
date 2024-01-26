@@ -35,18 +35,18 @@
     self.tabBarController.delegate = self;
 
     DownloadsAllController *allDownloadsViewController = [[DownloadsAllController alloc] init];
-    allFilesViewController.title = LOC(@"ALL_TAB");
-    allFilesViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"ALL_TAB") image:[UIImage systemImageNamed:@"folder"] tag:2];
-    UINavigationController *allDownloadsNavViewController = [[UINavigationController alloc] initWithRootViewController:allFilesViewController];
+    allDownloadsViewController.title = LOC(@"ALL_TAB");
+    allDownloadsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"ALL_TAB") image:[UIImage systemImageNamed:@"folder"] tag:0];
+    UINavigationController *allDownloadsNavViewController = [[UINavigationController alloc] initWithRootViewController:allDownloadsViewController];
 
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
     videoViewController.title = LOC(@"VIDEO_TAB");
-    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"VIDEO_TAB") image:[UIImage systemImageNamed:@"video.circle.fill"] tag:0];
+    videoViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"VIDEO_TAB") image:[UIImage systemImageNamed:@"video.circle.fill"] tag:1];
     UINavigationController *videoNavViewController = [[UINavigationController alloc] initWithRootViewController:videoViewController];
 
     DownloadsAudioController *audioViewController = [[DownloadsAudioController alloc] init];
     audioViewController.title = LOC(@"AUDIO_TAB");
-    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"AUDIO_TAB") image:[UIImage systemImageNamed:@"music.note"] tag:1];
+    audioViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"AUDIO_TAB") image:[UIImage systemImageNamed:@"music.note"] tag:2];
     UINavigationController *audioNavViewController = [[UINavigationController alloc] initWithRootViewController:audioViewController];
 
     self.tabBarController.viewControllers = @[allDownloadsNavViewController, videoNavViewController, audioNavViewController];
