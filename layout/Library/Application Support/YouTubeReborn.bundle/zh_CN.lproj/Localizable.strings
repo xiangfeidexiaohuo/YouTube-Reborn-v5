@@ -12,7 +12,7 @@
 "APPLY_TEXT" = "应用";
 
 // Downloads
-"ALL_TAB" = "All";
+"ALL_TAB" = "全部";
 "VIDEO_TAB" = "视频";
 "AUDIO_TAB" = "音频";
 "DOWNLOAD_NOTICE" = "不要退出应用程序\n下载完成后将自动关闭";
