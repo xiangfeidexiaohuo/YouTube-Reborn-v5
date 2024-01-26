@@ -151,19 +151,19 @@
             autoHideHomeBar.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAutoHideHomeBar"];
             cell.accessoryView = autoHideHomeBar;
         }
-        if (indexPath.row == 12) {
-            cell.textLabel.text = LOC(@"APP_VERSION_SPOOFER");
-            UISwitch *appVersionSpoofer = [[UISwitch alloc] initWithFrame:CGRectZero];
-            [appVersionSpoofer addTarget:self action:@selector(toggleAppVersionSpoofer:) forControlEvents:UIControlEventValueChanged];
-            appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
-            cell.accessoryView = appVersionSpoofer;
-	    
-            self.versionTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-            self.versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
-            self.versionTextField.enabled = appVersionSpoofer.isOn;
-            [self.versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.accessoryView = self.versionTextField;
+    if (indexPath.row == 12) {
+        cell.textLabel.text = LOC(@"APP_VERSION_SPOOFER");
+        UISwitch *appVersionSpoofer = [[UISwitch alloc] initWithFrame:CGRectZero];
+        [appVersionSpoofer addTarget:self action:@selector(toggleAppVersionSpoofer:) forControlEvents:UIControlEventValueChanged];
+        appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
+        cell.accessoryView = appVersionSpoofer;
+
+        self.versionTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, cell.bounds.size.width-130, cell.bounds.size.height-20)];
+        self.versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
+        self.versionTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.versionTextField.enabled = appVersionSpoofer.isOn;
+        [self.versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+        [cell.contentView addSubview:self.versionTextField];
 	}
     }
     return cell;
@@ -186,10 +186,6 @@
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
     [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 }
 
 - (void)versionTextFieldChanged:(UITextField *)textField {
