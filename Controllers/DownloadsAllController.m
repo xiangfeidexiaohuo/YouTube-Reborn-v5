@@ -38,8 +38,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
-    [self setupAudioArrays];
-    [self setupVideoArrays];
+    [self setupAllArrays];
     
     [NSLayoutConstraint activateConstraints:@[
         [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
@@ -121,9 +120,9 @@
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
     }
-    cell.textLabel.text = [filePathsVideoArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [filePathsAllArray objectAtIndex:indexPath.row];
     @try {
-        NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
+        NSString *artworkFileName = filePathsAllArtworkArray[indexPath.row];
         cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
     }
     @catch (NSException *exception) {
@@ -135,7 +134,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    NSString *currentFileName = filePathsVideoArray[indexPath.row];
+    NSString *currentFileName = filePathsAllArray[indexPath.row];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:currentFileName];
     
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];
@@ -150,8 +149,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    NSString *currentVideoFileName = filePathsVideoArray[indexPath.row];
-    NSString *currentArtworkFileName = filePathsVideoArtworkArray[indexPath.row];
+    NSString *currentVideoFileName = filePathsAllArray[indexPath.row];
+    NSString *currentArtworkFileName = filePathsAllArtworkArray[indexPath.row];
 
     UIAlertController *alertMenu = [UIAlertController alertControllerWithTitle:LOC(@"OPTIONS_TEXT") message:nil preferredStyle:UIAlertControllerStyleAlert];
 
@@ -187,9 +186,9 @@
         UIAlertController *alertDeleted = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"VIDEO_DELETED") preferredStyle:UIAlertControllerStyleAlert];
 
         [alertDeleted addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [filePathsVideoArray removeAllObjects];
-            [filePathsVideoArtworkArray removeAllObjects];
-            [self setupVideoArrays];
+            [filePathsAllArray removeAllObjects];
+            [filePathsAllArtworkArray removeAllObjects];
+            [self setupAllArrays];
             [self.tableView reloadData];
         }]];
 
@@ -211,7 +210,7 @@
     filePathsAllArtworkArray = [[NSMutableArray alloc] init];
     for (id object in filePathsList) {
         if ([[object pathExtension] isEqualToString:@"mp4"] || [[object pathExtension] isEqualToString:@"mp3"] || [[object pathExtension] isEqualToString:@"m4a"]){
-            [filePathsVideoArray addObject:object];
+            [filePathsAllArray addObject:object];
             NSString *cut = [object substringToIndex:[object length]-4];
             NSString *jpg = [NSString stringWithFormat:@"%@.jpg", cut];
             [filePathsAllArtworkArray addObject:jpg];
