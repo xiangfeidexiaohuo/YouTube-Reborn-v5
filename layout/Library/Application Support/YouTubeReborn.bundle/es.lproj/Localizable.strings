@@ -55,7 +55,7 @@
 "ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "Activar la duración personalizada de la doble pulsación para saltar";
 "VALUE_10_TEXT" = "Valor (segundos): 10";
 "VALUE_TEXT" = "Valor (segundos): %.lf";
-"DISABLE_PREMIUM_TEXT" = "Esta función se ha desactivado porque tienes activada la opción "Tengo YouTube Premium".";
+"DISABLE_PREMIUM_TEXT" = "Esta función se ha desactivado porque tienes activada la opción 'Tengo YouTube Premium'";
 "ALWAYS_SHOW_BAR_TEXT" = "Debes activar 'Desactivar vídeos relacionados en superposición' y 'Ocultar acciones rápidas de superposición' en la configuración de YouTube Reborn para utilizar 'Mostrar siempre la barra de reproducción'";
 
 // Overlay Options
