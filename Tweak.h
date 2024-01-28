@@ -18,6 +18,7 @@
 #import "YouTubeHeader/YTColor.h"
 #import "YouTubeHeader/YTColorPalette.h"
 #import "YouTubeHeader/YTCommonColorPalette.h"
+#import "YouTubeHeader/YTPageStyleController.h"
 #import "YouTubeHeader/YTHotConfig.h"
 #import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
