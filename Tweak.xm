@@ -789,14 +789,14 @@ static NSString *accessGroupID() {
 %end
 
 // YouTube Reborn Video Player Button (v5.0.0+)
-#pragma mark - @NguyenASang - Video tab bar Reborn Download Video or Audio Button (17.01.4 and up)
+#pragma mark - Video tab bar OP Button (17.01.4 and up) - @NguyenASang
 
 static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title, NSString *accessibilityLabel) {
     NSInteger pageStyle = [%c(YTPageStyleController) pageStyle];
-    YTColorPalette *palette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle];
-    YTCommonColorPalette *commonPalette = pageStyle == 1 ? [%c(YTCommonColorPalette) darkPalette] : [%c(YTCommonColorPalette) lightPalette];
-    if (!commonPalette) commonPalette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle]; // YouTube 17.18.4 and below
+    YTCommonColorPalette *palette = pageStyle == 1 ? [%c(YTCommonColorPalette) darkPalette] : [%c(YTCommonColorPalette) lightPalette];
+    if (!palette) palette = [%c(YTColorPalette) colorPaletteForPageStyle:pageStyle]; // YouTube 17.18.4 and below
     UIColor *textColor = [palette textPrimary];
+
     ELMContainerNode *containerNode = (ELMContainerNode *)[[[[node yogaChildren] firstObject] yogaChildren] firstObject]; // To get node container properties
     UIButton *buttonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 65, containerNode.calculatedSize.height)];
     buttonView.center = CGPointMake(CGRectGetMaxX([node.layoutAttributes frame]) + 65 / 2, CGRectGetMidY([node.layoutAttributes frame]));
