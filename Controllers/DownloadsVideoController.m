@@ -133,7 +133,7 @@
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     cell.imageView.clipsToBounds = YES;
     cell.imageView.image = nil;
-    cell.imageView.image = previewImage;
+    cell.imageView.image = previewImageView;
     return cell;
 }
 
