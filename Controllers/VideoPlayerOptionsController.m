@@ -109,7 +109,7 @@
             cell.accessoryView = hideClipButton;
         }
         if (indexPath.row == 6) {
-            cell.textLabel.text = LOC(@"HIDE_PLAYLIST_PLAYER_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_SAVE_PLAYER_BUTTON");
             UISwitch *hidePlaylistButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlaylistButton addTarget:self action:@selector(toggleHidePlaylistButton:) forControlEvents:UIControlEventValueChanged];
             hidePlaylistButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSaveToPlaylistButton"];
