@@ -165,6 +165,7 @@
         versionTextField.enabled = appVersionSpoofer.isOn;
         [versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
         [cell.contentView addSubview:versionTextField];
+        self.versionTextField = versionTextField;
 	}
     }
     return cell;
