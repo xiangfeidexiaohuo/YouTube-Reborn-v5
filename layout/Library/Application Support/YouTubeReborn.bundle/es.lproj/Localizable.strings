@@ -59,15 +59,15 @@
 "ALWAYS_SHOW_BAR_TEXT" = "Debes activar 'Desactivar vídeos relacionados en superposición' y 'Ocultar acciones rápidas de superposición' en la configuración de YouTube Reborn para utilizar 'Mostrar siempre la barra de reproducción'";
 
 // Video Player Options
-"VIDEO_PLAYER_OPTIONS" = "Video Player Options";
+"VIDEO_PLAYER_OPTIONS" = "Opciones del reproductor de vídeo";
 
-"HIDE_CONNECT_PLAYER_BUTTON" = "Hide 'Connect' Button under Video Player";
-"HIDE_SHARE_PLAYER_BUTTON" = "Hide 'Share' Button under Video Player";
-"HIDE_REMIX_PLAYER_BUTTON" = "Hide 'Remix' Button under Video Player";
-"HIDE_THANKS_PLAYER_BUTTON" = "Hide 'Thanks' Button under Video Player";
-"HIDE_DOWNLOAD_PLAYER_BUTTON" = "Hide 'Download' Button under Video Player";
-"HIDE_CLIP_PLAYER_BUTTON" = "Hide 'Clip' Button under Video Player";
-"HIDE_SAVE_PLAYER_BUTTON" = "Hide 'Save' Button under Video Player";
+"HIDE_CONNECT_PLAYER_BUTTON" = "Ocultar el botón 'Conectar' debajo del reproductor de vídeo";
+"HIDE_SHARE_PLAYER_BUTTON" = "Ocultar el botón 'Compartir' bajo el reproductor de vídeo";
+"HIDE_REMIX_PLAYER_BUTTON" = "Ocultar botón 'Remix' en reproductor de vídeo";
+"HIDE_THANKS_PLAYER_BUTTON" = "Ocultar botón 'Gracias' en reproductor de vídeo";
+"HIDE_DOWNLOAD_PLAYER_BUTTON" = "Ocultar botón 'Descargar' en reproductor de vídeo";
+"HIDE_CLIP_PLAYER_BUTTON" = "Ocultar botón 'Clip' en reproductor de vídeo";
+"HIDE_SAVE_PLAYER_BUTTON" = "Ocultar el botón 'Guardar' en el reproductor de vídeo";
 
 // Overlay Options
 "OVERLAY_OPTIONS" = "Opciones de superposición";
@@ -169,7 +169,7 @@
 "HIDE_PLAY_NEXT_IN_QUEUE" = "Ocultar 'Reproducir siguiente en cola'";
 "DISABLE_YOUTUBE_KIDS" = "Desactivar YouTube Kids";
 "DISABLE_HINTS" = "Desactivar sugerencias";
-"PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
+"PREMIUM_YOUTUBE_LOGO" = "Logotipo de YouTube Premium";
 "HIDE_YOUTUBE_LOGO" = "Ocultar el logotipo de YouTube";
 "STICK_NAVIGATION_BAR" = "Barra de navegación";
 "AUTO_HIDE_HOME_BAR" = "Ocultar automáticamente la barra de inicio";
@@ -180,7 +180,7 @@
 "REBORN_SETTINGS" = "Ajustes de Reborn";
 
 "I_HAVE_YOUTUBE_PREMIUM" = "Tengo YouTube Premium";
-"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Hide 'OP' Button under Video Player";
+"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Ocultar el botón 'OP' bajo el reproductor de vídeo";
 "HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Ocultar botón 'OP' de superposición de vídeo";
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ocultar superposición de Shorts 'OP' Botón";
 "RESET_COLOR_OPTIONS" = "Restablecer opciones de color";
