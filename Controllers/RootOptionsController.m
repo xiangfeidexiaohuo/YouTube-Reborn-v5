@@ -1,6 +1,7 @@
 #import "RootOptionsController.h"
 #import "DownloadsController.h"
 #import "VideoOptionsController.h"
+#import "VideoPlayerOptionsController.h"
 #import "OverlayOptionsController.h"
 #import "TabBarOptionsController.h"
 #import "ReorderPivotBarController.h"
@@ -114,7 +115,7 @@
         }
     }
     if (section == 1) {
-        return 11;
+        return 12;
     }
     if (section == 2) {
         return 2;
@@ -164,33 +165,36 @@
                 cell.textLabel.text = LOC(@"VIDEO_OPTIONS");
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = LOC(@"OVERLAY_OPTIONS");
+                cell.textLabel.text = LOC(@"VIDEO_PLAYER_OPTIONS");
             }
             if (indexPath.row == 2) {
-                cell.textLabel.text = LOC(@"TAB_BAR_OPTIONS");
+                cell.textLabel.text = LOC(@"OVERLAY_OPTIONS");
             }
             if (indexPath.row == 3) {
-                cell.textLabel.text = LOC(@"REORDER_TABS");
+                cell.textLabel.text = LOC(@"TAB_BAR_OPTIONS");
             }
             if (indexPath.row == 4) {
-                cell.textLabel.text = LOC(@"COLOR_OPTIONS");
+                cell.textLabel.text = LOC(@"REORDER_TABS");
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = LOC(@"COLOR_OPTIONS_2");
+                cell.textLabel.text = LOC(@"COLOR_OPTIONS");
             }
             if (indexPath.row == 6) {
-                cell.textLabel.text = LOC(@"COLOR_OPTIONS_3");
+                cell.textLabel.text = LOC(@"COLOR_OPTIONS_2");
             }
             if (indexPath.row == 7) {
-                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
+                cell.textLabel.text = LOC(@"COLOR_OPTIONS_3");
             }
             if (indexPath.row == 8) {
-                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
+                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
             }
             if (indexPath.row == 9) {
-                cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
+                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
             }
             if (indexPath.row == 10) {
+                cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
+            }
+            if (indexPath.row == 11) {
                 cell.textLabel.text = LOC(@"OTHER_OPTIONS");
             }
         }
@@ -238,48 +242,55 @@
             [self presentViewController:videoOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 1) {
+            VideoPlayerOptionsController *videoPlayerOptionsController = [[VideoPlayerOptionsController alloc] init];
+            UINavigationController *videoPlayerOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:videoPlayerOptionsController];
+            videoPlayerOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:videoPlayerOptionsControllerView animated:YES completion:nil];
+        }
+        if (indexPath.row == 2) {
             OverlayOptionsController *overlayOptionsController = [[OverlayOptionsController alloc] init];
             UINavigationController *overlayOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:overlayOptionsController];
             overlayOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:overlayOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             TabBarOptionsController *tabBarOptionsController = [[TabBarOptionsController alloc] init];
             UINavigationController *tabBarOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:tabBarOptionsController];
             tabBarOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             ReorderPivotBarController *reorderPivotBarController = [[ReorderPivotBarController alloc] init];
 	    UINavigationController *reorderPivotBarControllerView = [[UINavigationController alloc] initWithRootViewController:reorderPivotBarController];
             reorderPivotBarControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:reorderPivotBarControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 4) {
+        if (indexPath.row == 5) {
             ColourOptionsController *colourOptionsController = [[ColourOptionsController alloc] init];
             UINavigationController *colourOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:colourOptionsController];
             colourOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:colourOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 5) {
+        if (indexPath.row == 6) {
             ColourOptionsController2 *colourOptionsController2 = [[ColourOptionsController2 alloc] init];
             UINavigationController *colourOptionsController2View = [[UINavigationController alloc] initWithRootViewController:colourOptionsController2];
             colourOptionsController2View.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:colourOptionsController2View animated:YES completion:nil];
         }
-        if (indexPath.row == 6) {
+        if (indexPath.row == 7) {
             ColourOptionsController3 *colourOptionsController3 = [[ColourOptionsController3 alloc] init];
             UINavigationController *colourOptionsController3View = [[UINavigationController alloc] initWithRootViewController:colourOptionsController3];
             colourOptionsController3View.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:colourOptionsController3View animated:YES completion:nil];
         }
-        if (indexPath.row == 7) {
+        if (indexPath.row == 8) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
                 PictureInPictureOptionsController *pictureInPictureOptionsController = [[PictureInPictureOptionsController alloc] init];
                 UINavigationController *pictureInPictureOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:pictureInPictureOptionsController];
@@ -295,21 +306,21 @@
                 [self presentViewController:alertError animated:YES completion:nil];
             }
         }
-        if (indexPath.row == 8) {
+        if (indexPath.row == 9) {
             ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] init];
             UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
             shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 	    
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 10) {
             SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc] init];
             UINavigationController *sponsorBlockOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:sponsorBlockOptionsController];
             sponsorBlockOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:sponsorBlockOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 10) {
+        if (indexPath.row == 11) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
