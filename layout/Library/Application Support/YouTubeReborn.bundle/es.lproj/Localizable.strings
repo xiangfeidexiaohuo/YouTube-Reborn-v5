@@ -58,6 +58,17 @@
 "DISABLE_PREMIUM_TEXT" = "Esta función se ha desactivado porque tienes activada la opción 'Tengo YouTube Premium'";
 "ALWAYS_SHOW_BAR_TEXT" = "Debes activar 'Desactivar vídeos relacionados en superposición' y 'Ocultar acciones rápidas de superposición' en la configuración de YouTube Reborn para utilizar 'Mostrar siempre la barra de reproducción'";
 
+// Video Player Options
+"VIDEO_PLAYER_OPTIONS" = "Video Player Options";
+
+"HIDE_CONNECT_PLAYER_BUTTON" = "Hide 'Connect' Button under Video Player";
+"HIDE_SHARE_PLAYER_BUTTON" = "Hide 'Share' Button under Video Player";
+"HIDE_REMIX_PLAYER_BUTTON" = "Hide 'Remix' Button under Video Player";
+"HIDE_THANKS_PLAYER_BUTTON" = "Hide 'Thanks' Button under Video Player";
+"HIDE_DOWNLOAD_PLAYER_BUTTON" = "Hide 'Download' Button under Video Player";
+"HIDE_CLIP_PLAYER_BUTTON" = "Hide 'Clip' Button under Video Player";
+"HIDE_SAVE_PLAYER_BUTTON" = "Hide 'Save' Button under Video Player";
+
 // Overlay Options
 "OVERLAY_OPTIONS" = "Opciones de superposición";
 
@@ -169,7 +180,7 @@
 "REBORN_SETTINGS" = "Ajustes de Reborn";
 
 "I_HAVE_YOUTUBE_PREMIUM" = "Tengo YouTube Premium";
-"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Ocultar el botón 'OP' del reproductor";
+"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Hide 'OP' Button under Video Player";
 "HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Ocultar botón 'OP' de superposición de vídeo";
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ocultar superposición de Shorts 'OP' Botón";
 "RESET_COLOR_OPTIONS" = "Restablecer opciones de color";
