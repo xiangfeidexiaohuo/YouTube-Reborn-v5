@@ -1,6 +1,4 @@
 #import "Tweak.h"
-#import <rootless.h>
-#import <Foundation/Foundation.h>
 
 extern NSBundle *YouTubeRebornBundle();
 
