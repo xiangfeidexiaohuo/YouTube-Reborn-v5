@@ -67,49 +67,49 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row == 0) {
-            cell.textLabel.text = LOC(@"HIDE_CONNECT_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_CONNECT_PLAYER_BUTTON");
             UISwitch *hideConnectButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideConnectButton addTarget:self action:@selector(toggleHideConnectButton:) forControlEvents:UIControlEventValueChanged];
             hideConnectButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideConnectButton"];
             cell.accessoryView = hideConnectButton;
         }
         if (indexPath.row == 1) {
-            cell.textLabel.text = LOC(@"HIDE_SHARE_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_SHARE_PLAYER_BUTTON");
             UISwitch *hideShareButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideShareButton addTarget:self action:@selector(toggleHideShareButton:) forControlEvents:UIControlEventValueChanged];
             hideShareButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShareButton"];
             cell.accessoryView = hideShareButton;
         }
         if (indexPath.row == 2) {
-            cell.textLabel.text = LOC(@"HIDE_REMIX_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_REMIX_PLAYER_BUTTON");
             UISwitch *hideRemixButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideRemixButton addTarget:self action:@selector(toggleHideRemixButton:) forControlEvents:UIControlEventValueChanged];
             hideRemixButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRemixButton"];
             cell.accessoryView = hideRemixButton;
         }
         if (indexPath.row == 3) {
-            cell.textLabel.text = LOC(@"HIDE_THANKS_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_THANKS_PLAYER_BUTTON");
             UISwitch *hideThanksButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideThanksButton addTarget:self action:@selector(toggleHideThanksButton:) forControlEvents:UIControlEventValueChanged];
             hideThanksButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideThanksButton"];
             cell.accessoryView = hideThanksButton;
         }
         if (indexPath.row == 4) {
-            cell.textLabel.text = LOC(@"HIDE_DOWNLOAD_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_DOWNLOAD_PLAYER_BUTTON");
             UISwitch *hideDownloadButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideDownloadButton addTarget:self action:@selector(toggleHideDownloadButton:) forControlEvents:UIControlEventValueChanged];
             hideDownloadButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideAddToOfflineButton"];
             cell.accessoryView = hideDownloadButton;
         }
         if (indexPath.row == 5) {
-            cell.textLabel.text = LOC(@"HIDE_CLIP_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_CLIP_PLAYER_BUTTON");
             UISwitch *hideClipButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideClipButton addTarget:self action:@selector(toggleHideClipButton:) forControlEvents:UIControlEventValueChanged];
             hideClipButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideClipButton"];
             cell.accessoryView = hideClipButton;
         }
         if (indexPath.row == 6) {
-            cell.textLabel.text = LOC(@"HIDE_PLAYLIST_BUTTON");
+            cell.textLabel.text = LOC(@"HIDE_PLAYLIST_PLAYER_BUTTON");
             UISwitch *hidePlaylistButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlaylistButton addTarget:self action:@selector(toggleHidePlaylistButton:) forControlEvents:UIControlEventValueChanged];
             hidePlaylistButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSaveToPlaylistButton"];
