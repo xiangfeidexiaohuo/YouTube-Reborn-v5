@@ -124,10 +124,6 @@
 - (void)showFullScreen;
 @end
 
-@interface YTPageStyleController
-+ (NSInteger)pageStyle;
-@end
-
 @interface YTSingleVideoTime : NSObject
 @end
 
