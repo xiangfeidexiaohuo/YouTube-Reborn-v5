@@ -93,7 +93,7 @@
             cell.textLabel.text = @"Snoolie";
             cell.detailTextLabel.text = LOC(@"FEATURES_NSNOOLIE_TEXT");
             [self loadImageWithURLString:@"" forImageView:cell.imageView];
-        } else if (indexPath.row == 7) {
+        } else if (indexPath.row == 6) {
             cell.textLabel.text = @"xiangfeidexiaohuo";
             cell.detailTextLabel.text = LOC(@"🇨🇳简体中文@秋名山巨魔俱乐部");
             [self loadImageWithURLString:@"" forImageView:cell.imageView];
@@ -124,7 +124,9 @@
         } else if (indexPath.row == 4) {
             [self openURLWithString:@"https://github.com/NguyenASang"];
         } else if (indexPath.row == 5) {
-            [self openURLWithString:@"https://github.com/0xilis"];            
+            [self openURLWithString:@"https://github.com/0xilis"];
+        } else if (indexPath.row == 6) {
+            [self openURLWithString:@"https://xiangfeidexiaohuo.github.io"];
         }
     }
 }
