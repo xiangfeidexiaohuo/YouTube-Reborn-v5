@@ -2848,13 +2848,13 @@ NSString *customAppVersion = nil; // Declare the global variable
 %hook _ASDisplayView
 - (void)layoutSubviews {
     %orig;
-    BOOL hideConnectButton = @"kHideConnectButton_enabled";
-    BOOL hideShareButton = @"kHideShareButton";
-    BOOL hideRemixButton = @"kHideRemixButton";
-    BOOL hideThanksButton = @"kHideThanksButton";
-    BOOL hideAddToOfflineButton = @"kHideAddToOfflineButton";
-    BOOL hideClipButton = @"kHideClipButton";
-    BOOL hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton";
+    BOOL hideConnectButton = kHideConnectButton;
+    BOOL hideShareButton = kHideShareButton;
+    BOOL hideRemixButton = kHideRemixButton;
+    BOOL hideThanksButton = kHideThanksButton;
+    BOOL hideAddToOfflineButton = kHideAddToOfflineButton;
+    BOOL hideClipButton = kHideClipButton;
+    BOOL hideSaveToPlaylistButton = kHideSaveToPlaylistButton;
     CGFloat buttonSeparation = 8;
     CGFloat currentX = 0;
     for (UIView *subview in self.subviews) {
