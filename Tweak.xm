@@ -2848,30 +2848,30 @@ NSString *customAppVersion = nil; // Declare the global variable
 %hook _ASDisplayView
 - (void)layoutSubviews {
     %orig;
-    BOOL hideConnectButton = kHideConnectButton;
-    BOOL hideShareButton = kHideShareButton;
-    BOOL hideRemixButton = kHideRemixButton;
-    BOOL hideThanksButton = kHideThanksButton;
-    BOOL hideAddToOfflineButton = kHideAddToOfflineButton;
-    BOOL hideClipButton = kHideClipButton;
-    BOOL hideSaveToPlaylistButton = kHideSaveToPlaylistButton;
+    NSString* hideConnectButton = @"kHideConnectButton";
+    NSString* hideShareButton = @"kHideShareButton";
+    NSString* hideRemixButton = @"kHideRemixButton";
+    NSString* hideThanksButton = @"kHideThanksButton";
+    NSString* hideAddToOfflineButton = @"kHideAddToOfflineButton";
+    NSString* hideClipButton = @"kHideClipButton";
+    NSString* hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton";
     CGFloat buttonSeparation = 8;
     CGFloat currentX = 0;
     for (UIView *subview in self.subviews) {
         if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
-            subview.hidden = hideConnectButton;
+            subview.hidden = [hideConnectButton boolValue];
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.share.button"] || [subview.accessibilityLabel isEqualToString:@"Share"]) {
-            subview.hidden = hideShareButton;
+            subview.hidden = [hideShareButton boolValue];
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.remix.button"] || [subview.accessibilityLabel isEqualToString:@"Create a Short with this video"]) {
-            subview.hidden = hideRemixButton;
+            subview.hidden = [hideRemixButton boolValue];
         } else if ([subview.accessibilityLabel isEqualToString:@"Thanks"]) {
-            subview.hidden = hideThanksButton;
+            subview.hidden = [hideThanksButton boolValue];
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.ui.add_to.offline.button"] || [subview.accessibilityIdentifier isEqualToString:@"Download"]) {
-            subview.hidden = hideAddToOfflineButton;
+            subview.hidden = [hideAddToOfflineButton boolValue];
         } else if ([subview.accessibilityLabel isEqualToString:@"Clip"]) {
-            subview.hidden = hideClipButton;
+            subview.hidden = [hideClipButton boolValue];
         } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
-            subview.hidden = hideSaveToPlaylistButton;
+            subview.hidden = [hideSaveToPlaylistButton boolValue];
         }
         if (!subview.hidden) {
             CGRect frame = subview.frame;
