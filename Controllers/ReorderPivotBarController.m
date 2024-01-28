@@ -52,9 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return self.tabOrder.count;
-    }
-    return 0;
+        return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,6 +99,25 @@
     [self.tabOrder insertObject:tabIdentifier atIndex:destinationIndex];
 }
 
+- (void)reorderTabs {
+    NSArray *defaultTabOrder = @[@"FEwhat_to_watch", @"FEshorts", @"FEuploads", @"FEsubscriptions", @"FElibrary"];
+    NSUInteger sectionCount = [self.tableView numberOfSections];
+    for (NSUInteger section = 0; section < sectionCount; section++) {
+        NSUInteger rowCount = [self.tableView numberOfRowsInSection:section];
+        for (NSUInteger row = 0; row < rowCount; row++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            NSString *tabIdentifier = cell.textLabel.text;
+            if (tabIdentifier) {
+                NSUInteger tabIndex = [defaultTabOrder indexOfObject:tabIdentifier];
+                if (tabIndex != NSNotFound) {
+                    [self.tabOrder replaceObjectAtIndex:tabIndex withObject:tabIdentifier];
+                }
+            }
+        }
+    }
+}
+
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint location = [gestureRecognizer locationInView:self.tableView];
@@ -117,23 +134,19 @@
 
 - (void)reset {
     self.tabOrder = [@[
-        LOC(@"HOME_TEXT"),
-        LOC(@"SHORTS_TEXT"),
-        LOC(@"CREATE_TEXT"),
-        LOC(@"SUB_TEXT"),
-        LOC(@"YOU_TEXT")
+        @"FEwhat_to_watch",
+        @"FEshorts",
+        @"FEuploads",
+        @"FEsubscriptions",
+        @"FElibrary"
     ] mutableCopy];
     [self.tableView reloadData];
     [self save];
 }
 
-- (void)save {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:self.tabOrder forKey:@"kTabOrder"];
-    [defaults synchronize];
-}
-
 - (void)done {
+    [self reorderTabs];
+    [self save];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
