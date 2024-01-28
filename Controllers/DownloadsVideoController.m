@@ -120,12 +120,13 @@
         }
     }
     cell.textLabel.text = [filePathsVideoArray objectAtIndex:indexPath.row];
+    UIImage *previewImage = nil;
     @try {
-    NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
-    UIImage *previewImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
-    if (CGSizeEqualToSize(previewImage.size, CGSizeZero)) {
-        previewImage = [UIImage imageNamed:@"placeholder_image"];
-       }
+        NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
+        previewImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
+        if (CGSizeEqualToSize(previewImage.size, CGSizeZero)) {
+            previewImage = [UIImage imageNamed:@"placeholder_image"];
+        }
     }
     @catch (NSException *exception) {
     }
