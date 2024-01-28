@@ -111,8 +111,7 @@
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
             cell.textLabel.textColor = [UIColor blackColor];
             cell.detailTextLabel.textColor = [UIColor blackColor];
-        }
-        else {
+        } else {
             cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
             cell.textLabel.textColor = [UIColor whiteColor];
             cell.textLabel.shadowColor = [UIColor blackColor];
@@ -122,12 +121,19 @@
     }
     cell.textLabel.text = [filePathsVideoArray objectAtIndex:indexPath.row];
     @try {
-        NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
+    NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
+    UIImage *previewImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
+    if (CGSizeEqualToSize(previewImage.size, CGSizeZero)) {
+        previewImage = [UIImage imageNamed:@"placeholder_image"];
+       }
     }
     @catch (NSException *exception) {
     }
-
+    UIImageView *previewImageView = [[UIImageView alloc] initWithImage:previewImage];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.imageView.clipsToBounds = YES;
+    cell.imageView.image = nil;
+    cell.imageView.image = previewImage;
     return cell;
 }
 
@@ -214,6 +220,19 @@
             NSString *cut = [object substringToIndex:[object length]-4];
             NSString *jpg = [NSString stringWithFormat:@"%@.jpg", cut];
             [filePathsVideoArtworkArray addObject:jpg];
+        }
+    }
+    UIFont *font = [UIFont systemFontOfSize:17.0];
+    for (NSInteger i = 0; i < filePathsVideoArray.count; i++) {
+        NSString *filePath = filePathsVideoArray[i];
+        NSString *text = filePath.lastPathComponent;
+        CGSize requiredSize = [text sizeWithAttributes:@{NSFontAttributeName: font}];
+      
+        CGFloat availableWidth = self.tableView.frame.size.width - 40.0;
+        if (requiredSize.width > availableWidth) {
+            NSInteger charactersToRemove = (requiredSize.width - availableWidth) / requiredSize.width * text.length;
+            NSString *resizedText = [text stringByReplacingCharactersInRange:NSMakeRange(text.length - charactersToRemove, charactersToRemove) withString:@"..."];
+            filePathsVideoArray[i] = [resizedText copy];
         }
     }
     self.allItems = [NSArray arrayWithArray:filePathsVideoArray];
