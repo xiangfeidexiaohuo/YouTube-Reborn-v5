@@ -158,7 +158,7 @@
         appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
         cell.accessoryView = appVersionSpoofer;
 
-        self.versionTextField = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, cell.bounds.size.width-130, cell.bounds.size.height-20)];
+        UITextField *versionTextField = [[UITextField alloc] initWithFrame:CGRectMake(cell.bounds.origin.x + cell.textLabel.frame.size.width + 20, 10, cell.bounds.size.width - cell.textLabel.frame.size.width - 30, cell.bounds.size.height - 20)];
         self.versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
         self.versionTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.versionTextField.enabled = appVersionSpoofer.isOn;
@@ -341,5 +341,6 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kAppVersionSpoofer"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    self.versionTextField.enabled = sender.isOn;
 }
 @end
