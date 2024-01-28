@@ -159,7 +159,7 @@
 @property(readonly, nonatomic) YTQTMButton *navigationButton;
 @end
 
-@interface YTIPivotBarItemRenderer : NSObject
+@interface YTIPivotBarItemRenderer (reorderPivotBar)
 - (NSString *)pivotIdentifier;
 - (void)setTabOrder:(NSArray *)orderedTabs;
 - (void)reorderTabs;
@@ -172,18 +172,18 @@
 @property(copy, nonatomic) NSData *trackingParams;
 @end
 
-@interface YTIPivotBarIconOnlyItemRenderer : GPBMessage
+@interface YTIPivotBarIconOnlyItemRenderer (reorderPivotBar)
 - (NSString *)pivotIdentifier;
 - (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 @end
 
-@interface YTIPivotBarSupportedRenderers : NSObject
+@interface YTIPivotBarSupportedRenderers (reorderPivotBar)
 - (YTIPivotBarItemRenderer *)pivotBarItemRenderer;
 - (YTIPivotBarIconOnlyItemRenderer *)pivotBarIconOnlyItemRenderer;
 @property(retain, nonatomic) YTIPivotBarItemRenderer *pivotBarItemRenderer;
 @end
 
-@interface YTIPivotBarRenderer : NSObject
+@interface YTIPivotBarRenderer (reorderPivotBar)
 - (NSMutableArray <YTIPivotBarSupportedRenderers *> *)itemsArray;
 @property (nonatomic, strong) UITableView *tableView;
 @end
