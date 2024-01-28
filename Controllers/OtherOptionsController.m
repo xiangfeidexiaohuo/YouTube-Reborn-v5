@@ -6,7 +6,6 @@
 @end
 
 @implementation OtherOptionsController
-@synthesize versionTextField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
