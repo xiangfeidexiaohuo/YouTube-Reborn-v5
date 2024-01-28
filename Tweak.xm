@@ -816,6 +816,18 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     return buttonView;
 }
 
+%hook YTIIcon
+- (UIImage *)iconImageWithColor:(UIColor *)color {
+    if (self.iconType == OPButtonType) {
+        UIImage *image = [%c(QTMIcon) tintImage:[UIImage imageWithContentsOfFile:TabBarOPIconPath] color:[[%c(YTPageStyleController) currentColorPalette] textPrimary]];
+        if ([image respondsToSelector:@selector(imageFlippedForRightToLeftLayoutDirection)])
+            image = [image imageFlippedForRightToLeftLayoutDirection];
+        return image;
+    }
+    return %orig;
+}
+%end
+
 %hook ASCollectionView
 
 %property (retain, nonatomic) UIButton *rebornOverlayButton;
