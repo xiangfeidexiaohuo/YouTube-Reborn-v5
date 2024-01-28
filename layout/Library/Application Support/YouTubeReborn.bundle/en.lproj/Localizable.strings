@@ -58,6 +58,17 @@
 "DISABLE_PREMIUM_TEXT" = "This feature has been disabled cause you have the 'I Have YouTube Premium' option enabled";
 "ALWAYS_SHOW_BAR_TEXT" = "You must enable 'Disable Related Videos In Overlay' and 'Hide Overlay Quick Actions' in YouTube Reborn settings to use 'Always Show Player Bar'";
 
+// Video Player Options
+"VIDEO_PLAYER_OPTIONS" = "Video Player Options";
+
+"HIDE_CONNECT_PLAYER_BUTTON" = "Hide 'Connect' Button under Video Player";
+"HIDE_SHARE_PLAYER_BUTTON" = "Hide 'Share' Button under Video Player";
+"HIDE_REMIX_PLAYER_BUTTON" = "Hide 'Remix' Button under Video Player";
+"HIDE_THANKS_PLAYER_BUTTON" = "Hide 'Thanks' Button under Video Player";
+"HIDE_DOWNLOAD_PLAYER_BUTTON" = "Hide 'Download' Button under Video Player";
+"HIDE_CLIP_PLAYER_BUTTON" = "Hide 'Clip' Button under Video Player";
+"HIDE_SAVE_PLAYER_BUTTON" = "Hide 'Save' Button under Video Player";
+
 // Overlay Options
 "OVERLAY_OPTIONS" = "Overlay Options";
 
@@ -169,7 +180,7 @@
 "REBORN_SETTINGS" = "Reborn Settings";
 
 "I_HAVE_YOUTUBE_PREMIUM" = "I Have YouTube Premium";
-"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Hide Player Overlay 'OP' Button";
+"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Hide 'OP' Button under Video Player";
 "HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Hide Video Overlay 'OP' Button";
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Hide Shorts Overlay 'OP' Button";
 "RESET_COLOR_OPTIONS" = "Reset Color Options";
