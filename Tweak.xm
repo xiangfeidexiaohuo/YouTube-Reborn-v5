@@ -2833,6 +2833,45 @@ NSString *customAppVersion = nil; // Declare the global variable
 }
 %end
 
+// Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @arichornlover
+%hook _ASDisplayView
+- (void)layoutSubviews {
+    %orig;
+    BOOL hideConnectButton = @"kHideConnectButton_enabled";
+    BOOL hideShareButton = @"kHideShareButton_enabled";
+    BOOL hideRemixButton = @"kHideRemixButton_enabled";
+    BOOL hideThanksButton = @"kHideThanksButton_enabled";
+    BOOL hideAddToOfflineButton = @"kHideAddToOfflineButton_enabled";
+    BOOL hideClipButton = @"kHideClipButton_enabled";
+    BOOL hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton_enabled";
+    CGFloat buttonSeparation = 8;
+    CGFloat currentX = 0;
+    for (UIView *subview in self.subviews) {
+        if ([subview.accessibilityIdentifier isEqualToString:@"connect account"]) {
+            subview.hidden = hideConnectButton;
+        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.share.button"] || [subview.accessibilityIdentifier isEqualToString:@"Share"]) {
+            subview.hidden = hideShareButton;
+        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.remix.button"] || [subview.accessibilityIdentifier isEqualToString:@"Create a Short with this video"]) {
+            subview.hidden = hideRemixButton;
+        } else if ([subview.accessibilityLabel isEqualToString:@"Thanks"]) {
+            subview.hidden = hideThanksButton;
+        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.ui.add_to.offline.button"] || [subview.accessibilityIdentifier isEqualToString:@"Download"]) {
+            subview.hidden = hideAddToOfflineButton;
+        } else if ([subview.accessibilityLabel isEqualToString:@"Clip"]) {
+            subview.hidden = hideClipButton;
+        } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
+            subview.hidden = hideSaveToPlaylistButton;
+        }
+        if (!subview.hidden) {
+            CGRect frame = subview.frame;
+            frame.origin.x = currentX;
+            subview.frame = frame;
+            currentX += frame.size.width + buttonSeparation;
+        }
+    }
+}
+%end
+
 NSBundle *YouTubeRebornBundle() {
     static NSBundle *bundle = nil;
     static dispatch_once_t onceToken;
