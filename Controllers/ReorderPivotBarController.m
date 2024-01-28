@@ -12,9 +12,8 @@
     self.title = LOC(@"REORDER_TABS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"SAVE_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(save)];
     UIBarButtonItem *resetButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"RESET_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
-    self.navigationItem.leftBarButtonItems = @[saveButton, resetButton];
+    self.navigationItem.leftBarButtonItems = resetButton;
     self.navigationItem.rightBarButtonItem = doneButton;
 
     UITableViewStyle style;
@@ -100,22 +99,23 @@
 }
 
 - (void)reorderTabs {
-    NSArray *defaultTabOrder = @[@"FEwhat_to_watch", @"FEshorts", @"FEuploads", @"FEsubscriptions", @"FElibrary"];
-    NSUInteger sectionCount = [self.tableView numberOfSections];
-    for (NSUInteger section = 0; section < sectionCount; section++) {
-        NSUInteger rowCount = [self.tableView numberOfRowsInSection:section];
-        for (NSUInteger row = 0; row < rowCount; row++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            NSString *tabIdentifier = cell.textLabel.text;
-            if (tabIdentifier) {
-                NSUInteger tabIndex = [defaultTabOrder indexOfObject:tabIdentifier];
-                if (tabIndex != NSNotFound) {
-                    [self.tabOrder replaceObjectAtIndex:tabIndex withObject:tabIdentifier];
-                }
+    NSMutableArray *newTabOrder = [NSMutableArray array];  
+    NSArray *tabOrderKeys = @[
+        @"FEwhat_to_watch",
+        @"FEshorts",
+        @"FEuploads",
+        @"FEsubscriptions",
+        @"FElibrary"
+    ];
+    for (NSString *tabKey in tabOrderKeys) {
+        for (YTIPivotBarSupportedRenderers *item in self.tabOrder) {
+            if ([[[item pivotBarItemRenderer] pivotIdentifier] isEqualToString:tabKey]) {
+                [newTabOrder addObject:item];
+                break;
             }
         }
     }
+    self.tabOrder = newTabOrder;
 }
 
 - (void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer {
