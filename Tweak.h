@@ -159,35 +159,6 @@
 @property(readonly, nonatomic) YTQTMButton *navigationButton;
 @end
 
-@interface YTIPivotBarItemRenderer (reorderPivotBar)
-- (NSString *)pivotIdentifier;
-- (void)setTabOrder:(NSArray *)orderedTabs;
-- (void)reorderTabs;
-- (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
-@property (nonatomic, strong) UITableView *tableView;
-@property(retain, nonatomic) YTIIcon *icon;
-@property(retain, nonatomic) YTICommand *navigationEndpoint;
-@property(copy, nonatomic) NSString *pivotIdentifier;
-@property(retain, nonatomic) YTIFormattedString *title;
-@property(copy, nonatomic) NSData *trackingParams;
-@end
-
-@interface YTIPivotBarIconOnlyItemRenderer (reorderPivotBar)
-- (NSString *)pivotIdentifier;
-- (UIView *)findTabViewWithAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
-@end
-
-@interface YTIPivotBarSupportedRenderers (reorderPivotBar)
-- (YTIPivotBarItemRenderer *)pivotBarItemRenderer;
-- (YTIPivotBarIconOnlyItemRenderer *)pivotBarIconOnlyItemRenderer;
-@property(retain, nonatomic) YTIPivotBarItemRenderer *pivotBarItemRenderer;
-@end
-
-@interface YTIPivotBarRenderer (reorderPivotBar)
-- (NSMutableArray <YTIPivotBarSupportedRenderers *> *)itemsArray;
-@property (nonatomic, strong) UITableView *tableView;
-@end
-
 @interface YTReelHeaderView : UIView
 - (id)_viewControllerForAncestor;
 - (void)rebornOptionsAction;
