@@ -2066,7 +2066,7 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
                 }
                 if ([[NSUserDefaults standardUserDefaults] integerForKey:@"kFillerSegmentedInt"] == 2 && !sponsorSkipShowing && !sponsorSkipCheck) {
                     sponsorSkipShowing = YES;
-                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:LOC(@"PREVIEW_DETECTED") message:LOC(@"WOULD_YOU_LIKE_TO_SKIP") preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alertSkip = [UIAlertController alertControllerWithTitle:LOC(@"FILLER_DETECTED") message:LOC(@"WOULD_YOU_LIKE_TO_SKIP") preferredStyle:UIAlertControllerStyleAlert];
 
                     [alertSkip addAction:[UIAlertAction actionWithTitle:LOC(@"NO_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         sponsorSkipCheck = YES;
