@@ -94,6 +94,7 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     NSInteger destinationIndex = destinationIndexPath.row;
+    NSInteger sourceIndex = sourceIndexPath.row;
 
     NSString *tabIdentifier = self.tabOrder[sourceIndex];
     [self.tabOrder removeObjectAtIndex:sourceIndex];
