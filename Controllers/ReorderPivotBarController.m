@@ -93,7 +93,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSInteger sourceIndex = indexPath.row;
     NSInteger destinationIndex = destinationIndexPath.row;
 
     NSString *tabIdentifier = self.tabOrder[sourceIndex];
@@ -107,7 +106,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
         if (indexPath && indexPath.section == 0) {
             [self.tableView setEditing:YES animated:YES];
-            NSInteger sourceIndex = indexPath.row;
             NSInteger destinationIndex = [self.tableView numberOfRowsInSection:0] - 1;
             NSIndexPath *destinationIndexPath = [NSIndexPath indexPathForRow:destinationIndex inSection:0];
             [self.tableView moveRowAtIndexPath:indexPath toIndexPath:destinationIndexPath];
