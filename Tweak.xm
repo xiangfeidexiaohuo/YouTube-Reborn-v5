@@ -3197,9 +3197,7 @@ NSString *customAppVersion = nil; // Declare the global variable
     NSString* hideThanksButton = @"kHideThanksButton";
     NSString* hideAddToOfflineButton = @"kHideAddToOfflineButton";
     NSString* hideClipButton = @"kHideClipButton";
-    NSString* hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton";
-    CGFloat buttonSeparation = 8;
-    CGFloat currentX = 0;
+    NSString* hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton"
     for (UIView *subview in self.subviews) {
         if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
             subview.hidden = [hideConnectButton boolValue];
@@ -3215,12 +3213,6 @@ NSString *customAppVersion = nil; // Declare the global variable
             subview.hidden = [hideClipButton boolValue];
         } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
             subview.hidden = [hideSaveToPlaylistButton boolValue];
-        }
-        if (!subview.hidden) {
-            CGRect frame = subview.frame;
-            frame.origin.x = currentX;
-            subview.frame = frame;
-            currentX += frame.size.width + buttonSeparation;
         }
     }
 }
