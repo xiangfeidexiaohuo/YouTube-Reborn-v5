@@ -2413,12 +2413,12 @@ BOOL selectedTabIndex = NO;
 %end
 
 %group gHideChannelWatermark
-%hook YTMainAppVideoPlayerOverlayView
-- (BOOL)isWatermarkEnabled { return NO; }
-%end
-%hook YTAnnotationsViewController // Deprecated
+%hook YTAnnotationsViewController // Deprecated (works if iosEnableFeaturedChannelWatermarkOverlayFix is off)
 - (void)loadFeaturedChannelWatermark {
 }
+%end
+%hook YTColdConfig
+- (BOOL)iosEnableFeaturedChannelWatermarkOverlayFix { return NO; }
 %end
 %end
 
@@ -2492,6 +2492,10 @@ BOOL selectedTabIndex = NO;
 
 %group gHideShortsMoreActionsButton
 %hook YTReelWatchPlaybackOverlayView
+- (void)layoutSubviews {
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_moreButton").hidden = YES;
+}
 - (void)setMoreButton:(id)arg1 {
     %orig;
 }
@@ -2501,10 +2505,8 @@ BOOL selectedTabIndex = NO;
 %group gHideShortsSearchButton
 %hook YTReelTransparentStackView
 - (void)layoutSubviews {
-    %orig;
-    if (self.subviews.count >= 3 && [self.subviews[0].accessibilityIdentifier isEqualToString:@"id.ui.generic.button"]) {
-        self.subviews[0].hidden = YES;
-    }
+	%orig();
+	MSHookIvar<YTQTMButton *>(self, "_searchButton").hidden = YES;
 }
 %end
 %end
