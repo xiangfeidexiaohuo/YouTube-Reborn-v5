@@ -3,6 +3,8 @@
 "RESET_TEXT" = "リセット";
 "SAVE_TEXT" = "保存";
 "OKAY_TEXT" = "OK";
+"YES_TEXT" = "はい";
+"NO_TEXT" = "いいえ";
 "NOTICE_TEXT" = "通知";
 "COLOR_SAVED" = "保存しました";
 "IMPORT_VIDEO" = "動画をカメラロールに保存";
@@ -157,6 +159,15 @@
 "PREVIEW" = "プレビュー";
 "FILLER" = "繋ぎの話/冗談";
 "MUSIC_AND_OFFTOPIC" = "音楽/音楽ではない区間";
+"WOULD_YOU_LIKE_TO_SKIP" = "Would you like to skip?";
+"SPONSOR_DETECTED" = "Sponsor Detected";
+"SELFPROMO_DETECTED" = "Selfpromo Detected";
+"INTERACTION_DETECTED" = "Interaction Detected";
+"INTRO_DETECTED" = "Intro Detected";
+"OUTRO_DETECTED" = "Outro Detected";
+"PREVIEW_DETECTED" = "Preview Detected";
+"FILLER_DETECTED" = "Filler Detected";
+"MUSIC_OFFTOPIC_DETECTED" = "Music or offtopic Detected";
 
 // Other Options
 "OTHER_OPTIONS" = "その他の設定";
