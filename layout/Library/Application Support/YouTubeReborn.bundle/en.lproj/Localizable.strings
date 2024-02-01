@@ -3,6 +3,8 @@
 "RESET_TEXT" = "Reset";
 "SAVE_TEXT" = "Save";
 "OKAY_TEXT" = "Okay";
+"YES_TEXT" = "Yes";
+"NO_TEXT" = "No";
 "NOTICE_TEXT" = "Notice";
 "COLOR_SAVED" = "Color Saved";
 "IMPORT_VIDEO" = "Import Video To Camera Roll";
@@ -157,6 +159,15 @@
 "PREVIEW" = "Preview";
 "FILLER" = "Filler Tangent/Jokes";
 "MUSIC_AND_OFFTOPIC" = "Music/OffTopic";
+"WOULD_YOU_LIKE_TO_SKIP" = "Would you like to skip?";
+"SPONSOR_DETECTED" = "Sponsor Detected";
+"SELFPROMO_DETECTED" = "Selfpromo Detected";
+"INTERACTION_DETECTED" = "Interaction Detected";
+"INTRO_DETECTED" = "Intro Detected";
+"OUTRO_DETECTED" = "Outro Detected";
+"PREVIEW_DETECTED" = "Preview Detected";
+"FILLER_DETECTED" = "Filler Detected";
+"MUSIC_OFFTOPIC_DETECTED" = "Music or offtopic Detected";
 
 // Other Options
 "OTHER_OPTIONS" = "Other Options";
