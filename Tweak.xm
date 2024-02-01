@@ -1,4 +1,5 @@
 #import "Tweak.h"
+#import "Controllers/OtherOptionsController.m" // App Version Spoofer
 
 extern NSBundle *YouTubeRebornBundle();
 
