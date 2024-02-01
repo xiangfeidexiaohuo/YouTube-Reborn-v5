@@ -3192,7 +3192,7 @@ NSString *customAppVersion = nil; // Declare the global variable
     NSString* hideThanksButton = @"kHideThanksButton";
     NSString* hideAddToOfflineButton = @"kHideAddToOfflineButton";
     NSString* hideClipButton = @"kHideClipButton";
-    NSString* hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton"
+    NSString* hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton";
     for (UIView *subview in self.subviews) {
         if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
             subview.hidden = [hideConnectButton boolValue];
