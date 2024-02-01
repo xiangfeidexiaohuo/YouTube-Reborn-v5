@@ -221,7 +221,7 @@
 
         [self presentViewController:alertError animated:YES completion:nil];
     }
-    if (indexPath.row == 10) {
+    if (indexPath.row == 12) {
         UIAlertController *alertError = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"ALWAYS_SHOW_BAR_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
         [alertError addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
