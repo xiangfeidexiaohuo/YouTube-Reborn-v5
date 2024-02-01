@@ -157,14 +157,17 @@
         appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
         cell.accessoryView = appVersionSpoofer;
 
-        UITextField *versionTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-        versionTextField.frame = CGRectMake(cell.bounds.origin.x + cell.textLabel.frame.size.width + 20, 10, cell.bounds.size.width - cell.textLabel.frame.size.width - 30, cell.bounds.size.height - 20);
-        versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
-        versionTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        versionTextField.enabled = appVersionSpoofer.isOn;
-        [versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-        [cell.contentView addSubview:versionTextField];
-        self.versionTextField = versionTextField;
+        UITextField *versionTextField = [cell.contentView viewWithTag:123];
+        if (!versionTextField) {
+            versionTextField = [[UITextField alloc] initWithFrame:CGRectMake(cell.bounds.origin.x + cell.textLabel.frame.size.width + 20, 10, cell.bounds.size.width - cell.textLabel.frame.size.width - 30, cell.bounds.size.height - 20)];
+            versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
+            versionTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            versionTextField.enabled = appVersionSpoofer.isOn;
+            [versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+            versionTextField.tag = 123;
+            [cell.contentView addSubview:versionTextField];
+            self.versionTextField = versionTextField;
+	    }
 	}
     }
     return cell;
