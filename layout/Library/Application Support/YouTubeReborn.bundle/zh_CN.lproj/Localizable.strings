@@ -3,6 +3,8 @@
 "RESET_TEXT" = "重置";
 "SAVE_TEXT" = "保存";
 "OKAY_TEXT" = "好的";
+"YES_TEXT" = "是";
+"NO_TEXT" = "不";
 "NOTICE_TEXT" = "注意";
 "COLOR_SAVED" = "颜色已保存";
 "IMPORT_VIDEO" = "将视频导入相册";
@@ -157,6 +159,15 @@
 "PREVIEW" = "预览";
 "FILLER" = "话题/笑话";
 "MUSIC_AND_OFFTOPIC" = "无关音乐";
+"WOULD_YOU_LIKE_TO_SKIP" = "你想跳过吗？";
+"SPONSOR_DETECTED" = "检测到推广赞助";
+"SELFPROMO_DETECTED" = "检测到推广推销";
+"INTERACTION_DETECTED" = "检测到推广关注";
+"INTRO_DETECTED" = "检测到推广介绍";
+"OUTRO_DETECTED" = "检测到其他推广";
+"PREVIEW_DETECTED" = "检测到推广预览";
+"FILLER_DETECTED" = "检测到推广话题/笑话";
+"MUSIC_OFFTOPIC_DETECTED" = "检测到推广无关音乐";
 
 // Other Options
 "OTHER_OPTIONS" = "其他功能选项";
