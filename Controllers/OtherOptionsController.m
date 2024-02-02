@@ -1,5 +1,5 @@
 #import "OtherOptionsController.h"
-#import "Localization.h"
+// #import "Localization.h"
 
 @interface OtherOptionsController ()
 - (void)coloursView;
