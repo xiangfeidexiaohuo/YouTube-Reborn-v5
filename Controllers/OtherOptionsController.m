@@ -2,13 +2,13 @@
 #import "Localization.h"
 #import "../YouTubeHeader/YTUIUtils.h"
 
-@interface YTVersionUtils : NSObject // Add this interface to define the YTVersionUtils class
+@interface YTVersionUtils : NSObject
 + (NSString *)appVersion;
 @end
 
 @implementation YTVersionUtils
 + (NSString *)appVersion {
-    NSString *customAppVersion = nil
+    NSString *customAppVersion = nil;
     if (customAppVersion) {
         return customAppVersion;
     }
