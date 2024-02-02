@@ -2,15 +2,19 @@
 #import "Localization.h"
 #import "../YouTubeHeader/YTUIUtils.h"
 
-%hook YTVersionUtils // App Version Spoofer (YouTube Reborn Version) - @arichorn
-NSString *customAppVersion = nil; // Declare the global variable
+@interface YTVersionUtils : NSObject // Add this interface to define the YTVersionUtils class
++ (NSString *)appVersion;
+@end
+
+@implementation YTVersionUtils
 + (NSString *)appVersion {
+    NSString *customAppVersion = nil
     if (customAppVersion) {
         return customAppVersion;
     }
     return %orig;
 }
-%end
+@end
 
 @interface OtherOptionsController ()
 - (void)coloursView;
