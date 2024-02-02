@@ -1,5 +1,5 @@
 #import "OtherOptionsController.h"
-// #import "Localization.h"
+#import "Tweak.xm" // Localization.h (Alt)
 
 @interface OtherOptionsController ()
 - (void)coloursView;
