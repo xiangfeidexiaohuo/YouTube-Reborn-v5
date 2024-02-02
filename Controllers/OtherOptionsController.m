@@ -1,5 +1,16 @@
 #import "OtherOptionsController.h"
-#import "Tweak.xm" // Localization.h (Alt)
+#import "Localization.h"
+#import "../YouTubeHeader/YTUIUtils.h"
+
+%hook YTVersionUtils // App Version Spoofer (YouTube Reborn Version) - @arichorn
+NSString *customAppVersion = nil; // Declare the global variable
++ (NSString *)appVersion {
+    if (customAppVersion) {
+        return customAppVersion;
+    }
+    return %orig;
+}
+%end
 
 @interface OtherOptionsController ()
 - (void)coloursView;
