@@ -1,5 +1,4 @@
 #import "Tweak.h"
-#import "Controllers/OtherOptionsController.m" // App Version Spoofer
 
 extern NSBundle *YouTubeRebornBundle();
 
@@ -3164,17 +3163,6 @@ BOOL selectedTabIndex = NO;
 	self.durationLabel.hidden = YES;
 }
 %end
-%end
-
-// App Version Spoofer (YouTube Reborn Version) - @arichorn
-%hook YTVersionUtils
-NSString *customAppVersion = nil; // Declare the global variable
-+ (NSString *)appVersion {
-    if (customAppVersion) {
-        return customAppVersion;
-    }
-    return %orig;
-}
 %end
 
 %hook YTColdConfig
