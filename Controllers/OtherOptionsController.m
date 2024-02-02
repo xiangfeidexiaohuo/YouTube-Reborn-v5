@@ -12,7 +12,7 @@
     if (customAppVersion) {
         return customAppVersion;
     }
-    return %orig;
+    return nil;
 }
 @end
 
