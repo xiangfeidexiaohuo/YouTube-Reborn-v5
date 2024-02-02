@@ -8,7 +8,7 @@
 
 @implementation YTVersionUtils
 + (NSString *)appVersion {
-    NSString *customAppVersion = nil;
+    NSString *customAppVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"kAppVersionSpoofer"];
     if (customAppVersion) {
         return customAppVersion;
     }
