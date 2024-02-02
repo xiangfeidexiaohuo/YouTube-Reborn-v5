@@ -4,7 +4,7 @@
 #import "VideoPlayerOptionsController.h"
 #import "OverlayOptionsController.h"
 #import "TabBarOptionsController.h"
-// #import "ReorderPivotBarController.h"
+#import "ReorderPivotBarController.h"
 #import "ColourOptionsController.h"
 #import "ColourOptionsController2.h"
 #import "ColourOptionsController3.h"
@@ -32,7 +32,7 @@
     [super viewDidLoad];
     [self coloursView];
 
-    self.title = @"YouTube Reborn";
+    self.title = LOC(@"YouTube Reborn");
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
@@ -212,7 +212,7 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
                 cell.textLabel.text = LOC(@"REBORN_SETTINGS");
-		cell.imageView.image = [UIImage imageWithContentsOfFile:TabBarOPIconPath];
+		cell.imageView.image = [UIImage systemImageNamed:@"switch.2"];
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"CREDITS_BUTTON");
