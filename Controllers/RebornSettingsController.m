@@ -38,7 +38,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -49,7 +49,10 @@
         return 3;
     }
     if (section == 2) {
-        return 2;
+        return 1;
+    }
+    if (section == 3) {
+        return 3;
     }
     return 0;
 }
@@ -108,7 +111,7 @@
                 cell.accessoryView = hideRebornShortsOPButton;
             }
         }
-        if (indexPath.section == 2) {
+        if (indexPath.section == 3) {
             if (indexPath.row == 0) {
                 cell.textLabel.text = LOC(@"RESET_COLOR_OPTIONS");
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -117,14 +120,58 @@
                 cell.textLabel.text = LOC(@"RESET_YOUTUBE_REBORN_OPTIONS");
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
+            if (indexPath.row == 2) {
+                cell.textLabel.text = LOC(@"RESET_CACHE");
+                UILabel *cache = [[UILabel alloc] init];
+                cache.text = [self getCacheSize];
+                cache.textColor = [UIColor secondaryLabelColor];
+                cache.font = [UIFont systemFontOfSize:16];
+                cache.textAlignment = NSTextAlignmentRight;
+                [cache sizeToFit];
+                cell.accessoryView = cache;
+            }
         }
     }
     return cell;
 }
 
+- (NSString *)getCacheSize {
+    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+    NSArray *filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:cachePath error:nil];
+
+    unsigned long long int folderSize = 0;
+    for (NSString *fileName in filesArray) {
+        NSString *filePath = [cachePath stringByAppendingPathComponent:fileName];
+        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+        folderSize += [fileAttributes fileSize];
+    }
+
+    NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
+    formatter.countStyle = NSByteCountFormatterCountStyleFile;
+
+    return [formatter stringFromByteCount:folderSize];
+}
+
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 2) {
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
+        activityIndicator.color = [UIColor labelColor];
+        [activityIndicator startAnimating];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.accessoryView = activityIndicator;
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+            [[NSFileManager defaultManager] removeItemAtPath:cachePath error:nil];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:2]] withRowAnimation:UITableViewRowAnimationNone];
+            });
+        });
+    }
+
+    if (indexPath.section == 3) {
         if (indexPath.row == 0) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"RESET_COLOR_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
