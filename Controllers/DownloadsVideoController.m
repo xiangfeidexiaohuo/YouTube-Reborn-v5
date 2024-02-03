@@ -22,7 +22,7 @@
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
-    self.searchBar.placeholder = LOC(@"SEARCH_VIDEO_FILES");
+    self.searchBar.placeholder = LOC(@"SEARCH_TEXT");
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
     self.navigationItem.rightBarButtonItem = searchButton;
