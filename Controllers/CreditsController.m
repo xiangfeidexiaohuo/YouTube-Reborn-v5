@@ -60,8 +60,16 @@
 
     cell.textLabel.numberOfLines = 1;
     cell.textLabel.lineBreakMode = NSLineBreakByClipping;
+    cell.textLabel.frame = CGRectMake(cell.textLabel.frame.origin.x, 
+                                       cell.textLabel.frame.origin.y, 
+                                       cell.contentView.frame.size.width - 90, 
+                                       cell.textLabel.frame.size.height);
     cell.detailTextLabel.numberOfLines = 1;
     cell.detailTextLabel.lineBreakMode = NSLineBreakByClipping;
+    cell.detailTextLabel.frame = CGRectMake(cell.textLabel.frame.origin.x, 
+                                       cell.textLabel.frame.origin.y, 
+                                       cell.contentView.frame.size.width - 90, 
+                                       cell.textLabel.frame.size.height);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     if (indexPath.section == 0) {
