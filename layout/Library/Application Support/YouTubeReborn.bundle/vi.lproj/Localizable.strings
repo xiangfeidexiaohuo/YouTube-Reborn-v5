@@ -197,6 +197,7 @@
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' lớp phủ quần short";
 "RESET_COLOR_OPTIONS" = "Đặt lại tùy chọn màu";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "Đặt lại tất cả các tùy chọn tái sinh trên YouTube";
+"RESET_CACHE" = "Clear Cache";
 "RESET_COLOR_TEXT" = "Are you sure you want to reset all your set colors?";
 "RESET_OPTIONS_TEXT" = "Are you sure you want to reset all your options?";
 
@@ -205,7 +206,7 @@
 "DEVELOPER_TEXT" = "Nhà phát triển";
 "ICON_DESIGNER_TEXT" = "Trình thiết kế biểu tượng";
 "DEV_SUPPORT_TEXT" = "Development Support";
-"FEATURES_DAYANCH96_TEXT" = "Features: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+"FEATURES_DAYANCH96_TEXT" = "Features: \"YouTube Reborn v5 Menu\", \"Clear Cache\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to seek\"";
 "FEATURES_POOMSMART_TEXT" = "Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
 "FEATURES_NGUYEASANG_TEXT" = "Features: \"YouTube Reborn Button under Video Player\"";
 "FEATURES_NSNOOLIE_TEXT" = "Features: \"Enable Extra Video Speed\"";
