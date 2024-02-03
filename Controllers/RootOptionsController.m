@@ -155,10 +155,12 @@
             if (indexPath.row == 0) {
                 cell.textLabel.text = LOC(@"VIEW_DOWNLOADS");
                 cell.imageView.image = [UIImage systemImageNamed:@"arrow.down.circle"];
+		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"VIEW_DOWNLOADS_IN_FILZA");
 		cell.imageView.image = [UIImage systemImageNamed:@"square.and.arrow.up.on.square"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
         }
         if (indexPath.section == 1) {
@@ -166,46 +168,57 @@
             if (indexPath.row == 0) {
                 cell.textLabel.text = LOC(@"VIDEO_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"play.rectangle"];
+		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"VIDEO_PLAYER_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"video"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 2) {
                 cell.textLabel.text = LOC(@"OVERLAY_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"square.grid.3x2.fill"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 3) {
                 cell.textLabel.text = LOC(@"TAB_BAR_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"rectangle.3.offgrid.fill"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 4) {
                 cell.textLabel.text = LOC(@"COLOR_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"eyedropper.full"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 5) {
                 cell.textLabel.text = LOC(@"COLOR_OPTIONS_2");
 		cell.imageView.image = [UIImage systemImageNamed:@"slider.horizontal.3"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 6) {
                 cell.textLabel.text = LOC(@"COLOR_OPTIONS_3");
 		cell.imageView.image = [UIImage systemImageNamed:@"line.horizontal.3.decrease.circle"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 7) {
                 cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"pip"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 8) {
                 cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"video.square"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 9) {
                 cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"tag"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 10) {
                 cell.textLabel.text = LOC(@"OTHER_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"ellipsis"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
         }
         if (indexPath.section == 2) {
@@ -213,10 +226,12 @@
             if (indexPath.row == 0) {
                 cell.textLabel.text = LOC(@"REBORN_SETTINGS");
 		cell.imageView.image = [UIImage systemImageNamed:@"switch.2"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"CREDITS_BUTTON");
 		cell.imageView.image = [UIImage systemImageNamed:@"star"];
+  		cell.imageView.tintColor = cell.textLabel.textColor;
             }
         }
     }
