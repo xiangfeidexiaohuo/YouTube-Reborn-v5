@@ -125,8 +125,10 @@
 
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-        cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        cell.textLabel.numberOfLines = 1;
+        cell.textLabel.lineBreakMode = NSLineBreakByClipping;
+        cell.detailTextLabel.numberOfLines = 1;
+        cell.detailTextLabel.lineBreakMode = NSLineBreakByClipping;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
@@ -140,34 +142,12 @@
             cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
-        UIScrollView *textContainer = [[UIScrollView alloc] initWithFrame:cell.contentView.bounds];
-        textContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        textContainer.showsVerticalScrollIndicator = NO;
-        textContainer.showsHorizontalScrollIndicator = NO;
-        cell.contentView.autoresizesSubviews = YES;
-        [cell.contentView addSubview:textContainer];
-        
-        UILabel *textLabel = [[UILabel alloc] initWithFrame:textContainer.bounds];
-        textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [textContainer addSubview:textLabel];
-        
-        cell.textLabel.backgroundColor = [UIColor clearColor];
-        cell.textLabel.opaque = NO;
-        cell.textLabel.clipsToBounds = YES;
-        cell.textLabel.numberOfLines = 1;
-        cell.textLabel.minimumScaleFactor = 0.5;
-        cell.textLabel.font = [UIFont systemFontOfSize:17.0];
-        
-        cell.textLabel.marqueeScrollEnabled = YES;
-        cell.textLabel.marqueeType = MLContinuous;
-        cell.textLabel.marqueeFadeLength = 8.0;
-        cell.textLabel.marqueeLeadingBuffer = 30.0;
-        cell.textLabel.marqueeTrailingBuffer = 30.0;
-        
-        textContainer.contentSize = cell.contentView.bounds.size;
-        textContainer.delegate = self;
     }
     cell.textLabel.text = [filePathsVideoArray objectAtIndex:indexPath.row];
+    cell.textLabel.frame = CGRectMake(cell.textLabel.frame.origin.x, 
+                                       cell.textLabel.frame.origin.y, 
+                                       cell.contentView.frame.size.width - 90, 
+                                       cell.textLabel.frame.size.height);
     
     NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
     UIImage *thumbnail = [thumbnailCache objectForKey:artworkFileName];
