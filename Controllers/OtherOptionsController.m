@@ -81,6 +81,7 @@
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UISwitch *appVersionSpoofer; // App Version Spoofer Declaration
         if (indexPath.row == 0) {
             cell.textLabel.text = LOC(@"IPAD_LAYOUT");
             UISwitch *enableiPadStyleOniPhone = [[UISwitch alloc] initWithFrame:CGRectZero];
