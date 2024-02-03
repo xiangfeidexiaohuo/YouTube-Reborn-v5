@@ -1,4 +1,5 @@
 // Actions/Prompts
+"SEARCH_TEXT" = "Search";
 "CANCEL_TEXT" = "Huỷ";
 "RESET_TEXT" = "Reset";
 "SAVE_TEXT" = "Save";
