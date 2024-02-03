@@ -197,6 +197,7 @@
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "ショート動画オーバーレイのOPボタンを非表示";
 "RESET_COLOR_OPTIONS" = "カラーオプションをリセット";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "すべての設定をリセット";
+"RESET_CACHE" = "Clear Cache";
 "RESET_COLOR_TEXT" = "カラーオプションを全てリセットしてもよろしいですか?";
 "RESET_OPTIONS_TEXT" = "設定を全てリセットしてもよろしいですか?";
 
@@ -205,7 +206,7 @@
 "DEVELOPER_TEXT" = "開発者";
 "ICON_DESIGNER_TEXT" = "アイコンデザイナー";
 "DEV_SUPPORT_TEXT" = "開発者サポート";
-"FEATURES_DAYANCH96_TEXT" = "機能: \"YouTube Reborn v5 Menu\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to skip\"";
+"FEATURES_DAYANCH96_TEXT" = "機能: \"YouTube Reborn v5 Menu\", \"Clear Cache\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to seek\"";
 "FEATURES_POOMSMART_TEXT" = "機能: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
 "FEATURES_NGUYEASANG_TEXT" = "機能: \"YouTube Reborn Button under Video Player\"";
 "FEATURES_NSNOOLIE_TEXT" = "機能: \"Enable Extra Video Speed\"";
