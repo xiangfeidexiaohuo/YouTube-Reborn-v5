@@ -1,4 +1,5 @@
 // Actions/Prompts
+"SEARCH_TEXT" = "Search";
 "CANCEL_TEXT" = "取消";
 "RESET_TEXT" = "重置";
 "SAVE_TEXT" = "保存";
