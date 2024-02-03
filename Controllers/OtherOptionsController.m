@@ -57,7 +57,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 13;
+    return 14;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -171,7 +171,8 @@
         [appVersionSpoofer addTarget:self action:@selector(toggleAppVersionSpoofer:) forControlEvents:UIControlEventValueChanged];
         appVersionSpoofer.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kAppVersionSpoofer"];
         cell.accessoryView = appVersionSpoofer;
-
+	}
+    if (indexPath.row == 13) {
         UITextField *versionTextField = [cell.contentView viewWithTag:123];
         if (!versionTextField) {
             versionTextField = [[UITextField alloc] initWithFrame:CGRectMake(cell.bounds.origin.x + cell.textLabel.frame.size.width + 20, 10, cell.bounds.size.width - cell.textLabel.frame.size.width - 30, cell.bounds.size.height - 20)];
@@ -218,7 +219,7 @@
 
    if (![validVersionPredicate evaluateWithObject:customVersion] || ![allowedCharacterSet isSupersetOfSet:inputCharacterSet]) {
         // Invalid format, set the default value or display an error message
-        textField.text = @"19.03.1";
+        textField.text = @"";
         return;
     } 
     self.customAppVersion = customVersion;
