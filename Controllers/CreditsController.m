@@ -59,7 +59,11 @@
     }
 
     cell.textLabel.adjustsFontSizeToFitWidth = YES;
+    cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    cell.textLabel.marqueeScrollEnabled = YES;
     cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+    cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    cell.detailTextLabel.marqueeScrollEnabled = YES;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     if (indexPath.section == 0) {
