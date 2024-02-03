@@ -1,4 +1,5 @@
 // Actions/Prompts
+"SEARCH_TEXT" = "Search";
 "CANCEL_TEXT" = "Cancelar";
 "RESET_TEXT" = "Restablecer";
 "SAVE_TEXT" = "Guardar";
