@@ -197,6 +197,7 @@
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ocultar superposición de Shorts 'OP' Botón";
 "RESET_COLOR_OPTIONS" = "Restablecer opciones de color";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "Restablecer todas las opciones de YouTube Reborn";
+"RESET_CACHE" = "Clear Cache";
 "RESET_COLOR_TEXT" = "¿Estás seguro de que quieres restablecer todos los colores establecidos?";
 "RESET_OPTIONS_TEXT" = "¿Seguro que quieres restablecer todas las opciones?";
 
