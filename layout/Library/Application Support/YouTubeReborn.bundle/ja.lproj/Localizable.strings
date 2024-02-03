@@ -1,4 +1,5 @@
 // Actions/Prompts
+"SEARCH_TEXT" = "Search";
 "CANCEL_TEXT" = "キャンセル";
 "RESET_TEXT" = "リセット";
 "SAVE_TEXT" = "保存";
