@@ -69,7 +69,8 @@
     NSString *searchText = searchBar.text;
 
     if (searchText.length > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", searchText];
+        NSString *cleanSearchText = [searchText stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", cleanSearchText];
         self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
         self.isSearching = YES;
     } else {
@@ -102,7 +103,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
+        cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        cell.textLabel.marqueeScrollEnabled = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+        cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        cell.detailTextLabel.marqueeScrollEnabled = YES;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
