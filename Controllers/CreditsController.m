@@ -58,12 +58,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
 
-    cell.textLabel.adjustsFontSizeToFitWidth = YES;
-    cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-    cell.textLabel.marqueeScrollEnabled = YES;
-    cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
-    cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-    cell.detailTextLabel.marqueeScrollEnabled = YES;
+    cell.textLabel.numberOfLines = 1;
+    cell.textLabel.lineBreakMode = NSLineBreakByClipping;
+    cell.detailTextLabel.numberOfLines = 1;
+    cell.detailTextLabel.lineBreakMode = NSLineBreakByClipping;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
     if (indexPath.section == 0) {
