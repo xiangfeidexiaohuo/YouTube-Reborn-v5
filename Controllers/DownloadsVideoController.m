@@ -7,9 +7,11 @@
     NSString *documentsDirectory;
     NSMutableArray *filePathsVideoArray;
     NSMutableArray *filePathsVideoArtworkArray;
+    NSCache *thumbnailCache;
 }
 - (void)coloursView;
 - (void)setupVideoArrays;
+- (UIImage *)generateThumbnailForVideoAtURL:(NSURL *)videoURL;
 @end
 
 @implementation DownloadsVideoController
@@ -39,13 +41,32 @@
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     [self setupVideoArrays];
-    
+
+    thumbnailCache = [[NSCache alloc] init];
+
     [NSLayoutConstraint activateConstraints:@[
         [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
         [self.tableView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
         [self.tableView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor],
         [self.tableView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor]
     ]];
+}
+
+- (UIImage *)generateThumbnailForVideoAtURL:(NSURL *)videoURL {
+    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+    AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    generator.appliesPreferredTrackTransform = YES;
+    
+    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
+    NSError *error = nil;
+    CMTime actualTime;
+    
+    CGImageRef imageRef = [generator copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    UIImage *thumbnail = [[UIImage alloc] initWithCGImage:imageRef];
+    
+    CGImageRelease(imageRef);
+    
+    return thumbnail;
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -105,10 +126,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-        cell.textLabel.marqueeScrollEnabled = YES;
+        cell.textLabel.superview.marqueeEnabled = YES;
         cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-        cell.detailTextLabel.marqueeScrollEnabled = YES;
+        cell.detailTextLabel.superview.marqueeEnabled = YES;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
@@ -124,13 +145,30 @@
         }
     }
     cell.textLabel.text = [filePathsVideoArray objectAtIndex:indexPath.row];
-    @try {
-        NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [documentsDirectory stringByAppendingPathComponent:artworkFileName]]];
+    
+    NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
+    UIImage *thumbnail = [thumbnailCache objectForKey:artworkFileName];
+    
+    if (thumbnail) {
+        cell.imageView.image = thumbnail;
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:artworkFileName];
+            NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+            UIImage *thumbnailImage = [self generateThumbnailForVideoAtURL:fileURL];
+            
+            if (thumbnailImage) {
+                [thumbnailCache setObject:thumbnailImage forKey:artworkFileName];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UITableViewCell *updateCell = [tableView cellForRowAtIndexPath:indexPath];
+                    if (updateCell) {
+                        updateCell.imageView.image = thumbnailImage;
+                    }
+                });
+            }
+        });
     }
-    @catch (NSException *exception) {
-    }
-
+    
     return cell;
 }
 
