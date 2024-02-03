@@ -70,7 +70,7 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Lillie";
             cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
-            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/91358136?v=4" forImageView:cell.imageView];
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
@@ -80,19 +80,19 @@
         } else if (indexPath.row == 1) {
             cell.textLabel.text = @"kirb";
             cell.detailTextLabel.text = LOC(@"DEV_SUPPORT_TEXT");
-            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/773309?v=4" forImageView:cell.imageView];
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         } else if (indexPath.row == 2) {
             cell.textLabel.text = @"Dayanch96";
             cell.detailTextLabel.text = LOC(@"FEATURES_DAYANCH96_TEXT");
-            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/38832025?v=4" forImageView:cell.imageView];
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         } else if (indexPath.row == 3) {
             cell.textLabel.text = @"PoomSmart";
             cell.detailTextLabel.text = LOC(@"FEATURES_POOMSMART_TEXT");
-            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/3608783?v=4" forImageView:cell.imageView];
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         } else if (indexPath.row == 4) {
             cell.textLabel.text = @"NguyenASang";
             cell.detailTextLabel.text = LOC(@"FEATURES_NGUYEASANG_TEXT");
-            [self loadImageWithURLString:@"https://avatars.githubusercontent.com/u/87893636?v=4" forImageView:cell.imageView];
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         } else if (indexPath.row == 5) {
             cell.textLabel.text = @"Snoolie";
             cell.detailTextLabel.text = LOC(@"FEATURES_NSNOOLIE_TEXT");
