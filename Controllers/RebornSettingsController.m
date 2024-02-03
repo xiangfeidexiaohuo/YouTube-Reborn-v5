@@ -135,6 +135,23 @@
     return cell;
 }
 
+- (NSString *)getCacheSize {
+    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+    NSArray *filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:cachePath error:nil];
+
+    unsigned long long int folderSize = 0;
+    for (NSString *fileName in filesArray) {
+        NSString *filePath = [cachePath stringByAppendingPathComponent:fileName];
+        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+        folderSize += [fileAttributes fileSize];
+    }
+
+    NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
+    formatter.countStyle = NSByteCountFormatterCountStyleFile;
+
+    return [formatter stringFromByteCount:folderSize];
+}
+
 - (void)tableView:(UITableView *)theTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [theTableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 2 && indexPath.row == 0) {
@@ -167,7 +184,7 @@
 	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTProgreessBarColourOption"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [[UIApplication sharedApplication] performSelector:@selector(suspend)];
-                [NSThread sleepForTimeInterval:0.5];
+                [NSThread sleepForTimeInterval:1.0];
                 exit(0);
             }]];
 
@@ -270,30 +287,13 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideDuration"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [[UIApplication sharedApplication] performSelector:@selector(suspend)];
-                [NSThread sleepForTimeInterval:0.5];
+                [NSThread sleepForTimeInterval:1.0];
                 exit(0);
             }]];
 
             [self presentViewController:alert animated:YES completion:nil];
         }
     }
-}
-
-- (NSString *)getCacheSize {
-    NSString *cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
-    NSArray *filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:cachePath error:nil];
-
-    unsigned long long int folderSize = 0;
-    for (NSString *fileName in filesArray) {
-        NSString *filePath = [cachePath stringByAppendingPathComponent:fileName];
-        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
-        folderSize += [fileAttributes fileSize];
-    }
-
-    NSByteCountFormatter *formatter = [[NSByteCountFormatter alloc] init];
-    formatter.countStyle = NSByteCountFormatterCountStyleFile;
-
-    return [formatter stringFromByteCount:folderSize];
 }
 
 - (void)coloursView {
