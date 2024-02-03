@@ -148,7 +148,7 @@
                                        cell.contentView.frame.size.width - 90, 
                                        cell.textLabel.frame.size.height);
 
-    NSString *artworkFileName = filePathsVideoArtworkArray[indexPath.row];
+    NSString *artworkFileName = filePathsAudioArtworkArray[indexPath.row];
     UIImage *thumbnail = [thumbnailCache objectForKey:artworkFileName];
 
     if (thumbnail) {
