@@ -22,6 +22,7 @@
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
+    self.searchBar.placeholder = LOC(@"SEARCH_VIDEO_FILES");
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
     self.navigationItem.rightBarButtonItem = searchButton;
@@ -124,12 +125,8 @@
 
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.textLabel.adjustsFontSizeToFitWidth = YES;
         cell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-        cell.textLabel.superview.marqueeEnabled = YES;
-        cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
         cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-        cell.detailTextLabel.superview.marqueeEnabled = YES;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
@@ -143,6 +140,32 @@
             cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
+        UIScrollView *textContainer = [[UIScrollView alloc] initWithFrame:cell.contentView.bounds];
+        textContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        textContainer.showsVerticalScrollIndicator = NO;
+        textContainer.showsHorizontalScrollIndicator = NO;
+        cell.contentView.autoresizesSubviews = YES;
+        [cell.contentView addSubview:textContainer];
+        
+        UILabel *textLabel = [[UILabel alloc] initWithFrame:textContainer.bounds];
+        textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [textContainer addSubview:textLabel];
+        
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.textLabel.opaque = NO;
+        cell.textLabel.clipsToBounds = YES;
+        cell.textLabel.numberOfLines = 1;
+        cell.textLabel.minimumScaleFactor = 0.5;
+        cell.textLabel.font = [UIFont systemFontOfSize:17.0];
+        
+        cell.textLabel.marqueeScrollEnabled = YES;
+        cell.textLabel.marqueeType = MLContinuous;
+        cell.textLabel.marqueeFadeLength = 8.0;
+        cell.textLabel.marqueeLeadingBuffer = 30.0;
+        cell.textLabel.marqueeTrailingBuffer = 30.0;
+        
+        textContainer.contentSize = cell.contentView.bounds.size;
+        textContainer.delegate = self;
     }
     cell.textLabel.text = [filePathsVideoArray objectAtIndex:indexPath.row];
     
@@ -168,7 +191,6 @@
             }
         });
     }
-    
     return cell;
 }
 
