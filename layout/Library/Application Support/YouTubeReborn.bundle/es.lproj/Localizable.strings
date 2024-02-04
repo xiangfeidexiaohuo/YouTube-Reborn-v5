@@ -1,5 +1,5 @@
 // Actions/Prompts
-"SEARCH_TEXT" = "Search";
+"SEARCH_TEXT" = "Búscar";
 "CANCEL_TEXT" = "Cancelar";
 "RESET_TEXT" = "Restablecer";
 "SAVE_TEXT" = "Guardar";
@@ -160,15 +160,15 @@
 "PREVIEW" = "Vista previa";
 "FILLER" = "Bromas/chistes de relleno";
 "MUSIC_AND_OFFTOPIC" = "Música/Sin tema";
-"WOULD_YOU_LIKE_TO_SKIP" = "Would you like to skip?";
-"SPONSOR_DETECTED" = "Sponsor Detected";
-"SELFPROMO_DETECTED" = "Selfpromo Detected";
-"INTERACTION_DETECTED" = "Interaction Detected";
-"INTRO_DETECTED" = "Intro Detected";
-"OUTRO_DETECTED" = "Outro Detected";
-"PREVIEW_DETECTED" = "Preview Detected";
-"FILLER_DETECTED" = "Filler Detected";
-"MUSIC_OFFTOPIC_DETECTED" = "Music or offtopic Detected";
+"WOULD_YOU_LIKE_TO_SKIP" = "¿Quieres saltar?";
+"SPONSOR_DETECTED" = "Patrocinador detectado";
+"SELFPROMO_DETECTED" = "Autopromoción detectada";
+"INTERACTION_DETECTED" = "Interacción detectada";
+"INTRO_DETECTED" = "Introducción detectada";
+"OUTRO_DETECTED" = "Outro detectado";
+"PREVIEW_DETECTED" = "Vista previa detectada";
+"FILLER_DETECTED" = "Relleno detectado";
+"MUSIC_OFFTOPIC_DETECTED" = "Música u offtopic detectados";
 
 // Other Options
 "OTHER_OPTIONS" = "Otras opciones";
