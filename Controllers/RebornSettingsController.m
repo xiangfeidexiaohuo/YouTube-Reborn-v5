@@ -52,7 +52,7 @@
         return 1;
     }
     if (section == 3) {
-        return 3;
+        return 2;
     }
     return 0;
 }
@@ -111,16 +111,8 @@
                 cell.accessoryView = hideRebornShortsOPButton;
             }
         }
-        if (indexPath.section == 3) {
+        if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                cell.textLabel.text = LOC(@"RESET_COLOR_OPTIONS");
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            if (indexPath.row == 1) {
-                cell.textLabel.text = LOC(@"RESET_YOUTUBE_REBORN_OPTIONS");
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            if (indexPath.row == 2) {
                 cell.textLabel.text = LOC(@"RESET_CACHE");
                 UILabel *cache = [[UILabel alloc] init];
                 cache.text = [self getCacheSize];
@@ -129,6 +121,16 @@
                 cache.textAlignment = NSTextAlignmentRight;
                 [cache sizeToFit];
                 cell.accessoryView = cache;
+            }
+        }
+        if (indexPath.section == 3) {
+            if (indexPath.row == 0) {
+                cell.textLabel.text = LOC(@"RESET_COLOR_OPTIONS");
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+            if (indexPath.row == 1) {
+                cell.textLabel.text = LOC(@"RESET_YOUTUBE_REBORN_OPTIONS");
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
     }
