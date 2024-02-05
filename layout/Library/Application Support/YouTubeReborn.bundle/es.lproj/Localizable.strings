@@ -1,5 +1,5 @@
 // Actions/Prompts
-"SEARCH_TEXT" = "Search";
+"SEARCH_TEXT" = "Búscar";
 "CANCEL_TEXT" = "Cancelar";
 "RESET_TEXT" = "Restablecer";
 "SAVE_TEXT" = "Guardar";
@@ -160,15 +160,15 @@
 "PREVIEW" = "Vista previa";
 "FILLER" = "Bromas/chistes de relleno";
 "MUSIC_AND_OFFTOPIC" = "Música/Sin tema";
-"WOULD_YOU_LIKE_TO_SKIP" = "Would you like to skip?";
-"SPONSOR_DETECTED" = "Sponsor Detected";
-"SELFPROMO_DETECTED" = "Selfpromo Detected";
-"INTERACTION_DETECTED" = "Interaction Detected";
-"INTRO_DETECTED" = "Intro Detected";
-"OUTRO_DETECTED" = "Outro Detected";
-"PREVIEW_DETECTED" = "Preview Detected";
-"FILLER_DETECTED" = "Filler Detected";
-"MUSIC_OFFTOPIC_DETECTED" = "Music or offtopic Detected";
+"WOULD_YOU_LIKE_TO_SKIP" = "¿Quieres saltar?";
+"SPONSOR_DETECTED" = "Patrocinador detectado";
+"SELFPROMO_DETECTED" = "Autopromoción detectada";
+"INTERACTION_DETECTED" = "Interacción detectada";
+"INTRO_DETECTED" = "Introducción detectada";
+"OUTRO_DETECTED" = "Outro detectado";
+"PREVIEW_DETECTED" = "Vista previa detectada";
+"FILLER_DETECTED" = "Relleno detectado";
+"MUSIC_OFFTOPIC_DETECTED" = "Música u offtopic detectados";
 
 // Other Options
 "OTHER_OPTIONS" = "Otras opciones";
@@ -197,7 +197,7 @@
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ocultar superposición de Shorts 'OP' Botón";
 "RESET_COLOR_OPTIONS" = "Restablecer opciones de color";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "Restablecer todas las opciones de YouTube Reborn";
-"RESET_CACHE" = "Clear Cache";
+"RESET_CACHE" = "Borrar caché";
 "RESET_COLOR_TEXT" = "¿Estás seguro de que quieres restablecer todos los colores establecidos?";
 "RESET_OPTIONS_TEXT" = "¿Seguro que quieres restablecer todas las opciones?";
 
@@ -206,7 +206,7 @@
 "DEVELOPER_TEXT" = "Desarrollador";
 "ICON_DESIGNER_TEXT" = "Diseñador de iconos";
 "DEV_SUPPORT_TEXT" = "Apoyo al desarrollo";
-"FEATURES_DAYANCH96_TEXT" = "Funciones: \"YouTube Reborn v5 Menu\", \"Clear Cache\", \"Barra de progreso roja\", \"Progreso del búfer gris\", \"Barra de navegación\", \"Desactivar el toque para saltar\"";
+"FEATURES_DAYANCH96_TEXT" = "Funciones: \"YouTube Reborn v5 Menu\", \"Borrar caché\", \"Barra de progreso roja\", \"Progreso del búfer gris\", \"Barra de navegación\", \"Desactivar el toque para saltar\"";
 "FEATURES_POOMSMART_TEXT" = "Funciones: \"Botón YouTube Reborn bajo el reproductor de vídeo\", \"YouTube-X/Adblock\", \"Reproducción automática a pantalla completa\"";
 "FEATURES_NGUYEASANG_TEXT" = "Funciones: \"Botón YouTube Reborn bajo el reproductor de vídeo\"";
 "FEATURES_NSNOOLIE_TEXT" = "Funciones: \"Activar la velocidad de vídeo adicional\"";
