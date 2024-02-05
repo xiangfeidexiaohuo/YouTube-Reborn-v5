@@ -1,5 +1,5 @@
 // Actions/Prompts
-"SEARCH_TEXT" = "Search";
+"SEARCH_TEXT" = "搜索";
 "CANCEL_TEXT" = "取消";
 "RESET_TEXT" = "重置";
 "SAVE_TEXT" = "保存";
@@ -197,7 +197,7 @@
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "隐藏短视频左上角“OP”按钮";
 "RESET_COLOR_OPTIONS" = "重置颜色选项";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "重置插件设置";
-"RESET_CACHE" = "Clear Cache";
+"RESET_CACHE" = "清除缓存";
 "RESET_COLOR_TEXT" = "你想重置所有颜色？";
 "RESET_OPTIONS_TEXT" = "你想重置所有设置？";
 
@@ -206,7 +206,7 @@
 "DEVELOPER_TEXT" = "开发者";
 "ICON_DESIGNER_TEXT" = "图标设计";
 "DEV_SUPPORT_TEXT" = "开发支持";
-"FEATURES_DAYANCH96_TEXT" = "功能：“YouTube Reborn v5 菜单”、“Clear Cache”、“红色进度条”、“灰色缓冲区进度”、“导航栏”、“禁用双击跳过”";
+"FEATURES_DAYANCH96_TEXT" = "功能：“YouTube Reborn v5 菜单”、“清除缓存”、“红色进度条”、“灰色缓冲区进度”、“导航栏”、“禁用双击跳过”";
 "FEATURES_POOMSMART_TEXT" = "功能：“视频播放器下的 YouTube Reborn 按钮”、“YouTube-X/Adblock”、“自动全屏播放”";
 "FEATURES_NGUYEASANG_TEXT" = "功能：“视频播放器下的 YouTube Reborn 按钮”";
 "FEATURES_NSNOOLIE_TEXT" = "功能：“额外的视频速度”";
