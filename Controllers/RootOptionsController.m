@@ -1,13 +1,11 @@
 #import "RootOptionsController.h"
 #import "DownloadsController.h"
+#import "ColourOptionsControllerNav.h"
 #import "VideoOptionsController.h"
 #import "VideoPlayerOptionsController.h"
 #import "OverlayOptionsController.h"
 #import "TabBarOptionsController.h"
 #import "ReorderPivotBarController.h"
-#import "ColourOptionsController.h"
-#import "ColourOptionsController2.h"
-#import "ColourOptionsController3.h"
 #import "PictureInPictureOptionsController.h"
 #import "ShortsOptionsController.h"
 #import "SponsorBlockOptionsController.h"
@@ -109,13 +107,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"filza://"]]) {
-            return 2;
+            return 3;
         } else {
-            return 1;
+            return 2;
         }
     }
     if (section == 1) {
-        return 11;
+        return 8;
     }
     if (section == 2) {
         return 2;
@@ -153,11 +151,16 @@
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
+                cell.textLabel.text = LOC(@"COLOR_OPTIONS");
+                cell.imageView.image = [UIImage systemImageNamed:@"slider.horizontal.3"];
+		cell.imageView.tintColor = cell.textLabel.textColor;
+            }
+            if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"VIEW_DOWNLOADS");
                 cell.imageView.image = [UIImage systemImageNamed:@"arrow.down.circle"];
 		cell.imageView.tintColor = cell.textLabel.textColor;
             }
-            if (indexPath.row == 1) {
+            if (indexPath.row == 2) {
                 cell.textLabel.text = LOC(@"VIEW_DOWNLOADS_IN_FILZA");
 		cell.imageView.image = [UIImage systemImageNamed:@"square.and.arrow.up.on.square"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
@@ -186,36 +189,21 @@
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 4) {
-                cell.textLabel.text = LOC(@"COLOR_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"eyedropper.full"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
-            }
-            if (indexPath.row == 5) {
-                cell.textLabel.text = LOC(@"COLOR_OPTIONS_2");
-		cell.imageView.image = [UIImage systemImageNamed:@"slider.horizontal.3"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
-            }
-            if (indexPath.row == 6) {
-                cell.textLabel.text = LOC(@"COLOR_OPTIONS_3");
-		cell.imageView.image = [UIImage systemImageNamed:@"line.horizontal.3.decrease.circle"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
-            }
-            if (indexPath.row == 7) {
                 cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"pip"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
-            if (indexPath.row == 8) {
+            if (indexPath.row == 5) {
                 cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"video.square"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
-            if (indexPath.row == 9) {
+            if (indexPath.row == 6) {
                 cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"tag"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
-            if (indexPath.row == 10) {
+            if (indexPath.row == 7) {
                 cell.textLabel.text = LOC(@"OTHER_OPTIONS");
 		cell.imageView.image = [UIImage systemImageNamed:@"ellipsis"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
@@ -242,13 +230,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {    
+            ColourOptionsControllerNav *colourOptionsControllerNav = [[ColourOptionsControllerNav alloc] init];
+            UINavigationController *colourOptionsControllerNavView = [[UINavigationController alloc] initWithRootViewController:colourOptionsControllerNav];
+            colourOptionsControllerNavView.modalPresentationStyle = UIModalPresentationFullScreen;
+
+            [self presentViewController:colourOptionsControllerNavView animated:YES completion:nil];
+        }
+        if (indexPath.row == 1) {    
             DownloadsController *downloadsController = [[DownloadsController alloc] init];
             UINavigationController *downloadsControllerView = [[UINavigationController alloc] initWithRootViewController:downloadsController];
             downloadsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:downloadsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 1) {
+        if (indexPath.row == 2) {
             NSFileManager *fm = [[NSFileManager alloc] init];
             NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
             NSString *documentsDirectory = [paths objectAtIndex:0];
