@@ -14,7 +14,7 @@
     self.title = LOC(@"CREDITS_BUTTON");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = doneButton;
 
     UITableViewStyle style = UITableViewStyleGrouped;
     if (@available(iOS 13, *)) {
