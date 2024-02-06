@@ -14,7 +14,7 @@
     self.title = LOC(@"SPONSOR_BLOCK_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = doneButton;
 
     if (@available(iOS 15.0, *)) {
     	[self.tableView setSectionHeaderTopPadding:0.0f];
