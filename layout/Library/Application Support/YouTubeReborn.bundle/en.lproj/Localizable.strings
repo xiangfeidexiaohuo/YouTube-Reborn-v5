@@ -37,6 +37,13 @@
 "DOWNLOAD_NOTICE_TEXT" = "Please Pause The Video Before Continuing";
 "DOWNLOAD_FILES_TEXT" = "Download Audio or Video Files";
 
+// Color Options
+"COLOR_OPTIONS" = "Color Options";
+
+"CUSTOM_THEME_TAB" = "Custom Theme";
+"CUSTOM_TINT_TAB" = "Custom Tint";
+"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+
 // Video Options
 "VIDEO_OPTIONS" = "Video Options";
 
@@ -113,9 +120,6 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Hide Subscriptions Tab";
 "HIDE_YOU_TAB" = "Hide You Tab";
 "REORDER_TABS" = "Reorder Tabs";
-"COLOR_OPTIONS" = "Color Options - Custom Theme";
-"COLOR_OPTIONS_2" = "Color Options - Custom Texts/Icons";
-"COLOR_OPTIONS_3" = "Color Options - Custom Progress Bar";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Picture In Picture Options";
