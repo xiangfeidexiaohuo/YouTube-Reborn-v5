@@ -37,6 +37,13 @@
 "DOWNLOAD_NOTICE_TEXT" = "请先暂停视频再继续";
 "DOWNLOAD_FILES_TEXT" = "下载音频或视频文件";
 
+// Color Options
+"COLOR_OPTIONS" = "界面颜色选项";
+
+"CUSTOM_THEME_TAB" = "Custom Theme";
+"CUSTOM_TINT_TAB" = "Custom Tint";
+"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+
 // Video Options
 "VIDEO_OPTIONS" = "视频播放选项";
 
@@ -113,9 +120,6 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "隐藏订阅";
 "HIDE_YOU_TAB" = "隐藏“我”";
 "REORDER_TABS" = "标签重新排序";
-"COLOR_OPTIONS" = "界面颜色选项-主题";
-"COLOR_OPTIONS_2" = "界面颜色选项-文本和图标";
-"COLOR_OPTIONS_3" = "界面颜色选项-自定义进度条";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "画中画的选项";
