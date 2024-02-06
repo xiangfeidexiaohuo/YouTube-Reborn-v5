@@ -3177,6 +3177,7 @@ BOOL selectedTabIndex = NO;
 }
 %end
 
+/*
 // Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @arichornlover
 %hook _ASDisplayView
 - (void)layoutSubviews {
@@ -3207,6 +3208,7 @@ BOOL selectedTabIndex = NO;
     }
 }
 %end
+*/
 
 NSBundle *YouTubeRebornBundle() {
     static NSBundle *bundle = nil;
