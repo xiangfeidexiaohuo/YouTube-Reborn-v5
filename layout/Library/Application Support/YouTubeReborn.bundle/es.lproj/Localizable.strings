@@ -37,6 +37,13 @@
 "DOWNLOAD_NOTICE_TEXT" = "Pausa el vídeo antes de continuar";
 "DOWNLOAD_FILES_TEXT" = "Descargar archivos de audio o vídeo";
 
+// Color Options
+"COLOR_OPTIONS" = "Opciones de color";
+
+"CUSTOM_THEME_TAB" = "Custom Theme";
+"CUSTOM_TINT_TAB" = "Custom Tint";
+"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+
 // Video Options
 "VIDEO_OPTIONS" = "Opciones de vídeo";
 
@@ -113,9 +120,6 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Ocultar pestaña Suscripciones";
 "HIDE_YOU_TAB" = "Ocultar pestaña Tú";
 "REORDER_TABS" = "Reordenar pestañas";
-"COLOR_OPTIONS" = "Opciones de color - Tema custom";
-"COLOR_OPTIONS_2" = "Opciones de color - Textos e iconos customs";
-"COLOR_OPTIONS_3" = "Opciones de color - Barra de progreso personalizada";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Opciones de imagen en imagen";
