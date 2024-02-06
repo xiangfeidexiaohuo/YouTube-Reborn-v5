@@ -52,23 +52,6 @@
     ]];
 }
 
-- (UIImage *)generateThumbnailForVideoAtURL:(NSURL *)videoURL {
-    AVAsset *asset = [AVAsset assetWithURL:videoURL];
-    AVAssetImageGenerator *generator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    generator.appliesPreferredTrackTransform = YES;
-
-    CMTime time = CMTimeMakeWithSeconds(0.0, 600);
-    NSError *error = nil;
-    CMTime actualTime;
-
-    CGImageRef imageRef = [generator copyCGImageAtTime:time actualTime:&actualTime error:&error];
-    UIImage *thumbnail = [[UIImage alloc] initWithCGImage:imageRef];
-
-    CGImageRelease(imageRef);
-
-    return thumbnail;
-}
-
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     searchBar.text = @"";
     self.filteredItems = [NSArray array];
@@ -119,56 +102,29 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"AudioDownloadsTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-        cell.textLabel.numberOfLines = 1;
-        cell.textLabel.lineBreakMode = NSLineBreakByClipping;
-        cell.detailTextLabel.numberOfLines = 1;
-        cell.detailTextLabel.lineBreakMode = NSLineBreakByClipping;
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-            cell.textLabel.textColor = [UIColor blackColor];
-            cell.detailTextLabel.textColor = [UIColor blackColor];
-        }
-        else {
-            cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
-            cell.textLabel.textColor = [UIColor whiteColor];
-	    cell.textLabel.shadowColor = [UIColor blackColor];
-            cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
-            cell.detailTextLabel.textColor = [UIColor whiteColor];
-        }
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text = [filePathsAudioArray objectAtIndex:indexPath.row];
-    cell.textLabel.frame = CGRectMake(cell.textLabel.frame.origin.x, 
-                                       cell.textLabel.frame.origin.y, 
-                                       cell.contentView.frame.size.width - 90, 
-                                       cell.textLabel.frame.size.height);
 
-    NSString *artworkFileName = filePathsAudioArtworkArray[indexPath.row];
-    UIImage *thumbnail = [thumbnailCache objectForKey:artworkFileName];
+    if (indexPath.section == 0 && indexPath.row < filePathsAudioArray.count) {
+        cell.textLabel.text = [filePathsAudioArray[indexPath.row] stringByDeletingPathExtension];
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.25];
 
-    if (thumbnail) {
-        cell.imageView.image = thumbnail;
-    } else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:artworkFileName];
-            NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-            UIImage *thumbnailImage = [self generateThumbnailForVideoAtURL:fileURL];
-
-            if (thumbnailImage) {
-                [thumbnailCache setObject:thumbnailImage forKey:artworkFileName];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UITableViewCell *updateCell = [tableView cellForRowAtIndexPath:indexPath];
-                    if (updateCell) {
-                        updateCell.imageView.image = thumbnailImage;
-                    }
-                });
-            }
-        });
+        NSString *imageName = [NSString stringWithFormat:@"%@.png", [filePathsAudioArray[indexPath.row] stringByDeletingPathExtension]];
+        UIImage *image = [UIImage imageWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:imageName]];
+        CGFloat targetSize = 37.5;
+        CGFloat scaleFactor = targetSize / MAX(image.size.width, image.size.height);
+        CGSize scaledSize = CGSizeMake(image.size.width * scaleFactor, image.size.height * scaleFactor);
+        UIGraphicsBeginImageContextWithOptions(scaledSize, NO, 0.0);
+        [[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, scaledSize.width, scaledSize.height) cornerRadius:6] addClip];
+        [image drawInRect:CGRectMake(0, 0, scaledSize.width, scaledSize.height)];
+        UIImage *roundedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        roundedImage = [roundedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        cell.imageView.image = roundedImage;
     }
 
     return cell;
@@ -230,8 +186,8 @@
         if ([[object pathExtension] isEqualToString:@"m4a"] || [[object pathExtension] isEqualToString:@"mp3"]){
             [filePathsAudioArray addObject:object];
             NSString *cut = [object substringToIndex:[object length]-4];
-            NSString *jpg = [NSString stringWithFormat:@"%@.jpg", cut];
-            [filePathsAudioArtworkArray addObject:jpg];
+            NSString *png = [NSString stringWithFormat:@"%@.png", cut];
+            [filePathsAudioArtworkArray addObject:png];
         }
     }
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
