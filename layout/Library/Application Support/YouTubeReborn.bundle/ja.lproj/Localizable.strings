@@ -37,6 +37,13 @@
 "DOWNLOAD_NOTICE_TEXT" = "続ける前に動画を一時停止してください";
 "DOWNLOAD_FILES_TEXT" = "音声/動画ファイルをダウンロード";
 
+// Color Options
+"COLOR_OPTIONS" = "カラーオプション";
+
+"CUSTOM_THEME_TAB" = "Custom Theme";
+"CUSTOM_TINT_TAB" = "Custom Tint";
+"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+
 // Video Options
 "VIDEO_OPTIONS" = "動画の設定";
 
@@ -113,9 +120,6 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "登録チャンネルタブを非表示";
 "HIDE_YOU_TAB" = "マイページタブを非表示";
 "REORDER_TABS" = "タブの並べ替え";
-"COLOR_OPTIONS" = "カラーオプション - テーマ";
-"COLOR_OPTIONS_2" = "カラーオプション - テキストとアイコン";
-"COLOR_OPTIONS_3" = "カラーオプション - プログレスバー";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "ピクチャインピクチャの設定";
