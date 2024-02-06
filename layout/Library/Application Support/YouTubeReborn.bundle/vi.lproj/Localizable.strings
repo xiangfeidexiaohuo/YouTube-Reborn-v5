@@ -37,6 +37,13 @@
 "DOWNLOAD_NOTICE_TEXT" = "Please Pause The Video Before Continuing";
 "DOWNLOAD_FILES_TEXT" = "Download Audio or Video Files";
 
+// Color Options
+"COLOR_OPTIONS" = "Tùy chọn màu sắc - Chủ đề tùy chỉnh";
+
+"CUSTOM_THEME_TAB" = "Custom Theme";
+"CUSTOM_TINT_TAB" = "Custom Tint";
+"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+
 // Video Options
 "VIDEO_OPTIONS" = "Tùy chọn Video";
 
@@ -113,9 +120,6 @@
 "HIDE_SUBSCRIPTIONS_TAB" = "Ẩn tab đăng ký";
 "HIDE_YOU_TAB" = "Ẩn tab của bạn";
 "REORDER_TABS" = "Sắp xếp lại các tab";
-"COLOR_OPTIONS" = "Tùy chọn màu sắc - Chủ đề tùy chỉnh";
-"COLOR_OPTIONS_2" = "Tùy chọn màu sắc - Văn bản và biểu tượng tùy chỉnh";
-"COLOR_OPTIONS_3" = "Tùy chọn màu sắc - Custom Progress Bar";
 
 // Picture In Picture Options
 "PICTURE_IN_PICTURE_OPTIONS" = "Tùy chọn Hình trong Hình";
