@@ -29,7 +29,7 @@
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = doneButton;
 
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.delegate = self;
