@@ -6,11 +6,9 @@
     NSString *documentsDirectory;
     NSMutableArray *filePathsAudioArray;
     NSMutableArray *filePathsAudioArtworkArray;
-    NSCache *thumbnailCache;
 }
 - (void)coloursView;
 - (void)setupAudioArrays;
-- (UIImage *)generateThumbnailForVideoAtURL:(NSURL *)videoURL;
 @end
 
 @implementation DownloadsAudioController
@@ -41,8 +39,6 @@
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     [self setupAudioArrays];
-
-    thumbnailCache = [[NSCache alloc] init];
 
     [NSLayoutConstraint activateConstraints:@[
         [self.tableView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
