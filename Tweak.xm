@@ -842,8 +842,9 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 - (ELMCellNode *)nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
-        if ([self numberOfItemsInSection:0] - 1 == indexPath.row) {
-            self.rebornOverlayButton = makeUnderRebornPlayerButton(%orig, @"OP", LOC(@"DOWNLOAD_FILES_TEXT"));
+        ELMCellNode *node = %orig;
+        if (CGRectGetMaxX([node.layoutAttributes frame]) == [self contentSize].width) {
+            self.rebornOverlayButton = makeUnderRebornPlayerButton(node, @"OP", LOC(@"DOWNLOAD_FILES_TEXT"));
             [self addSubview:self.rebornOverlayButton];
 
             [self.rebornOverlayButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
