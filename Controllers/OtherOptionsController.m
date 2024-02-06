@@ -3,11 +3,11 @@
 #import "../YouTubeHeader/YTUIUtils.h"
 
 @interface YTVersionUtils : NSObject
-+ (NSString *)appVersion;
+- (NSString *)appVersion;
 @end
 
 @implementation YTVersionUtils
-+ (NSString *)appVersion {
+- (NSString *)appVersion {
     NSString *customAppVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"kAppVersionSpoofer"];
     if (customAppVersion) {
         return customAppVersion;
@@ -29,7 +29,7 @@
     self.title = LOC(@"OTHER_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = doneButton;
 
     UITableViewStyle style;
         if (@available(iOS 13, *)) {
