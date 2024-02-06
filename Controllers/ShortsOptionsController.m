@@ -14,7 +14,7 @@
     self.title = LOC(@"SHORTS_OPTIONS");
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    self.navigationItem.leftBarButtonItem = doneButton;
 
     UITableViewStyle style;
         if (@available(iOS 13, *)) {
