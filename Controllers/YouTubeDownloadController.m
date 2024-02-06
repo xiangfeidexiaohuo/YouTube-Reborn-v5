@@ -1,5 +1,6 @@
 #import "YouTubeDownloadController.h"
 #import "Localization.h"
+#import "../MobileFFmpeg/MobileFFmpeg.h"
 #import "../AFNetworking/AFNetworking.h"
 
 @interface YouTubeDownloadController () {
