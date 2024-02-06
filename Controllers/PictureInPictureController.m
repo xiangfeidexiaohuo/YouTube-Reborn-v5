@@ -63,20 +63,6 @@ UILabel *rebornPictureInPictureLoadingLabel;
     [self coloursView];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.view.layer.borderWidth = 1.0;
-    self.view.layer.borderColor = [UIColor blackColor].CGColor;
-    self.view.layer.cornerRadius = 10.0;
-    self.view.layer.masksToBounds = YES;
-    self.view.layer.maskedCorners = kCALayerMaxXMinYCorner | kCALayerMinXMinYCorner;
-}
-
 @end
 
 @implementation PictureInPictureController (Privates)
