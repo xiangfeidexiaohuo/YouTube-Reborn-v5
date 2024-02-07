@@ -285,27 +285,6 @@
             [self presentViewController:tabBarOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 4) {
-            ColourOptionsController *colourOptionsController = [[ColourOptionsController alloc] init];
-            UINavigationController *colourOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:colourOptionsController];
-            colourOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
-
-            [self presentViewController:colourOptionsControllerView animated:YES completion:nil];
-        }
-        if (indexPath.row == 5) {
-            ColourOptionsController2 *colourOptionsController2 = [[ColourOptionsController2 alloc] init];
-            UINavigationController *colourOptionsController2View = [[UINavigationController alloc] initWithRootViewController:colourOptionsController2];
-            colourOptionsController2View.modalPresentationStyle = UIModalPresentationFullScreen;
-
-            [self presentViewController:colourOptionsController2View animated:YES completion:nil];
-        }
-        if (indexPath.row == 6) {
-            ColourOptionsController3 *colourOptionsController3 = [[ColourOptionsController3 alloc] init];
-            UINavigationController *colourOptionsController3View = [[UINavigationController alloc] initWithRootViewController:colourOptionsController3];
-            colourOptionsController3View.modalPresentationStyle = UIModalPresentationFullScreen;
-
-            [self presentViewController:colourOptionsController3View animated:YES completion:nil];
-        }
-        if (indexPath.row == 7) {
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"15.0")) {
                 PictureInPictureOptionsController *pictureInPictureOptionsController = [[PictureInPictureOptionsController alloc] init];
                 UINavigationController *pictureInPictureOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:pictureInPictureOptionsController];
@@ -321,21 +300,21 @@
                 [self presentViewController:alertError animated:YES completion:nil];
             }
         }
-        if (indexPath.row == 8) {
+        if (indexPath.row == 5) {
             ShortsOptionsController *shortsOptionsController = [[ShortsOptionsController alloc] init];
             UINavigationController *shortsOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:shortsOptionsController];
             shortsOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 	    
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 9) {
+        if (indexPath.row == 6) {
             SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc] init];
             UINavigationController *sponsorBlockOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:sponsorBlockOptionsController];
             sponsorBlockOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
 
             [self presentViewController:sponsorBlockOptionsControllerView animated:YES completion:nil];
         }
-        if (indexPath.row == 10) {
+        if (indexPath.row == 7) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
