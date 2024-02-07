@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <Photos/Photos.h>
 
 @interface YouTubeDownloadController : UIViewController
 
