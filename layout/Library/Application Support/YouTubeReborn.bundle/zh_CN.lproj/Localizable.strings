@@ -40,9 +40,9 @@
 // Color Options
 "COLOR_OPTIONS" = "界面颜色选项";
 
-"CUSTOM_THEME_TAB" = "Custom Theme";
-"CUSTOM_TINT_TAB" = "Custom Tint";
-"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+"CUSTOM_THEME_TAB" = "自定义主题";
+"CUSTOM_TINT_TAB" = "自定义色调";
+"CUSTOM_PROGRESS_BAR_TAB" = "自定义进度条";
 
 // Video Options
 "VIDEO_OPTIONS" = "视频播放选项";
