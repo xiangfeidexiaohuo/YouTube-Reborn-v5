@@ -1800,6 +1800,7 @@ BOOL isAd(id node) {
 %end
 %end
 
+/*
 BOOL sponsorBlockEnabled;
 BOOL sponsorSkipCheck;
 BOOL sponsorSkipShowing;
@@ -2140,6 +2141,7 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
     }
 }
 %end
+*/
 
 /* BROKEN
 %hook YTPivotBarView // Reorder Pivot Bar - @arichornlover
@@ -2511,8 +2513,10 @@ BOOL selectedTabIndex = NO;
 %group gHideShortsSearchButton
 %hook YTReelTransparentStackView
 - (void)layoutSubviews {
-	%orig();
-	MSHookIvar<YTQTMButton *>(self, "_searchButton").hidden = YES;
+    %orig;
+    if (self.subviews.count >= 3 && [self.subviews[0].accessibilityIdentifier isEqualToString:@"id.ui.generic.button"]) {
+        self.subviews[0].hidden = YES;
+    }
 }
 %end
 %end
