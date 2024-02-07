@@ -40,9 +40,9 @@
 // Color Options
 "COLOR_OPTIONS" = "Opciones de color";
 
-"CUSTOM_THEME_TAB" = "Custom Theme";
-"CUSTOM_TINT_TAB" = "Custom Tint";
-"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+"CUSTOM_THEME_TAB" = "Tema personalizado";
+"CUSTOM_TINT_TAB" = "Tinte personalizado";
+"CUSTOM_PROGRESS_BAR_TAB" = "Barra de progreso personalizada";
 
 // Video Options
 "VIDEO_OPTIONS" = "Opciones de vídeo";
@@ -210,7 +210,7 @@
 "DEVELOPER_TEXT" = "Desarrollador";
 "ICON_DESIGNER_TEXT" = "Diseñador de iconos";
 "DEV_SUPPORT_TEXT" = "Apoyo al desarrollo";
-"FEATURES_DAYANCH96_TEXT" = "Funciones: \"YouTube Reborn v5 Menu\", \"Borrar caché\", \"Barra de progreso roja\", \"Progreso del búfer gris\", \"Barra de navegación\", \"Desactivar el toque para saltar\"";
+"FEATURES_DAYANCH96_TEXT" = "Funciones: \"Menú YouTube Reborn v5\", \"Borrar caché\", \"Barra de progreso roja\", \"Progreso del búfer gris\", \"Barra de navegación\", \"Desactivar el toque para saltar\"";
 "FEATURES_POOMSMART_TEXT" = "Funciones: \"Botón YouTube Reborn bajo el reproductor de vídeo\", \"YouTube-X/Adblock\", \"Reproducción automática a pantalla completa\"";
 "FEATURES_NGUYEASANG_TEXT" = "Funciones: \"Botón YouTube Reborn bajo el reproductor de vídeo\"";
 "FEATURES_NSNOOLIE_TEXT" = "Funciones: \"Activar la velocidad de vídeo adicional\"";
