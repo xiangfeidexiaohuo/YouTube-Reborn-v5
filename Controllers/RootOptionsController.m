@@ -20,6 +20,8 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
+#define SETUP_SECTION(text, imageName, color) cell.textLabel.text = LOC(text); cell.imageView.image = [UIImage systemImageNamed:imageName]; cell.imageView.tintColor = cell.textLabel.textColor = color;
+
 @interface RootOptionsController ()
 - (void)coloursView;
 @end
@@ -32,16 +34,11 @@
 
     self.title = LOC(@"YouTube Reborn");
 
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
-    self.searchBar.delegate = self;
-
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBarButtonPressed)];
-    self.navigationItem.rightBarButtonItem = searchButton;
-    self.filteredItems = [NSArray array];
-    self.isSearching = NO;
-
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
+
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"magnifyingglass"] style:UIBarButtonSystemItemSearch target:self action:@selector(searchBarButtonPressed)];
+    self.navigationItem.rightBarButtonItem = searchButton;
 
     UIBarButtonItem *applyButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"APPLY_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(apply)];
     self.navigationItem.rightBarButtonItem = applyButton;
@@ -113,7 +110,7 @@
         }
     }
     if (section == 1) {
-        return 8;
+        return 7;
     }
     if (section == 2) {
         return 2;
@@ -151,75 +148,46 @@
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = LOC(@"COLOR_OPTIONS");
-                cell.imageView.image = [UIImage systemImageNamed:@"slider.horizontal.3"];
-		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"COLOR_OPTIONS", @"slider.horizontal.3", cell.textLabel.textColor);
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = LOC(@"VIEW_DOWNLOADS");
-                cell.imageView.image = [UIImage systemImageNamed:@"arrow.down.circle"];
-		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"VIEW_DOWNLOADS", @"arrow.down.circle", cell.textLabel.textColor);
             }
             if (indexPath.row == 2) {
-                cell.textLabel.text = LOC(@"VIEW_DOWNLOADS_IN_FILZA");
-		cell.imageView.image = [UIImage systemImageNamed:@"square.and.arrow.up.on.square"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"VIEW_DOWNLOADS_IN_FILZA", @"square.and.arrow.up.on.square", cell.textLabel.textColor);
             }
         }
         if (indexPath.section == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = LOC(@"VIDEO_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"play.rectangle"];
-		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"VIDEO_OPTIONS", @"play.rectangle", cell.textLabel.textColor);
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = LOC(@"VIDEO_PLAYER_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"video"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"VIDEO_PLAYER_OPTIONS", @"video", cell.textLabel.textColor);
             }
             if (indexPath.row == 2) {
-                cell.textLabel.text = LOC(@"OVERLAY_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"square.grid.3x2.fill"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"OVERLAY_OPTIONS", @"square.grid.3x2.fill", cell.textLabel.textColor);
             }
             if (indexPath.row == 3) {
-                cell.textLabel.text = LOC(@"TAB_BAR_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"rectangle.3.offgrid.fill"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"TAB_BAR_OPTIONS", @"rectangle.3.offgrid.fill", cell.textLabel.textColor);
             }
             if (indexPath.row == 4) {
-                cell.textLabel.text = LOC(@"PICTURE_IN_PICTURE_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"pip"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"PICTURE_IN_PICTURE_OPTIONS", @"pip", cell.textLabel.textColor);
             }
             if (indexPath.row == 5) {
-                cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"video.square"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"SHORTS_OPTIONS", @"video.square", cell.textLabel.textColor);
             }
             if (indexPath.row == 6) {
-                cell.textLabel.text = LOC(@"SPONSOR_BLOCK_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"tag"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
-            }
-            if (indexPath.row == 7) {
-                cell.textLabel.text = LOC(@"OTHER_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"ellipsis"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"OTHER_OPTIONS", @"ellipsis", cell.textLabel.textColor);
             }
         }
         if (indexPath.section == 2) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                cell.textLabel.text = LOC(@"REBORN_SETTINGS");
-		cell.imageView.image = [UIImage systemImageNamed:@"switch.2"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"REBORN_SETTINGS", @"switch.2", cell.textLabel.textColor);
             }
             if (indexPath.row == 1) {
-                cell.textLabel.text = LOC(@"CREDITS_BUTTON");
-		cell.imageView.image = [UIImage systemImageNamed:@"star"];
-  		cell.imageView.tintColor = cell.textLabel.textColor;
+                SETUP_SECTION(@"CREDITS_BUTTON", @"star", cell.textLabel.textColor);
             }
         }
     }
@@ -308,13 +276,6 @@
             [self presentViewController:shortsOptionsControllerView animated:YES completion:nil];
         }
         if (indexPath.row == 6) {
-            SponsorBlockOptionsController *sponsorBlockOptionsController = [[SponsorBlockOptionsController alloc] init];
-            UINavigationController *sponsorBlockOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:sponsorBlockOptionsController];
-            sponsorBlockOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
-
-            [self presentViewController:sponsorBlockOptionsControllerView animated:YES completion:nil];
-        }
-        if (indexPath.row == 7) {
             OtherOptionsController *otherOptionsController = [[OtherOptionsController alloc] init];
             UINavigationController *otherOptionsControllerView = [[UINavigationController alloc] initWithRootViewController:otherOptionsController];
             otherOptionsControllerView.modalPresentationStyle = UIModalPresentationFullScreen;
