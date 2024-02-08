@@ -131,7 +131,6 @@
 
     NSString *currentFileName = filePathsAudioArray[indexPath.row];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:currentFileName];
-    NSString *imageName = [NSString stringWithFormat:@"%@.png", [self.filePathsAudioArray[indexPath.row] stringByDeletingPathExtension]];
 
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 
