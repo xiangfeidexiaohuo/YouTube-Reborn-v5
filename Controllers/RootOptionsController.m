@@ -37,7 +37,7 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
 
-    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"magnifyingglass"] style:UIBarButtonSystemItemSearch target:self action:@selector(searchBarButtonPressed)];
+    UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"magnifyingglass"] style:UIBarButtonItemStylePlain target:self action:@selector(searchBarButtonPressed)];
     self.navigationItem.rightBarButtonItem = searchButton;
 
     UIBarButtonItem *applyButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"APPLY_TEXT") style:UIBarButtonItemStylePlain target:self action:@selector(apply)];
