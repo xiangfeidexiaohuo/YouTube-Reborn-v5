@@ -179,7 +179,9 @@
 
     NSString *currentFileName = filePathsVideoArray[indexPath.row];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:currentFileName];
-    
+
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];
     playerViewController.player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:filePath]];
     playerViewController.allowsPictureInPicturePlayback = NO;
