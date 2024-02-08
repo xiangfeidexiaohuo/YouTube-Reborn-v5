@@ -3181,38 +3181,37 @@ BOOL selectedTabIndex = NO;
 }
 %end
 
-/*
 // Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @arichornlover
 %hook _ASDisplayView
 - (void)layoutSubviews {
-    %orig;
-    NSString* hideConnectButton = @"kHideConnectButton";
-    NSString* hideShareButton = @"kHideShareButton";
-    NSString* hideRemixButton = @"kHideRemixButton";
-    NSString* hideThanksButton = @"kHideThanksButton";
-    NSString* hideAddToOfflineButton = @"kHideAddToOfflineButton";
-    NSString* hideClipButton = @"kHideClipButton";
-    NSString* hideSaveToPlaylistButton = @"kHideSaveToPlaylistButton";
+    %orig; 
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL hideConnectButton = [defaults boolForKey:@"kHideConnectButton"];
+    BOOL hideShareButton = [defaults boolForKey:@"kHideShareButton"];
+    BOOL hideRemixButton = [defaults boolForKey:@"kHideRemixButton"];
+    BOOL hideThanksButton = [defaults boolForKey:@"kHideThanksButton"];
+    BOOL hideAddToOfflineButton = [defaults boolForKey:@"kHideAddToOfflineButton"];
+    BOOL hideClipButton = [defaults boolForKey:@"kHideClipButton"];
+    BOOL hideSaveToPlaylistButton = [defaults boolForKey:@"kHideSaveToPlaylistButton"];
     for (UIView *subview in self.subviews) {
         if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
-            subview.hidden = [hideConnectButton boolValue];
+            subview.hidden = hideConnectButton;
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.share.button"] || [subview.accessibilityLabel isEqualToString:@"Share"]) {
-            subview.hidden = [hideShareButton boolValue];
+            subview.hidden = hideShareButton;
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.remix.button"] || [subview.accessibilityLabel isEqualToString:@"Create a Short with this video"]) {
-            subview.hidden = [hideRemixButton boolValue];
+            subview.hidden = hideRemixButton;
         } else if ([subview.accessibilityLabel isEqualToString:@"Thanks"]) {
-            subview.hidden = [hideThanksButton boolValue];
-        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.ui.add_to.offline.button"] || [subview.accessibilityIdentifier isEqualToString:@"Download"]) {
-            subview.hidden = [hideAddToOfflineButton boolValue];
+            subview.hidden = hideThanksButton;
+        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.ui.add_to.offline.button"] || [subview.accessibilityLabel isEqualToString:@"Download"]) {
+            subview.hidden = hideAddToOfflineButton;
         } else if ([subview.accessibilityLabel isEqualToString:@"Clip"]) {
-            subview.hidden = [hideClipButton boolValue];
+            subview.hidden = hideClipButton;
         } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
-            subview.hidden = [hideSaveToPlaylistButton boolValue];
+            subview.hidden = hideSaveToPlaylistButton;
         }
     }
 }
 %end
-*/
 
 NSBundle *YouTubeRebornBundle() {
     static NSBundle *bundle = nil;
