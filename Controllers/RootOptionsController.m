@@ -20,7 +20,7 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
-#define SETUP_SECTION(text, imageName, color) cell.textLabel.text = text; cell.imageView.image = [UIImage systemImageNamed:imageName]; cell.imageView.tintColor = cell.textLabel.textColor = color;
+#define SETUP_SECTION(text, imageName, color) cell.textLabel.text = LOC(text); cell.imageView.image = [UIImage systemImageNamed:imageName]; cell.imageView.tintColor = cell.textLabel.textColor = color;
 
 @interface RootOptionsController ()
 - (void)coloursView;
