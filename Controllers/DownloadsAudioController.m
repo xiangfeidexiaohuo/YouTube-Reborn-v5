@@ -131,7 +131,10 @@
 
     NSString *currentFileName = filePathsAudioArray[indexPath.row];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:currentFileName];
-    
+    NSString *imageName = [NSString stringWithFormat:@"%@.png", [self.filePathsAudioArray[indexPath.row] stringByDeletingPathExtension]];
+
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];
     playerViewController.player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:filePath]];
     playerViewController.allowsPictureInPicturePlayback = NO;
@@ -202,12 +205,6 @@
     [super traitCollectionDidChange:previousTraitCollection];
     [self coloursView];
     [self.tableView reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
 }
 
 @end
