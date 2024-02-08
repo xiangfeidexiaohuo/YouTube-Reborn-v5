@@ -20,7 +20,7 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
-#define SETUP_SECTION(text, imageName, color) cell.textLabel.text = LOC(text); cell.imageView.image = [UIImage systemImageNamed:imageName]; cell.imageView.tintColor = cell.textLabel.textColor = color;
+#define SETUP_SECTION(text, imageName, color) cell.textLabel.text = text; cell.imageView.image = [UIImage systemImageNamed:imageName]; cell.imageView.tintColor = cell.textLabel.textColor = color;
 
 @interface RootOptionsController ()
 - (void)coloursView;
@@ -148,46 +148,46 @@
         if (indexPath.section == 0) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                SETUP_SECTION(@"COLOR_OPTIONS", @"slider.horizontal.3", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"COLOR_OPTIONS"), @"slider.horizontal.3", cell.textLabel.textColor)
             }
             if (indexPath.row == 1) {
-                SETUP_SECTION(@"VIEW_DOWNLOADS", @"arrow.down.circle", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"VIEW_DOWNLOADS"), @"arrow.down.circle", cell.textLabel.textColor)
             }
             if (indexPath.row == 2) {
-                SETUP_SECTION(@"VIEW_DOWNLOADS_IN_FILZA", @"square.and.arrow.up.on.square", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"VIEW_DOWNLOADS_IN_FILZA"), @"square.and.arrow.up.on.square", cell.textLabel.textColor)
             }
         }
         if (indexPath.section == 1) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                SETUP_SECTION(@"VIDEO_OPTIONS", @"play.rectangle", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"VIDEO_OPTIONS"), @"play.rectangle", cell.textLabel.textColor)
             }
             if (indexPath.row == 1) {
-                SETUP_SECTION(@"VIDEO_PLAYER_OPTIONS", @"video", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"VIDEO_PLAYER_OPTIONS"), @"video", cell.textLabel.textColor)
             }
             if (indexPath.row == 2) {
-                SETUP_SECTION(@"OVERLAY_OPTIONS", @"square.grid.3x2.fill", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"OVERLAY_OPTIONS"), @"square.grid.3x2.fill", cell.textLabel.textColor)
             }
             if (indexPath.row == 3) {
-                SETUP_SECTION(@"TAB_BAR_OPTIONS", @"rectangle.3.offgrid.fill", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"TAB_BAR_OPTIONS"), @"rectangle.3.offgrid.fill", cell.textLabel.textColor)
             }
             if (indexPath.row == 4) {
-                SETUP_SECTION(@"PICTURE_IN_PICTURE_OPTIONS", @"pip", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"PICTURE_IN_PICTURE_OPTIONS"), @"pip", cell.textLabel.textColor)
             }
             if (indexPath.row == 5) {
-                SETUP_SECTION(@"SHORTS_OPTIONS", @"video.square", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"SHORTS_OPTIONS"), @"video.square", cell.textLabel.textColor)
             }
             if (indexPath.row == 6) {
-                SETUP_SECTION(@"OTHER_OPTIONS", @"ellipsis", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"OTHER_OPTIONS"), @"ellipsis", cell.textLabel.textColor)
             }
         }
         if (indexPath.section == 2) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             if (indexPath.row == 0) {
-                SETUP_SECTION(@"REBORN_SETTINGS", @"switch.2", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"REBORN_SETTINGS"), @"switch.2", cell.textLabel.textColor)
             }
             if (indexPath.row == 1) {
-                SETUP_SECTION(@"CREDITS_BUTTON", @"star", cell.textLabel.textColor)
+                SETUP_SECTION(LOC(@"CREDITS_BUTTON"), @"star", cell.textLabel.textColor)
             }
         }
     }
