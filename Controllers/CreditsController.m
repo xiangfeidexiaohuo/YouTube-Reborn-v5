@@ -55,60 +55,59 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-        cell.textLabel.lineBreakMode = NSLineBreakByTruncatingHead;
-        cell.textLabel.numberOfLines = 1;
-        cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingHead;
-        cell.detailTextLabel.numberOfLines = 1;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-            cell.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-            cell.textLabel.textColor = [UIColor blackColor];
-            cell.detailTextLabel.textColor = [UIColor blackColor];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+
+    cell.textLabel.numberOfLines = 1;
+    cell.textLabel.lineBreakMode = NSLineBreakByClipping;
+    cell.textLabel.frame = CGRectMake(cell.textLabel.frame.origin.x, 
+                                       cell.textLabel.frame.origin.y, 
+                                       cell.contentView.frame.size.width - 90, 
+                                       cell.textLabel.frame.size.height);
+    cell.detailTextLabel.numberOfLines = 1;
+    cell.detailTextLabel.lineBreakMode = NSLineBreakByClipping;
+    cell.detailTextLabel.frame = CGRectMake(cell.textLabel.frame.origin.x, 
+                                       cell.textLabel.frame.origin.y, 
+                                       cell.contentView.frame.size.width - 90, 
+                                       cell.textLabel.frame.size.height);
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"Lillie";
+            cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         }
-        else {
-            cell.backgroundColor = [UIColor colorWithRed:0.110 green:0.110 blue:0.118 alpha:1.0];
-            cell.textLabel.textColor = [UIColor whiteColor];
-            cell.textLabel.shadowColor = [UIColor blackColor];
-            cell.textLabel.shadowOffset = CGSizeMake(1.0, 1.0);
-            cell.detailTextLabel.textColor = [UIColor whiteColor];
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"Alpha_Stream";
+            cell.detailTextLabel.text = LOC(@"ICON_DESIGNER_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 1) {
+            cell.textLabel.text = @"kirb";
+            cell.detailTextLabel.text = LOC(@"DEV_SUPPORT_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 2) {
+            cell.textLabel.text = @"Dayanch96";
+            cell.detailTextLabel.text = LOC(@"FEATURES_DAYANCH96_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 3) {
+            cell.textLabel.text = @"PoomSmart";
+            cell.detailTextLabel.text = LOC(@"FEATURES_POOMSMART_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 4) {
+            cell.textLabel.text = @"NguyenASang";
+            cell.detailTextLabel.text = LOC(@"FEATURES_NGUYEASANG_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 5) {
+            cell.textLabel.text = @"Snoolie";
+            cell.detailTextLabel.text = LOC(@"FEATURES_NSNOOLIE_TEXT");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
+        } else if (indexPath.row == 6) {
+            cell.textLabel.text = @"xiangfeidexiaohuo";
+            cell.detailTextLabel.text = LOC(@"🇨🇳简体中文@秋名山巨魔俱乐部");
+            [self loadImageWithURLString:@"" forImageView:cell.imageView];
         }
-        if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"Lillie";
-                cell.detailTextLabel.text = LOC(@"DEVELOPER_TEXT");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            }
-        } else if (indexPath.section == 1) {
-            if (indexPath.row == 0) {
-                cell.textLabel.text = @"Alpha_Stream";
-                cell.detailTextLabel.text = LOC(@"ICON_DESIGNER_TEXT");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            } else if (indexPath.row == 1) {
-                cell.textLabel.text = @"kirb";
-                cell.detailTextLabel.text = LOC(@"DEV_SUPPORT_TEXT");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            } else if (indexPath.row == 2) {
-                cell.textLabel.text = @"Dayanch96";
-                cell.detailTextLabel.text = LOC(@"FEATURES_DAYANCH96_TEXT");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            } else if (indexPath.row == 3) {
-                cell.textLabel.text = @"PoomSmart";
-                cell.detailTextLabel.text = LOC(@"FEATURES_POOMSMART_TEXT");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            } else if (indexPath.row == 4) {
-                cell.textLabel.text = @"NguyenASang";
-                cell.detailTextLabel.text = LOC(@"FEATURES_NGUYEASANG_TEXT");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            } else if (indexPath.row == 5) {
-                cell.textLabel.text = @"Snoolie";
-                cell.detailTextLabel.text = LOC(@"FEATURES_NSNOOLIE_TEXT");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            } else if (indexPath.row == 6) {
-                cell.textLabel.text = @"xiangfeidexiaohuo";
-                cell.detailTextLabel.text = LOC(@"🇨🇳简体中文@秋名山巨魔俱乐部");
-                [self loadImageWithURLString:@"" forImageView:cell.imageView];
-            }
     }
 
     return cell;
