@@ -22,6 +22,7 @@
 #import "YouTubeHeader/YTVideoQualitySwitchOriginalController.h"
 #import "YouTubeHeader/YTVideoWithContextNode.h"
 #import "YouTubeHeader/YTIElementRenderer.h"
+#import "YouTubeHeader/YTISectionListRenderer.h"
 #import "YouTubeHeader/YTIMenuConditionalServiceItemRenderer.h"
 #import "YouTubeHeader/YTPlaybackStrippedWatchController.h"
 #import "YouTubeHeader/YTSlimVideoDetailsActionView.h"
