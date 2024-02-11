@@ -1150,6 +1150,18 @@ BOOL isAd(YTIElementRenderer *self) {
     %orig;
 }
 %end
+%hook YTWatchNextResultsViewController
+- (void)loadWithModel:(YTISectionListRenderer *)_watchNextResults {
+    NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = _watchNextResults.contentsArray;
+    NSIndexSet *removeIndexes = [contentsArray indexesOfObjectsPassingTest:^BOOL(YTISectionListSupportedRenderers *renderers, NSUInteger idx, BOOL *stop) {
+        YTIItemSectionRenderer *sectionRenderer = renderers.itemSectionRenderer;
+        YTIItemSectionSupportedRenderers *firstObject = [sectionRenderer.contentsArray firstObject];
+        return firstObject.hasPromotedVideoRenderer || firstObject.hasCompactPromotedVideoRenderer || firstObject.hasPromotedVideoInlineMutedRenderer || isAd(firstObject.elementRenderer);
+    }];
+    [contentsArray removeObjectsAtIndexes:removeIndexes];
+    %orig;
+}
+%end
 %end
 
 // Remove “Play next in queue” from the menu by @PoomSmart
