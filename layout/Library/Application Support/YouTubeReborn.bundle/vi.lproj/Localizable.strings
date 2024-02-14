@@ -6,6 +6,7 @@
 "OKAY_TEXT" = "Okay";
 "YES_TEXT" = "Yes";
 "NO_TEXT" = "No";
+"MORE_TEXT" = "More";
 "NOTICE_TEXT" = "Chú ý";
 "COLOR_SAVED" = "Color Saved";
 "IMPORT_VIDEO" = "Import Video To Camera Roll";
@@ -30,6 +31,7 @@
 "PROGRESS_TEXT" = "Progress: %.02f%%";
 "DOWNLOAD_AUDIO" = "Download Audio";
 "DOWNLOAD_VIDEO" = "Download Video";
+"EDIT_FILE_NAME" = "Edit File Name";
 "PLAY_APP_TEXT" = "Play In External App";
 "CHOOSE_TEXT" = "Choose App";
 "INFUSE_TEXT" = "Play In Infuse";
