@@ -17,6 +17,13 @@
     [super viewDidLoad];
     [self coloursView];
 
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    NSError *error = nil;
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:&error];
+    if (error) {
+        NSLog(@"Failed to set audio session category: %@", error);
+    }
+
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
     self.searchBar.placeholder = LOC(@"SEARCH_TEXT");
@@ -108,10 +115,9 @@
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.25];
+        documentsDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
 
         NSString *imageName = [NSString stringWithFormat:@"%@.png", [filePathsAudioArray[indexPath.row] stringByDeletingPathExtension]];
-        NSString *documentsDirectory = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-
         UIImage *image = [UIImage imageWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:imageName]];
         CGFloat targetSize = 37.5;
         CGFloat scaleFactor = targetSize / MAX(image.size.width, image.size.height);
@@ -134,8 +140,6 @@
     NSString *currentFileName = filePathsAudioArray[indexPath.row];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:currentFileName];
 
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-
     AVPlayerViewController *playerViewController = [AVPlayerViewController new];
     playerViewController.player = [AVPlayer playerWithURL:[NSURL fileURLWithPath:filePath]];
     playerViewController.allowsPictureInPicturePlayback = NO;
@@ -149,7 +153,7 @@
 
 - (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
     UIContextualAction *moreAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal
-                                                                             title:@"More"
+                                                                             title:LOC(@"MORE_TEXT")
                                                                            handler:^(UIContextualAction *action, __kindof UIView *sourceView, void (^completionHandler)(BOOL)) {
         NSString *currentAudioFileName = filePathsAudioArray[indexPath.row];
         NSString *currentArtworkFileName = filePathsAudioArtworkArray[indexPath.row];
@@ -207,7 +211,7 @@
         [self presentViewController:alertMenu animated:YES completion:nil];
     }];
     moreAction.image = [UIImage systemImageNamed:@"ellipsis"];
-    moreAction.backgroundColor = self.view.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor systemBlueColor] : [UIColor systemBlueColor].colorWithAlphaComponent(0.8);
+    moreAction.backgroundColor = self.view.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ? [UIColor systemBlueColor] : [[UIColor systemBlueColor] colorWithAlphaComponent:0.8];
 
     UISwipeActionsConfiguration *configuration = [UISwipeActionsConfiguration configurationWithActions:@[moreAction]];
     configuration.performsFirstActionWithFullSwipe = NO;
@@ -227,7 +231,7 @@
             [filePathsAudioArray addObject:object];
             NSString *cut = [object substringToIndex:[object length]-4];
             NSString *jpg = [NSString stringWithFormat:@"%@.jpg", cut];
-            [filePathsAudioArtworkArray addObject:png];
+            [filePathsAudioArtworkArray addObject:jpg];
         }
     }
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
