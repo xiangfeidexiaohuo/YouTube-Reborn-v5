@@ -6,6 +6,7 @@
 "OKAY_TEXT" = "OK";
 "YES_TEXT" = "はい";
 "NO_TEXT" = "いいえ";
+"MORE_TEXT" = "More";
 "NOTICE_TEXT" = "通知";
 "COLOR_SAVED" = "保存しました";
 "IMPORT_VIDEO" = "動画をカメラロールに保存";
@@ -30,6 +31,7 @@
 "PROGRESS_TEXT" = "進行状況: %.02f%%";
 "DOWNLOAD_AUDIO" = "音声をダウンロード";
 "DOWNLOAD_VIDEO" = "動画をダウンロード";
+"EDIT_FILE_NAME" = "Edit File Name";
 "PLAY_APP_TEXT" = "外部アプリで再生";
 "CHOOSE_TEXT" = "アプリを選択";
 "INFUSE_TEXT" = "Infuseで再生";
