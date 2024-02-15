@@ -181,7 +181,7 @@
             UIAlertController *editAlert = [UIAlertController alertControllerWithTitle:LOC(@"EDIT_FILE_NAME") message:nil preferredStyle:UIAlertControllerStyleAlert];
             
             [editAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                textField.placeholder = @"New File Name";
+                textField.placeholder = currentAudioFileName;
                 textField.text = [currentAudioFileName stringByDeletingPathExtension];
             }];
             
