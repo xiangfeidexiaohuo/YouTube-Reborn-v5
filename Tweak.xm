@@ -276,11 +276,11 @@ static NSString *accessGroupID() {
         
         if ([%c(YTPageStyleController) pageStyle] == 0) {
             [self.youtubeRebornButton setImage:[UIImage imageWithContentsOfFile:youtubeRebornDarkSettingsPath] forState:UIControlStateNormal];
-            [self.youtubeRebornButton setTintColor:[UIColor vk_contentTintColor]];
+            [self.youtubeRebornButton setTintColor:[UIColor tintColor]];
         }
         else if ([%c(YTPageStyleController) pageStyle] == 1) {
             [self.youtubeRebornButton setImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath] forState:UIControlStateNormal];
-            [self.youtubeRebornButton setTintColor:[UIColor vk_contentTintColor]];
+            [self.youtubeRebornButton setTintColor:[UIColor tintColor]];
         }
         
         [self.youtubeRebornButton addTarget:self action:@selector(rebornRootOptionsAction) forControlEvents:UIControlEventTouchUpInside];
