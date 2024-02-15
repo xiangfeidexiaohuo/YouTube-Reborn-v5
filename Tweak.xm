@@ -275,12 +275,14 @@ static NSString *accessGroupID() {
         self.youtubeRebornButton.frame = CGRectMake(0, 0, 40, 40);
         
         if ([%c(YTPageStyleController) pageStyle] == 0) {
-            [self.youtubeRebornButton setImage:[UIImage imageWithContentsOfFile:youtubeRebornDarkSettingsPath] forState:UIControlStateNormal];
-            [self.youtubeRebornButton setTintColor:[UIColor tintColor]];
+            UIImage *setButtonMode = [UIImage imageWithContentsOfFile:youtubeRebornDarkSettingsPath];
+            setButtonMode = [setButtonMode imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [self.youtubeRebornButton setImage:setButtonMode forState:UIControlStateNormal];
         }
         else if ([%c(YTPageStyleController) pageStyle] == 1) {
-            [self.youtubeRebornButton setImage:[UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath] forState:UIControlStateNormal];
-            [self.youtubeRebornButton setTintColor:[UIColor tintColor]];
+            UIImage *setButtonMode = [UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath];
+            setButtonMode = [setButtonMode imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            [self.youtubeRebornButton setImage:setButtonMode forState:UIControlStateNormal];
         }
         
         [self.youtubeRebornButton addTarget:self action:@selector(rebornRootOptionsAction) forControlEvents:UIControlEventTouchUpInside];
