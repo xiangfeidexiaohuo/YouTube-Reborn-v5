@@ -75,16 +75,25 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     NSString *searchText = searchBar.text;
-
+    
     if (searchText.length > 0) {
-        NSString *cleanSearchText = [searchText stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", cleanSearchText];
-        self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
+        NSMutableArray *filteredItems = [[NSMutableArray alloc] init];
+        
+        for (NSString *filename in self.allItems) {
+            NSString *filenameWithoutExtension = [[filename lastPathComponent] stringByDeletingPathExtension];
+            
+            if ([filenameWithoutExtension rangeOfString:searchText options:NSCaseInsensitiveSearch].location != NSNotFound) {
+                [filteredItems addObject:filename];
+            }
+        }
+        
+        self.filteredItems = [NSArray arrayWithArray:filteredItems];
         self.isSearching = YES;
     } else {
         self.filteredItems = [NSArray array];
         self.isSearching = NO;
     }
+    
     [self.tableView reloadData];
 }
 
@@ -108,6 +117,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    }
+    NSString *filename;
+    if (self.isSearching) {
+        filename = self.filteredItems[indexPath.row];
+    } else {
+        filename = self.allItems[indexPath.row];
     }
 
     if (indexPath.section == 0 && indexPath.row < filePathsAudioArray.count) {
