@@ -118,7 +118,6 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
-    NSString *filename;
     if (self.isSearching) {
         filename = self.filteredItems[indexPath.row];
     } else {
