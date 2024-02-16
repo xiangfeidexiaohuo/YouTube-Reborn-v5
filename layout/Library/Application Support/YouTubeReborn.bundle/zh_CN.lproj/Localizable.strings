@@ -6,7 +6,7 @@
 "OKAY_TEXT" = "好的";
 "YES_TEXT" = "是";
 "NO_TEXT" = "不";
-"MORE_TEXT" = "More";
+"MORE_TEXT" = "更多";
 "NOTICE_TEXT" = "注意";
 "COLOR_SAVED" = "颜色已保存";
 "IMPORT_VIDEO" = "将视频导入相册";
@@ -31,7 +31,7 @@
 "PROGRESS_TEXT" = "进度: %.02f%%";
 "DOWNLOAD_AUDIO" = "下载音频";
 "DOWNLOAD_VIDEO" = "下载视频";
-"EDIT_FILE_NAME" = "Edit File Name";
+"EDIT_FILE_NAME" = "编辑文件名";
 "PLAY_APP_TEXT" = "用第三方程序播放";
 "CHOOSE_TEXT" = "选择应用程序";
 "INFUSE_TEXT" = "用 Infuse 播放";
