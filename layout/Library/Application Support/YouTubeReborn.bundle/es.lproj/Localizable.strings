@@ -32,11 +32,11 @@
 "DOWNLOAD_AUDIO" = "Descargar audio";
 "DOWNLOAD_VIDEO" = "Descargar vídeo";
 "EDIT_FILE_NAME" = "Edit File Name";
-"IMPORT_TO_DOWNLOADS" = "Import to Downloads"
-"IMPORT_ERROR" = "File failed to Import!"
-"FILE_ALREADY_IMPORTED" = "❔The file has already been imported to the \"Downloads\" folder."
-"SUCCESSFULLY_IMPORTED_FILE" = "File Successfully Imported!"
-"FILE_IMPORTED" = "✅ The file has successfully been imported to the \"Downloads\" folder."
+"IMPORT_TO_DOWNLOADS" = "Import to Downloads";
+"IMPORT_ERROR" = "File failed to Import!";
+"FILE_ALREADY_IMPORTED" = "❔The file has already been imported to the \"Downloads\" folder.";
+"SUCCESSFULLY_IMPORTED_FILE" = "File Successfully Imported!";
+"FILE_IMPORTED" = "✅ The file has successfully been imported to the \"Downloads\" folder.";
 "PLAY_APP_TEXT" = "Reproducir en una aplicación externa";
 "CHOOSE_TEXT" = "Elegir aplicación";
 "INFUSE_TEXT" = "Reproducir en Infuse";
