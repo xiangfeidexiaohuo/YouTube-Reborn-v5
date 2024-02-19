@@ -33,7 +33,7 @@
 "DOWNLOAD_VIDEO" = "下载视频";
 "EDIT_FILE_NAME" = "编辑文件名";
 "IMPORT_TO_DOWNLOADS" = "Import to Downloads"
-"IMPORT_ERROR" = "File didn't Import!"
+"IMPORT_ERROR" = "File failed to Import!"
 "FILE_ALREADY_IMPORTED" = "❔The file has already been imported to the \"Downloads\" folder."
 "SUCCESSFULLY_IMPORTED_FILE" = "File Successfully Imported!"
 "FILE_IMPORTED" = "✅ The file has successfully been imported to the \"Downloads\" folder."
