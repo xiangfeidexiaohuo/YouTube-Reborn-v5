@@ -204,6 +204,25 @@
             [self presentViewController:editAlert animated:YES completion:nil];
         }]];
 
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"IMPORT_TO_DOWNLOADS") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            NSString *currentAudioFileName = filePathsAudioArray[indexPath.row];
+            NSString *downloadsDirectory = [NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES) firstObject];
+
+            NSString *newAudioFilePath = [downloadsDirectory stringByAppendingPathComponent:currentAudioFileName];
+    
+            if ([[NSFileManager defaultManager] fileExistsAtPath:newAudioFilePath]) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"IMPORT_ERROR") message:LOC(@"FILE_ALREADY_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+            } else {
+                [[NSFileManager defaultManager] copyItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentAudioFileName] toPath:newAudioFilePath error:nil];
+        
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:LOC(@"FILE_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+        }]];
+
         [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DELETE_AUDIO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [[NSFileManager defaultManager] removeItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentAudioFileName] error:nil];
             [[NSFileManager defaultManager] removeItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentArtworkFileName] error:nil];
