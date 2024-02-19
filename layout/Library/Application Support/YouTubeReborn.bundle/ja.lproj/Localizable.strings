@@ -32,6 +32,11 @@
 "DOWNLOAD_AUDIO" = "音声をダウンロード";
 "DOWNLOAD_VIDEO" = "動画をダウンロード";
 "EDIT_FILE_NAME" = "Edit File Name";
+"IMPORT_TO_DOWNLOADS" = "Import to Downloads"
+"IMPORT_ERROR" = "File didn't Import!"
+"FILE_ALREADY_IMPORTED" = "❔The file has already been imported to the "\Downloads"\ folder."
+"SUCCESSFULLY_IMPORTED_FILE" = "File Successfully Imported!"
+"FILE_IMPORTED" = "✅ The file has successfully been imported to the "\Downloads"\ folder."
 "PLAY_APP_TEXT" = "外部アプリで再生";
 "CHOOSE_TEXT" = "アプリを選択";
 "INFUSE_TEXT" = "Infuseで再生";
