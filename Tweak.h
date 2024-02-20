@@ -105,7 +105,7 @@
 @property(readonly, nonatomic) UIImageView *imageView;
 @end
 
-@interface YTPlayerView : UIView
+@interface YTPlayerView (Reborn)
 - (void)downloadVideo;
 @end
 
