@@ -206,7 +206,8 @@
 
         [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"IMPORT_TO_DOWNLOADS") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             NSString *currentAudioFileName = filePathsAudioArray[indexPath.row];
-            NSString *downloadsDirectory = [NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES) firstObject];
+            NSArray *downloadsDirectories = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+            NSString *downloadsDirectory = [downloadsDirectories firstObject];
 
             NSString *newAudioFilePath = [downloadsDirectory stringByAppendingPathComponent:currentAudioFileName];
     
