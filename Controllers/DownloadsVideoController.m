@@ -25,7 +25,9 @@
     self.searchBar.placeholder = LOC(@"SEARCH_TEXT");
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
-    self.navigationItem.rightBarButtonItem = searchButton;
+
+    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"slider.horizontal.3"] style:UIBarButtonItemStylePlain target:self action:@selector(filterButtonTapped)];
+    self.navigationItem.rightBarButtonItems = @[searchButton, filterButton];
     self.filteredItems = [NSArray array];
     self.isSearching = NO;
 
@@ -224,6 +226,35 @@
         }];
     }]];
 
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"EDIT_FILE_NAME") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+            UIAlertController *editAlert = [UIAlertController alertControllerWithTitle:LOC(@"EDIT_FILE_NAME") message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            [editAlert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = currentVideoFileName;
+                textField.text = [currentVideoFileName stringByDeletingPathExtension];
+            }];
+            
+            [editAlert addAction:[UIAlertAction actionWithTitle:LOC(@"SAVE_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                UITextField *textField = editAlert.textFields.firstObject;
+                NSString *newFileName = textField.text;
+                
+                NSString *newVideoFileName = [[newFileName stringByAppendingString:@"."] stringByAppendingString:[currentVideoFileName pathExtension]];
+                NSString *newArtworkFileName = [[newFileName stringByAppendingString:@"."] stringByAppendingString:[currentArtworkFileName pathExtension]];
+                
+                [[NSFileManager defaultManager] moveItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentVideoFileName] toPath:[documentsDirectory stringByAppendingPathComponent:newVideoFileName] error:nil];
+                [[NSFileManager defaultManager] moveItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentArtworkFileName] toPath:[documentsDirectory stringByAppendingPathComponent:newArtworkFileName] error:nil];
+                
+                [filePathsVideoArray replaceObjectAtIndex:indexPath.row withObject:newVideoFileName];
+                [filePathsVideoArtworkArray replaceObjectAtIndex:indexPath.row withObject:newArtworkFileName];
+                [self.tableView reloadData];
+            }]];
+            
+            [editAlert addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:nil]];
+            
+            [self presentViewController:editAlert animated:YES completion:nil];
+        }]];
+
     [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"DELETE_VIDEO") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[NSFileManager defaultManager] removeItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentVideoFileName] error:nil];
         [[NSFileManager defaultManager] removeItemAtPath:[documentsDirectory stringByAppendingPathComponent:currentArtworkFileName] error:nil];
@@ -263,6 +294,23 @@
     }
     self.allItems = [NSArray arrayWithArray:filePathsVideoArray];
 }
+
+- (void)filterButtonTapped {
+    UIAlertController *filterAlert = [UIAlertController alertControllerWithTitle:LOC(@"Filter Videos") message:LOC(@"Enter the maximum duration in seconds:") preferredStyle:UIAlertControllerStyleAlert];
+    [filterAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = LOC(@"Enter seconds");
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+    }];
+    UIAlertAction *applyFilter = [UIAlertAction actionWithTitle:LOC(@"APPLY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textField = filterAlert.textFields.firstObject;
+        NSString *inputSeconds = textField.text;
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:nil];
+    [filterAlert addAction:applyFilter];
+    [filterAlert addAction:cancelAction];
+    [self presentViewController:filterAlert animated:YES completion:nil];
+}
+
 
 - (void)coloursView {
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
