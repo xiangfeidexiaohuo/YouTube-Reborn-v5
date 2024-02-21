@@ -198,7 +198,7 @@
     NSString *customVersion = textField.text;
     NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
     NSCharacterSet *inputCharacterSet = [NSCharacterSet characterSetWithCharactersInString:customVersion];
-    if (![inputCharacterSet isSubsetOfSet:allowedCharacterSet] || customVersion.length < 7) {
+    if (![allowedCharacterSet isSupersetOfSet:inputCharacterSet] || customVersion.length < 7) {
         textField.text = @"";
         return;
     }
