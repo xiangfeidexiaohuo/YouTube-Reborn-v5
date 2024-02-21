@@ -278,11 +278,13 @@ static NSString *accessGroupID() {
             UIImage *setButtonMode = [UIImage imageWithContentsOfFile:youtubeRebornDarkSettingsPath];
             setButtonMode = [setButtonMode imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             [self.youtubeRebornButton setImage:setButtonMode forState:UIControlStateNormal];
+            [self.youtubeRebornButton setTintColor:UIColor.blackColor];
         }
         else if ([%c(YTPageStyleController) pageStyle] == 1) {
             UIImage *setButtonMode = [UIImage imageWithContentsOfFile:youtubeRebornLightSettingsPath];
             setButtonMode = [setButtonMode imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             [self.youtubeRebornButton setImage:setButtonMode forState:UIControlStateNormal];
+            [self.youtubeRebornButton setTintColor:UIColor.whiteColor];
         }
         
         [self.youtubeRebornButton addTarget:self action:@selector(rebornRootOptionsAction) forControlEvents:UIControlEventTouchUpInside];
