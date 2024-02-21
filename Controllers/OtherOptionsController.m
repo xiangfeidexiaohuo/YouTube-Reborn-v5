@@ -1,20 +1,5 @@
 #import "OtherOptionsController.h"
 #import "Localization.h"
-#import "../YouTubeHeader/YTUIUtils.h"
-
-@interface YTVersionUtils : NSObject
-- (NSString *)appVersion;
-@end
-
-@implementation YTVersionUtils
-- (NSString *)appVersion {
-    NSString *customAppVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"kAppVersionSpoofer"];
-    if (customAppVersion) {
-        return customAppVersion;
-    }
-    return nil;
-}
-@end
 
 @interface OtherOptionsController ()
 - (void)coloursView;
@@ -211,19 +196,19 @@
 
 - (void)versionTextFieldChanged:(UITextField *)textField {
     NSString *customVersion = textField.text;
-    
-    NSString *validVersionFormat = @"(17|18|19)(\\.\\d{1,2}){2}";
-    NSPredicate *validVersionPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", validVersionFormat];
-
     NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
     NSCharacterSet *inputCharacterSet = [NSCharacterSet characterSetWithCharactersInString:customVersion];
-
-   if (![validVersionPredicate evaluateWithObject:customVersion] || ![allowedCharacterSet isSupersetOfSet:inputCharacterSet]) {
-        // Invalid format, set the default value or display an error message
+    if (![inputCharacterSet isSubsetOfSet:allowedCharacterSet] || customVersion.length < 7) {
         textField.text = @"";
         return;
-    } 
-    self.customAppVersion = customVersion;
+    }
+    if (customVersion.length >= 6) {
+        NSMutableString *mutableCustomVersion = [customVersion mutableCopy];
+        [mutableCustomVersion replaceCharactersInRange:NSMakeRange(2, 1) withString:@"."];
+        [mutableCustomVersion replaceCharactersInRange:NSMakeRange(5, 1) withString:@"."];
+        textField.text = mutableCustomVersion;
+    }
+    self.customAppVersion = textField.text;
 }
 
 @end
