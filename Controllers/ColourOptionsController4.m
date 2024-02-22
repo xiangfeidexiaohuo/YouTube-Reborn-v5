@@ -1,17 +1,17 @@
-#import "ColourOptionsController3.h"
+#import "ColourOptionsController4.h"
 #import "Localization.h"
 
-@interface ColourOptionsController3 ()
+@interface ColourOptionsController4 ()
 - (void)coloursView;
 @end
 
-@implementation ColourOptionsController3
+@implementation ColourOptionsController4
 
 - (void)loadView {
 	[super loadView];
     [self coloursView];
 
-    self.title = LOC(@"COLOR_OPTIONS_3");
+    self.title = LOC(@"COLOR_OPTIONS_4");
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
@@ -47,7 +47,7 @@
 
 @end
 
-@implementation ColourOptionsController3(Privates)
+@implementation ColourOptionsController4(Privates)
 
 - (void)done {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
