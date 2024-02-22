@@ -22,7 +22,7 @@
     self.supportsAlpha = NO;
     NSData *systemBlueColorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCustomSystemBlueColor"];
     NSKeyedUnarchiver *systemBlueUnarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:systemBlueColorData error:nil];
-    [lcmUnarchiver setRequiresSecureCoding:NO];
+    [systemBlueUnarchiver setRequiresSecureCoding:NO];
     UIColor *color = [systemBlueUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
     self.selectedColor = color;
 }
