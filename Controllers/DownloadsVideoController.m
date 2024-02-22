@@ -304,6 +304,20 @@
     UIAlertAction *applyFilter = [UIAlertAction actionWithTitle:LOC(@"APPLY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UITextField *textField = filterAlert.textFields.firstObject;
         NSString *inputSeconds = textField.text;
+        
+        double maxDuration = [inputSeconds intValue];
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            NSString *videoFileName = (NSString *)evaluatedObject;
+            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:videoFileName];
+            AVAsset *asset = [AVAsset assetWithURL:[NSURL fileURLWithPath:filePath]];
+            CMTime duration = asset.duration;
+            double durationSeconds = CMTimeGetSeconds(duration);
+            return durationSeconds <= maxDuration;
+        }];
+        
+        self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
+        self.isSearching = YES;
+        [self.tableView reloadData];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:nil];
     [filterAlert addAction:applyFilter];
