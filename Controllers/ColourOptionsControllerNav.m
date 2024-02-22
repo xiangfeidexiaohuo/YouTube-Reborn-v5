@@ -50,7 +50,7 @@
     ColourOptionsController4 *colorViewController4 = [[ColourOptionsController4 alloc] init];
     colorViewController4.title = LOC(@"CUSTOM_PROGRESS_BAR_TAB");
     colorViewController4.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"CUSTOM_PROGRESS_BAR_TAB") image:[UIImage systemImageNamed:@"waveform.path.ecg"] tag:3];
-    UINavigationController *colorNavViewController4 = [[UINavigationController alloc] initWithRootViewController:colorViewController3];
+    UINavigationController *colorNavViewController4 = [[UINavigationController alloc] initWithRootViewController:colorViewController4];
 
     self.tabBarController.viewControllers = @[colorNavViewController, colorNavViewController2, colorNavViewController3, colorNavViewController4];
     [self addChildViewController:self.tabBarController];
