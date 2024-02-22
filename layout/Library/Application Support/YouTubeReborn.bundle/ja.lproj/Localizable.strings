@@ -34,9 +34,9 @@
 "EDIT_FILE_NAME" = "Edit File Name";
 "IMPORT_TO_DOWNLOADS" = "Import to Downloads";
 "IMPORT_ERROR" = "File failed to Import!";
-"FILE_ALREADY_IMPORTED" = "❔The file has already been imported to the \"Downloads\" folder.";
+"FILE_ALREADY_IMPORTED" = "❔The file has already been imported to the Downloads folder.";
 "SUCCESSFULLY_IMPORTED_FILE" = "File Successfully Imported!";
-"FILE_IMPORTED" = "✅ The file has successfully been imported to the \"Downloads\" folder.";
+"FILE_IMPORTED" = "✅ The file has successfully been imported to the Downloads folder.";
 "PLAY_APP_TEXT" = "外部アプリで再生";
 "CHOOSE_TEXT" = "アプリを選択";
 "INFUSE_TEXT" = "Infuseで再生";
@@ -49,6 +49,7 @@
 
 "CUSTOM_THEME_TAB" = "Custom Theme";
 "CUSTOM_TINT_TAB" = "Custom Tint";
+"CUSTOM_SYSTEMBLUE_TAB" = "Custom SystemBlue";
 "CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
 
 // Video Options
