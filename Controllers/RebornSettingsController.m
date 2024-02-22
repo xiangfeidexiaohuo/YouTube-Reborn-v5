@@ -183,6 +183,7 @@
             [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTRebornColourOptionsVFour"];
 	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTLcmColourOptionVFive"];
+	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kCustomSystemBlueColor"];
 	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kYTProgreessBarColourOption"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [[UIApplication sharedApplication] performSelector:@selector(suspend)];
@@ -289,7 +290,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideDuration"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [[UIApplication sharedApplication] performSelector:@selector(suspend)];
-                [NSThread sleepForTimeInterval:1.0];
+                [NSThread sleepForTimeInterval:2.0];
                 exit(0);
             }]];
 
