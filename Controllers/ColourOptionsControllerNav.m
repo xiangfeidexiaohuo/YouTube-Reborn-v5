@@ -2,6 +2,7 @@
 #import "ColourOptionsController.h"
 #import "ColourOptionsController2.h"
 #import "ColourOptionsController3.h"
+#import "ColourOptionsController4.h"
 #import "Localization.h"
 
 @interface ColourOptionsControllerNav ()
