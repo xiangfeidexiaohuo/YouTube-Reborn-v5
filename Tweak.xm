@@ -1527,15 +1527,6 @@ BOOL isAd(YTIElementRenderer *self) {
    %orig([UIColor whiteColor]);
 }
 %end
-%hook UIImageView
-- (void)setImage:(UIImage *)image {
-    if ([self.imageName isEqualToString:@"ic_create_video_dark"] || [self.imageName isEqualToString:@"ic_create_live_dark"] || [self.imageName isEqualToString:@"ic_create_post_dark"] ||
-        [self.imageName isEqualToString:@"permissions_camera_mic_shorts"] || [self.imageName isEqualToString:@"permissions_info"] || [self.imageName isEqualToString:@"permissions_settings"]) {
-        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    }
-    %orig(image);
-}
-%end
 %end
 
 // Auto-Hide Home Bar by @arichorn
@@ -2973,6 +2964,7 @@ BOOL selectedTabIndex = NO;
         return systemBlueHexColor;
     }
 }
+%end
 %end
 
 %group gColourOptions4 // Custom Progress Bar color
