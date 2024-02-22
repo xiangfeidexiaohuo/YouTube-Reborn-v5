@@ -34,9 +34,9 @@
 "EDIT_FILE_NAME" = "编辑文件名";
 "IMPORT_TO_DOWNLOADS" = "导入到下载";
 "IMPORT_ERROR" = "文件导入失败！";
-"FILE_ALREADY_IMPORTED" = "❔该文件早已导入到“Downloads”文件夹中。";
+"FILE_ALREADY_IMPORTED" = "❔该文件早已导入到Downloads文件夹中。";
 "SUCCESSFULLY_IMPORTED_FILE" = "文件导入成功！";
-"FILE_IMPORTED" = "✅ 文件已成功导入到“Downloads”文件夹。";
+"FILE_IMPORTED" = "✅ 文件已成功导入到Downloads文件夹。";
 "PLAY_APP_TEXT" = "用第三方程序播放";
 "CHOOSE_TEXT" = "选择应用程序";
 "INFUSE_TEXT" = "用 Infuse 播放";
@@ -49,6 +49,7 @@
 
 "CUSTOM_THEME_TAB" = "自定义主题";
 "CUSTOM_TINT_TAB" = "自定义色调";
+"CUSTOM_SYSTEMBLUE_TAB" = "Custom SystemBlue";
 "CUSTOM_PROGRESS_BAR_TAB" = "自定义进度条";
 
 // Video Options
