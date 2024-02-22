@@ -2959,6 +2959,7 @@ BOOL selectedTabIndex = NO;
 %end
 
 %group gColourOptions3 // Custom SystemBlue color
+%hook UIColor
 + (UIColor *)systemBlueColor {
     if (systemBlueHexColor) {
         return systemBlueHexColor;
