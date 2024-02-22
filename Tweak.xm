@@ -3320,13 +3320,21 @@ NSBundle *YouTubeRebornBundle() {
             lcmHexColor = [lcmUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
             %init(gColourOptions2);
         }
+        NSData *systemBlueColorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCustomSystemBlueColor"];
+        NSKeyedUnarchiver *systemBlueUnarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:systemBlueColorData error:nil];
+        [systemBlueUnarchiver setRequiresSecureCoding:NO];
+        NSString *systemBlueHexString = [systemBlueUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+        if (systemBlueHexString != nil) {
+            systemBlueHexColor = [systemBlueUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+            %init(gColourOptions3);
+        }
         NSData *progressbarColorData = [[NSUserDefaults standardUserDefaults] objectForKey:@"kYTProgreessBarColourOption"];
         NSKeyedUnarchiver *progressbarUnarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:progressbarColorData error:nil];
         [progressbarUnarchiver setRequiresSecureCoding:NO];
         NSString *progressbarHexString = [progressbarUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
         if (progressbarHexString != nil) {
             progressbarHexColor = [progressbarUnarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
-            %init(gColourOptions3);
+            %init(gColourOptions4);
         }
         NSBundle *tweakBundle = YouTubeRebornBundle();
         TabBarOPIconPath = [tweakBundle pathForResource:@"ytrebornbuttonblack" ofType:@"png"];
