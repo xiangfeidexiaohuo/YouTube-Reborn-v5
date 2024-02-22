@@ -2963,6 +2963,8 @@ BOOL selectedTabIndex = NO;
 + (UIColor *)systemBlueColor {
     if (systemBlueHexColor) {
         return systemBlueHexColor;
+    } else {
+        return [UIColor systemBlueColor];
     }
 }
 %end
