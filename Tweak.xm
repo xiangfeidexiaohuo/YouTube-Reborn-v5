@@ -29,6 +29,7 @@ static NSString *TabBarOPIconPath;
 
 UIColor *rebornHexColour;
 UIColor *lcmHexColor;
+UIColor *systemBlueHexColor;
 UIColor *progressbarHexColor;
 
 YTLocalPlaybackController *playingVideoID;
@@ -1526,21 +1527,13 @@ BOOL isAd(YTIElementRenderer *self) {
    %orig([UIColor whiteColor]);
 }
 %end
-%end
-
-%group gColourOptions3
-%hook YTInlinePlayerBarContainerView
-- (id)quietProgressBarColor {
-    return progressbarHexColor;
-}
-%end
-
-%hook YTSegmentableInlinePlayerBarView
-- (UIColor *)progressBarColor {
-    return progressbarHexColor;
-}
-- (UIColor *)userIsScrubbingProgressBarColor {
-    return progressbarHexColor;
+%hook UIImageView
+- (void)setImage:(UIImage *)image {
+    if ([self.imageName isEqualToString:@"ic_create_video_dark"] || [self.imageName isEqualToString:@"ic_create_live_dark"] || [self.imageName isEqualToString:@"ic_create_post_dark"] ||
+        [self.imageName isEqualToString:@"permissions_camera_mic_shorts"] || [self.imageName isEqualToString:@"permissions_info"] || [self.imageName isEqualToString:@"permissions_settings"]) {
+        image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }
+    %orig(image);
 }
 %end
 %end
@@ -2563,7 +2556,7 @@ BOOL selectedTabIndex = NO;
 %end
 %end
 
-%group gColourOptions
+%group gColourOptions // Custom Theme color
 %hook YTCommonColorPalette
 - (UIColor *)background1 {
     return rebornHexColour;
@@ -2970,6 +2963,31 @@ BOOL selectedTabIndex = NO;
         if ([self.accessibilityIdentifier isEqualToString:@"id.comment.channel_guidelines_entry_banner_container"]) { self.backgroundColor = rebornHexColour; }
 	if ([self.accessibilityIdentifier isEqualToString:@"id.comment.comment_group_detail_container"]) { self.backgroundColor = [UIColor clearColor]; }
         if ([self.accessibilityIdentifier hasPrefix:@"id.elements.components.overflow_menu_item_"]) { self.backgroundColor = [UIColor clearColor]; }
+}
+%end
+%end
+
+%group gColourOptions3 // Custom SystemBlue color
++ (UIColor *)systemBlueColor {
+    if (systemBlueHexColor) {
+        return systemBlueHexColor;
+    }
+}
+%end
+
+%group gColourOptions4 // Custom Progress Bar color
+%hook YTInlinePlayerBarContainerView
+- (id)quietProgressBarColor {
+    return progressbarHexColor;
+}
+%end
+
+%hook YTSegmentableInlinePlayerBarView
+- (UIColor *)progressBarColor {
+    return progressbarHexColor;
+}
+- (UIColor *)userIsScrubbingProgressBarColor {
+    return progressbarHexColor;
 }
 %end
 %end
