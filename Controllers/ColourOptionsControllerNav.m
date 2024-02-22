@@ -42,11 +42,16 @@
     UINavigationController *colorNavViewController2 = [[UINavigationController alloc] initWithRootViewController:colorViewController2];
 
     ColourOptionsController3 *colorViewController3 = [[ColourOptionsController3 alloc] init];
-    colorViewController3.title = LOC(@"CUSTOM_PROGRESS_BAR_TAB");
-    colorViewController3.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"CUSTOM_PROGRESS_BAR_TAB") image:[UIImage systemImageNamed:@"waveform.path.ecg"] tag:2];
+    colorViewController3.title = LOC(@"CUSTOM_SYSTEMBLUE_TAB");
+    colorViewController3.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"CUSTOM_SYSTEMBLUE_TAB") image:[UIImage systemImageNamed:@"swift.fill"] tag:2];
     UINavigationController *colorNavViewController3 = [[UINavigationController alloc] initWithRootViewController:colorViewController3];
 
-    self.tabBarController.viewControllers = @[colorNavViewController, colorNavViewController2, colorNavViewController3];
+    ColourOptionsController4 *colorViewController4 = [[ColourOptionsController4 alloc] init];
+    colorViewController4.title = LOC(@"CUSTOM_PROGRESS_BAR_TAB");
+    colorViewController4.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"CUSTOM_PROGRESS_BAR_TAB") image:[UIImage systemImageNamed:@"waveform.path.ecg"] tag:3];
+    UINavigationController *colorNavViewController4 = [[UINavigationController alloc] initWithRootViewController:colorViewController3];
+
+    self.tabBarController.viewControllers = @[colorNavViewController, colorNavViewController2, colorNavViewController3, colorNavViewController4];
     [self addChildViewController:self.tabBarController];
     self.tabBarController.view.frame = self.view.bounds;
     [self.view addSubview:self.tabBarController.view];
