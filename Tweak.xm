@@ -1127,7 +1127,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 %end
 BOOL isAd(YTIElementRenderer *self) {
-    if (self == nil) return NO;
+    if (self != nil) {
     NSString *description = [self description];
     if ([description containsString:@"brand_promo"]
         || [description containsString:@"statement_banner"]
@@ -1143,7 +1143,7 @@ BOOL isAd(YTIElementRenderer *self) {
         || [description containsString:@"landscape_image_wide_button_layout"]
         || [description containsString:@"feed_ad_metadata"])
         return YES;
-    return NO;
+    }return NO;
 }
 %hook YTSectionListViewController
 - (void)loadWithModel:(YTISectionListRenderer *)model {
@@ -1158,8 +1158,8 @@ BOOL isAd(YTIElementRenderer *self) {
 }
 %end
 %hook YTWatchNextResultsViewController
-- (void)loadWithModel:(YTISectionListRenderer *)_watchNextResults {
-    NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = _watchNextResults.contentsArray;
+- (void)loadWithModel:(YTISectionListRenderer *)watchNextResults {
+    NSMutableArray <YTISectionListSupportedRenderers *> *contentsArray = watchNextResults.contentsArray;
     NSIndexSet *removeIndexes = [contentsArray indexesOfObjectsPassingTest:^BOOL(YTISectionListSupportedRenderers *renderers, NSUInteger idx, BOOL *stop) {
         YTIItemSectionRenderer *sectionRenderer = renderers.itemSectionRenderer;
         YTIItemSectionSupportedRenderers *firstObject = [sectionRenderer.contentsArray firstObject];
