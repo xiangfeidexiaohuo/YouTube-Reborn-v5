@@ -1169,6 +1169,12 @@ BOOL isAd(YTIElementRenderer *self) {
     %orig;
 }
 %end
+%hook _ASDisplayView
+- (void)didMoveToWindow {
+    %orig();
+    if ([self.accessibilityIdentifier isEqualToString:@"id.products_in_video_with_preview_overlay_badge.view"]) self.hidden = YES; 
+}
+%end
 %end
 
 // Remove “Play next in queue” from the menu by @PoomSmart
