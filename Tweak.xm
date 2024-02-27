@@ -2125,7 +2125,6 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
     }
 }
 %end
-*/
 
 /* BROKEN
 %hook YTPivotBarView // Reorder Pivot Bar - @arichornlover
@@ -2153,6 +2152,7 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
     %orig;
 }
 %end
+*/
 
 BOOL selectedTabIndex = NO;
 
