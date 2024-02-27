@@ -1785,7 +1785,6 @@ BOOL isAd(YTIElementRenderer *self) {
 %end
 %end
 
-/*
 BOOL sponsorBlockEnabled;
 BOOL sponsorSkipCheck;
 BOOL sponsorSkipShowing;
@@ -2154,7 +2153,6 @@ NSDictionary *sponsorBlockValues = [[NSDictionary alloc] init];
     %orig;
 }
 %end
-*/
 
 BOOL selectedTabIndex = NO;
 
@@ -3210,25 +3208,25 @@ BOOL selectedTabIndex = NO;
     for (UIView *subview in self.subviews) {
         if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
             subview.hidden = hideConnectButton;
-            subview.frame = CGRectZero;
+            subview.frame = hideConnectButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.share.button"] || [subview.accessibilityLabel isEqualToString:@"Share"]) {
             subview.hidden = hideShareButton;
-            subview.frame = CGRectZero;
+            subview.frame = hideShareButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.remix.button"] || [subview.accessibilityLabel isEqualToString:@"Create a Short with this video"]) {
             subview.hidden = hideRemixButton;
-            subview.frame = CGRectZero;
+            subview.frame = hideRemixButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityLabel isEqualToString:@"Thanks"]) {
             subview.hidden = hideThanksButton;
-            subview.frame = CGRectZero;
+            subview.frame = hideThanksButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityIdentifier isEqualToString:@"id.ui.add_to.offline.button"] || [subview.accessibilityLabel isEqualToString:@"Download"]) {
             subview.hidden = hideAddToOfflineButton;
-            subview.frame = CGRectZero;
+            subview.frame = hideAddToOfflineButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityLabel isEqualToString:@"Clip"]) {
             subview.hidden = hideClipButton;
-            subview.frame = CGRectZero;
+            subview.frame = hideClipButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
             subview.hidden = hideSaveToPlaylistButton;
-            subview.frame = CGRectZero;
+            subview.frame = hideSaveToPlaylistButton ? CGRectZero : subview.frame;
         }
     }
 }
