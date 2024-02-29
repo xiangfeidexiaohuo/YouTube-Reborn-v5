@@ -223,7 +223,7 @@
   		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideShareButton"];
     		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideRemixButton"];
       		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideThanksButton"];
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideAddToOfflineButton"];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideDownloadButton"];
   		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideClipButton"];
       		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideSaveToPlaylistButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kDisableDoubleTapToSkip"];
