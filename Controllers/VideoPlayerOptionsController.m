@@ -98,7 +98,7 @@
             cell.textLabel.text = LOC(@"HIDE_DOWNLOAD_PLAYER_BUTTON");
             UISwitch *hideDownloadButton = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hideDownloadButton addTarget:self action:@selector(toggleHideDownloadButton:) forControlEvents:UIControlEventValueChanged];
-            hideDownloadButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideAddToOfflineButton"];
+            hideDownloadButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideDownloadButton"];
             cell.accessoryView = hideDownloadButton;
         }
         if (indexPath.row == 5) {
@@ -192,10 +192,10 @@
 
 - (void)toggleHideDownloadButton:(UISwitch *)sender {
     if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideAddToOfflineButton"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideDownloadButton"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideAddToOfflineButton"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideDownloadButton"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
