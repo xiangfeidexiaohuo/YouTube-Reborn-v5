@@ -276,7 +276,10 @@
         [[NSFileManager defaultManager] copyItemAtURL:url toURL:[NSURL fileURLWithPath:newAudioFilePath] error:nil];
     
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:LOC(@"FILE_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self setupAudioArrays];
+            [self.tableView reloadData];
+        }]];
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
