@@ -175,7 +175,7 @@
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"VIDEO_PLAYER_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"video"];
+		cell.imageView.image = [UIImage systemImageNamed:@"video.square"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 2) {
@@ -195,7 +195,7 @@
             }
             if (indexPath.row == 5) {
                 cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"video.square"];
+		cell.imageView.image = [UIImage systemImageNamed:@"pause.circle.fill"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 6) {
@@ -213,7 +213,7 @@
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"CREDITS_BUTTON");
-		cell.imageView.image = [UIImage systemImageNamed:@"star"];
+		cell.imageView.image = [UIImage systemImageNamed:@"star.fill"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
         }
