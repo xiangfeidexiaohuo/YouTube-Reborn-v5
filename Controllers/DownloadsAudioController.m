@@ -276,7 +276,6 @@
     
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:@"" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self setupAudioArrays];
             [self.tableView reloadData];
         }]];
         [self presentViewController:alert animated:YES completion:nil];
