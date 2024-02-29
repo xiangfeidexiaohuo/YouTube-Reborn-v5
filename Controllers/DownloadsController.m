@@ -36,7 +36,7 @@
 
     DownloadsAllController *allDownloadsViewController = [[DownloadsAllController alloc] init];
     allDownloadsViewController.title = LOC(@"ALL_TAB");
-    allDownloadsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"ALL_TAB") image:[UIImage systemImageNamed:@"folder"] tag:0];
+    allDownloadsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"ALL_TAB") image:[UIImage systemImageNamed:@"folder.fill"] tag:0];
     UINavigationController *allDownloadsNavViewController = [[UINavigationController alloc] initWithRootViewController:allDownloadsViewController];
 
     DownloadsVideoController *videoViewController = [[DownloadsVideoController alloc] init];
