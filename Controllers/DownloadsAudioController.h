@@ -6,7 +6,6 @@
 @interface DownloadsAudioController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIScrollViewDelegate, UIDocumentPickerDelegate, AVPlayerViewControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIBarButtonItem *importButton;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSArray *allItems;
 @property (nonatomic, strong) NSArray *filteredItems;
