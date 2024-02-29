@@ -32,14 +32,14 @@
 "DOWNLOAD_AUDIO" = "下载音频";
 "DOWNLOAD_VIDEO" = "下载视频";
 "EDIT_FILE_NAME" = "编辑文件名";
-"IMPORT_FILE" = "Import File";
-"EXPORT_FILE" = "Export File";
-"IMPORT_ERROR" = "File failed to Import!";
-"EXPORT_ERROR" = "File failed to Export!";
-"FILE_ALREADY_IMPORTED" = "The file has already been Imported?";
-"FILE_ALREADY_EXPORTED" = "The file has already been Exported?";
-"SUCCESSFULLY_IMPORTED_FILE" = "File has Successfully Imported!";
-"SUCCESSFULLY_EXPORTED_FILE" = "File has Successfully Exported!";
+"IMPORT_FILE" = "导入文件";
+"EXPORT_FILE" = "导出文件";
+"IMPORT_ERROR" = "文件导入失败";
+"EXPORT_ERROR" = "文件导出失败！";
+"FILE_ALREADY_IMPORTED" = "文件已经导入了？";
+"FILE_ALREADY_EXPORTED" = "文件已经导出了？";
+"SUCCESSFULLY_IMPORTED_FILE" = "文件已成功导入！";
+"SUCCESSFULLY_EXPORTED_FILE" = "文件已成功导出！";
 "PLAY_APP_TEXT" = "用第三方程序播放";
 "CHOOSE_TEXT" = "选择应用程序";
 "INFUSE_TEXT" = "用 Infuse 播放";
@@ -51,9 +51,9 @@
 "COLOR_OPTIONS" = "界面颜色选项";
 
 "CUSTOM_THEME_TAB" = "自定义主题";
-"CUSTOM_TINT_TAB" = "自定义色调";
-"CUSTOM_SYSTEMBLUE_TAB" = "Custom SystemBlue";
-"CUSTOM_PROGRESS_BAR_TAB" = "自定义进度条";
+"CUSTOM_TINT_TAB" = "定制色调";
+"CUSTOM_SYSTEMBLUE_TAB" = "定制系统蓝色";
+"CUSTOM_PROGRESS_BAR_TAB" = "定制进度条";
 
 // Video Options
 "VIDEO_OPTIONS" = "视频播放选项";
