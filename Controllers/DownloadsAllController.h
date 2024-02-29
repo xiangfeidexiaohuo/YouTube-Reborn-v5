@@ -3,7 +3,7 @@
 #import <AVKit/AVKit.h>
 #import <UIKit/UIKit.h>
 
-@interface DownloadsAllController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIScrollViewDelegate, AVPlayerViewControllerDelegate>
+@interface DownloadsAllController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIScrollViewDelegate, UIDocumentPickerDelegate, AVPlayerViewControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UISearchBar *searchBar;
