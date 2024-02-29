@@ -79,17 +79,7 @@
     NSString *searchText = searchBar.text;
     
     if (searchText.length > 0) {
-        NSMutableArray *filteredItems = [[NSMutableArray alloc] init];
-        
-        for (NSString *filename in self.allItems) {
-            NSString *filenameWithoutExtension = [[filename lastPathComponent] stringByDeletingPathExtension];
-            
-            if ([filenameWithoutExtension rangeOfString:searchText options:NSCaseInsensitiveSearch].location != NSNotFound) {
-                [filteredItems addObject:filename];
-            }
-        }
-        
-        self.filteredItems = [NSArray arrayWithArray:filteredItems];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
         self.isSearching = YES;
     } else {
         self.filteredItems = [NSArray array];
@@ -120,15 +110,11 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
-    NSString *filename;
-    if (self.isSearching) {
-        filename = self.filteredItems[indexPath.row];
-    } else {
-        filename = self.allItems[indexPath.row];
-    }
-
+    NSString *fileName = self.isSearching ? self.filteredItems[indexPath.row] : self.allItems[indexPath.row];
+    
     if (indexPath.section == 0 && indexPath.row < filePathsAudioArray.count) {
         cell.textLabel.text = [filePathsAudioArray[indexPath.row] stringByDeletingPathExtension];
+        cell.detailTextLabel.text = [fileName pathExtension];
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.25];
@@ -276,6 +262,7 @@
     
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:@"" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self setupAudioArrays];
             [self.tableView reloadData];
         }]];
         [self presentViewController:alert animated:YES completion:nil];
@@ -283,10 +270,25 @@
 }
 
 - (void)importFile {
-    NSString *currentAudioFileName = filePathsAudioArray[[self.tableView indexPathForSelectedRow].row];
-
     UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeImport];
     documentPicker.delegate = self;
+    [self presentViewController:documentPicker animated:YES completion:nil];
+}
+
+- (void)exportFile {
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    if (selectedIndexPath) {
+        [self exportFileAtIndexPath:selectedIndexPath];
+    }
+}
+
+- (void)exportFileAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *currentAudioFileName = filePathsAudioArray[indexPath.row];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:currentAudioFileName];
+
+    UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithURL:[NSURL fileURLWithPath:filePath] inMode:UIDocumentPickerModeExportToService];
+    documentPicker.delegate = self;
+    documentPicker.name = currentAudioFileName.lastPathComponent;
     [self presentViewController:documentPicker animated:YES completion:nil];
 }
 
