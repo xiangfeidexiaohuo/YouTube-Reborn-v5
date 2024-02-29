@@ -44,7 +44,7 @@
 
     ColourOptionsController3 *colorViewController3 = [[ColourOptionsController3 alloc] init];
     colorViewController3.title = LOC(@"CUSTOM_SYSTEMBLUE_TAB");
-    colorViewController3.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"CUSTOM_SYSTEMBLUE_TAB") image:[UIImage systemImageNamed:@"swift.fill"] tag:2];
+    colorViewController3.tabBarItem = [[UITabBarItem alloc] initWithTitle:LOC(@"CUSTOM_SYSTEMBLUE_TAB") image:[UIImage systemImageNamed:@"square.stack"] tag:2];
     UINavigationController *colorNavViewController3 = [[UINavigationController alloc] initWithRootViewController:colorViewController3];
 
     ColourOptionsController4 *colorViewController4 = [[ColourOptionsController4 alloc] init];
