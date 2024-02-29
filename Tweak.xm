@@ -3193,42 +3193,88 @@ BOOL selectedTabIndex = NO;
 }
 %end
 
-// Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @arichornlover
+// OLD    Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @arichornlover
 %hook _ASDisplayView
 - (void)layoutSubviews {
     %orig; 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL hideConnectButton = [defaults boolForKey:@"kHideConnectButton"];
-    BOOL hideShareButton = [defaults boolForKey:@"kHideShareButton"];
-    BOOL hideRemixButton = [defaults boolForKey:@"kHideRemixButton"];
+//  BOOL hideShareButton = [defaults boolForKey:@"kHideShareButton"]; DISABLED
+//  BOOL hideRemixButton = [defaults boolForKey:@"kHideRemixButton"]; DISABLED
     BOOL hideThanksButton = [defaults boolForKey:@"kHideThanksButton"];
-    BOOL hideAddToOfflineButton = [defaults boolForKey:@"kHideAddToOfflineButton"];
-    BOOL hideClipButton = [defaults boolForKey:@"kHideClipButton"];
+//  BOOL hideAddToOfflineButton = [defaults boolForKey:@"kHideAddToOfflineButton"]; DISABLED
+//  BOOL hideClipButton = [defaults boolForKey:@"kHideClipButton"]; DISABLED
     BOOL hideSaveToPlaylistButton = [defaults boolForKey:@"kHideSaveToPlaylistButton"];
     for (UIView *subview in self.subviews) {
         if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
             subview.hidden = hideConnectButton;
             subview.frame = hideConnectButton ? CGRectZero : subview.frame;
-        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.share.button"] || [subview.accessibilityLabel isEqualToString:@"Share"]) {
-            subview.hidden = hideShareButton;
-            subview.frame = hideShareButton ? CGRectZero : subview.frame;
-        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.video.remix.button"] || [subview.accessibilityLabel isEqualToString:@"Create a Short with this video"]) {
-            subview.hidden = hideRemixButton;
-            subview.frame = hideRemixButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityLabel isEqualToString:@"Thanks"]) {
             subview.hidden = hideThanksButton;
             subview.frame = hideThanksButton ? CGRectZero : subview.frame;
-        } else if ([subview.accessibilityIdentifier isEqualToString:@"id.ui.add_to.offline.button"] || [subview.accessibilityLabel isEqualToString:@"Download"]) {
-            subview.hidden = hideAddToOfflineButton;
-            subview.frame = hideAddToOfflineButton ? CGRectZero : subview.frame;
-        } else if ([subview.accessibilityLabel isEqualToString:@"Clip"]) {
-            subview.hidden = hideClipButton;
-            subview.frame = hideClipButton ? CGRectZero : subview.frame;
         } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
             subview.hidden = hideSaveToPlaylistButton;
             subview.frame = hideSaveToPlaylistButton ? CGRectZero : subview.frame;
         }
     }
+}
+%end
+
+// Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @PoomSmart & arichornlover
+static BOOL findCell(ASNodeController *nodeController, NSArray <NSString *> *identifiers, NSUserDefaults *defaults) {
+    for (id child in [nodeController children]) {
+        if ([child isKindOfClass:%c(ELMNodeController)]) {
+            NSArray <ELMComponent *> *elmChildren = [(ELMNodeController *)child children];
+            for (ELMComponent *elmChild in elmChildren) {
+                for (NSString *identifier in identifiers) {
+                    if ([[elmChild description] containsString:identifier])
+                        return YES;
+                }
+            }
+        }
+        if ([child isKindOfClass:%c(ASNodeController)]) {
+            ASDisplayNode *childNode = ((ASNodeController *)child).node;
+            NSArray *yogaChildren = childNode.yogaChildren;
+            for (ASDisplayNode *displayNode in yogaChildren) {
+                if ([identifiers containsObject:displayNode.accessibilityIdentifier])
+                    return YES;
+            }
+            return findCell(child, identifiers, defaults);
+        }
+        return NO;
+    }
+    return NO;
+}
+
+%hook ASCollectionView
+- (CGSize)sizeForElement:(ASCollectionElement *)element {
+    if ([self.accessibilityIdentifier isEqualToString:@"id.video.scrollable_action_bar"]) {
+        ASCellNode *node = [element node];
+        ASNodeController *nodeController = [node controller];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+//      BOOL hideConnectButton = [defaults boolForKey:@"kHideConnectButton"];
+        BOOL hideShareButton = [defaults boolForKey:@"kHideShareButton"];
+        BOOL hideRemixButton = [defaults boolForKey:@"kHideRemixButton"];
+//      BOOL hideThanksButton = [defaults boolForKey:@"kHideThanksButton"];
+        BOOL hideDownloadButton = [defaults boolForKey:@"kHideDownloadButton"];
+        BOOL hideClipButton = [defaults boolForKey:@"kHideClipButton"];
+//      BOOL hideSaveToPlaylistButton = [defaults boolForKey:@"kHideSaveToPlaylistButton"];
+
+        if (hideShareButton && findCell(nodeController, @[@"id.video.share.button"], defaults)) {
+            return CGSizeZero;
+        }
+        if (hideRemixButton && findCell(nodeController, @[@"id.video.remix.button"], defaults)) {
+            return CGSizeZero;
+        }
+        if (hideDownloadButton && findCell(nodeController, @[@"id.ui.add_to.offline.button"], defaults)) {
+            return CGSizeZero;
+        }
+        if (hideClipButton && findCell(nodeController, @[@"clip_button.eml"], defaults)) {
+            return CGSizeZero;
+        }
+    }
+    return %orig;
 }
 %end
 
