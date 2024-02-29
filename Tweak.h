@@ -11,6 +11,7 @@
 #import "Controllers/YouTubeDownloadController.h"
 #import "Controllers/ReorderPivotBarController.h"
 // YT Headers
+#import "YouTubeHeader/ASCollectionElement.h"
 #import "YouTubeHeader/ASCollectionView.h"
 #import "YouTubeHeader/ELMCellNode.h"
 #import "YouTubeHeader/ELMContainerNode.h"
