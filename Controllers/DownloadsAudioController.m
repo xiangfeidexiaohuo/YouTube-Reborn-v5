@@ -24,6 +24,9 @@
         NSLog(@"Failed to set audio session category: %@", error);
     }
 
+    self.importButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"IMPORT_FILE") style:UIBarButtonItemStylePlain target:self action:@selector(importFile)];
+    self.navigationItem.rightBarButtonItem = self.importButton;
+
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
     self.searchBar.placeholder = LOC(@"SEARCH_TEXT");
@@ -204,11 +207,12 @@
             [self presentViewController:editAlert animated:YES completion:nil];
         }]];
 
-        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"IMPORT_TO_DOWNLOADS") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"EXPORT_FILE") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             NSString *currentAudioFileName = filePathsAudioArray[indexPath.row];
 
-            UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeImport];
+            UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeExportToService];
             documentPicker.delegate = self;
+            documentPicker.name = currentAudioFileName.lastPathComponent;
             [self presentViewController:documentPicker animated:YES completion:nil];
         }]];
 
@@ -275,6 +279,14 @@
         [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (void)importFile {
+    NSString *currentAudioFileName = filePathsAudioArray[[self.tableView indexPathForSelectedRow].row];
+
+    UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeImport];
+    documentPicker.delegate = self;
+    [self presentViewController:documentPicker animated:YES completion:nil];
 }
 
 - (void)coloursView {
