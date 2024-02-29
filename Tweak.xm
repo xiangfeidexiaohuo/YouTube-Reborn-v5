@@ -824,11 +824,14 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     
     // Check if the PiP button (for YouPiP) exists and adjust the OP button's center accordingly
     ASCollectionView *collectionView = (ASCollectionView *)[[node closestViewController] view];
-    NSIndexPath *pipIndexPath = [collectionView indexPathForCell:collectionView.pipButton.superview.superview];
-    if (pipIndexPath) {
-        CGFloat pipOffset = [collectionView.pipButton center].x - CGRectGetMaxX([node.layoutAttributes frame]);
-        [buttonView setCenter:CGPointMake(buttonView.center.x + pipOffset, buttonView.center.y)];
-    } 
+    UIView *pipButtonSuperview = collectionView.pipButton.superview.superview;
+    if (pipButtonSuperview && [pipButtonSuperview isKindOfClass:[UIView class]]) {
+        NSIndexPath *pipIndexPath = [collectionView indexPathForCell:pipButtonSuperview];
+        if (pipIndexPath) {
+            CGFloat pipOffset = CGRectGetMaxX(pipButtonSuperview.frame) - CGRectGetMaxX([node.layoutAttributes frame]);
+            [buttonView setCenter:CGPointMake(buttonView.center.x + pipOffset, buttonView.center.y)];
+        }
+    }
     return buttonView;
 }
 
@@ -856,15 +859,18 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 - (ELMCellNode *)nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
-        ELMCellNode *node = %orig;
-        if (CGRectGetMaxX([node.layoutAttributes frame]) == [self contentSize].width) {
-            self.rebornOverlayButton = makeUnderRebornPlayerButton(node, @"OP", LOC(@"DOWNLOAD_FILES_TEXT"));
-            [self addSubview:self.rebornOverlayButton];
+        BOOL hideOPButton = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornOPButtonVThree"];
+        if (!hideOPButton) {
+            ELMCellNode *node = %orig;
+            if (CGRectGetMaxX([node.layoutAttributes frame]) == [self contentSize].width) {
+                self.rebornOverlayButton = makeUnderRebornPlayerButton(node, @"OP", LOC(@"DOWNLOAD_FILES_TEXT"));
+                [self addSubview:self.rebornOverlayButton];
 
-            [self.rebornOverlayButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
-            YTTouchFeedbackController *controller = [[%c(YTTouchFeedbackController) alloc] initWithView:self.rebornOverlayButton];
-            controller.touchFeedbackView.customCornerRadius = 16;
-            self.rebornTouchController = controller;
+                [self.rebornOverlayButton addTarget:self action:@selector(didPressReborn:event:) forControlEvents:UIControlEventTouchUpInside];
+                YTTouchFeedbackController *controller = [[%c(YTTouchFeedbackController) alloc] initWithView:self.rebornOverlayButton];
+                controller.touchFeedbackView.customCornerRadius = 16;
+                self.rebornTouchController = controller;
+            }
         }
     }
     return %orig;
@@ -890,9 +896,11 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 
 %new;
 - (void)rebornOptionsAction {
-    NSInteger videoStatus = [stateOut playerState];
-    if (videoStatus == 3) {
-        [self didPressPause:[self playPauseButton]];
+    if (stateOut && [stateOut respondsToSelector:@selector(playerState)]) {
+        NSInteger videoStatus = [stateOut playerState];
+        if (videoStatus == 3) {
+            [self didPressPause:[self playPauseButton]];
+        }
     }
 
     NSString *videoIdentifier = [playingVideoID currentVideoID];
