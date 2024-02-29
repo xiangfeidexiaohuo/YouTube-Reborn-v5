@@ -24,15 +24,14 @@
         NSLog(@"Failed to set audio session category: %@", error);
     }
 
-    self.importButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"IMPORT_FILE") style:UIBarButtonItemStylePlain target:self action:@selector(importFile)];
-    self.navigationItem.rightBarButtonItem = self.importButton;
+    UIBarButtonItem *importButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"IMPORT_FILE") style:UIBarButtonItemStylePlain target:self action:@selector(importFile)];
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
     self.searchBar.placeholder = LOC(@"SEARCH_TEXT");
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
-    self.navigationItem.rightBarButtonItem = searchButton;
+    self.navigationItem.rightBarButtonItems = @[searchButton, importButton];
     self.filteredItems = [NSArray array];
     self.isSearching = NO;
 
@@ -275,7 +274,7 @@
     } else {
         [[NSFileManager defaultManager] copyItemAtURL:url toURL:[NSURL fileURLWithPath:newAudioFilePath] error:nil];
     
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:LOC(@"FILE_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:@"" preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self setupAudioArrays];
             [self.tableView reloadData];
