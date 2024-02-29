@@ -260,17 +260,17 @@
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
 }
 
-- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
-    NSURL *url = [urls firstObject];
-    NSString *currentAudioFileName = filePathsAudioArray[indexPath.row];
-    NSString *destinationFilePath = [documentsDirectory stringByAppendingPathComponent:currentAudioFileName];
-    NSError *error;
-    [[NSFileManager defaultManager] copyItemAtURL:url toURL:[NSURL fileURLWithPath:destinationFilePath] error:&error];
-    if (error) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"IMPORT_ERROR") message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
+    NSString *importedFileName = [url lastPathComponent];
+    NSString *newAudioFilePath = [documentsDirectory stringByAppendingPathComponent:importedFileName];
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:newAudioFilePath]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"IMPORT_ERROR") message:LOC(@"FILE_ALREADY_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
+        [[NSFileManager defaultManager] copyItemAtURL:url toURL:[NSURL fileURLWithPath:newAudioFilePath] error:nil];
+    
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:LOC(@"FILE_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
