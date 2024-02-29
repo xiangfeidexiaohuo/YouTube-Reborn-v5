@@ -1,56 +1,56 @@
 // Actions/Prompts
-"SEARCH_TEXT" = "Search";
+"SEARCH_TEXT" = "Tìm kiếm";
 "CANCEL_TEXT" = "Huỷ";
-"RESET_TEXT" = "Reset";
-"SAVE_TEXT" = "Save";
-"OKAY_TEXT" = "Okay";
-"YES_TEXT" = "Yes";
-"NO_TEXT" = "No";
-"MORE_TEXT" = "More";
+"RESET_TEXT" = "Khôi phục";
+"SAVE_TEXT" = "Lưu";
+"OKAY_TEXT" = "Ok";
+"YES_TEXT" = "Có";
+"NO_TEXT" = "Không";
+"MORE_TEXT" = "Nhiều hơn";
 "NOTICE_TEXT" = "Chú ý";
-"COLOR_SAVED" = "Color Saved";
-"IMPORT_VIDEO" = "Import Video To Camera Roll";
-"SAVED_VIDEO" = "Video Saved To Camera Roll";
-"SAVED_VIDEO_2" = "Save To Camera Roll Failed \nMake Sure To Give Camera Roll Permission To YouTube In The iOS Settings App";
-"OPTIONS_TEXT" = "Options";
-"APPLY_TEXT" = "Apply";
+"COLOR_SAVED" = "Lưu màu";
+"IMPORT_VIDEO" = "Nhập Video vào thư viện ảnh";
+"SAVED_VIDEO" = "Video đã được lưu";
+"SAVED_VIDEO_2" = "Không lưu được vào Thư viện ảnh \nĐảm bảo cấp quyền Thư viện ảnh cho YouTube trong ứng dụng Cài đặt iOS";
+"OPTIONS_TEXT" = "Tuỳ chọn";
+"APPLY_TEXT" = "Áp dụng";
 
 // Downloads
 "ALL_TAB" = "All";
 "VIDEO_TAB" = "Video";
 "AUDIO_TAB" = "Audio";
-"DOWNLOAD_NOTICE" = "Đừng thoát khỏi ứng dụng\nỨng dụng này sẽ tự động đóng khi hoàn thành";
-"DELETE_VIDEO" = "Delete Video";
-"DELETE_AUDIO" = "Delete Audio";
-"VIDEO_DELETED" = "Video Successfully Deleted";
-"AUDIO_DELETED" = "Audio Successfully Deleted";
+"DOWNLOAD_NOTICE" = "Vui lòng chờ tải xuống\nGiao diện này sẽ tự động đóng khi tải xong";
+"DELETE_VIDEO" = "Xoá Video";
+"DELETE_AUDIO" = "Xoá Audio";
+"VIDEO_DELETED" = "Đã xoá Video";
+"AUDIO_DELETED" = "Đã xoá Audio";
 "VIEW_DOWNLOADS" = "Xem tải xuống";
 "VIEW_DOWNLOADS_IN_FILZA" = "Xem nội dung tải xuống trong Filza";
-"PROGRESS_PART1_TEXT" = "Progress (Part 1/2): %.02f%%";
-"PROGRESS_PART2_TEXT" = "Progress (Part 2/2): %.02f%%";
-"PROGRESS_TEXT" = "Progress: %.02f%%";
-"DOWNLOAD_AUDIO" = "Download Audio";
-"DOWNLOAD_VIDEO" = "Download Video";
-"EDIT_FILE_NAME" = "Edit File Name";
-"IMPORT_TO_DOWNLOADS" = "Import to Downloads";
-"IMPORT_ERROR" = "File failed to Import!";
-"FILE_ALREADY_IMPORTED" = "❔The file has already been imported to the Downloads folder.";
-"SUCCESSFULLY_IMPORTED_FILE" = "File Successfully Imported!";
-"FILE_IMPORTED" = "✅ The file has successfully been imported to the Downloads folder.";
-"PLAY_APP_TEXT" = "Play In External App";
-"CHOOSE_TEXT" = "Choose App";
-"INFUSE_TEXT" = "Play In Infuse";
-"VLC_TEXT" = "Play In VLC";
-"DOWNLOAD_NOTICE_TEXT" = "Please Pause The Video Before Continuing";
-"DOWNLOAD_FILES_TEXT" = "Download Audio or Video Files";
+"PROGRESS_PART1_TEXT" = "Đang tải (Part 1/2): %.02f%%";
+"PROGRESS_PART2_TEXT" = "Đang tải (Part 2/2): %.02f%%";
+"PROGRESS_TEXT" = "Đang tải: %.02f%%";
+"DOWNLOAD_AUDIO" = "Tải Audio";
+"DOWNLOAD_VIDEO" = "Tải Video";
+"EDIT_FILE_NAME" = "Sửa tên";
+"IMPORT_TO_DOWNLOADS" = "Nhập vào phần tải xuống";
+"IMPORT_ERROR" = "Không thể nhập tệp!";
+"FILE_ALREADY_IMPORTED" = "❔Tệp đã được nhập vào thư mục Tải xuống.";
+"SUCCESSFULLY_IMPORTED_FILE" = "Tệp đã được nhập thành công!";
+"FILE_IMPORTED" = "✅ Tệp đã được nhập thành công vào thư mục Tải xuống.";
+"PLAY_APP_TEXT" = "Phát trong ứng dụng khác";
+"CHOOSE_TEXT" = "Chọn ứng dụng";
+"INFUSE_TEXT" = "Phát trên Infuse";
+"VLC_TEXT" = "Phát trên VLC";
+"DOWNLOAD_NOTICE_TEXT" = "Vui lòng tạm dừng video trước khi tiếp tục";
+"DOWNLOAD_FILES_TEXT" = "Tải xuống tệp âm thanh hoặc video";
 
 // Color Options
 "COLOR_OPTIONS" = "Tùy chọn màu sắc";
 
-"CUSTOM_THEME_TAB" = "Custom Theme";
-"CUSTOM_TINT_TAB" = "Custom Tint";
-"CUSTOM_SYSTEMBLUE_TAB" = "Custom SystemBlue";
-"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+"CUSTOM_THEME_TAB" = "Tuỳ chỉnh chủ đề";
+"CUSTOM_TINT_TAB" = "Tuỳ chỉnh Tint";
+"CUSTOM_SYSTEMBLUE_TAB" = "Tuỳ chỉnh SystemBlue";
+"CUSTOM_PROGRESS_BAR_TAB" = "Tuỳ chỉnh thanh tiến trình";
 
 // Video Options
 "VIDEO_OPTIONS" = "Tùy chọn Video";
@@ -60,7 +60,7 @@
 "ALLOW_HD_ON_CELLULAR_DATA" = "Cho phép HD trên dữ liệu di động";
 "PORTRAIT_FULLSCREEN" = "Toàn màn hình dọc";
 "AUTO_PLAY_IN_FULLSCREEN" = "Tự động phát ở chế độ toàn màn hình";
-"DISABLE_PINCH_TO_ZOOM" = "Disable Pinch to Zoom";
+"DISABLE_PINCH_TO_ZOOM" = "Tắt chụm để thu phóng";
 "DISABLE_VIDEO_ENDSCREEN_POPUPS" = "Tắt cửa sổ bật lên màn hình cuối video";
 "DISABLE_VIDEO_INFO_CARDS" = "Tắt thẻ thông tin video";
 "DISABLE_VIDEO_AUTOPLAY" = "Tắt tính năng tự động phát video";
@@ -70,28 +70,28 @@
 "ALWAYS_SHOW_PLAYER_BAR" = "Luôn hiển thị thanh người chơi";
 "ENABLE_EXTRA_SPEED_OPTIONS" = "Bật tùy chọn tốc độ bổ sung";
 "DISABLE_DOUBLE_TAP_TO_SKIP" = "Tắt chạm hai lần để bỏ qua";
-"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "Bật tính năng nhấn đúp tùy chỉnh để bỏ qua thời lượng";
-"VALUE_10_TEXT" = "Value (Seconds): 10";
-"VALUE_TEXT" = "Value (Seconds): %.lf";
-"DISABLE_PREMIUM_TEXT" = "This feature has been disabled cause you have the 'I Have YouTube Premium' option enabled";
-"ALWAYS_SHOW_BAR_TEXT" = "You must enable 'Disable Related Videos In Overlay' and 'Hide Overlay Quick Actions' in YouTube Reborn settings to use 'Always Show Player Bar'";
+"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "Bật nhấn đúp để bỏ qua thời lượng";
+"VALUE_10_TEXT" = "Giá trị (giây): 10";
+"VALUE_TEXT" = "Giá trị (giây): %.lf";
+"DISABLE_PREMIUM_TEXT" = "Tính năng này đã bị tắt do bạn đã bật tùy chọn 'Tôi có YouTube Premium'";
+"ALWAYS_SHOW_BAR_TEXT" = "Bạn phải bật 'Tắt các video có liên quan trong lớp phủ' và 'Ẩn tác vụ nhanh lớp phủ' trong cài đặt YouTube Reborn để sử dụng 'Luôn hiển thị thanh trình phát'";
 
 // Video Player Options
-"VIDEO_PLAYER_OPTIONS" = "Video Player Options";
+"VIDEO_PLAYER_OPTIONS" = "Tùy chọn trình phát Video";
 
-"HIDE_CONNECT_PLAYER_BUTTON" = "Hide 'Connect' Button under Video Player";
-"HIDE_SHARE_PLAYER_BUTTON" = "Hide 'Share' Button under Video Player";
-"HIDE_REMIX_PLAYER_BUTTON" = "Hide 'Remix' Button under Video Player";
-"HIDE_THANKS_PLAYER_BUTTON" = "Hide 'Thanks' Button under Video Player";
-"HIDE_DOWNLOAD_PLAYER_BUTTON" = "Hide 'Download' Button under Video Player";
-"HIDE_CLIP_PLAYER_BUTTON" = "Hide 'Clip' Button under Video Player";
-"HIDE_SAVE_PLAYER_BUTTON" = "Hide 'Save' Button under Video Player";
+"HIDE_CONNECT_PLAYER_BUTTON" = "Ẩn nút 'Kết nối' trong trình phát video";
+"HIDE_SHARE_PLAYER_BUTTON" = "Ẩn nút 'Chia sẻ' trong trình phát video";
+"HIDE_REMIX_PLAYER_BUTTON" = "Ẩn nút 'Remix' trong trình phát video";
+"HIDE_THANKS_PLAYER_BUTTON" = "Ẩn nút 'Cảm ơn' trong trình phát video";
+"HIDE_DOWNLOAD_PLAYER_BUTTON" = "Ẩn nút 'Tải xuống' trong trình phát video";
+"HIDE_CLIP_PLAYER_BUTTON" = "Ẩn nút 'Clip' trong trình phát video";
+"HIDE_SAVE_PLAYER_BUTTON" = "Ẩn nút 'Lưu' trong trình phát video";
 
 // Overlay Options
-"OVERLAY_OPTIONS" = "Tùy chọn Overlay";
+"OVERLAY_OPTIONS" = "Tùy chọn lớp phủ";
 
-"SHOW_STATUS_BAR_IN_OVERLAY" = "Hiển thị thanh trạng thái trong lớp phủ (Chỉ dọc)";
-"STOCK_VOLUME_HUD" = "Stock Volume HUD";
+"SHOW_STATUS_BAR_IN_OVERLAY" = "Hiển thị thanh trạng thái trong lớp phủ";
+"STOCK_VOLUME_HUD" = "Khối lượng chứng khoán HUD";
 "HIDE_PREVIOUS_BUTTON" = "Ẩn nút trước";
 "HIDE_PREVIOUS_BUTTON_SHADOW" = "Ẩn bóng nút trước";
 "HIDE_NEXT_BUTTON" = "Ẩn nút tiếp theo";
@@ -107,19 +107,19 @@
 "HIDE_QUICK_ACTIONS" = "Ẩn thao tác nhanh";
 "HIDE_CURRENT_TIME" = "Ẩn thời gian hiện tại";
 "HIDE_DURATION" = "Ẩn thời lượng";
-"STATUS_BAR_TEXT" = "This option can't be enabled on notched idevices";
-"IPAD_TEXT" = "This option can't be enabled with 'Enable iPad Style On iPhone' enabled";
+"STATUS_BAR_TEXT" = "Không thể bật tùy chọn này trên các thiết bị có khía";
+"IPAD_TEXT" = "Không thể bật tùy chọn này khi bật 'Bật kiểu iPad trên iPhone'";
 
 // Tab Bar Options
 "TAB_BAR_OPTIONS" = "Tùy chọn Tab Bar";
 
 "STARTUP_PAGE" = "Trang khởi động";
-"HOME_TEXT" = "Home";
-"EXPLORE_TEXT" = "Explore";
+"HOME_TEXT" = "Trang chủ";
+"EXPLORE_TEXT" = "Khám phá";
 "SHORTS_TEXT" = "Shorts";
-"CREATE_TEXT" = "Create";
-"SUB_TEXT" = "Subscriptions";
-"YOU_TEXT" = "You";
+"CREATE_TEXT" = "Tạo";
+"SUB_TEXT" = "Kênh đăng ký";
+"YOU_TEXT" = "Thư viện";
 
 "HIDE_TAB_BAR_LABELS" = "Ẩn nhãn thanh tab";
 "HIDE_EXPLORE_TAB" = "Ẩn tab Khám phá";
@@ -130,10 +130,10 @@
 "REORDER_TABS" = "Sắp xếp lại các tab";
 
 // Picture In Picture Options
-"PICTURE_IN_PICTURE_OPTIONS" = "Tùy chọn Hình trong Hình";
+"PICTURE_IN_PICTURE_OPTIONS" = "Tùy chọn PIP";
 
-"PIP_TEXT" = "Picture In Picture";
-"PIP_NOTICE_TEXT" = "You must enable 'Background Playback' in YouTube Reborn settings to use Picture-In-Picture";
+"PIP_TEXT" = "Hình trong hình";
+"PIP_NOTICE_TEXT" = "Bạn phải bật 'Phát lại trong nền' trong cài đặt YouTube Premium để sử dụng PIP";
 
 "ENABLE_PICTURE_IN_PICTURE" = "Bật Hình trong Hình";
 "HIDE_PIP_ADS_BADGE" = "Ẩn huy hiệu quảng cáo PIP";
@@ -195,7 +195,7 @@
 "DISABLE_HINTS" = "Tắt gợi ý";
 "PREMIUM_YOUTUBE_LOGO" = "Biểu tượng YouTube cao cấp";
 "HIDE_YOUTUBE_LOGO" = "Ẩn biểu tượng YouTube";
-"STICK_NAVIGATION_BAR" = "Thanh điều hướng thanh";
+"STICK_NAVIGATION_BAR" = "Thanh điều hướng dính";
 "AUTO_HIDE_HOME_BAR" = "Tự động ẩn thanh chính";
 "APP_VERSION_SPOOFER" = "Phiên bản ứng dụng giả mạo";
 "ENTER_CUSTOM_APP_VERSION" = "Nhập phiên bản ứng dụng tùy chỉnh";
@@ -204,20 +204,20 @@
 "REBORN_SETTINGS" = "Cài đặt Reborn";
 
 "I_HAVE_YOUTUBE_PREMIUM" = "Tôi có YouTube Premium";
-"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Hide 'OP' Button under Video Player";
-"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' Lớp phủ video";
-"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' lớp phủ quần short";
+"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' trong trình phát video";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' lớp phủ video";
+"HIDE_SHORTS_OVERLAY_OP_BUTTON" = "Ẩn nút 'OP' lớp phủ Short";
 "RESET_COLOR_OPTIONS" = "Đặt lại tùy chọn màu";
-"RESET_YOUTUBE_REBORN_OPTIONS" = "Đặt lại tất cả các tùy chọn tái sinh trên YouTube";
-"RESET_CACHE" = "Clear Cache";
-"RESET_COLOR_TEXT" = "Are you sure you want to reset all your set colors?";
-"RESET_OPTIONS_TEXT" = "Are you sure you want to reset all your options?";
+"RESET_YOUTUBE_REBORN_OPTIONS" = "Đặt lại tất cả các tùy chọn trên YouTube";
+"RESET_CACHE" = "Xoá bộ nhớ tạm";
+"RESET_COLOR_TEXT" = "Bạn có chắc chắn muốn đặt lại tất cả các màu đã đặt của mình không?";
+"RESET_OPTIONS_TEXT" = "Bạn có chắc chắn muốn đặt lại tất cả các tùy chọn của mình không?";
 
 // Credits
 "CREDITS_BUTTON" = "Tín dụng";
 "DEVELOPER_TEXT" = "Nhà phát triển";
-"ICON_DESIGNER_TEXT" = "Trình thiết kế biểu tượng";
-"DEV_SUPPORT_TEXT" = "Development Support";
+"ICON_DESIGNER_TEXT" = "Thiết kế biểu tượng";
+"DEV_SUPPORT_TEXT" = "Hỗ trợ phát triển";
 "FEATURES_DAYANCH96_TEXT" = "Features: \"YouTube Reborn v5 Menu\", \"Clear Cache\", \"Red Progress Bar\", \"Gray Buffer Progress\", \"Stick Navigation Bar\", \"Disable Double tap to seek\"";
 "FEATURES_POOMSMART_TEXT" = "Features: \"YouTube Reborn Button under Video Player\", \"YouTube-X/Adblock\", \"AutoPlay In Fullscreen\"";
 "FEATURES_NGUYEASANG_TEXT" = "Features: \"YouTube Reborn Button under Video Player\"";
