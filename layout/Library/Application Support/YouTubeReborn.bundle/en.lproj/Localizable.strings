@@ -47,10 +47,10 @@
 // Color Options
 "COLOR_OPTIONS" = "Color Options";
 
-"CUSTOM_THEME_TAB" = "Custom Theme";
-"CUSTOM_TINT_TAB" = "Custom Tint";
-"CUSTOM_SYSTEMBLUE_TAB" = "Custom SystemBlue";
-"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+"CUSTOM_THEME_TAB" = "Theme";
+"CUSTOM_TINT_TAB" = "Tint";
+"CUSTOM_SYSTEMBLUE_TAB" = "SystemBlue";
+"CUSTOM_PROGRESS_BAR_TAB" = "Progress Bar";
 
 // Video Options
 "VIDEO_OPTIONS" = "Video Options";
