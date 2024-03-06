@@ -3268,6 +3268,7 @@ static BOOL findCell(ASNodeController *nodeController, NSArray <NSString *> *ide
         BOOL hideDownloadButton = [defaults boolForKey:@"kHideDownloadButton"];
         BOOL hideClipButton = [defaults boolForKey:@"kHideClipButton"];
 //      BOOL hideSaveToPlaylistButton = [defaults boolForKey:@"kHideSaveToPlaylistButton"];
+        BOOL hideCommentSection = [defaults boolForKey:@"kHideCommentSection"];
 
         if (hideShareButton && findCell(nodeController, @[@"id.video.share.button"], defaults)) {
             return CGSizeZero;
@@ -3279,6 +3280,9 @@ static BOOL findCell(ASNodeController *nodeController, NSArray <NSString *> *ide
             return CGSizeZero;
         }
         if (hideClipButton && findCell(nodeController, @[@"clip_button.eml"], defaults)) {
+            return CGSizeZero;
+        }
+        if (hideCommentSection && findCell(nodeController, @[@"id.ui.carousel_header"], defaults)) {
             return CGSizeZero;
         }
     }
