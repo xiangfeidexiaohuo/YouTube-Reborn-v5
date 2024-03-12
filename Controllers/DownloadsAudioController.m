@@ -196,7 +196,7 @@
 
             UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeExportToService];
             documentPicker.delegate = self;
-            documentPicker.name = currentAudioFileName.lastPathComponent;
+            documentPicker.title = currentAudioFileName.lastPathComponent;
             [self presentViewController:documentPicker animated:YES completion:nil];
         }]];
 
@@ -287,7 +287,7 @@
 
     UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithURL:[NSURL fileURLWithPath:filePath] inMode:UIDocumentPickerModeExportToService];
     documentPicker.delegate = self;
-    documentPicker.preferredName = currentAudioFileName.lastPathComponent;
+    documentPicker.title = currentAudioFileName.lastPathComponent;
     [self presentViewController:documentPicker animated:YES completion:nil];
 }
 
