@@ -24,14 +24,12 @@
         NSLog(@"Failed to set audio session category: %@", error);
     }
 
-    UIBarButtonItem *importButton = [[UIBarButtonItem alloc] initWithTitle:LOC(@"IMPORT_FILE") style:UIBarButtonItemStylePlain target:self action:@selector(importFile)];
-
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
     self.searchBar.placeholder = LOC(@"SEARCH_TEXT");
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
-    self.navigationItem.rightBarButtonItems = @[searchButton, importButton];
+    self.navigationItem.rightBarButtonItem = searchButton;
     self.filteredItems = [NSArray array];
     self.isSearching = NO;
 
@@ -46,6 +44,7 @@
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.interactions = @[ [[UIDropInteraction alloc] initWithDelegate:self] ];
     [self.view addSubview:self.tableView];
     [self setupAudioArrays];
 
@@ -248,6 +247,38 @@
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
 }
 
+- (void)performDropWithCoordinator:(id<UIDropCoordinator>)coordinator {
+    CGPoint dropPoint = [coordinator session].locationInView:coordinator.view;
+
+    for (id<UIDragItem> item in coordinator.items) {
+        [item.itemProvider loadFileRepresentationForTypeIdentifier:@"public.file-url" completionHandler:^(NSURL *url, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    NSLog(@"Error loading dropped item: %@", error);
+                } else {
+                    NSString *importedFileName = [url lastPathComponent];
+                    NSString *newAudioFilePath = [documentsDirectory stringByAppendingPathComponent:importedFileName];
+
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:newAudioFilePath]) {
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"IMPORT_ERROR") message:LOC(@"FILE_ALREADY_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
+                        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
+                        [self presentViewController:alert animated:YES completion:nil];
+                    } else {
+                        [[NSFileManager defaultManager] copyItemAtURL:url toURL:[NSURL fileURLWithPath:newAudioFilePath] error:nil];
+
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                            [self setupAudioArrays];
+                            [self.tableView reloadData];
+                        }]];
+                        [self presentViewController:alert animated:YES completion:nil];
+                    }
+                }
+            });
+        }];
+    }
+}
+
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url {
     NSString *importedFileName = [url lastPathComponent];
     NSString *newAudioFilePath = [documentsDirectory stringByAppendingPathComponent:importedFileName];
@@ -268,12 +299,6 @@
     }
 }
 
-- (void)importFile {
-    UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.audio"] inMode:UIDocumentPickerModeImport];
-    documentPicker.delegate = self;
-    [self presentViewController:documentPicker animated:YES completion:nil];
-}
-
 - (void)exportFile {
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
     if (selectedIndexPath) {
@@ -288,6 +313,7 @@
     UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithURL:[NSURL fileURLWithPath:filePath] inMode:UIDocumentPickerModeExportToService];
     documentPicker.delegate = self;
     documentPicker.title = currentAudioFileName.lastPathComponent;
+    documentPicker.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:documentPicker animated:YES completion:nil];
 }
 
