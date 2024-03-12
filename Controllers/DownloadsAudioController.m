@@ -79,7 +79,6 @@
     NSString *searchText = searchBar.text;
     
     if (searchText.length > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
         self.isSearching = YES;
     } else {
         self.filteredItems = [NSArray array];
@@ -288,7 +287,7 @@
 
     UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc] initWithURL:[NSURL fileURLWithPath:filePath] inMode:UIDocumentPickerModeExportToService];
     documentPicker.delegate = self;
-    documentPicker.name = currentAudioFileName.lastPathComponent;
+    documentPicker.preferredName = currentAudioFileName.lastPathComponent;
     [self presentViewController:documentPicker animated:YES completion:nil];
 }
 
