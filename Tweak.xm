@@ -3099,6 +3099,7 @@ BOOL selectedTabIndex = NO;
 - (BOOL)watchCollapseButtonHidden { return YES; }
 - (void)setWatchCollapseButtonAvailable:(BOOL)available { %orig(available); }
 %end
+%end
 
 // Hide Fullscreen Button in Video Player - @arichornlover
 %group gHideFullscreenButton
