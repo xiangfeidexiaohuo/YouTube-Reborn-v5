@@ -3093,6 +3093,21 @@ BOOL selectedTabIndex = NO;
 %end
 %end
 
+// Hide Collapse (Arrow - V) Button in Video Player - @arichornlover
+%group gHideCollapseButton
+%hook YTMainAppControlsOverlayView
+- (BOOL)watchCollapseButtonHidden { return YES; }
+- (void)setWatchCollapseButtonAvailable:(BOOL)available { %orig(available); }
+%end
+
+// Hide Fullscreen Button in Video Player - @arichornlover
+%group gHideFullscreenButton
+%hook YTInlinePlayerBarContainerView
+- (BOOL)canShowFullscreenButton { return NO; }
+- (BOOL)fullscreenButtonDisabled { return YES; }
+%end
+%end
+
 %group gHidePlayerBarHeatwave
 %hook YTPlayerBarHeatwaveView
 - (id)initWithFrame:(CGRect)frame heatmap:(id)heat {
@@ -3369,6 +3384,8 @@ NSBundle *YouTubeRebornBundle() {
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kPortraitFullscreen"] == YES) %init(gPortraitFullscreen);
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kRedProgressBar"] == YES) %init(gRedProgressBar);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kGrayBufferProgress"] == YES) %init(gGrayBufferProgress);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCollapseButton"] == YES) %init(gHideCollapseButton);
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHideFullscreenButton"] == YES) %init(gHideFullscreenButton);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayerBarHeatwave"] == YES) %init(gHidePlayerBarHeatwave);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureAdsBadge"] == YES) %init(gHidePictureInPictureAdsBadge);
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePictureInPictureSponsorBadge"] == YES) %init(gHidePictureInPictureSponsorBadge);
