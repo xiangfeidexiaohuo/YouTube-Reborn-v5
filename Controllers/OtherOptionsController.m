@@ -3,6 +3,7 @@
 
 @interface OtherOptionsController ()
 - (void)coloursView;
+- (void)showVersionAlert;
 @end
 
 @implementation OtherOptionsController
@@ -361,6 +362,5 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kAppVersionSpoofer"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    self.versionTextField.enabled = sender.isOn;
 }
 @end
