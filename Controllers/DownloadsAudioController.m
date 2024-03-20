@@ -247,7 +247,7 @@
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
 }
 
-- (void)performDropWithCoordinator:(id<UIDropCoordinator>)coordinator {
+- (void)performDropWithCoordinator:(id<UIDropInteraction>)coordinator {
     CGPoint dropPoint = [coordinator session].locationInView:self.view;
     for (UIDragItem *item in coordinator.items) {
         NSItemProvider *itemProvider = item.itemProvider;
