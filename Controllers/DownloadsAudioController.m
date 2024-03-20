@@ -248,7 +248,7 @@
 }
 
 - (void)performDropWithCoordinator:(id<UIDropSession>)session {
-    CGPoint dropPoint = [((id<UIDragSession>)[(id)session) localDragSession];
+    CGPoint dropPoint = [(id<UIDragSession>)session localDragSession].location;
     UIDragItem *item = session.items.firstObject;
     NSItemProvider *itemProvider = item.itemProvider;
 
@@ -288,7 +288,6 @@
     UIDragInteraction *dragInteraction = [[UIDragInteraction alloc] initWithDelegate:(id<UIDragInteractionDelegate>)self];
     return dragInteraction;
 }
-
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
     for (NSURL *url in urls) {
         NSString *importedFileName = [url lastPathComponent];
