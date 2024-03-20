@@ -247,9 +247,9 @@
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
 }
 
-- (void)performDropWithCoordinator:(id<UIDropInteraction>)coordinator {
+- (void)performDropWithCoordinator:(id<UITableViewDropCoordinator>)coordinator {
     CGPoint dropPoint = [coordinator session].locationInView:self.view;
-    for (UIDragItem *item in coordinator.items) {
+    for (id<UIDragItem> item in coordinator.items) {
         NSItemProvider *itemProvider = item.itemProvider;
         [itemProvider loadFileRepresentationForTypeIdentifier:@"public.file-url" completionHandler:^(NSURL *url, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
