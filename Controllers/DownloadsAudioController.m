@@ -248,7 +248,7 @@
 }
 
 - (void)performDropWithCoordinator:(id<UIDropSession>)session {
-CGPoint dropPoint = [(id<UIDragSession>)[(id)session localDragSession].self.view];
+    CGPoint dropPoint = [(id<UIDragSession>)[(id)session localDragSession]];
     UIDragItem *item = session.items.firstObject;
     NSItemProvider *itemProvider = item.itemProvider;
 
