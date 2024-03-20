@@ -210,23 +210,6 @@
     [self.tableView reloadData];
 }
 
-- (void)versionTextFieldChanged:(UITextField *)textField {
-    NSString *customVersion = textField.text;
-    NSCharacterSet *allowedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
-    NSCharacterSet *inputCharacterSet = [NSCharacterSet characterSetWithCharactersInString:customVersion];
-    if (![allowedCharacterSet isSupersetOfSet:inputCharacterSet] || customVersion.length < 7) {
-        textField.text = @"";
-        return;
-    }
-    if (customVersion.length >= 6) {
-        NSMutableString *mutableCustomVersion = [customVersion mutableCopy];
-        [mutableCustomVersion replaceCharactersInRange:NSMakeRange(2, 1) withString:@"."];
-        [mutableCustomVersion replaceCharactersInRange:NSMakeRange(5, 1) withString:@"."];
-        textField.text = mutableCustomVersion;
-    }
-    self.customAppVersion = textField.text;
-}
-
 @end
 
 @implementation OtherOptionsController (Privates)
