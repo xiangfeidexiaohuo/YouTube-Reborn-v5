@@ -20,14 +20,20 @@
     [super viewDidLoad];
     [self coloursView];
 
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    NSError *error = nil;
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:&error];
+    if (error) {
+        NSLog(@"Failed to set audio session category: %@", error);
+    }
+
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
     self.searchBar.placeholder = LOC(@"SEARCH_TEXT");
 
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
 
-    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"slider.horizontal.3"] style:UIBarButtonItemStylePlain target:self action:@selector(filterButtonTapped)];
-    self.navigationItem.rightBarButtonItems = @[searchButton, filterButton];
+    self.navigationItem.rightBarButtonItem = searchButton;
     self.filteredItems = [NSArray array];
     self.isSearching = NO;
 
@@ -294,37 +300,6 @@
     }
     self.allItems = [NSArray arrayWithArray:filePathsVideoArray];
 }
-
-- (void)filterButtonTapped {
-    UIAlertController *filterAlert = [UIAlertController alertControllerWithTitle:LOC(@"Filter Videos") message:LOC(@"Enter the maximum duration in seconds:") preferredStyle:UIAlertControllerStyleAlert];
-    [filterAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = LOC(@"Enter seconds");
-        textField.keyboardType = UIKeyboardTypeNumberPad;
-    }];
-    UIAlertAction *applyFilter = [UIAlertAction actionWithTitle:LOC(@"APPLY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *textField = filterAlert.textFields.firstObject;
-        NSString *inputSeconds = textField.text;
-        
-        double maxDuration = [inputSeconds intValue];
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            NSString *videoFileName = (NSString *)evaluatedObject;
-            NSString *filePath = [documentsDirectory stringByAppendingPathComponent:videoFileName];
-            AVAsset *asset = [AVAsset assetWithURL:[NSURL fileURLWithPath:filePath]];
-            CMTime duration = asset.duration;
-            double durationSeconds = CMTimeGetSeconds(duration);
-            return durationSeconds <= maxDuration;
-        }];
-        
-        self.filteredItems = [self.allItems filteredArrayUsingPredicate:predicate];
-        self.isSearching = YES;
-        [self.tableView reloadData];
-    }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:nil];
-    [filterAlert addAction:applyFilter];
-    [filterAlert addAction:cancelAction];
-    [self presentViewController:filterAlert animated:YES completion:nil];
-}
-
 
 - (void)coloursView {
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
