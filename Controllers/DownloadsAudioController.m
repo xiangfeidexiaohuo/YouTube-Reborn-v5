@@ -247,15 +247,15 @@
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
 }
 
-- (void)performDropWithCoordinator:(id<UITableViewDropCoordinator>)coordinator {
-    CGPoint dropPoint = [coordinator session].locationInView:self.view;
-    for (id<UIDragItem> item in coordinator.items) {
-        NSItemProvider *itemProvider = item.itemProvider;
-        [itemProvider loadFileRepresentationForTypeIdentifier:@"public.file-url" completionHandler:^(NSURL *url, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (error) {
-                    NSLog(@"Error loading dropped item: %@", error);
-                } else {
+- (void)performDropWithCoordinator:(id<UIDropSession>)session {
+    CGPoint dropPoint = [session localDragSession].locationInView:self.view;
+    UIDragItem *item = session.items.firstObject;
+    NSItemProvider *itemProvider = item.itemProvider;
+
+    if ([itemProvider hasItemConformingToTypeIdentifier:(__bridge NSString *)kUTTypeAudio]) {
+        [itemProvider loadItemForTypeIdentifier:(__bridge NSString *)kUTTypeAudio options:nil completionHandler:^(NSURL *url, NSError *error) {
+            if (url) {
+                dispatch_async(dispatch_get_main_queue(), ^{
                     NSString *importedFileName = [url lastPathComponent];
                     NSString *newAudioFilePath = [documentsDirectory stringByAppendingPathComponent:importedFileName];
 
@@ -273,10 +273,20 @@
                         }]];
                         [self presentViewController:alert animated:YES completion:nil];
                     }
-                }
-            });
+                });
+            } else {
+                NSLog(@"Error loading dropped item: %@", error);
+            }
         }];
     }
+}
+- (UIDropInteraction *)dropInteraction {
+    UIDropInteraction *dropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
+    return dropInteraction;
+}
+- (UIDragInteraction *)dragInteraction {
+    UIDragInteraction *dragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
+    return dragInteraction;
 }
 
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
