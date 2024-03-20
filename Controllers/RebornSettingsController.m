@@ -256,6 +256,8 @@
 	        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kEnableiPhoneStyleOniPad"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kRedProgressBar"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kGrayBufferProgress"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideCollapseButton"];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHideFullscreenButton"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePlayerBarHeatwave"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureAdsBadge"];
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"kHidePictureInPictureSponsorBadge"];
