@@ -159,18 +159,32 @@
         cell.accessoryView = appVersionSpoofer;
 	}
     if (indexPath.row == 13) {
-        UITextField *versionTextField = [cell.contentView viewWithTag:123];
-        if (!versionTextField) {
-            versionTextField = [[UITextField alloc] initWithFrame:CGRectMake(cell.bounds.origin.x + cell.textLabel.frame.size.width + 20, 10, cell.bounds.size.width - cell.textLabel.frame.size.width - 30, cell.bounds.size.height - 20)];
-            versionTextField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
-            versionTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-            versionTextField.enabled = appVersionSpoofer.isOn;
-            [versionTextField addTarget:self action:@selector(versionTextFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-            versionTextField.tag = 123;
-            [cell.contentView addSubview:versionTextField];
-            self.versionTextField = versionTextField;
-	    }
-	}
+        cell.textLabel.text = LOC(@"APP_VERSION_SPOOFER");
+        UIButton *alertViewButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [alertViewButton setTitle:LOC(@"ENTER_CUSTOM_APP_VERSION") forState:UIControlStateNormal];
+        [alertViewButton addTarget:self action:@selector(showVersionAlert) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryView = alertViewButton;
+        }
+- (void)showVersionAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"ENTER_CUSTOM_APP_VERSION") message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
+        textField.text = self.customAppVersion;
+    }];
+    UIAlertAction *resetAction = [UIAlertAction actionWithTitle:LOC(@"RESET_TEXT") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textField = alert.textFields.firstObject;
+        textField.text = @"";
+        self.customAppVersion = @"";
+    }];
+    UIAlertAction *saveAction = [UIAlertAction actionWithTitle:LOC(@"SAVE_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textField = alert.textFields.firstObject;
+        self.customAppVersion = textField.text;
+    }]; 
+    UIAlertAction *closeAction = [UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:resetAction];
+    [alert addAction:saveAction];
+    [alert addAction:closeAction];
+    [self presentViewController:alert animated:YES completion:nil];
     }
     return cell;
 }
