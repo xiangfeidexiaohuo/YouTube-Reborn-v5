@@ -248,7 +248,7 @@
 }
 
 - (void)performDropWithCoordinator:(id<UIDropSession>)session {
-    CGPoint dragLocation = [session locationInView:self.tableMapView.contentView];
+    CGPoint dropPoint = [((id<UIDragSession>)[(id)session) localDragSession];
     UIDragItem *item = session.items.firstObject;
     NSItemProvider *itemProvider = item.itemProvider;
 
