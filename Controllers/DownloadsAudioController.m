@@ -285,7 +285,7 @@
     return dropInteraction;
 }
 - (UIDragInteraction *)dragInteraction {
-    UIDragInteraction *dragInteraction = [[UIDragInteraction alloc] initWithDelegate:self];
+    UIDragInteraction *dragInteraction = [[UIDragInteraction alloc] initWithDelegate:(id<UIDragInteractionDelegate>)self];
     return dragInteraction;
 }
 
