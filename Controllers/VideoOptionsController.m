@@ -43,9 +43,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"] == YES) {
-        return 17;
+        return 19;
     }
-    return 16;
+    return 18;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -154,14 +154,28 @@
             grayBufferProgress.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kGrayBufferProgress"];
             cell.accessoryView = grayBufferProgress;
         }
-        if (indexPath.row == 11) {
+	if (indexPath.row == 11) {
+            cell.textLabel.text = LOC(@"HIDE_COLLAPSE_BUTTON");
+            UISwitch *hideCollapseButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideCollapseButton addTarget:self action:@selector(toggleHideCollapseButton:) forControlEvents:UIControlEventValueChanged];
+            hideCollapseButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideCollapseButton"];
+            cell.accessoryView = hideCollapseButton;
+        }
+	if (indexPath.row == 12) {
+            cell.textLabel.text = LOC(@"HIDE_FULLSCREEN_BUTTON");
+            UISwitch *hideFullscreenButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+            [hideFullscreenButton addTarget:self action:@selector(toggleHideFullscreenButton:) forControlEvents:UIControlEventValueChanged];
+            hideFullscreenButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideFullscreenButton"];
+            cell.accessoryView = hideFullscreenButton;
+        }
+        if (indexPath.row == 13) {
             cell.textLabel.text = LOC(@"HIDE_PLAYER_BAR_HEATWAVE");
             UISwitch *hidePlayerBarHeatwave = [[UISwitch alloc] initWithFrame:CGRectZero];
             [hidePlayerBarHeatwave addTarget:self action:@selector(toggleHidePlayerBarHeatwave:) forControlEvents:UIControlEventValueChanged];
             hidePlayerBarHeatwave.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHidePlayerBarHeatwave"];
             cell.accessoryView = hidePlayerBarHeatwave;
         }
-        if (indexPath.row == 12) {
+        if (indexPath.row == 14) {
             cell.textLabel.text = LOC(@"ALWAYS_SHOW_PLAYER_BAR");
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableRelatedVideosInOverlay"] == NO || [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideOverlayQuickActions"] == NO) {
                 cell.accessoryType = UITableViewCellAccessoryDetailButton;
@@ -172,28 +186,28 @@
                 cell.accessoryView = alwaysShowPlayerBar;
             }
         }
-        if (indexPath.row == 13) {
+        if (indexPath.row == 15) {
             cell.textLabel.text = LOC(@"ENABLE_EXTRA_SPEED_OPTIONS");
             UISwitch *enableExtraSpeedOptions = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableExtraSpeedOptions addTarget:self action:@selector(toggleExtraSpeedOptions:) forControlEvents:UIControlEventValueChanged];
             enableExtraSpeedOptions.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableExtraSpeedOptions"];
             cell.accessoryView = enableExtraSpeedOptions;
         }
-        if (indexPath.row == 14) {
+        if (indexPath.row == 16) {
             cell.textLabel.text = LOC(@"DISABLE_DOUBLE_TAP_TO_SKIP");
             UISwitch *disableDoubleTapToSkip = [[UISwitch alloc] initWithFrame:CGRectZero];
             [disableDoubleTapToSkip addTarget:self action:@selector(toggleDisableDoubleTapToSkip:) forControlEvents:UIControlEventValueChanged];
             disableDoubleTapToSkip.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kDisableDoubleTapToSkip"];
             cell.accessoryView = disableDoubleTapToSkip;
         }
-        if (indexPath.row == 15) {
+        if (indexPath.row == 17) {
             cell.textLabel.text = LOC(@"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION");
             UISwitch *enableCustomDoubleTapToSkipDuration = [[UISwitch alloc] initWithFrame:CGRectZero];
             [enableCustomDoubleTapToSkipDuration addTarget:self action:@selector(toggleEnableCustomDoubleTapToSkipDuration:) forControlEvents:UIControlEventValueChanged];
             enableCustomDoubleTapToSkipDuration.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kEnableCustomDoubleTapToSkipDuration"];
             cell.accessoryView = enableCustomDoubleTapToSkipDuration;
         }
-        if (indexPath.row == 16) {
+        if (indexPath.row == 18) {
             UIStepper *customDoubleTapToSkipDurationStepper = [[UIStepper alloc] initWithFrame:CGRectZero];
             customDoubleTapToSkipDurationStepper.stepValue = 1;
             customDoubleTapToSkipDurationStepper.minimumValue = 1;
@@ -221,7 +235,7 @@
 
         [self presentViewController:alertError animated:YES completion:nil];
     }
-    if (indexPath.row == 12) {
+    if (indexPath.row == 14) {
         UIAlertController *alertError = [UIAlertController alertControllerWithTitle:LOC(@"NOTICE_TEXT") message:LOC(@"ALWAYS_SHOW_BAR_TEXT") preferredStyle:UIAlertControllerStyleAlert];
 
         [alertError addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
@@ -388,6 +402,26 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kGrayBufferProgress"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideCollapseButton:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideCollapseButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideCollapseButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)toggleHideFullscreenButton:(UISwitch *)sender {
+    if ([sender isOn]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideFullscreenButton"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideFullscreenButton"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
