@@ -166,6 +166,7 @@
         [alertViewButton addTarget:self action:@selector(showVersionAlert) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = alertViewButton;
         }
+}
 - (void)showVersionAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"ENTER_CUSTOM_APP_VERSION") message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
