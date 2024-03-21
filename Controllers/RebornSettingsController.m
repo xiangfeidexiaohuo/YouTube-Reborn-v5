@@ -3,7 +3,6 @@
 
 @interface RebornSettingsController ()
 - (void)coloursView;
-NSData *settingsData;
 @end
 
 @implementation RebornSettingsController
@@ -11,6 +10,7 @@ NSData *settingsData;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coloursView];
+    NSData *settingsData;
 
     self.title = LOC(@"REBORN_SETTINGS");
 
