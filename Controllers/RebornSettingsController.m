@@ -3,6 +3,7 @@
 
 @interface RebornSettingsController ()
 - (void)coloursView;
+NSData *settingsData;
 @end
 
 @implementation RebornSettingsController
@@ -318,7 +319,7 @@
     if (indexPath.section == 4) {
         if (indexPath.row == 0) {
             NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
-            settingsData = [NSKeyedArchiver archivedDataWithRootObject:settingsDict];
+            NSData *settingsData = [NSKeyedArchiver archivedDataWithRootObject:settingsDict];
         } else {
             NSDictionary *settingsDict = [NSKeyedUnarchiver unarchiveObjectWithData:settingsData];
             for (NSString *key in settingsDict.allKeys) {
