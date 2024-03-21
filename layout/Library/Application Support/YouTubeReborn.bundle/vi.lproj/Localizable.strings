@@ -69,6 +69,8 @@
 "DISABLE_VIDEO_AUTOPLAY" = "Tắt tính năng tự động phát video";
 "RED_PROGRESS_BAR" = "Thanh tiến trình màu đỏ";
 "GRAY_BUFFER_PROGRESS" = "Tiến trình bộ đệm xám";
+"HIDE_COLLAPSE_BUTTON" = "Hide Collapse Button";
+"HIDE_FULLSCREEN_BUTTON" = "Hide Fullscreen Button";
 "HIDE_PLAYER_BAR_HEATWAVE" = "Ẩn sóng nhiệt thanh người chơi";
 "ALWAYS_SHOW_PLAYER_BAR" = "Luôn hiển thị thanh người chơi";
 "ENABLE_EXTRA_SPEED_OPTIONS" = "Bật tùy chọn tốc độ bổ sung";
