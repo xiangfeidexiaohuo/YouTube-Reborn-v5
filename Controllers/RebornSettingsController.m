@@ -10,7 +10,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self coloursView];
-    NSData *settingsData;
 
     self.title = LOC(@"REBORN_SETTINGS");
 
@@ -321,6 +320,7 @@
             NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
             NSData *settingsData = [NSKeyedArchiver archivedDataWithRootObject:settingsDict];
         } else {
+            NSData *settingsData = nil;
             NSDictionary *settingsDict = [NSKeyedUnarchiver unarchiveObjectWithData:settingsData];
             for (NSString *key in settingsDict.allKeys) {
                 [[NSUserDefaults standardUserDefaults] setObject:settingsDict[key] forKey:key];
