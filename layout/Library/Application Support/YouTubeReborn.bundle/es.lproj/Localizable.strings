@@ -69,6 +69,8 @@
 "DISABLE_VIDEO_AUTOPLAY" = "Desactivar reproducción automática de vídeo";
 "RED_PROGRESS_BAR" = "Barra de progreso roja";
 "GRAY_BUFFER_PROGRESS" = "Progreso del búfer gris";
+"HIDE_COLLAPSE_BUTTON" = "Hide Collapse Button";
+"HIDE_FULLSCREEN_BUTTON" = "Hide Fullscreen Button";
 "HIDE_PLAYER_BAR_HEATWAVE" = "Ocultar Heatwave de la barra del reproductor";
 "ALWAYS_SHOW_PLAYER_BAR" = "Mostrar siempre la barra de reproductor";
 "ENABLE_EXTRA_SPEED_OPTIONS" = "Activar opciones de velocidad extra";
