@@ -38,7 +38,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -52,6 +52,9 @@
         return 1;
     }
     if (section == 3) {
+        return 2;
+    }
+    if (section == 4) {
         return 2;
     }
     return 0;
@@ -133,6 +136,18 @@
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
         }
+    }
+    if (indexPath.section == 4) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ImportExportCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ImportExportCell"];
+            if (indexPath.row == 0) {
+                cell.textLabel.text = LOC(@"EXPORT_OPTIONS");
+            } else {
+                cell.textLabel.text = LOC(@"IMPORT_OPTIONS");
+            }
+        }
+        return cell;
     }
     return cell;
 }
@@ -297,6 +312,20 @@
             }]];
 
             [self presentViewController:alert animated:YES completion:nil];
+        }
+    }
+
+    if (indexPath.section == 4) {
+        if (indexPath.row == 0) {
+            NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+            NSData *settingsData = [NSKeyedArchiver archivedDataWithRootObject:settingsDict];
+        } else {
+            NSDictionary *settingsDict = [NSKeyedUnarchiver unarchiveObjectWithData:settingsData];
+            for (NSString *key in settingsDict.allKeys) {
+                [[NSUserDefaults standardUserDefaults] setObject:settingsDict[key] forKey:key];
+            }
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self.tableView reloadData];
         }
     }
 }
