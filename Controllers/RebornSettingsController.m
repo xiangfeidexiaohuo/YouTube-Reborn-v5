@@ -318,7 +318,7 @@
     if (indexPath.section == 4) {
         if (indexPath.row == 0) {
             NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
-            NSData *settingsData = [NSKeyedArchiver archivedDataWithRootObject:settingsDict];
+            settingsData = [NSKeyedArchiver archivedDataWithRootObject:settingsDict];
         } else {
             NSDictionary *settingsDict = [NSKeyedUnarchiver unarchiveObjectWithData:settingsData];
             for (NSString *key in settingsDict.allKeys) {
