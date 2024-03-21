@@ -166,7 +166,10 @@
         [alertViewButton addTarget:self action:@selector(showVersionAlert) forControlEvents:UIControlEventTouchUpInside];
         cell.accessoryView = alertViewButton;
         }
+    }
+    return cell;
 }
+
 - (void)showVersionAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"ENTER_CUSTOM_APP_VERSION") message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -181,14 +184,12 @@
     UIAlertAction *saveAction = [UIAlertAction actionWithTitle:LOC(@"SAVE_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UITextField *textField = alert.textFields.firstObject;
         self.customAppVersion = textField.text;
-    }]; 
+    }];
     UIAlertAction *closeAction = [UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:resetAction];
     [alert addAction:saveAction];
     [alert addAction:closeAction];
     [self presentViewController:alert animated:YES completion:nil];
-    }
-    return cell;
 }
 
 - (void)coloursView {
