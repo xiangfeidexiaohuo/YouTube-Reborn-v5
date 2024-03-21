@@ -49,10 +49,13 @@
 
 // Color Options
 "COLOR_OPTIONS" = "界面颜色选项";
+"COLOR_OPTIONS_2" = "标签颜色";
+"COLOR_OPTIONS_3" = "SystemBlue 颜色";
+"COLOR_OPTIONS_4" = "进度条颜色";
 
 "CUSTOM_THEME_TAB" = "自定义主题";
 "CUSTOM_TINT_TAB" = "定制色调";
-"CUSTOM_SYSTEMBLUE_TAB" = "定制系统蓝色";
+"CUSTOM_SYSTEMBLUE_TAB" = "定制 SystemBlue";
 "CUSTOM_PROGRESS_BAR_TAB" = "定制进度条";
 
 // Video Options
@@ -200,7 +203,7 @@
 "DISABLE_HINTS" = "禁用提示";
 "PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
 "HIDE_YOUTUBE_LOGO" = "隐藏 YouTube Logo";
-"STICK_NAVIGATION_BAR" = "条形导航栏";
+"STICK_NAVIGATION_BAR" = "固定导航栏";
 "AUTO_HIDE_HOME_BAR" = "自动隐藏手势横条";
 "APP_VERSION_SPOOFER" = "程序版本伪装";
 "ENTER_CUSTOM_APP_VERSION" = "输入自定义油管版本号";
