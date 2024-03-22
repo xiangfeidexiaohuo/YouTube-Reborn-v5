@@ -49,6 +49,9 @@
 
 // Color Options
 "COLOR_OPTIONS" = "Tùy chọn màu sắc";
+"COLOR_OPTIONS_2" = "Tint Color";
+"COLOR_OPTIONS_3" = "SystemBlue Color";
+"COLOR_OPTIONS_4" = "Progreess Bar Colour";
 
 "CUSTOM_THEME_TAB" = "Tuỳ chỉnh chủ đề";
 "CUSTOM_TINT_TAB" = "Tuỳ chỉnh Tint";

@@ -49,10 +49,13 @@
 
 // Color Options
 "COLOR_OPTIONS" = "界面颜色选项";
+"COLOR_OPTIONS_2" = "标签颜色";
+"COLOR_OPTIONS_3" = "SystemBlue 颜色";
+"COLOR_OPTIONS_4" = "进度条颜色";
 
 "CUSTOM_THEME_TAB" = "自定义主题";
 "CUSTOM_TINT_TAB" = "定制色调";
-"CUSTOM_SYSTEMBLUE_TAB" = "定制系统蓝色";
+"CUSTOM_SYSTEMBLUE_TAB" = "定制 SystemBlue";
 "CUSTOM_PROGRESS_BAR_TAB" = "定制进度条";
 
 // Video Options
@@ -69,8 +72,8 @@
 "DISABLE_VIDEO_AUTOPLAY" = "禁用视频自动播放";
 "RED_PROGRESS_BAR" = "红色进度条";
 "GRAY_BUFFER_PROGRESS" = "灰色缓冲区进度";
-"HIDE_COLLAPSE_BUTTON" = "Hide Collapse Button";
-"HIDE_FULLSCREEN_BUTTON" = "Hide Fullscreen Button";
+"HIDE_COLLAPSE_BUTTON" = "隐藏折叠按钮";
+"HIDE_FULLSCREEN_BUTTON" = "隐藏全屏按钮";
 "HIDE_PLAYER_BAR_HEATWAVE" = "隐藏播放栏热度频谱";
 "ALWAYS_SHOW_PLAYER_BAR" = "始终显示播放栏";
 "ENABLE_EXTRA_SPEED_OPTIONS" = "启用额外速度选项";
@@ -200,7 +203,7 @@
 "DISABLE_HINTS" = "禁用提示";
 "PREMIUM_YOUTUBE_LOGO" = "Premium YouTube Logo";
 "HIDE_YOUTUBE_LOGO" = "隐藏 YouTube Logo";
-"STICK_NAVIGATION_BAR" = "条形导航栏";
+"STICK_NAVIGATION_BAR" = "固定导航栏";
 "AUTO_HIDE_HOME_BAR" = "自动隐藏手势横条";
 "APP_VERSION_SPOOFER" = "程序版本伪装";
 "ENTER_CUSTOM_APP_VERSION" = "输入自定义油管版本号";

@@ -49,6 +49,9 @@
 
 // Color Options
 "COLOR_OPTIONS" = "カラーオプション";
+"COLOR_OPTIONS_2" = "Tint Color";
+"COLOR_OPTIONS_3" = "SystemBlue Color";
+"COLOR_OPTIONS_4" = "Progreess Bar Colour";
 
 "CUSTOM_THEME_TAB" = "Custom Theme";
 "CUSTOM_TINT_TAB" = "Custom Tint";
