@@ -1,12 +1,12 @@
 // Actions/Prompts
-"SEARCH_TEXT" = "Search";
+"SEARCH_TEXT" = "検索";
 "CANCEL_TEXT" = "キャンセル";
 "RESET_TEXT" = "リセット";
 "SAVE_TEXT" = "保存";
 "OKAY_TEXT" = "OK";
 "YES_TEXT" = "はい";
 "NO_TEXT" = "いいえ";
-"MORE_TEXT" = "More";
+"MORE_TEXT" = "その他";
 "NOTICE_TEXT" = "通知";
 "COLOR_SAVED" = "保存しました";
 "IMPORT_VIDEO" = "動画をカメラロールに保存";
@@ -31,15 +31,15 @@
 "PROGRESS_TEXT" = "進行状況: %.02f%%";
 "DOWNLOAD_AUDIO" = "音声をダウンロード";
 "DOWNLOAD_VIDEO" = "動画をダウンロード";
-"EDIT_FILE_NAME" = "Edit File Name";
-"IMPORT_FILE" = "Import File";
-"EXPORT_FILE" = "Export File";
-"IMPORT_ERROR" = "File failed to Import!";
-"EXPORT_ERROR" = "File failed to Export!";
-"FILE_ALREADY_IMPORTED" = "The file has already been Imported?";
-"FILE_ALREADY_EXPORTED" = "The file has already been Exported?";
-"SUCCESSFULLY_IMPORTED_FILE" = "File has Successfully Imported!";
-"SUCCESSFULLY_EXPORTED_FILE" = "File has Successfully Exported!";
+"EDIT_FILE_NAME" = "ファイル名を編集";
+"IMPORT_FILE" = "ファイルをインポート";
+"EXPORT_FILE" = "ファイルをエクスポート";
+"IMPORT_ERROR" = "ファイルのインポートに失敗しました!";
+"EXPORT_ERROR" = "ファイルのエクスポートに失敗しました!";
+"FILE_ALREADY_IMPORTED" = "ファイルはすでにインポート済みです";
+"FILE_ALREADY_EXPORTED" = "ファイルはすでにエクスポート済みです";
+"SUCCESSFULLY_IMPORTED_FILE" = "ファイルが正常にインポートされました!";
+"SUCCESSFULLY_EXPORTED_FILE" = "ファイルが正常にエクスポートされました!";
 "PLAY_APP_TEXT" = "外部アプリで再生";
 "CHOOSE_TEXT" = "アプリを選択";
 "INFUSE_TEXT" = "Infuseで再生";
@@ -49,51 +49,51 @@
 
 // Color Options
 "COLOR_OPTIONS" = "カラーオプション";
-"COLOR_OPTIONS_2" = "Tint Color";
-"COLOR_OPTIONS_3" = "SystemBlue Color";
-"COLOR_OPTIONS_4" = "Progreess Bar Colour";
+"COLOR_OPTIONS_2" = "色合い";
+"COLOR_OPTIONS_3" = "SystemBlueの色";
+"COLOR_OPTIONS_4" = "プログレスバーの色";
 
-"CUSTOM_THEME_TAB" = "Custom Theme";
-"CUSTOM_TINT_TAB" = "Custom Tint";
-"CUSTOM_SYSTEMBLUE_TAB" = "Custom SystemBlue";
-"CUSTOM_PROGRESS_BAR_TAB" = "Custom Progress Bar";
+"CUSTOM_THEME_TAB" = "テーマ";
+"CUSTOM_TINT_TAB" = "色合い";
+"CUSTOM_SYSTEMBLUE_TAB" = "SystemBlue";
+"CUSTOM_PROGRESS_BAR_TAB" = "プログレスバー";
 
 // Video Options
 "VIDEO_OPTIONS" = "動画の設定";
 
-"ENABLE_NO_ADS" = "広告を削除する";
+"ENABLE_NO_ADS" = "広告を削除";
 "ENABLE_BACKGROUND_PLAYBACK" = "バックグラウンド再生を有効化";
-"ALLOW_HD_ON_CELLULAR_DATA" = "モバイルネットワークでHD再生を許可";
-"PORTRAIT_FULLSCREEN" = "フルスクリーン(縦画面)";
+"ALLOW_HD_ON_CELLULAR_DATA" = "モバイルネットワークでのHD再生を許可";
+"PORTRAIT_FULLSCREEN" = "フルスクリーン(縦)";
 "AUTO_PLAY_IN_FULLSCREEN" = "フルスクリーンで自動再生";
 "DISABLE_PINCH_TO_ZOOM" = "ピンチで拡大を無効化";
-"DISABLE_VIDEO_ENDSCREEN_POPUPS" = "動画終了画面のポップアップを無効化";
-"DISABLE_VIDEO_INFO_CARDS" = "動画情報カードを無効化";
+"DISABLE_VIDEO_ENDSCREEN_POPUPS" = "エンドスクリーンのポップアップを無効化";
+"DISABLE_VIDEO_INFO_CARDS" = "動画の情報カードを無効化";
 "DISABLE_VIDEO_AUTOPLAY" = "動画の自動再生を無効化";
 "RED_PROGRESS_BAR" = "赤色のプログレスバー";
 "GRAY_BUFFER_PROGRESS" = "灰色のバッファプログレスバー";
-"HIDE_COLLAPSE_BUTTON" = "Hide Collapse Button";
-"HIDE_FULLSCREEN_BUTTON" = "Hide Fullscreen Button";
+"HIDE_COLLAPSE_BUTTON" = "折りたたみボタンを非表示";
+"HIDE_FULLSCREEN_BUTTON" = "フルスクリーンボタンを非表示";
 "HIDE_PLAYER_BAR_HEATWAVE" = "プレーヤーバーのヒートウェーブを非表示";
 "ALWAYS_SHOW_PLAYER_BAR" = "プレーヤーバーを常に表示";
-"ENABLE_EXTRA_SPEED_OPTIONS" = "追加の速度オプションを有効化";
-"DISABLE_DOUBLE_TAP_TO_SKIP" = "ダブルタップによるスキップを無効化";
-"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "カスタムダブルタップスキップ時間を有効化";
+"ENABLE_EXTRA_SPEED_OPTIONS" = "追加の再生速度オプションを有効化";
+"DISABLE_DOUBLE_TAP_TO_SKIP" = "ダブルタップでのスキップを無効化";
+"ENABLE_CUSTOM_DOUBLE_TAP_TO_SKIP_DURATION" = "ダブルタップスキップ時間のカスタムを有効化";
 "VALUE_10_TEXT" = "値 (秒): 10";
 "VALUE_TEXT" = "値 (秒): %.lf";
 "DISABLE_PREMIUM_TEXT" = "「私はYouTubeプレミアムを利用中です」オプションが有効なためこの機能は無効化されます";
 "ALWAYS_SHOW_BAR_TEXT" = "「関連動画を非表示」と「クイックアクションを非表示」を有効にする必要があります";
 
 // Video Player Options
-"VIDEO_PLAYER_OPTIONS" = "Video Player Options";
+"VIDEO_PLAYER_OPTIONS" = "プレーヤーの設定";
 
-"HIDE_CONNECT_PLAYER_BUTTON" = "Hide 'Connect' Button under Video Player";
-"HIDE_SHARE_PLAYER_BUTTON" = "Hide 'Share' Button under Video Player";
-"HIDE_REMIX_PLAYER_BUTTON" = "Hide 'Remix' Button under Video Player";
-"HIDE_THANKS_PLAYER_BUTTON" = "Hide 'Thanks' Button under Video Player";
-"HIDE_DOWNLOAD_PLAYER_BUTTON" = "Hide 'Download' Button under Video Player";
-"HIDE_CLIP_PLAYER_BUTTON" = "Hide 'Clip' Button under Video Player";
-"HIDE_SAVE_PLAYER_BUTTON" = "Hide 'Save' Button under Video Player";
+"HIDE_CONNECT_PLAYER_BUTTON" = "プレーヤー下の'Connect'ボタンを非表示";
+"HIDE_SHARE_PLAYER_BUTTON" = "プレーヤー下の'共有'ボタンを非表示";
+"HIDE_REMIX_PLAYER_BUTTON" = "プレーヤー下の'リミックス'ボタンを非表示";
+"HIDE_THANKS_PLAYER_BUTTON" = "プレーヤー下の'Thanks'ボタンを非表示";
+"HIDE_DOWNLOAD_PLAYER_BUTTON" = "プレーヤー下の'オフライン'ボタンを非表示";
+"HIDE_CLIP_PLAYER_BUTTON" = "プレーヤー下の'クリップ'ボタンを非表示";
+"HIDE_SAVE_PLAYER_BUTTON" = "プレーヤー下の'保存'ボタンを非表示";
 
 // Overlay Options
 "OVERLAY_OPTIONS" = "オーバーレイの設定";
@@ -116,7 +116,7 @@
 "HIDE_CURRENT_TIME" = "現在の再生時間を非表示";
 "HIDE_DURATION" = "再生時間の長さを非表示";
 "STATUS_BAR_TEXT" = "ノッチ有りのデバイスでこのオプションは無効です";
-"IPAD_TEXT" = "'iPhoneでiPadスタイルを有効化'が有効な場合このオプションは無効です";
+"IPAD_TEXT" = "'iPhoneで'iPadスタイルを有効化'が有効な場合このオプションは無効です";
 
 // Tab Bar Options
 "TAB_BAR_OPTIONS" = "タブバーの設定";
@@ -179,16 +179,16 @@
 "OUTRO" = "終了画面/クレジット";
 "PREVIEW" = "プレビュー";
 "FILLER" = "繋ぎの話/冗談";
-"MUSIC_AND_OFFTOPIC" = "音楽/音楽ではない区間";
-"WOULD_YOU_LIKE_TO_SKIP" = "Would you like to skip?";
-"SPONSOR_DETECTED" = "Sponsor Detected";
-"SELFPROMO_DETECTED" = "Selfpromo Detected";
-"INTERACTION_DETECTED" = "Interaction Detected";
-"INTRO_DETECTED" = "Intro Detected";
-"OUTRO_DETECTED" = "Outro Detected";
-"PREVIEW_DETECTED" = "Preview Detected";
-"FILLER_DETECTED" = "Filler Detected";
-"MUSIC_OFFTOPIC_DETECTED" = "Music or offtopic Detected";
+"MUSIC_AND_OFFTOPIC" = "音楽:音楽以外の区間";
+"WOULD_YOU_LIKE_TO_SKIP" = "スキップしますか?";
+"SPONSOR_DETECTED" = "スポンサーを検出";
+"SELFPROMO_DETECTED" = "自己宣伝を検出";
+"INTERACTION_DETECTED" = "行動のお願いを検出";
+"INTRO_DETECTED" = "合間/導入アニメを検出";
+"OUTRO_DETECTED" = "終了画面/クレジットを検出";
+"PREVIEW_DETECTED" = "予告/あらすじを検出";
+"FILLER_DETECTED" = "繋ぎの話/冗談を検出";
+"MUSIC_OFFTOPIC_DETECTED" = "音楽:音楽以外の区間を検出";
 
 // Other Options
 "OTHER_OPTIONS" = "その他の設定";
@@ -212,8 +212,8 @@
 "REBORN_SETTINGS" = "Rebornの設定";
 
 "I_HAVE_YOUTUBE_PREMIUM" = "私はYouTubeプレミアムを利用中です";
-"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "Hide 'OP' Button under Video Player";
-"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "動画オーバーレイのOPボタンを非表示";
+"HIDE_PLAYER_OVERLAY_OP_BUTTON" = "プレーヤー下の'OP'ボタンを非表示";
+"HIDE_VIDEO_OVERLAY_OP_BUTTON" = "オーバーレイのOPボタンを非表示";
 "HIDE_SHORTS_OVERLAY_OP_BUTTON" = "ショート動画オーバーレイのOPボタンを非表示";
 "RESET_COLOR_OPTIONS" = "カラーオプションをリセット";
 "RESET_YOUTUBE_REBORN_OPTIONS" = "すべての設定をリセット";
