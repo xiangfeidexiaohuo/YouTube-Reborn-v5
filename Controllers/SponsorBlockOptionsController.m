@@ -1,3 +1,4 @@
+/*
 #import "SponsorBlockOptionsController.h"
 #import "Localization.h"
 
@@ -300,3 +301,4 @@
 }
 
 @end
+*/
