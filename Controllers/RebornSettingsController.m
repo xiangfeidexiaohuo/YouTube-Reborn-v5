@@ -2,8 +2,26 @@
 #import "Localization.h"
 
 @interface RebornSettingsController ()
+@property (nonatomic, strong) NSData *exportedSettingsData;
+@property (nonatomic, strong) NSDictionary *importedSettingsDict;
 - (void)coloursView;
 @end
+
+NSError *error = nil;
+NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"exported_settings.json"];
+BOOL success = [self.exportedSettingsData writeToFile:filePath options:NSDataWritingAtomic error:&error];
+if (success) {
+    NSLog(@"Export data saved to file: %@", filePath);
+} else {
+    NSLog(@"Error saving export data: %@", error.localizedDescription);
+}
+NSString *importedFilePath;
+NSData *importedData = [NSData dataWithContentsOfFile:importedFilePath];
+if (importedData) {
+    self.importedSettingsData = importedData;
+} else {
+    NSLog(@"Error reading imported data from file");
+}
 
 @implementation RebornSettingsController
 
@@ -317,11 +335,9 @@
 
     if (indexPath.section == 4) {
         if (indexPath.row == 0) {
-            NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
-            NSData *settingsData = [NSKeyedArchiver archivedDataWithRootObject:settingsDict];
-        } else {
-            NSData *settingsData = nil;
-            NSDictionary *settingsDict = [NSKeyedUnarchiver unarchiveObjectWithData:settingsData];
+            self.exportedSettingsData = [NSKeyedArchiver archivedDataWithRootObject:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+        } else if (indexPath.row == 1) {
+            NSDictionary *settingsDict = [NSKeyedUnarchiver unarchiveObjectWithData:self.importedSettingsData];
             for (NSString *key in settingsDict.allKeys) {
                 [[NSUserDefaults standardUserDefaults] setObject:settingsDict[key] forKey:key];
             }
