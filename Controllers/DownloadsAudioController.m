@@ -247,47 +247,6 @@
     self.allItems = [NSArray arrayWithArray:filePathsAudioArray];
 }
 
-- (void)performDropWithCoordinator:(id<UIDropSession>)session {
-    CGPoint dropPoint = [session locationInView:self.view];
-    UIDragItem *item = session.items.firstObject;
-    NSItemProvider *itemProvider = item.itemProvider;
-
-    if ([itemProvider hasItemConformingToTypeIdentifier:(__bridge NSString *)kUTTypeAudio]) {
-        [itemProvider loadItemForTypeIdentifier:(__bridge NSString *)kUTTypeAudio options:nil completionHandler:^(NSURL *url, NSError *error) {
-            if (url) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSString *importedFileName = [url lastPathComponent];
-                    NSString *newAudioFilePath = [documentsDirectory stringByAppendingPathComponent:importedFileName];
-
-                    if ([[NSFileManager defaultManager] fileExistsAtPath:newAudioFilePath]) {
-                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"IMPORT_ERROR") message:LOC(@"FILE_ALREADY_IMPORTED") preferredStyle:UIAlertControllerStyleAlert];
-                        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:nil]];
-                        [self presentViewController:alert animated:YES completion:nil];
-                    } else {
-                        [[NSFileManager defaultManager] copyItemAtURL:url toURL:[NSURL fileURLWithPath:newAudioFilePath] error:nil];
-
-                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"SUCCESSFULLY_IMPORTED_FILE") message:@"" preferredStyle:UIAlertControllerStyleAlert];
-                        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                            [self setupAudioArrays];
-                            [self.tableView reloadData];
-                        }]];
-                        [self presentViewController:alert animated:YES completion:nil];
-                    }
-                });
-            } else {
-                NSLog(@"Error loading dropped item: %@", error);
-            }
-        }];
-    }
-}
-- (UIDropInteraction *)dropInteraction {
-    UIDropInteraction *dropInteraction = [[UIDropInteraction alloc] initWithDelegate:self];
-    return dropInteraction;
-}
-- (UIDragInteraction *)dragInteraction {
-    UIDragInteraction *dragInteraction = [[UIDragInteraction alloc] initWithDelegate:(id<UIDragInteractionDelegate>)self];
-    return dragInteraction;
-}
 - (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls {
     for (NSURL *url in urls) {
         NSString *importedFileName = [url lastPathComponent];
