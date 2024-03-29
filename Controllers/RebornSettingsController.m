@@ -317,32 +317,43 @@
         }
     }
 
-if (indexPath.section == 4) {
-    if (indexPath.row == 0) {
-        self.exportedSettingsData = [NSKeyedArchiver archivedDataWithRootObject:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-        NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"exported_settings.json"];
-        NSError *error = nil;
-        BOOL success = [self.exportedSettingsData writeToFile:filePath options:NSDataWritingAtomic error:&error];
-        if (success) {
-            NSLog(@"Export data saved to file: %@", filePath);
-        } else {
-            NSLog(@"Error saving export data: %@", error.localizedDescription);
-        }
-    } else if (indexPath.row == 1) {
-        NSString *importedFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"exported_settings.json"];
-        NSData *importedData = [NSData dataWithContentsOfFile:importedFilePath];
-        if (importedData) {
-            self.importedSettingsData = importedData;
-            
-            // Unarchive the imported settings data and update user defaults
-            NSDictionary *settingsDict = [NSKeyedUnarchiver unarchiveObjectWithData:self.importedSettingsData];
-            for (NSString *key in settingsDict.allKeys) {
-                [[NSUserDefaults standardUserDefaults] setObject:settingsDict[key] forKey:key];
+    if (indexPath.section == 4) {
+        if (indexPath.row == 0) {
+            NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+            NSError *error;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:settingsDict options:NSJSONWritingPrettyPrinted error:&error];
+
+            if (!jsonData) {
+                NSLog(@"Error exporting settings data: %@", error.localizedDescription);
+            } else {
+                NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"exported_settings.json"];
+                BOOL success = [jsonData writeToFile:filePath options:NSDataWritingAtomic error:&error];
+                if (success) {
+                    NSLog(@"Export data saved to file: %@", filePath);
+                } else {
+                    NSLog(@"Error saving export data: %@", error.localizedDescription);
+                }
             }
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"Error reading imported data from file");
+        } else if (indexPath.row == 1) {
+            NSString *importedFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"exported_settings.json"];
+            NSData *importedData = [NSData dataWithContentsOfFile:importedFilePath];
+            
+            if (importedData) {
+                NSError *error;
+                NSDictionary *importedSettingsDict = [NSJSONSerialization JSONObjectWithData:importedData options:kNilOptions error:&error];
+                if (importedSettingsDict) {
+                    for (NSString *key in importedSettingsDict.allKeys) {
+                        [[NSUserDefaults standardUserDefaults] setObject:importedSettingsDict[key] forKey:key];
+                    }
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [tableView reloadData];
+                    NSLog(@"Imported settings successfully.");
+                } else {
+                    NSLog(@"Error parsing imported data: %@", error.localizedDescription);
+                }
+            } else {
+                NSLog(@"Error reading imported data from file.");
+            }
         }
     }
 }
