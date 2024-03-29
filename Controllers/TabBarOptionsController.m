@@ -2,6 +2,23 @@
 #import "StartupPageOptionsController.h"
 #import "Localization.h"
 
+#define BOOL_FOR_KEY(KEY) [[NSUserDefaults standardUserDefaults] boolForKey:KEY]
+#define SET_BOOL_FOR_KEY(KEY, VALUE) [[NSUserDefaults standardUserDefaults] setBool:VALUE forKey:KEY]; [[NSUserDefaults standardUserDefaults] synchronize];
+
+#define TOGGLE_SETTING(KEY, SENDER) \
+if ([SENDER isOn]) { \
+    SET_BOOL_FOR_KEY(KEY, YES); \
+} else { \
+    SET_BOOL_FOR_KEY(KEY, NO); \
+}
+
+#define CREATE_SWITCH(NAME, SELECTOR, KEY) \
+UISwitch *NAME = [[UISwitch alloc] initWithFrame:CGRectZero]; \
+[NAME addTarget:self action:@selector(SELECTOR:) forControlEvents:UIControlEventValueChanged]; \
+NAME.on = BOOL_FOR_KEY(KEY);\
+cell.accessoryView = NAME;
+
+//
 @interface TabBarOptionsController ()
 - (void)coloursView;
 @end
@@ -99,50 +116,32 @@
             if (indexPath.row == 0) {
                 cell.textLabel.text = LOC(@"HIDE_TAB_BAR_LABELS");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UISwitch *hideTabBarLabels = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [hideTabBarLabels addTarget:self action:@selector(toggleHideTabBarLabels:) forControlEvents:UIControlEventValueChanged];
-                hideTabBarLabels.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideTabBarLabels"];
-                cell.accessoryView = hideTabBarLabels;
+                CREATE_SWITCH(hideTabBarLabels, toggleHideTabBarLabels, @"kHideTabBarLabels");
             }
             if (indexPath.row == 1) {
                 cell.textLabel.text = LOC(@"HIDE_EXPLORE_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UISwitch *hideExploreTab = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [hideExploreTab addTarget:self action:@selector(toggleHideExploreTab:) forControlEvents:UIControlEventValueChanged];
-                hideExploreTab.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideExploreTab"];
-                cell.accessoryView = hideExploreTab;
+                CREATE_SWITCH(hideExploreTab, toggleHideExploreTab, @"kHideExploreTab");
             }
             if (indexPath.row == 2) {
                 cell.textLabel.text = LOC(@"HIDE_SHORTS_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UISwitch *hideShortsTab = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [hideShortsTab addTarget:self action:@selector(toggleHideShortsTab:) forControlEvents:UIControlEventValueChanged];
-                hideShortsTab.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideShortsTab"];
-                cell.accessoryView = hideShortsTab;
+                CREATE_SWITCH(hideShortsTab, toggleHideShortsTab, @"kHideShortsTab");
             }
             if (indexPath.row == 3) {
                 cell.textLabel.text = LOC(@"HIDE_CREATE_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UISwitch *hideUploadTab = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [hideUploadTab addTarget:self action:@selector(toggleHideUploadTab:) forControlEvents:UIControlEventValueChanged];
-                hideUploadTab.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideUploadTab"];
-                cell.accessoryView = hideUploadTab;
+                CREATE_SWITCH(hideUploadTab, toggleHideUploadTab, @"kHideUploadTab");
             }
             if (indexPath.row == 4) {
                 cell.textLabel.text = LOC(@"HIDE_SUBSCRIPTIONS_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UISwitch *hideSubscriptionsTab = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [hideSubscriptionsTab addTarget:self action:@selector(toggleHideSubscriptionsTab:) forControlEvents:UIControlEventValueChanged];
-                hideSubscriptionsTab.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideSubscriptionsTab"];
-                cell.accessoryView = hideSubscriptionsTab;
+                CREATE_SWITCH(hideSubscriptionsTab, toggleHideSubscriptionsTab, @"kHideSubscriptionsTab");
             }
             if (indexPath.row == 5) {
                 cell.textLabel.text = LOC(@"HIDE_YOU_TAB");
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                UISwitch *hideYouTab = [[UISwitch alloc] initWithFrame:CGRectZero];
-                [hideYouTab addTarget:self action:@selector(toggleHideYouTab:) forControlEvents:UIControlEventValueChanged];
-                hideYouTab.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideYouTab"];
-                cell.accessoryView = hideYouTab;
+                CREATE_SWITCH(hideYouTab, toggleHideYouTab, @"kHideYouTab");
             }
         }
     }
@@ -193,63 +192,27 @@
 }
 
 - (void)toggleHideTabBarLabels:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideTabBarLabels"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideTabBarLabels"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    TOGGLE_SETTING(@"kHideTabBarLabels", sender);
 }
 
 - (void)toggleHideExploreTab:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideExploreTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideExploreTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    TOGGLE_SETTING(@"kHideExploreTab", sender);
 }
 
 - (void)toggleHideShortsTab:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideShortsTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideShortsTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    TOGGLE_SETTING(@"kHideShortsTab", sender);
 }
 
 - (void)toggleHideUploadTab:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideUploadTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideUploadTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    TOGGLE_SETTING(@"kHideUploadTab", sender);
 }
 
 - (void)toggleHideSubscriptionsTab:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideSubscriptionsTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideSubscriptionsTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    TOGGLE_SETTING(@"kHideSubscriptionsTab", sender);
 }
 
 - (void)toggleHideYouTab:(UISwitch *)sender {
-    if ([sender isOn]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHideYouTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    } else {
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"kHideYouTab"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    TOGGLE_SETTING(@"kHideYouTab", sender);
 }
 
 @end
