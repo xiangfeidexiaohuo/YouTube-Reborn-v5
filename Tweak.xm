@@ -824,13 +824,9 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
     
     // Check if the PiP button (for YouPiP) exists and adjust the OP button's center accordingly
     ASCollectionView *collectionView = (ASCollectionView *)[[node closestViewController] view];
-    UIView *pipButtonSuperview = collectionView.pipButton.superview.superview;
-    if (pipButtonSuperview && [pipButtonSuperview isKindOfClass:[UIView class]]) {
-        NSIndexPath *pipIndexPath = [collectionView indexPathForCell:pipButtonSuperview];
-        if (pipIndexPath) {
-            CGFloat pipOffset = CGRectGetMaxX(pipButtonSuperview.frame) - CGRectGetMaxX([node.layoutAttributes frame]);
-            [buttonView setCenter:CGPointMake(buttonView.center.x + pipOffset, buttonView.center.y)];
-        }
+    if (collectionView.pipButton) {
+        CGFloat pipOffset = CGRectGetMaxX(collectionView.pipButton.frame) - CGRectGetMaxX([node.layoutAttributes frame]);
+        [buttonView setCenter:CGPointMake(buttonView.center.x + pipOffset, buttonView.center.y)];
     }
     return buttonView;
 }
@@ -857,7 +853,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (ELMCellNode *)nodeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
+    if ([self.accessibilityIdentifier isEqualToString:@"id.video.scrollable_action_bar"] && !self.rebornOverlayButton) {
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 73);
         BOOL hideOPButton = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHideRebornOPButtonVThree"];
         if (!hideOPButton) {
@@ -877,7 +873,7 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
 }
 
 - (void)nodesDidRelayout:(NSArray <ELMCellNode *> *)nodes {
-    if ([self.accessibilityIdentifier isEqual:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
+    if ([self.accessibilityIdentifier isEqualToString:@"id.video.scrollable_action_bar"] && [nodes count] == 1) {
         CGFloat offset = nodes[0].calculatedSize.width - [nodes[0].layoutAttributes frame].size.width;
         [UIView animateWithDuration:0.3 animations:^{
             self.rebornOverlayButton.center = CGPointMake(self.rebornOverlayButton.center.x + offset, self.rebornOverlayButton.center.y);
@@ -893,6 +889,13 @@ static UIButton *makeUnderRebornPlayerButton(ELMCellNode *node, NSString *title,
         [self rebornOptionsAction];
     }
 }
+
+- (void)dealloc {
+    self.rebornOverlayButton = nil;
+    self.rebornTouchController = nil;
+    %orig;
+}
+
 
 %new;
 - (void)rebornOptionsAction {
