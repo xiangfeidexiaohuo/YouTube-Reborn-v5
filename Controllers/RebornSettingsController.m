@@ -346,7 +346,7 @@
                         [[NSUserDefaults standardUserDefaults] setObject:importedSettingsDict[key] forKey:key];
                     }
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                    [tableView reloadData];
+                    [self.tableView reloadData];
                     NSLog(@"Imported settings successfully.");
                 } else {
                     NSLog(@"Error parsing imported data: %@", error.localizedDescription);
