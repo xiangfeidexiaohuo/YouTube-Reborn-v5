@@ -17,7 +17,7 @@
 - (void)videoDownloaderPartOne;
 - (void)videoDownloaderPartTwo;
 - (void)audioDownloader;
-- (void)cancelDownload;
+- (void)cancelDownload:(UIButton *)sender;
 @end
 
 @implementation YouTubeDownloadController
@@ -212,9 +212,10 @@
     }
 }
 
-- (void)cancelDownload {
-    [downloadTask cancel];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+- (void)cancelDownload:(UIButton *)sender {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [MobileFFmpeg cancel];
+    });
 }
 
 @end
