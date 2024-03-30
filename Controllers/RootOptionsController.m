@@ -22,6 +22,7 @@
 
 @interface RootOptionsController ()
 - (void)coloursView;
+- (void)apply;
 @end
 
 @implementation RootOptionsController
