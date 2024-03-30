@@ -2,7 +2,7 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 
-@interface YouTubeDownloadController : UIViewController
+@interface YouTubeDownloadController : UIViewController <LogDelegate, StatisticsDelegate>
 
 @property (nonatomic, strong) NSString *downloadTitle;
 @property (nonatomic, strong) NSURL *videoURL;
