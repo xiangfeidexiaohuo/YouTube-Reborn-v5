@@ -12,15 +12,12 @@
     UILabel *noticeLabel;
     MBProgressHUD *HUD;
 }
-
 @property (nonatomic, strong) MBProgressHUD *hud;
-
 - (void)coloursView;
 - (void)videoDownloaderPartOne;
 - (void)videoDownloaderPartTwo;
 - (void)audioDownloader;
 - (void)cancelDownload;
-
 @end
 
 @implementation YouTubeDownloadController
@@ -174,7 +171,7 @@
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:self.dualURL];
 
-    downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             float downloadPercent = downloadProgress.fractionCompleted * 100;
             downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_TEXT"), downloadPercent];
