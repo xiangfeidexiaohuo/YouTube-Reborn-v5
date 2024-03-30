@@ -11,7 +11,6 @@
     UILabel *downloadPercentLabel;
     UILabel *noticeLabel;
     MBProgressHUD *HUD;
-    NSURLSessionDownloadTask *downloadTask;
 }
 
 @property (nonatomic, strong) MBProgressHUD *hud;
@@ -85,7 +84,7 @@
 
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.hud.mode = MBProgressHUDModeAnnularDeterminate;
-    self.hud.label.text = LOC(@"DOWNLOADING");
+    self.hud.label.text = @"";
 
     if (self.downloadOption == 0) {
         [self videoDownloaderPartOne];
@@ -101,10 +100,10 @@
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:self.videoURL];
 
-    downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             float downloadPercent = downloadProgress.fractionCompleted * 100;
-            self.downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_PART1_TEXT"), downloadPercent];
+            downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_PART1_TEXT"), downloadPercent];
         });
     } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
@@ -115,7 +114,7 @@
         [[NSFileManager defaultManager] moveItemAtPath:[filePath path] toPath:[NSString stringWithFormat:@"%@/video.mp4", documentsDirectory] error:nil];
         [self videoDownloaderPartTwo];
     }];
-    [self.downloadTask resume];
+    [downloadTask resume];
 }
 
 - (void)videoDownloaderPartTwo {
@@ -123,10 +122,10 @@
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:self.audioURL];
 
-    downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             float downloadPercent = downloadProgress.fractionCompleted * 100;
-            self.downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_PART2_TEXT"), downloadPercent];
+            downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_PART2_TEXT"), downloadPercent];
         });
     } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
@@ -143,7 +142,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/audio.mp3", documentsDirectory] error:nil];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
-    [self.downloadTask resume];
+    [downloadTask resume];
 }
 
 - (void)audioDownloader {
@@ -151,10 +150,10 @@
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:self.audioURL];
 
-    downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             float downloadPercent = downloadProgress.fractionCompleted * 100;
-            self.downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_TEXT"), downloadPercent];
+            downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_TEXT"), downloadPercent];
         });
     } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
@@ -167,7 +166,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:[filePath path] error:nil];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
-    [self.downloadTask resume];
+    [downloadTask resume];
 }
 
 - (void)shortsDownloader {
@@ -178,7 +177,7 @@
     downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             float downloadPercent = downloadProgress.fractionCompleted * 100;
-            self.downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_TEXT"), downloadPercent];
+            downloadPercentLabel.text = [NSString stringWithFormat:LOC(@"PROGRESS_TEXT"), downloadPercent];
         });
     } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
@@ -191,7 +190,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:[filePath path] error:nil];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
-    [self.downloadTask resume];
+    [downloadTask resume];
 }
 
 - (void)coloursView {
@@ -217,7 +216,7 @@
 }
 
 - (void)cancelDownload {
-    [self.downloadTask cancel];
+    [downloadTask cancel];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
