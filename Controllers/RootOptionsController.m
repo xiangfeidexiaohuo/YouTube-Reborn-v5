@@ -22,7 +22,6 @@
 
 @interface RootOptionsController ()
 - (void)coloursView;
-- (void)apply;
 @end
 
 @implementation RootOptionsController
@@ -40,8 +39,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [[GOOHUDManagerInternal sharedInstance] showMessageMainThread:[YTHUDMessage messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]]];
         });
-        [self apply];
-        return; // Exit viewDidLoad if version is below required
+        [self @selector(apply)];
+        return;
     }
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
