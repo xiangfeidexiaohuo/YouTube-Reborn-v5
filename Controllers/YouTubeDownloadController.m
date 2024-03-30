@@ -3,6 +3,7 @@
 #import "MBProgressHUD/MBProgressHUD.h"
 #import "../MobileFFmpeg/MobileFFmpegConfig.h"
 #import "../MobileFFmpeg/MobileFFmpeg.h"
+#import "../MobileFFmpeg/MobileFFprobe.h"
 #import "../AFNetworking/AFNetworking.h"
 
 @interface YouTubeDownloadController () {
