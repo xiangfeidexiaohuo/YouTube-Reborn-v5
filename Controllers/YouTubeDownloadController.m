@@ -10,7 +10,6 @@
     UILabel *titleLabel;
     UILabel *downloadPercentLabel;
     UILabel *noticeLabel;
-    MBProgressHUD *HUD;
 }
 @property (nonatomic, strong) MBProgressHUD *hud;
 - (void)coloursView;
