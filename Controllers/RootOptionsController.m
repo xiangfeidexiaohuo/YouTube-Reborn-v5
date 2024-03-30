@@ -35,10 +35,12 @@
     NSString *requiredVersion = @"19.06.2";
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
-    if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) { // Version Compatibility Checker
-        [[%c(GOOHUDManagerInternal) sharedInstance] showMessageMainThread:[%c(YTHUDMessage) messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]]];
+    if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[GOOHUDManagerInternal sharedInstance] showMessageMainThread:[YTHUDMessage messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]]];
+        });
         [self apply];
-        return;
+        return; // Exit viewDidLoad if version is below required
     }
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
