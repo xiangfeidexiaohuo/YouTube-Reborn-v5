@@ -39,7 +39,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [[GOOHUDManagerInternal sharedInstance] showMessageMainThread:[YTHUDMessage messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]]];
         });
-        [self @selector(apply)];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         return;
     }
 
