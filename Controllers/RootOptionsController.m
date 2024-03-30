@@ -32,6 +32,15 @@
 
     self.title = LOC(@"YouTube Reborn");
 
+    NSString *requiredVersion = @"19.06.2";
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) { // Version Compatibility Checker
+        [[%c(GOOHUDManagerInternal) sharedInstance] showMessageMainThread:[%c(YTHUDMessage) messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]]];
+        [self apply];
+        return;
+    }
+
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
 
