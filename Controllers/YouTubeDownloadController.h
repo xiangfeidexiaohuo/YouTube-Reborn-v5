@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <Photos/Photos.h>
+// #import <Photos/Photos.h> // iOS 16.0+ SDK does not work with "YouTubeDownloadController.m" correctly.
 
 @interface YouTubeDownloadController : UIViewController
 
