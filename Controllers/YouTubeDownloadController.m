@@ -1,6 +1,5 @@
 #import "Localization.h"
 #import "YouTubeDownloadController.h"
-#import "MBProgressHUD/MBProgressHUD.h"
 #import "../MobileFFmpeg/MobileFFmpegConfig.h"
 #import "../MobileFFmpeg/MobileFFmpeg.h"
 #import "../AFNetworking/AFNetworking.h"
