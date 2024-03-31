@@ -13,6 +13,11 @@
 #import "RebornSettingsController.h"
 #import "CreditsController.h"
 #import "Localization.h"
+// snackbar & alert view
+#import "YouTubeHeader/YTAlertView.h"
+#import "YouTubeHeader/YTLabel.h"
+#import "YouTubeHeader/YTHUDMessage.h"
+#import "YouTubeHeader/GOOHUDManagerInternal.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
