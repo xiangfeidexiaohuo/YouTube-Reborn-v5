@@ -37,8 +37,8 @@
     
     if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) {
         dispatch_async(dispatch_get_main_queue(), ^{
-        YTHUDMessage *message = [%c(YTHUDMessage) messageWithText:text];
-        GOOHUDManagerInternal *manager = [%c(GOOHUDManagerInternal) sharedInstance];
+        YTHUDMessage *message = [YTHUDMessage messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]];
+        GOOHUDManagerInternal *manager = [GOOHUDManagerInternal sharedInstance];
         [manager showMessageMainThread:message];
         });
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
