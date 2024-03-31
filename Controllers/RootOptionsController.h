@@ -1,6 +1,6 @@
 #import "UIKit/UIKit.h"
-#import <YouTubeHeader/YTHUDMessage.h>
-#import <YouTubeHeader/GOOHUDManagerInternal.h>
+#import "YouTubeHeader/YTHUDMessage.h"
+#import "YouTubeHeader/GOOHUDManagerInternal.h"
 
 @interface RootOptionsController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic, strong) UITableView* tableView;
