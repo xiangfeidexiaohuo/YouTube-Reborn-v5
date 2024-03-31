@@ -35,8 +35,8 @@
 #import "YouTubeHeader/YTTouchFeedbackController.h"
 #import "YouTubeHeader/YTWatchViewController.h"
 // YT Headers - snackbar
-#import <YouTubeHeader/YTHUDMessage.h>
-#import <YouTubeHeader/GOOHUDManagerInternal.h>
+#import "YouTubeHeader/YTHUDMessage.h"
+#import "YouTubeHeader/GOOHUDManagerInternal.h"
 
 @interface YTPlaybackButton : UIControl
 @end
