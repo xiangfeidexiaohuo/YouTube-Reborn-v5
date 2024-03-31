@@ -37,7 +37,9 @@
     
     if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[GOOHUDManagerInternal sharedInstance] showMessageMainThread:[YTHUDMessage messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]]];
+        YTHUDMessage *message = [%c(YTHUDMessage) messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]];
+        GOOHUDManagerInternal *manager = [%c(GOOHUDManagerInternal) sharedInstance];
+        [manager showMessageMainThread:message];
         });
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         return;
@@ -206,7 +208,7 @@
             }
             if (indexPath.row == 5) {
                 cell.textLabel.text = LOC(@"SHORTS_OPTIONS");
-		cell.imageView.image = [UIImage systemImageNamed:@"pause.circle.fill"];
+		cell.imageView.image = [UIImage systemImageNamed:@"play.rectangle.on.rectangle.circle.fill"];
   		cell.imageView.tintColor = cell.textLabel.textColor;
             }
             if (indexPath.row == 6) {
