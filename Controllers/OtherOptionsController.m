@@ -84,7 +84,6 @@ cell.accessoryView = NAME;
             cell.detailTextLabel.textColor = [UIColor whiteColor];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UISwitch *appVersionSpoofer;
     if (indexPath.row == 0) {
         cell.textLabel.text = LOC(@"IPAD_LAYOUT");
         CREATE_SWITCH(enableiPadStyleOniPhone, toggleEnableiPadStyleOniPhone, @"kEnableiPadStyleOniPhone");
@@ -153,6 +152,7 @@ cell.accessoryView = NAME;
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = LOC(@"ENTER_CUSTOM_APP_VERSION");
         textField.text = self.customAppVersion;
+        textField.enabled = BOOL_FOR_KEY(@"kAppVersionSpoofer");
     }];
     UIAlertAction *resetAction = [UIAlertAction actionWithTitle:LOC(@"RESET_TEXT") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         UITextField *textField = alert.textFields.firstObject;
