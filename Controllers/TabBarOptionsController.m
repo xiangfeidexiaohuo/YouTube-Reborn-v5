@@ -31,6 +31,20 @@ cell.accessoryView = NAME;
 
     self.title = LOC(@"TAB_BAR_OPTIONS");
 
+    NSString *requiredVersion = @"17.33.2";
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+
+if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+         UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"WARNING_TEXT") message:[NSString stringWithFormat:LOC(@"You are using %@ which is an outdated version of the YouTube app. Please update to version %@ or higher to continue using this tweak."), currentVersion, requiredVersion] preferredStyle:UIAlertControllerStyleAlert]; // LOC NAME: CLIENT_OUTDATED
+        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+    return;
+}
+
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     self.navigationItem.leftBarButtonItem = doneButton;
 
