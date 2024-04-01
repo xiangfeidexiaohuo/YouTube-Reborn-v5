@@ -8,6 +8,7 @@
 "NO_TEXT" = "いいえ";
 "MORE_TEXT" = "その他";
 "NOTICE_TEXT" = "通知";
+"WARNING_TEXT" = "Warning";
 "COLOR_SAVED" = "保存しました";
 "IMPORT_VIDEO" = "動画をカメラロールに保存";
 "SAVED_VIDEO" = "動画をカメラロールに保存しました";
