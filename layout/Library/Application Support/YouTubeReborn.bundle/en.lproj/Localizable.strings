@@ -8,6 +8,7 @@
 "NO_TEXT" = "No";
 "MORE_TEXT" = "More";
 "NOTICE_TEXT" = "Notice";
+"WARNING_TEXT" = "Warning";
 "COLOR_SAVED" = "Color Saved";
 "IMPORT_VIDEO" = "Import Video To Camera Roll";
 "SAVED_VIDEO" = "Video Saved To Camera Roll";
