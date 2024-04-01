@@ -39,7 +39,19 @@
 
     NSString *requiredVersion = @"19.06.2";
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    
+
+if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+         UIAlertController *alert = [UIAlertController alertControllerWithTitle:LOC(@"WARNING_TEXT") message:[NSString stringWithFormat:LOC(@"You are using the Client version %@. Please use at least version %@ or higher."), currentVersion, requiredVersion] preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:LOC(@"OKAY_TEXT") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    });
+    return;
+}
+
+/* implementation below uses YouTube's HUD but doesn't work due to linker error.
     if ([currentVersion compare:requiredVersion options:NSNumericSearch] == NSOrderedAscending) {
         dispatch_async(dispatch_get_main_queue(), ^{
         YTHUDMessage *message = [YTHUDMessage messageWithText:[NSString stringWithFormat:@"You are using the Client version %@. Please use at least version %@ or higher.", currentVersion, requiredVersion]];
@@ -49,6 +61,7 @@
         [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
         return;
     }
+*/
 
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44)];
     self.searchBar.delegate = self;
