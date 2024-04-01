@@ -8,6 +8,7 @@
 "NO_TEXT" = "Không";
 "MORE_TEXT" = "Nhiều hơn";
 "NOTICE_TEXT" = "Chú ý";
+"WARNING_TEXT" = "Warning";
 "COLOR_SAVED" = "Lưu màu";
 "IMPORT_VIDEO" = "Nhập Video vào thư viện ảnh";
 "SAVED_VIDEO" = "Video đã được lưu";
