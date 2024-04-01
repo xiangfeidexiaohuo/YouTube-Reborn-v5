@@ -8,6 +8,7 @@
 "NO_TEXT" = "No";
 "MORE_TEXT" = "More";
 "NOTICE_TEXT" = "Aviso";
+"WARNING_TEXT" = "Warning";
 "COLOR_SAVED" = "Color guardado";
 "IMPORT_VIDEO" = "Importar vídeo al carrete de la cámara";
 "SAVED_VIDEO" = "Vídeo guardado en el carrete";
