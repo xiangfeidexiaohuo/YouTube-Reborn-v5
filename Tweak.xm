@@ -2675,7 +2675,27 @@ BOOL selectedTabIndex = NO;
 %end
 %end
 
+// Premium YouTube Logo - @bhackel
 %group gPremiumYouTubeLogo
+%hook YTHeaderLogoController
+- (void)setTopbarLogoRenderer:(id)renderer {
+    // Modify the type of the icon before setting the renderer
+    YTITopbarLogoRenderer *logoRenderer = (YTITopbarLogoRenderer *)renderer;
+    YTIIcon *iconImage = logoRenderer.iconImage;
+    iconImage.iconType = 537; // magic number for Premium icon, hopefully it doesnt change. 158 is default logo.
+    // Use this modified renderer
+    %orig(logoRenderer);
+}
+// Method For 18.34.5 and lower
+- (void)setPremiumLogo:(BOOL)isPremiumLogo {
+    isPremiumLogo = YES;
+    %orig;
+}
+- (BOOL)isPremiumLogo {
+    return YES;
+}
+%end
+
 %hook YTHeaderLogoController
 - (void)setPremiumLogo:(BOOL)isPremiumLogo {
     isPremiumLogo = YES;
@@ -2879,7 +2899,7 @@ BOOL selectedTabIndex = NO;
 }
 %end
 
-// OLD    Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @arichornlover
+// OLD    Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save / Report) Buttons under the Video Player - 17.33.2 and up - @arichornlover
 %hook _ASDisplayView
 - (void)layoutSubviews {
     %orig; 
@@ -2891,6 +2911,7 @@ BOOL selectedTabIndex = NO;
 //  BOOL hideAddToOfflineButton = [defaults boolForKey:@"kHideAddToOfflineButton"]; DISABLED
 //  BOOL hideClipButton = [defaults boolForKey:@"kHideClipButton"]; DISABLED
     BOOL hideSaveToPlaylistButton = [defaults boolForKey:@"kHideSaveToPlaylistButton"];
+    BOOL hideReportButton = [defaults boolForKey:@"kHideReportButton"];
     for (UIView *subview in self.subviews) {
         if ([subview.accessibilityLabel isEqualToString:@"connect account"]) {
             subview.hidden = hideConnectButton;
@@ -2901,12 +2922,15 @@ BOOL selectedTabIndex = NO;
         } else if ([subview.accessibilityLabel isEqualToString:@"Save to playlist"]) {
             subview.hidden = hideSaveToPlaylistButton;
             subview.frame = hideSaveToPlaylistButton ? CGRectZero : subview.frame;
+        } else if ([subview.accessibilityLabel isEqualToString:@"Report"]) {
+            subview.hidden = hideReportButton;
+            subview.frame = hideReportButton ? CGRectZero : subview.frame;
         }
     }
 }
 %end
 
-// Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save) Buttons under the Video Player - 17.x.x and up - @PoomSmart & arichornlover
+// Hide the (Connect / Share / Remix / Thanks / Download / Clip / Save / Report) Buttons under the Video Player - 17.33.2 and up - @PoomSmart & @arichornlover
 static BOOL findCell(ASNodeController *nodeController, NSArray <NSString *> *identifiers, NSUserDefaults *defaults) {
     for (id child in [nodeController children]) {
         if ([child isKindOfClass:%c(ELMNodeController)]) {
@@ -2946,6 +2970,7 @@ static BOOL findCell(ASNodeController *nodeController, NSArray <NSString *> *ide
         BOOL hideDownloadButton = [defaults boolForKey:@"kHideDownloadButton"];
         BOOL hideClipButton = [defaults boolForKey:@"kHideClipButton"];
 //      BOOL hideSaveToPlaylistButton = [defaults boolForKey:@"kHideSaveToPlaylistButton"];
+//      BOOL hideReportButton = [defaults boolForKey:@"kHideReportButton"];
         BOOL hideCommentSection = [defaults boolForKey:@"kHideCommentSection"];
 
         if (hideShareButton && findCell(nodeController, @[@"id.video.share.button"], defaults)) {
