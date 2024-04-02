@@ -75,11 +75,11 @@
     [self.view addSubview:noticeLabel];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.modalInPresentation = YES;
+- (void)viewDidLoad { // OLD
+    [super viewDidLoad]; // OLD
+    self.modalInPresentation = YES; // OLD
 
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     self.hud.mode = MBProgressHUDModeAnnularDeterminate;
     self.hud.label.text = @"";
 
@@ -137,6 +137,7 @@
         [[NSFileManager defaultManager] removeItemAtPath:[filePath path] error:nil];
         [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/video.mp4", documentsDirectory] error:nil];
         [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/audio.mp3", documentsDirectory] error:nil];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil]; // for previous Download Menu
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [downloadTask resume];
@@ -161,6 +162,7 @@
         NSCharacterSet *notAllowedChars = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
         [MobileFFmpeg execute:[NSString stringWithFormat:@"-i %@ -c:a libmp3lame -q:a 8 %@/%@.mp3", filePath, documentsDirectory, [[self.downloadTitle componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""]]];
         [[NSFileManager defaultManager] removeItemAtPath:[filePath path] error:nil];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil]; // for previous Download Menu
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [downloadTask resume];
@@ -185,6 +187,7 @@
         NSCharacterSet *notAllowedChars = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
         [[NSFileManager defaultManager] moveItemAtPath:[filePath path] toPath:[NSString stringWithFormat:@"%@/%@.mp4", documentsDirectory, [[self.downloadTitle componentsSeparatedByCharactersInSet:notAllowedChars] componentsJoinedByString:@""]] error:nil];
         [[NSFileManager defaultManager] removeItemAtPath:[filePath path] error:nil];
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil]; // for previous Download Menu
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [downloadTask resume];
@@ -216,6 +219,10 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [MobileFFmpeg cancel];
     });
+}
+
+- (void)cancelHUD:(UIButton *)sender {
+    [self.hud hideAnimated:YES];
 }
 
 @end
