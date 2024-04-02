@@ -2695,30 +2695,6 @@ BOOL selectedTabIndex = NO;
     return YES;
 }
 %end
-
-%hook YTHeaderLogoController
-- (void)setPremiumLogo:(BOOL)isPremiumLogo {
-    isPremiumLogo = YES;
-    %orig;
-}
-- (BOOL)isPremiumLogo {
-    return YES;
-}
-- (void)setTopbarLogoRenderer:(id)renderer {
-}
-%end
-%hook YTVersionUtils
-+ (NSString *)appVersion { return @"18.34.5"; }
-%end
-%hook YTSettingsCell // Remove v18.34.5 Version Number - @Dayanch96
-- (void)setDetailText:(id)arg1 {
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-    NSString *appVersion = infoDictionary[@"CFBundleShortVersionString"];
-    if ([arg1 isEqualToString:@"18.34.5"]) {
-        arg1 = appVersion;
-    } %orig(arg1);
-}
-%end
 %end
 
 %group gHideYouTubeLogo
