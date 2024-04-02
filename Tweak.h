@@ -78,6 +78,10 @@
 - (void)removeCellsAtIndexPath:(NSIndexPath *)indexPath;
 @end
 
+@interface YTITopbarLogoRenderer : NSObject // Enable Premium logo - @bhackel
+@property(readonly, nonatomic) YTIIcon *iconImage;
+@end
+
 @interface YTRightNavigationButtons : UIView
 - (id)_viewControllerForAncestor;
 @property(readonly, nonatomic) YTQTMButton *MDXButton;
