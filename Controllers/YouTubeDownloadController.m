@@ -7,6 +7,7 @@
 #import "../AFNetworking/AFNetworking.h"
 
 @interface YouTubeDownloadController () {
+    Statistics *statistics;
     UIImageView *artworkImage;
     UILabel *titleLabel;
     UILabel *downloadPercentLabel;
@@ -28,6 +29,10 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
     [self coloursView];
+
+    self.hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    self.hud.label.text = @"";
 
     UIWindow *boundsWindow = [[[UIApplication sharedApplication] windows] firstObject];
 
@@ -79,10 +84,6 @@
     [super viewDidLoad]; // OLD
     self.modalInPresentation = YES; // OLD
 
-    self.hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
-    self.hud.label.text = @"";
-
     if (self.downloadOption == 0) {
         [self videoDownloaderPartOne];
     } else if (self.downloadOption == 1) {
@@ -115,6 +116,10 @@
 }
 
 - (void)videoDownloaderPartTwo {
+    self.hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    self.hud.label.text = @"";
+
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:self.audioURL];
@@ -144,6 +149,10 @@
 }
 
 - (void)audioDownloader {
+    self.hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    self.hud.label.text = @"";
+
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:self.audioURL];
@@ -169,6 +178,10 @@
 }
 
 - (void)shortsDownloader {
+    self.hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    self.hud.label.text = @"";
+
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURLRequest *request = [NSURLRequest requestWithURL:self.dualURL];
