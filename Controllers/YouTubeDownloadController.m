@@ -194,11 +194,12 @@
 }
 
 - (void)coloursView {
-    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
-        self.view.backgroundColor = [UIColor colorWithRed:0.949 green:0.949 blue:0.969 alpha:1.0];
-    } else {
-        self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-    }
+    self.view.backgroundColor = [UIColor clearColor];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurEffectView.frame = self.view.bounds;
+    [self.view addSubview:blurEffectView];
+    [self.view sendSubviewToBack:blurEffectView];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
