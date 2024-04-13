@@ -6,7 +6,7 @@ Revitalize your YouTube experience with YouTube Reborn—a tweak developed by Li
 
 ### Download YouTube Reborn
 
-Get ready to have a better YouTube experience! Download the Ipa or Deb file from the [latest release](https://github.com/arichorn/YouTube-Reborn/releases/latest/) on GitHub.
+Get ready to have a better YouTube experience! Download the .DEB file from the [latest release](https://github.com/arichornlover/YouTube-Reborn/releases/latest/) on GitHub.
 
 -----
 
