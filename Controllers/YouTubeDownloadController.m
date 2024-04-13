@@ -28,9 +28,21 @@
 
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
+    UIWindow *boundsWindow = [[[UIApplication sharedApplication] windows] firstObject];
+
+    cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    cancelButton.frame = CGRectMake(self.view.bounds.size.width - 100, boundsWindow.safeAreaInsets.top + 20, 80, 40);
+    [cancelButton setTitle:LOC(@"Cancel") forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(cancelDownload:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cancelButton];
+
     [self coloursView];
 
-    UIWindow *boundsWindow = [[[UIApplication sharedApplication] windows] firstObject];
+    CGRect contentViewFrame = CGRectMake(50, 100, self.view.bounds.size.width - 100, self.view.bounds.size.height - 200);
+    UIView *contentView = [[UIView alloc] initWithFrame:contentViewFrame];
+    contentView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    contentView.layer.cornerRadius = 20.0;
+    [self.view addSubview:contentView];
 
     artworkImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, boundsWindow.safeAreaInsets.top, self.view.bounds.size.width, 300)];
     UIImage *artwork = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.artworkURL]];
