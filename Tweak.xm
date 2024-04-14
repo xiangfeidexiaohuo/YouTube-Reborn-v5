@@ -97,6 +97,13 @@ static NSString *accessGroupID() {
     return accessGroup;
 }
 
+// Alternate Icon Support
+%hook UIApplication
+- (BOOL)supportsAlternateIcons {
+    return YES;
+}
+%end
+
 // IAmYouTube - https://github.com/PoomSmart/IAmYouTube
 %hook YTVersionUtils
 + (NSString *)appName { return YT_NAME; }
