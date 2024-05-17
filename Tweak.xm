@@ -2713,24 +2713,82 @@ BOOL selectedTabIndex = NO;
 %end
 %end
 
-// Premium YouTube Logo - @bhackel
+// YouTube Premium Logo - @arichornlover & @bhackel
 %group gPremiumYouTubeLogo
 %hook YTHeaderLogoController
-- (void)setTopbarLogoRenderer:(id)renderer {
-    // Modify the type of the icon before setting the renderer
-    YTITopbarLogoRenderer *logoRenderer = (YTITopbarLogoRenderer *)renderer;
-    YTIIcon *iconImage = logoRenderer.iconImage;
-    iconImage.iconType = 537; // magic number for Premium icon, hopefully it doesnt change. 158 is default logo.
-    // Use this modified renderer
-    %orig(logoRenderer);
+- (void)setTopbarLogoRenderer:(YTITopbarLogoRenderer *)renderer {
+    YTIIcon *iconImage = renderer.iconImage;
+    iconImage.iconType = 537;
+    %orig;
 }
-// Method For 18.34.5 and lower
 - (void)setPremiumLogo:(BOOL)isPremiumLogo {
     isPremiumLogo = YES;
     %orig;
 }
 - (BOOL)isPremiumLogo {
     return YES;
+}
+%end
+%hook YTAppCollectionViewController
+%new
+- (void)uYouEnhancedFakePremiumModel:(YTISectionListRenderer *)model {
+    Class YTVersionUtilsClass = %c(YTVersionUtils);
+    NSString *appVersion = [YTVersionUtilsClass performSelector:@selector(appVersion)];
+    NSComparisonResult result = [appVersion compare:@"18.35.4" options:NSNumericSearch];
+    if (result == NSOrderedAscending) {
+        return;
+    }
+    NSUInteger yourVideosCellIndex = -1;
+    NSMutableArray <YTISectionListSupportedRenderers *> *overallContentsArray = model.contentsArray;
+    YTISectionListSupportedRenderers *supportedRenderers;
+    for (supportedRenderers in overallContentsArray) {
+        YTIItemSectionRenderer *itemSectionRenderer = supportedRenderers.itemSectionRenderer;
+        NSMutableArray <YTIItemSectionSupportedRenderers *> *subContentsArray = itemSectionRenderer.contentsArray;
+        YTIItemSectionSupportedRenderers *itemSectionSupportedRenderers;
+        for (itemSectionSupportedRenderers in subContentsArray) {
+            if ([itemSectionSupportedRenderers hasCompactLinkRenderer]) {
+                YTICompactLinkRenderer *compactLinkRenderer = [itemSectionSupportedRenderers compactLinkRenderer];
+                if ([compactLinkRenderer hasIcon]) {
+                    YTIIcon *icon = [compactLinkRenderer icon];
+                    if ([icon hasIconType] && icon.iconType == 117) {
+                        icon.iconType = 741;
+                        ((YTIStringRun *)(compactLinkRenderer.title.runsArray.firstObject)).text = LOC(@"FAKE_YOUR_PREMIUM_BENEFITS");
+                    }
+                }
+            }
+            if ([itemSectionSupportedRenderers hasCompactListItemRenderer]) {
+                YTICompactListItemRenderer *compactListItemRenderer = itemSectionSupportedRenderers.compactListItemRenderer;
+                if ([compactListItemRenderer hasThumbnail]) {
+                    YTICompactListItemThumbnailSupportedRenderers *thumbnail = compactListItemRenderer.thumbnail;
+                    if ([thumbnail hasIconThumbnailRenderer]) {
+                        YTIIconThumbnailRenderer *iconThumbnailRenderer = thumbnail.iconThumbnailRenderer;
+                        if ([iconThumbnailRenderer hasIcon]) {
+                            YTIIcon *icon = iconThumbnailRenderer.icon;
+                            if ([icon hasIconType] && icon.iconType == 658) {
+                                yourVideosCellIndex = [subContentsArray indexOfObject:itemSectionSupportedRenderers];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (yourVideosCellIndex != -1 && subContentsArray[yourVideosCellIndex].accessibilityLabel == nil) {
+            YTIItemSectionSupportedRenderers *newItemSectionSupportedRenderers = [subContentsArray[yourVideosCellIndex] copy];
+            ((YTIStringRun *)(newItemSectionSupportedRenderers.compactListItemRenderer.title.runsArray.firstObject)).text = LOC(@"FAKE_DOWNLOADS");
+            newItemSectionSupportedRenderers.compactListItemRenderer.thumbnail.iconThumbnailRenderer.icon.iconType = 147;
+            [subContentsArray insertObject:newItemSectionSupportedRenderers atIndex:yourVideosCellIndex + 1];
+            subContentsArray[yourVideosCellIndex].accessibilityLabel = @"uYouEnhanced Modified";
+            yourVideosCellIndex = -1;
+        }
+    }
+}
+- (void)loadWithModel:(YTISectionListRenderer *)model {
+    [self uYouEnhancedFakePremiumModel:model];
+    %orig;
+}
+- (void)setupSectionListWithModel:(YTISectionListRenderer *)model isLoadingMore:(BOOL)isLoadingMore isRefreshingFromContinuation:(BOOL)isRefreshingFromContinuation {
+    [self uYouEnhancedFakePremiumModel:model];
+    %orig;
 }
 %end
 %end
@@ -2773,6 +2831,11 @@ BOOL selectedTabIndex = NO;
 
 // Red Progress Bar - @dayanch96
 %group gRedProgressBar
+%hook YTSegmentableInlinePlayerBarView
+- (void)setBufferedProgressBarColor:(id)arg1 {
+     [UIColor colorWithRed:1.00 green:1.00 blue:1.00 alpha:0.50];
+}
+%end
 %hook YTInlinePlayerBarContainerView
 - (id)quietProgressBarColor {
     return [UIColor redColor];
