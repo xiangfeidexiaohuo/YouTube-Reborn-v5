@@ -13,6 +13,7 @@
 // YT Headers
 #import "YouTubeHeader/ASCollectionElement.h"
 #import "YouTubeHeader/ASCollectionView.h"
+#import "YouTubeHeader/YTReelModel.h"
 #import "YouTubeHeader/ELMCellNode.h"
 #import "YouTubeHeader/ELMContainerNode.h"
 #import "YouTubeHeader/ELMNodeController.h"
@@ -48,6 +49,10 @@
 @end
 
 @interface YTCommentDetailHeaderCell : UIView
+@end
+
+@interface YTIPivotBarItemRenderer : NSObject
+@property(nonatomic, copy) NSArray *tabItems;
 @end
 
 @interface ASCollectionView (Reborn)
