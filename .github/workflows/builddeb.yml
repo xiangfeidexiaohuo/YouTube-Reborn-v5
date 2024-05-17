@@ -7,7 +7,7 @@ on:
     
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@main
 
@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Package 
         run: |
-          brew install make xz ldid 
+          brew install make ldid 
           export THEOS=theos
           gmake clean package FINALPACKAGE=1
           gmake clean package FINALPACKAGE=1 THEOS_PACKAGE_SCHEME=rootless
