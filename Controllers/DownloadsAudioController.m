@@ -221,8 +221,7 @@
             [self presentViewController:alertDeleted animated:YES completion:nil];
         }];
 
-        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        }];
+        [alertMenu addAction:[UIAlertAction actionWithTitle:LOC(@"CANCEL_TEXT") style:UIAlertActionStyleCancel handler:nil]];
 
         [self presentViewController:alertMenu animated:YES completion:nil];
     }];
