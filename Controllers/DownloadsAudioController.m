@@ -76,14 +76,14 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     NSString *searchText = searchBar.text;
-
+    
     if (searchText.length > 0) {
         self.isSearching = YES;
     } else {
         self.filteredItems = [NSArray array];
         self.isSearching = NO;
     }
-
+    
     [self.tableView reloadData];
 }
 
@@ -96,11 +96,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.isSearching) {
-        return self.filteredItems.count;
-    } else {
-        return self.allItems.count;
-    }
+    return self.isSearching ? self.filteredItems.count : self.allItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
